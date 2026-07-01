@@ -21,28 +21,27 @@ namespace TK.Gameplay
     [System.Serializable]
     public class ItemVisual
     {
-        public Sprite sprite;
-        public string displayName;
-        public Vector3 displayScale = Vector3.one;
+        public Sprite ItemSprite;
+        public string DisplayName;
+        public Vector3 DisplayScale = Vector3.one;
     }
 
     public class Collectible : MonoBehaviour
     {
         [Header("Item Data")]
-        [SerializeField] private ItemType itemType;
-        [SerializeField] private Rarity rarity;
+        [SerializeField] private ItemType _itemType;
+        [SerializeField] private Rarity _rarity;
 
         [Header("Visual Variants")]
-        [SerializeField] private ItemVisual[] variants;
+        [SerializeField] private ItemVisual[] _variants;
 
-        private SpriteRenderer sr;
-        private Collider2D col;
-        private PolygonCollider2D poly;
+        private SpriteRenderer _sr;
+        private PolygonCollider2D _poly;
 
         void Awake()
         {
-            sr = GetComponent<SpriteRenderer>();
-            poly = GetComponent<PolygonCollider2D>();
+            _sr = GetComponent<SpriteRenderer>();
+            _poly = GetComponent<PolygonCollider2D>();
         }
 
         void Start()
@@ -56,34 +55,34 @@ namespace TK.Gameplay
             transform.rotation = _rotation;
         }
 
-        private ItemVisual currentVisual;
+        private ItemVisual _currentVisual;
 
         private void SetRandomVisual()
         {
-            if (variants == null || variants.Length == 0)
+            if (_variants == null || _variants.Length == 0)
             {
                 Debug.LogWarning(gameObject.name + " has no variants assigned.");
                 return;
             }
 
-            int randomIndex = Random.Range(0, variants.Length);
-            currentVisual = variants[randomIndex];
+            int randomIndex = Random.Range(0, _variants.Length);
+            _currentVisual = _variants[randomIndex];
 
-            sr.sprite = currentVisual.sprite;
-            transform.localScale = currentVisual.displayScale;
+            _sr.sprite = _currentVisual.ItemSprite;
+            transform.localScale = _currentVisual.DisplayScale;
 
             RefreshCollider();
         }
 
         private void RefreshCollider()
         {
-            if (poly == null)
+            if (_poly == null)
                 return;
 
             // Rebuild collider using sprite's Physics Shape
-            poly.pathCount = 0;
+            _poly.pathCount = 0;
 
-            Sprite sprite = sr.sprite;
+            Sprite sprite = _sr.sprite;
 
             if (sprite == null)
                 return;
@@ -95,8 +94,8 @@ namespace TK.Gameplay
                 var points = new System.Collections.Generic.List<Vector2>();
                 sprite.GetPhysicsShape(i, points);
 
-                poly.pathCount = i + 1;
-                poly.SetPath(i, points);
+                _poly.pathCount = i + 1;
+                _poly.SetPath(i, points);
             }
         }
 
@@ -105,28 +104,30 @@ namespace TK.Gameplay
             if (!other.CompareTag("Player"))
                 return;
 
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            IItemCollector collector = other.GetComponent<IItemCollector>();
 
-            if (player == null || player.hasCollected)
+            if (collector == null || !collector.CanCollect)
                 return;
 
-            player.CollectItem(itemType, rarity);
+            // Build item data and hand it to the collector's inventory.
+            var data = new CollectedItemData
+            {
+                Type    = _itemType,
+                ItemRarity      = _rarity,
+                ItemSprite      = _currentVisual.ItemSprite,
+                DisplayName = _currentVisual.DisplayName
+            };
 
-            GameSession.CollectedSprite = currentVisual.sprite;
-            GameSession.CollectedItemName = currentVisual.displayName;
+            collector.AddItem(data);
 
-            poly.enabled = false;
+            _poly.enabled = false;
 
-            StartCoroutine(PickupAnimation(player));
-
-            // transform.SetParent(player.HoldPoint);
-            // transform.localPosition = Vector3.zero;
-            // transform.localRotation = Quaternion.identity;
+            StartCoroutine(PickupAnimation(collector));
         }
 
-        private System.Collections.IEnumerator PickupAnimation(PlayerMovement player)
+        private System.Collections.IEnumerator PickupAnimation(IItemCollector collector)
         {
-            Transform target = player.HoldPoint;
+            Transform target = collector.HoldPoint;
 
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
@@ -140,7 +141,7 @@ namespace TK.Gameplay
             float popScale = 1.15f;
             float wobbleAngle = 0f;
 
-            switch (rarity)
+            switch (_rarity)
             {
                 case Rarity.Uncommon:
                     popScale = 1.20f;

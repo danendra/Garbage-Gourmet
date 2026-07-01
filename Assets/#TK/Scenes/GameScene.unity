@@ -1448,8 +1448,8 @@ MonoBehaviour:
   offset: {x: 0, y: -3, z: -10}
   xmin: -0.5
   xmax: 0.5
-  bottomView: {fileID: 0}
-  topView: {fileID: 0}
+  bottomView: {fileID: 826589795}
+  topView: {fileID: 1108094305}
   panDuration: 1.2
   diveDuration: 0.35
 --- !u!1 &519913337
@@ -1782,6 +1782,11 @@ Transform:
   - {fileID: 2066228177}
   m_Father: {fileID: 1630518608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &826589795 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5831864130671319649, guid: 3edc4bae77bfb485291247ed76062726, type: 3}
+  m_PrefabInstance: {fileID: 642766708}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &845876289
 GameObject:
   m_ObjectHideFlags: 0
@@ -3951,22 +3956,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d4f8c726d2945d0ba02384f2c50f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragControl
-  dragAreaCollider: {fileID: 508458512}
-  leftWall: -2.5
-  rightWall: 2.5
-  dragSpeed: 2
-  speed: 1.25
-  acceleration: 0.035
-  returnAcceleration: 5
-  maxReturnSpeed: 75
-  heldItemType: 0
-  heldRarity: 0
-  holdPoint: {fileID: 1239379248}
-  handRenderer: {fileID: 1604472471}
-  openHandSprite: {fileID: -1730119455918461314, guid: d49b7e95cac27419e9074ae67db6ddc6, type: 3}
-  grabHandSprite: {fileID: 7453538563484385075, guid: fc1c63695c7314248a408589fa48d0fa, type: 3}
-  hasCollected: 0
-  canMove: 0
+  _dragAreaCollider: {fileID: 508458512}
+  _leftWall: -2.5
+  _rightWall: 2.5
+  _dragSpeed: 2
+  _speed: 1.25
+  _acceleration: 0.035
+  _returnAcceleration: 5
+  _maxReturnSpeed: 75
+  _holdPoint: {fileID: 1239379248}
+  _handRenderer: {fileID: 1604472471}
+  _openHandSprite: {fileID: -1730119455918461314, guid: d49b7e95cac27419e9074ae67db6ddc6, type: 3}
+  _grabHandSprite: {fileID: 7453538563484385075, guid: fc1c63695c7314248a408589fa48d0fa, type: 3}
+  _maxPickUpItems: 5
+  _canMove: 0
 --- !u!114 &1604472476
 MonoBehaviour:
   m_ObjectHideFlags: 0

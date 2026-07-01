@@ -38,7 +38,7 @@ namespace TK.Gameplay
             gameStarted = false;
             isGameOver = false;
 
-            player.canMove = false;
+            player._canMove = false;
 
             // Hide visuals first
             SetHandAlpha(0f);
@@ -62,7 +62,7 @@ namespace TK.Gameplay
 
             StartCoroutine(FadeGameplayVisuals());
 
-            player.canMove = true;
+            player._canMove = true;
             AudioManager.Instance.PlayGameplayMusic();
             gameStarted = true;
         }
@@ -118,7 +118,7 @@ namespace TK.Gameplay
             GameSession.FinalScore = finalScore;
             GameSession.PlayerWon = true;
 
-            playerRef.canMove = false;
+            playerRef._canMove = false;
             StartCoroutine(RunEndSequence(playerRef, won: true));
         }
 
@@ -130,7 +130,7 @@ namespace TK.Gameplay
             GameSession.FinalScore = 0;
             GameSession.PlayerWon = false;
 
-            playerRef.canMove = false;
+            playerRef._canMove = false;
             StartCoroutine(RunEndSequence(playerRef, won: false));
         }
 
