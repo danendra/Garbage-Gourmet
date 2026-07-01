@@ -1016,6 +1016,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482155058}
   m_CullTransparentMesh: 1
+--- !u!1 &490245732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 490245733}
+  - component: {fileID: 490245734}
+  m_Layer: 0
+  m_Name: Pool Bad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &490245733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490245732}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1731093671}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &490245734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490245732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6156fad1cfed149688a16fd0c52a2486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
+  poolPrefabs:
+  - {fileID: 5384939281917705278, guid: 38650d7a469d548b0965d05535364b75, type: 3}
+  - {fileID: 5232890315780783781, guid: e6ec1b8417efb4c5a8ea841085fbdb0c, type: 3}
+  parent: {fileID: 0}
+  poolSize: 5
 --- !u!1 &504188903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,8 +1497,8 @@ MonoBehaviour:
   offset: {x: 0, y: -3, z: -10}
   xmin: -0.5
   xmax: 0.5
-  bottomView: {fileID: 0}
-  topView: {fileID: 0}
+  bottomView: {fileID: 2065704291}
+  topView: {fileID: 1108094305}
   panDuration: 1.2
   diveDuration: 0.35
 --- !u!1 &519913337
@@ -2247,6 +2296,55 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &925619411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925619412}
+  - component: {fileID: 925619413}
+  m_Layer: 0
+  m_Name: Pool Uncommon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &925619412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925619411}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1731093671}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &925619413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925619411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6156fad1cfed149688a16fd0c52a2486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
+  poolPrefabs:
+  - {fileID: 7652828609911750713, guid: eed8e9e020ef64e48bf46a270b37aa31, type: 3}
+  - {fileID: 827111036340939983, guid: e5687356a77ab44579ca1cb6a56feeab, type: 3}
+  parent: {fileID: 0}
+  poolSize: 5
 --- !u!1 &978037997
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,6 +4601,59 @@ MonoBehaviour:
   arm: {fileID: 2060193815}
   fadeDuration: 0.18
   endSequence: {fileID: 1108094310}
+--- !u!1 &1722016145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1722016146}
+  - component: {fileID: 1722016147}
+  m_Layer: 0
+  m_Name: Pool Common
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1722016146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722016145}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1731093671}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1722016147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722016145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6156fad1cfed149688a16fd0c52a2486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
+  poolPrefabs:
+  - {fileID: 8587321363766256968, guid: 93960f1a641a74d7e81888cf5117ad6f, type: 3}
+  - {fileID: 5437167908848851601, guid: b7455f8cb57e040f0827028d8234295f, type: 3}
+  - {fileID: -1691949534302438406, guid: 5572dd8f2138e40b3963a96b479c3e03, type: 3}
+  - {fileID: 2881507141041580634, guid: 773971d0190c747a1a1668b3d1745e24, type: 3}
+  - {fileID: 8228942457436462962, guid: a6beb0e9303a941649019567b25afb46, type: 3}
+  - {fileID: 1239641098284944505, guid: 499480437b4914d90bc8a94a6a4fe5aa, type: 3}
+  parent: {fileID: 0}
+  poolSize: 5
 --- !u!1 &1731093669
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,7 +4683,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 490245733}
+  - {fileID: 1722016146}
+  - {fileID: 925619412}
+  - {fileID: 1807293918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1731093672
@@ -4554,16 +4709,10 @@ MonoBehaviour:
   xmax: {fileID: 2070155111}
   topY: {fileID: 1779023719}
   bottomY: {fileID: 1039844009}
-  commonPool:
-  - {fileID: 313304579551488642, guid: c94d87988fb0142ada935cc90f3b7101, type: 3}
-  uncommonPool:
-  - {fileID: 8655372380947374205, guid: 9e3dc038fccb24b35b9b3945a92a8a39, type: 3}
-  rarePool:
-  - {fileID: 4330547924406897892, guid: fd442c5669290486e85c9a8e8da41715, type: 3}
-  epicPool:
-  - {fileID: 4968042233771086919, guid: 2774a9855bb0b46f0b81ba07e7975ebb, type: 3}
-  trashPool:
-  - {fileID: 4305787381126682968, guid: 1e99039dbe64d427b8d9fe11d05b4e2f, type: 3}
+  _poolCommon: {fileID: 1722016147}
+  _poolUncommon: {fileID: 925619413}
+  _poolRare: {fileID: 1807293919}
+  _poolBad: {fileID: 490245734}
 --- !u!1 &1768968576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,6 +4835,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1469743475}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1807293917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1807293918}
+  - component: {fileID: 1807293919}
+  m_Layer: 0
+  m_Name: Pool Rare
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1807293918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807293917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1731093671}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1807293919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807293917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6156fad1cfed149688a16fd0c52a2486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
+  poolPrefabs:
+  - {fileID: 5900889759201876433, guid: fa1b45bc91b0143c4b035a3f507f7b1f, type: 3}
+  - {fileID: 6534387074359175498, guid: e95fc1134e39b4f19837b1cf622b5ebf, type: 3}
+  parent: {fileID: 0}
+  poolSize: 5
 --- !u!1 &1878369516
 GameObject:
   m_ObjectHideFlags: 0
@@ -5334,6 +5532,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2065704291 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5831864130671319649, guid: 3edc4bae77bfb485291247ed76062726, type: 3}
+  m_PrefabInstance: {fileID: 642766708}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2066228176
 GameObject:
   m_ObjectHideFlags: 0

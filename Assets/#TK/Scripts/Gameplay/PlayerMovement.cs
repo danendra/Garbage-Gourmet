@@ -30,8 +30,8 @@ namespace TK.Gameplay
         //Item collection
 
         [Header("Held Item")]
-        public ItemType heldItemType;
-        public Rarity heldRarity;
+        public ITEM_TYPE heldItemType;
+        public RARITY heldRarity;
         [SerializeField] private Transform holdPoint;
         public Transform HoldPoint => holdPoint;
 
@@ -193,7 +193,7 @@ namespace TK.Gameplay
             return distanceTravelled;
         }
 
-        public void CollectItem(ItemType type, Rarity itemRarity)
+        public void CollectItem(ITEM_TYPE type, RARITY itemRarity)
         {
             hasCollected = true;
             isDragging = false;
