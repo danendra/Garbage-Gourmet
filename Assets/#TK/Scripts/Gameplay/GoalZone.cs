@@ -16,8 +16,15 @@ namespace TK.Gameplay
             if (player == null)
                 return;
 
-            if (!player.hasCollected || player.HeldCount == 0)
+            // Only trigger once the player is ascending.
+            if (!player.hasCollected)
                 return;
+
+            if (player.HeldCount == 0)
+            {
+                gameManager.LoseGame(player);
+                return;
+            }
 
             // ── Pick the best item ────────────────────────────────────────────
             CollectedItemData best = SelectBestItem(player);

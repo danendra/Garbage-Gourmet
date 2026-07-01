@@ -28,6 +28,10 @@ namespace TK.Gameplay
         [SerializeField] private float _maxReturnSpeed = 20f;
         private float _returnSpeed = 0f;
 
+        [Header("Arm Reach")]
+        [SerializeField] private float _maximumArmReach = 10f;
+        public float MaximumArmReach => _maximumArmReach;
+
         // Item collection
 
         [Header("Held Item")]
@@ -38,7 +42,12 @@ namespace TK.Gameplay
         public Transform HoldPoint => _holdPoint;        
         public IReadOnlyList<CollectedItemData> HeldItems => _heldItems;
         public int HeldCount => _heldItems.Count;
-        public bool hasCollected => _heldItems.Count >= _maxPickUpItems;
+
+        // Ascent is triggered when EITHER condition is true:
+        //   1. The player has collected the maximum allowed items.
+        //   2. The arm has reached its maximum depth (distanceTravelled >= maximumArmReach).
+        public bool hasCollected => _heldItems.Count >= _maxPickUpItems
+                                 || _distanceTravelled >= _maximumArmReach;
         public bool CanCollect => !hasCollected;
 
         [Header("Hand Visual")]
@@ -251,6 +260,17 @@ namespace TK.Gameplay
         public float GetReturnSpeed()
         {
             return _returnSpeed;
+        }
+
+        // UPGRADE PURPOSES
+        public void AddArmLength(int amount)
+        {
+            _maximumArmReach += amount;
+        }
+
+        public void AddMaxPickUpItems(int amount)
+        {
+            _maxPickUpItems += amount;
         }
 
     }
