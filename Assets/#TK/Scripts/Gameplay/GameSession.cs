@@ -7,8 +7,8 @@ namespace TK.Gameplay
         public static int FinalScore;
         public static bool PlayerWon;
 
-        public static ItemType CollectedItemType;
-        public static Rarity CollectedRarity;
+        public static ITEM_TYPE CollectedItemType;
+        public static RARITY CollectedRarity;
 
         public static Sprite CollectedSprite;
         public static string CollectedItemName;

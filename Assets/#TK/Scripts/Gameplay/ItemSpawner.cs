@@ -21,14 +21,13 @@ namespace TK.Gameplay
         [SerializeField] private Transform topY;
         [SerializeField] private Transform bottomY;
 
-        [Header("Item Pools")]
-        [SerializeField] private GameObject[] commonPool;
-        [SerializeField] private GameObject[] uncommonPool;
-        [SerializeField] private GameObject[] rarePool;
-        [SerializeField] private GameObject[] epicPool;
-        [SerializeField] private GameObject[] trashPool;
+        [Header("Item Pools")]        
+        [SerializeField] private PoolerContainer _poolCommon;
+        [SerializeField] private PoolerContainer _poolUncommon;
+        [SerializeField] private PoolerContainer _poolRare;        
+        [SerializeField] private PoolerContainer _poolBad;
 
-        private List<Vector2> usedPositions = new List<Vector2>();
+        private List<Vector2> _usedPositions = new List<Vector2>();
 
         void Start()
         {
@@ -41,26 +40,26 @@ namespace TK.Gameplay
 
         private void SpawnAllItems()
         {
-            usedPositions.Clear();
+            _usedPositions.Clear();
 
             for (int i = 0; i < totalItems; i++)
             {
-                Vector2 spawnPos;
+                Vector2 _spawnPos;
 
-                if (!TryFindSpawnPosition(out spawnPos))
+                if (!TryFindSpawnPosition(out _spawnPos))
                     continue;
 
-                GameObject prefabToSpawn = GetPrefabForDepth(spawnPos.y);
+                Collectible _collectibleToSpawn = GetPrefabForDepth(_spawnPos.y);
 
-                if (prefabToSpawn == null)
+                if (_collectibleToSpawn == null)
                     continue;
 
-                float randomZ = Random.Range(-18f, 18f);
-                Quaternion rotation = Quaternion.Euler(0f, 0f, randomZ);
+                float _randomZ = Random.Range(-18f, 18f);
+                Quaternion _rotation = Quaternion.Euler(0f, 0f, _randomZ);
 
-                Instantiate(prefabToSpawn, spawnPos, rotation);
+                _collectibleToSpawn.Initialize(_spawnPos, _rotation);                
 
-                usedPositions.Add(spawnPos);
+                _usedPositions.Add(_spawnPos);
             }
         }
 
@@ -79,7 +78,7 @@ namespace TK.Gameplay
 
                 bool valid = true;
 
-                foreach (Vector2 used in usedPositions)
+                foreach (Vector2 used in _usedPositions)
                 {
                     float dynamicSpacing = GetSpacingForDepth(candidate.y);
                     if (Vector2.Distance(candidate, used) < dynamicSpacing)
@@ -104,7 +103,7 @@ namespace TK.Gameplay
         // DEPTH LOOT LOGIC
         // =====================================================
 
-        private GameObject GetPrefabForDepth(float y)
+        private Collectible GetPrefabForDepth(float y)
         {
             float top = topY.position.y;
             float bottom = bottomY.position.y;
@@ -118,43 +117,35 @@ namespace TK.Gameplay
             // TOP ZONE
             if (t < 0.25f)
             {
-                if (roll < 20) return GetRandomFromPool(trashPool);
-                return GetRandomFromPool(commonPool);
+                if (roll < 20) return _poolBad.Pop<Collectible>(true);
+                return _poolCommon.Pop<Collectible>(true);
             }
 
             // MID ZONE
             if (t < 0.55f)
             {
-                if (roll < 20) return GetRandomFromPool(trashPool);
-                if (roll < 65) return GetRandomFromPool(commonPool);
-                return GetRandomFromPool(uncommonPool);
+                if (roll < 20) return _poolBad.Pop<Collectible>(true);
+                if (roll < 65) return _poolCommon.Pop<Collectible>(true);
+                return _poolUncommon.Pop<Collectible>(true);
             }
 
             // DEEP ZONE
             if (t < 0.80f)
             {
-                if (roll < 15) return GetRandomFromPool(trashPool);
-                if (roll < 45) return GetRandomFromPool(uncommonPool);
-                return GetRandomFromPool(rarePool);
+                if (roll < 15) return _poolBad.Pop<Collectible>(true);
+                if (roll < 45) return _poolUncommon.Pop<Collectible>(true);
+                return _poolRare.Pop<Collectible>(true);
             }
 
             // BOTTOM ZONE
-            if (roll < 10) return GetRandomFromPool(trashPool);
-            if (roll < 35) return GetRandomFromPool(rarePool);
-            return GetRandomFromPool(epicPool);
+            if (roll < 10) return _poolBad.Pop<Collectible>(true);
+            if (roll < 35) return _poolRare.Pop<Collectible>(true);
+            return _poolBad.Pop<Collectible>(true);
         }
 
         // =====================================================
         // HELPERS
         // =====================================================
-
-        private GameObject GetRandomFromPool(GameObject[] pool)
-        {
-            if (pool == null || pool.Length == 0)
-                return null;
-
-            return pool[Random.Range(0, pool.Length)];
-        }
 
         private float GetSpacingForDepth(float y)
         {

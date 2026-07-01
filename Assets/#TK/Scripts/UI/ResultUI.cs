@@ -114,17 +114,17 @@ namespace TK.UI
         // STARS
         // =====================================================
 
-        private int GetStarCount(ItemType type, Rarity rarity)
+        private int GetStarCount(ITEM_TYPE type, RARITY rarity)
         {
-            if (type == ItemType.Trash) return 0;
+            if (type == ITEM_TYPE.Trash) return 0;
 
             switch (rarity)
             {
-                case Rarity.Common: return 1;
-                case Rarity.Uncommon: return 2;
-                case Rarity.Rare: return 3;
-                case Rarity.Epic: return 4;
-                case Rarity.Legendary: return 5;
+                case RARITY.Common: return 1;
+                case RARITY.Uncommon: return 2;
+                case RARITY.Rare: return 3;
+                case RARITY.Bad: return 4;
+                case RARITY.Legendary: return 5;
                 default: return 0;
             }
         }
@@ -189,7 +189,7 @@ namespace TK.UI
         {
             inkStamp.gameObject.SetActive(true);
 
-            if (GameSession.CollectedItemType == ItemType.Trash)
+            if (GameSession.CollectedItemType == ITEM_TYPE.Trash)
                 inkStampAnimator.SetTrigger(trashTrigger);
             else
             {
@@ -209,9 +209,9 @@ namespace TK.UI
         // HEADLINES & FLAVOR
         // =====================================================
 
-        private string GetResultHeadline(bool won, ItemType type, Rarity rarity)
+        private string GetResultHeadline(bool won, ITEM_TYPE type, RARITY rarity)
         {
-            if (!won || type == ItemType.Trash)
+            if (!won || type == ITEM_TYPE.Trash)
             {
                 return RandomFrom(
                     "Only Trash Today...",
@@ -225,20 +225,20 @@ namespace TK.UI
 
             switch (rarity)
             {
-                case Rarity.Rare:
+                case RARITY.Rare:
                     return RandomFrom("Now That's a Find!", "Lucky Snack!", "Tasty Treasure!");
-                case Rarity.Epic:
+                case RARITY.Bad:
                     return RandomFrom("Feast Material!", "Now We're Eating Well!", "Legendary Appetite!");
-                case Rarity.Legendary:
+                case RARITY.Legendary:
                     return RandomFrom("Royal Snack Secured!", "The Ultimate Bite!", "A Meal for the Ages!", "History Has Been Eaten!");
                 default:
                     return RandomFrom("Snack Secured!", "Good Haul!", "Tasty Find!", "Tonight We Feast!", "Treat Retrieved!");
             }
         }
 
-        private string GetFlavorText(bool won, ItemType type, Rarity rarity)
+        private string GetFlavorText(bool won, ITEM_TYPE type, RARITY rarity)
         {
-            if (!won || type == ItemType.Trash)
+            if (!won || type == ITEM_TYPE.Trash)
             {
                 return RandomFrom(
                     "Technically an object.",
@@ -252,11 +252,11 @@ namespace TK.UI
 
             switch (rarity)
             {
-                case Rarity.Common: return RandomFrom("A humble snack, but appreciated all the same.", "Nothing fancy—still tasty.", "Simple food. Honest flavor.");
-                case Rarity.Uncommon: return RandomFrom("Better than average and twice as exciting.", "A respectable snack with promise.", "You've got an eye for quality.");
-                case Rarity.Rare: return RandomFrom("Hard to find, easy to love.", "This one was worth the trip.", "A premium discovery.");
-                case Rarity.Epic: return RandomFrom("Rich aroma. Elite status.", "The kind of snack others dream about.", "A feast-worthy treasure.");
-                case Rarity.Legendary: return RandomFrom("Whispers spoke of this flavor.", "Some thought it was only a myth.", "The snack of legends has returned.");
+                case RARITY.Common: return RandomFrom("A humble snack, but appreciated all the same.", "Nothing fancy—still tasty.", "Simple food. Honest flavor.");
+                case RARITY.Uncommon: return RandomFrom("Better than average and twice as exciting.", "A respectable snack with promise.", "You've got an eye for quality.");
+                case RARITY.Rare: return RandomFrom("Hard to find, easy to love.", "This one was worth the trip.", "A premium discovery.");
+                case RARITY.Bad: return RandomFrom("Rich aroma. Elite status.", "The kind of snack others dream about.", "A feast-worthy treasure.");
+                case RARITY.Legendary: return RandomFrom("Whispers spoke of this flavor.", "Some thought it was only a myth.", "The snack of legends has returned.");
                 default: return "";
             }
         }

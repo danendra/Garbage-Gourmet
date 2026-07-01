@@ -34,9 +34,9 @@ namespace TK.Gameplay
                 GameSession.CollectedItemType = player.heldItemType;
                 GameSession.CollectedRarity = player.heldRarity;
 
-                if (player.heldItemType == ItemType.Food)
+                if (player.heldItemType == ITEM_TYPE.Food)
                     gameManager.WinGame(player);
-                else if (player.heldItemType == ItemType.Trash)
+                else if (player.heldItemType == ITEM_TYPE.Trash)
                     gameManager.LoseGame(player);
             }
         }
