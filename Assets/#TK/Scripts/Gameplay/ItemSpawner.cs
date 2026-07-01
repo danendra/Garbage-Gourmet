@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Anoa.Module;
+
 namespace TK.Gameplay
 {
 
@@ -52,6 +54,7 @@ namespace TK.Gameplay
 
                 if (prefabToSpawn == null)
                     continue;
+
                 float randomZ = Random.Range(-18f, 18f);
                 Quaternion rotation = Quaternion.Euler(0f, 0f, randomZ);
 

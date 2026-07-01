@@ -50,6 +50,12 @@ namespace TK.Gameplay
             SetRandomVisual();
         }
 
+        public void Initialize(Vector3 _position, Quaternion _rotation)
+        {
+            transform.position = _position;
+            transform.rotation = _rotation;
+        }
+
         private ItemVisual currentVisual;
 
         private void SetRandomVisual()
