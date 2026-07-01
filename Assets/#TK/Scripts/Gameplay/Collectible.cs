@@ -1,20 +1,21 @@
+using System.Collections;
 using UnityEngine;
 
 namespace TK.Gameplay
 {
 
-    public enum ItemType
+    public enum ITEM_TYPE
     {
         Food,
         Trash
     }
 
-    public enum Rarity
+    public enum RARITY
     {
         Common,
         Uncommon,
         Rare,
-        Epic,
+        Bad,
         Legendary
     }
 
@@ -46,57 +47,14 @@ namespace TK.Gameplay
 
         void Start()
         {
-            SetRandomVisual();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _collider = GetComponent<Collider2D>();
         }
 
         public void Initialize(Vector3 _position, Quaternion _rotation)
         {
             transform.position = _position;
             transform.rotation = _rotation;
-        }
-
-        private ItemVisual _currentVisual;
-
-        private void SetRandomVisual()
-        {
-            if (_variants == null || _variants.Length == 0)
-            {
-                Debug.LogWarning(gameObject.name + " has no variants assigned.");
-                return;
-            }
-
-            int randomIndex = Random.Range(0, _variants.Length);
-            _currentVisual = _variants[randomIndex];
-
-            _sr.sprite = _currentVisual.ItemSprite;
-            transform.localScale = _currentVisual.DisplayScale;
-
-            RefreshCollider();
-        }
-
-        private void RefreshCollider()
-        {
-            if (_poly == null)
-                return;
-
-            // Rebuild collider using sprite's Physics Shape
-            _poly.pathCount = 0;
-
-            Sprite sprite = _sr.sprite;
-
-            if (sprite == null)
-                return;
-
-            int shapeCount = sprite.GetPhysicsShapeCount();
-
-            for (int i = 0; i < shapeCount; i++)
-            {
-                var points = new System.Collections.Generic.List<Vector2>();
-                sprite.GetPhysicsShape(i, points);
-
-                _poly.pathCount = i + 1;
-                _poly.SetPath(i, points);
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -109,23 +67,17 @@ namespace TK.Gameplay
             if (collector == null || !collector.CanCollect)
                 return;
 
-            // Build item data and hand it to the collector's inventory.
-            var data = new CollectedItemData
-            {
-                Type    = _itemType,
-                ItemRarity      = _rarity,
-                ItemSprite      = _currentVisual.ItemSprite,
-                DisplayName = _currentVisual.DisplayName
-            };
+            player.CollectItem(_itemType, _rarity);
 
-            collector.AddItem(data);
+            GameSession.CollectedSprite = _spriteRenderer.sprite;
+            GameSession.CollectedItemName = name;
 
-            _poly.enabled = false;
+            _collider.enabled = false;
 
-            StartCoroutine(PickupAnimation(collector));
+            StartCoroutine(IEPickupAnimation(player));
         }
 
-        private System.Collections.IEnumerator PickupAnimation(IItemCollector collector)
+        private IEnumerator IEPickupAnimation(PlayerMovement player)
         {
             Transform target = collector.HoldPoint;
 
@@ -143,22 +95,22 @@ namespace TK.Gameplay
 
             switch (_rarity)
             {
-                case Rarity.Uncommon:
+                case RARITY.Uncommon:
                     popScale = 1.20f;
                     break;
 
-                case Rarity.Rare:
+                case RARITY.Rare:
                     popScale = 1.28f;
                     wobbleAngle = 12f;
                     break;
 
-                case Rarity.Epic:
+                case RARITY.Bad:
                     popScale = 1.38f;
                     wobbleAngle = 18f;
                     snapDuration = 0.10f;
                     break;
 
-                case Rarity.Legendary:
+                case RARITY.Legendary:
                     popScale = 1.55f;
                     wobbleAngle = 25f;
                     snapDuration = 0.08f;
