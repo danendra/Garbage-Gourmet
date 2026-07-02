@@ -13,8 +13,8 @@ namespace TK.Gameplay
 
         // The best item selected by GoalZone (Ini buat test, bisa dihapus kalau ga kepake lagi)
         public static CollectedItemData BestItem;
-        public static ItemType CollectedItemType;
-        public static Rarity CollectedRarity;
+        public static ITEM_TYPE CollectedItemType;
+        public static RARITY CollectedRarity;
         public static Sprite CollectedSprite;
         public static string CollectedItemName;
     }

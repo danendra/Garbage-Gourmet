@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 namespace TK.Gameplay
 {
-
-    public class PlayerMovement : MonoBehaviour, IItemCollector
+    public class PlayerMovement : MonoBehaviour
     {
         // Component references
         private Camera _mainCamera;
-        private Rigidbody2D rb;
+        private Rigidbody2D _rb;
 
         // Input/drag settings
 
@@ -32,31 +30,8 @@ namespace TK.Gameplay
         [SerializeField] private float _maximumArmReach = 10f;
         public float MaximumArmReach => _maximumArmReach;
 
-        // Item collection
-
-        [Header("Held Item")]
-        [SerializeField] private Transform _holdPoint;
-        private List<CollectedItemData> _heldItems = new List<CollectedItemData>();
-
-
-        public Transform HoldPoint => _holdPoint;        
-        public IReadOnlyList<CollectedItemData> HeldItems => _heldItems;
-        public int HeldCount => _heldItems.Count;
-
-        // Ascent is triggered when EITHER condition is true:
-        //   1. The player has collected the maximum allowed items.
-        //   2. The arm has reached its maximum depth (distanceTravelled >= maximumArmReach).
-        public bool hasCollected => _heldItems.Count >= _maxPickUpItems
-                                 || _distanceTravelled >= _maximumArmReach;
-        public bool CanCollect => !hasCollected;
-
-        [Header("Hand Visual")]
-        [SerializeField] private SpriteRenderer _handRenderer;
-        [SerializeField] private Sprite _openHandSprite;
-        [SerializeField] private Sprite _grabHandSprite;
-
-        [Header("Pick Up Settings")]
-        [SerializeField] private int _maxPickUpItems = 5;
+        [Header("Inventory")]
+        [SerializeField] private PlayerInventory _inventory;
 
         // Game state
 
@@ -70,31 +45,44 @@ namespace TK.Gameplay
         private Vector3 _offset;
         private float _velocityX;
         private float _previousX;
-        private Vector3 _handDefaultScale;
 
-        public bool IsDragging => _isDragging;
+        // Set to true by the OnInventoryFull event from PlayerInventory.
+        private bool _inventoryFull = false;
+
+        public bool hasCollected => _inventoryFull || _distanceTravelled >= _maximumArmReach;
+        public bool IsDragging   => _isDragging;
         public Vector3 HandPosition => transform.position;
 
-        // Unity methods
+        // ── Unity lifecycle ────────────────────────────────────────────────────
         void Start()
         {
             _mainCamera = Camera.main;
-            rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody2D>();
 
-            if (_handRenderer != null)
-            {
-                _handDefaultScale = _handRenderer.transform.localScale;
-            }
-
-            if (_handRenderer != null && _openHandSprite != null)
-            {
-                _handRenderer.sprite = _openHandSprite;
-            }
-
-            _targetX = transform.position.x;
-            _currentY = transform.position.y;
+            _targetX   = transform.position.x;
+            _currentY  = transform.position.y;
             _previousX = transform.position.x;
 
+            // Stop drag on any pickup so the item snap animation isn't fighting input.
+            _inventory.OnItemAdded    += OnItemAdded;
+            // Flag ascent when the bag is full.
+            _inventory.OnInventoryFull += OnInventoryFull;
+        }
+
+        void OnDestroy()
+        {
+            _inventory.OnItemAdded     -= OnItemAdded;
+            _inventory.OnInventoryFull -= OnInventoryFull;
+        }
+
+        private void OnItemAdded()
+        {
+            _isDragging = false;
+        }
+
+        private void OnInventoryFull()
+        {
+            _inventoryFull = true;
         }
 
         void Update()
@@ -119,8 +107,7 @@ namespace TK.Gameplay
             _previousX = transform.position.x;
         }
 
-        // Movement logic
-
+        // ── Movement logic ─────────────────────────────────────────────────────
         private void UpdateSpeed()
         {
             _speed += _acceleration * Time.fixedDeltaTime;
@@ -133,7 +120,7 @@ namespace TK.Gameplay
                 _returnSpeed += _returnAcceleration * Time.fixedDeltaTime;
                 _returnSpeed = Mathf.Lerp(_returnSpeed, _maxReturnSpeed, Time.fixedDeltaTime * _returnAcceleration);
 
-                _currentY += _returnSpeed * Time.fixedDeltaTime; // return upward
+                _currentY += _returnSpeed * Time.fixedDeltaTime; // ascend
             }
             else
             {
@@ -148,15 +135,14 @@ namespace TK.Gameplay
         {
             Vector3 finalPosition = new Vector3(_targetX, _currentY, 0f);
 
-            rb.MovePosition(Vector3.Lerp(
+            _rb.MovePosition(Vector3.Lerp(
                 transform.position,
                 finalPosition,
                 Time.fixedDeltaTime * _dragSpeed
             ));
         }
 
-        // Touch input
-
+        // ── Touch input ────────────────────────────────────────────────────────
         private void HandleTouch()
         {
             var touch = Touchscreen.current.primaryTouch;
@@ -165,21 +151,15 @@ namespace TK.Gameplay
 
             // START
             if (isTouching && !_wasTouching)
-            {
                 TryStartDrag(touch.position.ReadValue());
-            }
 
             // CONTINUE
             if (_isDragging && isTouching)
-            {
                 DragTo(touch.position.ReadValue());
-            }
 
             // STOP
             if (!isTouching && _wasTouching)
-            {
                 _isDragging = false;
-            }
 
             _wasTouching = isTouching;
         }
@@ -205,73 +185,15 @@ namespace TK.Gameplay
             _targetX = Mathf.Clamp(rawTargetX, _leftWall, _rightWall);
         }
 
-        // Public methods
-        public float GetDepth()
-        {
-            return _distanceTravelled;
-        }
+        // ── Public methods ─────────────────────────────────────────────────────
+        public float GetDepth()      => _distanceTravelled;
+        public float GetDeltaX()     => _velocityX;
+        public float GetReturnSpeed() => _returnSpeed;
 
-        /// Adds the item to the held inventory. 
-        public void AddItem(CollectedItemData data)
-        {
-            if (hasCollected) return; 
-
-            _heldItems.Add(data);
-            _isDragging = false;
-
-            if (_handRenderer != null && _grabHandSprite != null)
-            {
-                _handRenderer.sprite = _grabHandSprite;
-                _handRenderer.transform.localScale = new Vector3(
-                    _handDefaultScale.x * 1.12f,
-                    _handDefaultScale.y * 0.88f,
-                    _handDefaultScale.z
-                );
-
-                StartCoroutine(HandScaleBack());
-            }
-        }
-        private System.Collections.IEnumerator HandScaleBack()
-        {
-            Transform hand = _handRenderer.transform;
-
-            Vector3 startScale = hand.localScale;
-
-            float time = 0f;
-            float duration = 0.12f;
-
-            while (time < duration)
-            {
-                time += Time.deltaTime;
-                float t = time / duration;
-
-                hand.localScale = Vector3.Lerp(startScale, _handDefaultScale, t);
-
-                yield return null;
-            }
-
-            hand.localScale = _handDefaultScale;
-        }
-
-        public float GetDeltaX()
-        {
-            return _velocityX;
-        }
-        public float GetReturnSpeed()
-        {
-            return _returnSpeed;
-        }
-
-        // UPGRADE PURPOSES
+        // ── Upgrades ───────────────────────────────────────────────────────────
         public void AddArmLength(int amount)
         {
             _maximumArmReach += amount;
         }
-
-        public void AddMaxPickUpItems(int amount)
-        {
-            _maxPickUpItems += amount;
-        }
-
     }
 }

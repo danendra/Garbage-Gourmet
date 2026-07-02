@@ -11,58 +11,60 @@ namespace TK.Gameplay
             if (!other.CompareTag("Player"))
                 return;
 
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            PlayerMovement  player    = other.GetComponent<PlayerMovement>();
+            PlayerInventory inventory = other.GetComponent<PlayerInventory>();
 
-            if (player == null)
+            if (player == null || inventory == null)
                 return;
 
             // Only trigger once the player is ascending.
             if (!player.hasCollected)
                 return;
 
-            if (player.HeldCount == 0)
+            // Player hit the maximum arm reach without picking anything up.
+            if (inventory.HeldCount == 0)
             {
                 gameManager.LoseGame(player);
                 return;
             }
 
-            // ── Pick the best item ────────────────────────────────────────────
-            CollectedItemData best = SelectBestItem(player);
+            CollectedItemData best = SelectBestItem(inventory);
 
-            // ── Write to GameSession ──────────────────────────────────────────
-            // Store the full list for any future use (e.g. showing all items on result screen).
+            // Store the full list for any future use or remove based on design changes.
             GameSession.CollectedItems.Clear();
-            foreach (var item in player.HeldItems)
+            foreach (var item in inventory.HeldItems)
                 GameSession.CollectedItems.Add(item);
 
             // Store the winning item.
-            GameSession.BestItem = best;
+            GameSession.BestItem          = best;
             GameSession.CollectedItemType = best.Type;
             GameSession.CollectedRarity   = best.ItemRarity;
             GameSession.CollectedSprite   = best.ItemSprite;
             GameSession.CollectedItemName = best.DisplayName;
 
-            // ── Win / Lose ────────────────────────────────────────────────────
-            if (best.Type == ItemType.Food)
+            if (best.Type == ITEM_TYPE.Food)
                 gameManager.WinGame(player);
             else
                 gameManager.LoseGame(player);
         }
 
-        private CollectedItemData SelectBestItem(PlayerMovement player)
+        /// Selects the highest-value item from the inventory (Ini nanti diubah buat validasi list).
+        private CollectedItemData SelectBestItem(PlayerInventory inventory)
         {
-            CollectedItemData best = player.HeldItems[0];
+            CollectedItemData best = inventory.HeldItems[0];
 
-            for (int i = 1; i < player.HeldCount; i++)
+            for (int i = 1; i < inventory.HeldCount; i++)
             {
-                CollectedItemData candidate = player.HeldItems[i];
+                CollectedItemData candidate = inventory.HeldItems[i];
 
-                if (candidate.Type == ItemType.Food && best.Type == ItemType.Trash)
+                // Food always beats Trash
+                if (candidate.Type == ITEM_TYPE.Food && best.Type == ITEM_TYPE.Trash)
                 {
                     best = candidate;
                     continue;
                 }
 
+                // Same type — higher rarity wins
                 if (candidate.Type == best.Type && (int)candidate.ItemRarity > (int)best.ItemRarity)
                 {
                     best = candidate;

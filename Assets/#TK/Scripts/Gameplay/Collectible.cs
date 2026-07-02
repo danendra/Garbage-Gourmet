@@ -30,20 +30,11 @@ namespace TK.Gameplay
     public class Collectible : MonoBehaviour
     {
         [Header("Item Data")]
-        [SerializeField] private ItemType _itemType;
-        [SerializeField] private Rarity _rarity;
+        [SerializeField] private ITEM_TYPE _itemType;
+        [SerializeField] private RARITY _rarity;
 
-        [Header("Visual Variants")]
-        [SerializeField] private ItemVisual[] _variants;
-
-        private SpriteRenderer _sr;
-        private PolygonCollider2D _poly;
-
-        void Awake()
-        {
-            _sr = GetComponent<SpriteRenderer>();
-            _poly = GetComponent<PolygonCollider2D>();
-        }
+        private Collider2D _collider;
+        private SpriteRenderer _spriteRenderer;
 
         void Start()
         {
@@ -67,17 +58,15 @@ namespace TK.Gameplay
             if (collector == null || !collector.CanCollect)
                 return;
 
-            player.CollectItem(_itemType, _rarity);
-
             GameSession.CollectedSprite = _spriteRenderer.sprite;
             GameSession.CollectedItemName = name;
 
             _collider.enabled = false;
 
-            StartCoroutine(IEPickupAnimation(player));
+            StartCoroutine(IEPickupAnimation(collector));
         }
 
-        private IEnumerator IEPickupAnimation(PlayerMovement player)
+        private IEnumerator IEPickupAnimation(IItemCollector collector)
         {
             Transform target = collector.HoldPoint;
 

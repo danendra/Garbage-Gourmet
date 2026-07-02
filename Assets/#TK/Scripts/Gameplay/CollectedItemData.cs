@@ -6,8 +6,8 @@ namespace TK.Gameplay
     /// Passed from Collectible → PlayerMovement → GoalZone → GameSession.
     public class CollectedItemData
     {
-        public ItemType Type;
-        public Rarity   ItemRarity;
+        public ITEM_TYPE Type;
+        public RARITY   ItemRarity;
         public Sprite   ItemSprite;
         public string   DisplayName;
     }
