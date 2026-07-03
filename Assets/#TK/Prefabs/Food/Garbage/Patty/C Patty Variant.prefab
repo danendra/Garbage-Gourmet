@@ -14,12 +14,16 @@ PrefabInstance:
       objectReference: {fileID: 8984754096541894249, guid: 9f9e0e4567e8f48639bd6dd3904a0645, type: 3}
     - target: {fileID: 2336309638399483904, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_Name
-      value: C Bottom Bun Variant
+      value: C Patty Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: _itemType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: _goFoodServed
+      value: 
+      objectReference: {fileID: 3012219416004230014, guid: 42ef59470936c4a79ab6568c51a8001b, type: 3}
     - target: {fileID: 5674427922810825183, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

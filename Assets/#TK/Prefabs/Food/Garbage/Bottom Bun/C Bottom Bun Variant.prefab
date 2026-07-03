@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: _itemType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      propertyPath: _goFoodServed
+      value: 
+      objectReference: {fileID: 2336309638399483904, guid: 749f7988069574ff2b2eec54d042b21b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

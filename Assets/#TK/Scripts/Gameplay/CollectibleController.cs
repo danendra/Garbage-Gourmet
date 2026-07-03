@@ -36,6 +36,9 @@ namespace TK.Gameplay
         [SerializeField] private ITEM_TYPE _itemType;
         [SerializeField] private RARITY _rarity;
         [SerializeField] private int _intScore = 1;
+        [SerializeField] private GameObject _goFoodServed;
+
+        public GameObject GetFoodServed => _goFoodServed;
 
         private Collider2D _collider;
         private SpriteRenderer _spriteRenderer;

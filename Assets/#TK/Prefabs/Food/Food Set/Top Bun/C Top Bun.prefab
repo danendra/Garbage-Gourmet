@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 330894185113454029}
   - component: {fileID: 5975440692612145781}
   - component: {fileID: 3113167136787110338}
-  - component: {fileID: 8716565346548842337}
-  - component: {fileID: 2068085320042060153}
+  - component: {fileID: 8141993671275834603}
   m_Layer: 0
-  m_Name: C Top Bun Base
+  m_Name: C Top Bun
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +123,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -140,30 +139,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9785156, y: 0.6464844}
   m_EdgeRadius: 0
---- !u!114 &8716565346548842337
-MonoBehaviour:
+--- !u!50 &8141993671275834603
+Rigidbody2D:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7657299826903813138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4338fd3c0eda44e3eaab00bb621d9ff4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  _itemType: 0
-  _rarity: 0
-  _intScore: 1
---- !u!114 &2068085320042060153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7657299826903813138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e67da051dfb47f1922fd1824470ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerObject
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
