@@ -9,7 +9,6 @@ namespace TK.Gameplay
     public class EndSequenceController : MonoBehaviour
     {
         [SerializeField] private Animator animator;
-        [SerializeField] private CameraMovement cam;
         [SerializeField] private ResultUI resultUI;
 
         [Header("Item Display")]
@@ -18,13 +17,12 @@ namespace TK.Gameplay
 
         public IEnumerator PlayEndSequence(bool won)
         {
-            cam.DisableFollow();
-            cam.SnapTo(transform.position);
-
             // Set the sprite but keep it hidden
             itemDisplay.sprite = GameSession.CollectedSprite;
             itemDisplayOriginalScale = itemDisplay.transform.localScale;
             itemDisplay.transform.localScale = Vector3.zero;
+
+            yield return new WaitForSeconds(0.1f);
 
             // Pickup — fade item in
             animator.SetTrigger("Pickup");
@@ -77,15 +75,6 @@ namespace TK.Gameplay
             itemDisplay.transform.localScale = to;
         }
 
-        private IEnumerator WaitForAnimationHalfway(string stateName)
-        {
-            yield return new WaitUntil(() =>
-                animator.GetCurrentAnimatorStateInfo(0).IsName(stateName));
-
-            yield return new WaitUntil(() =>
-                animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f);
-        }
-
         private IEnumerator WaitForAnimationComplete(string stateName)
         {
             // Only wait to enter the state if we're not already in it
@@ -95,6 +84,7 @@ namespace TK.Gameplay
             while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
                 yield return null;
         }
+
         private IEnumerator WaitForAnimationAt(string stateName, float point)
         {
             yield return new WaitUntil(() =>
@@ -102,20 +92,6 @@ namespace TK.Gameplay
 
             yield return new WaitUntil(() =>
                 animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= point);
-        }
-        private IEnumerator PlayAnim(string triggerName)
-        {
-            animator.SetTrigger(triggerName);
-            yield return null;
-
-            while (animator.IsInTransition(0))
-                yield return null;
-
-            yield return new WaitUntil(() =>
-                animator.GetCurrentAnimatorStateInfo(0).IsName(triggerName));
-
-            while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
-                yield return null;
         }
     }
 }

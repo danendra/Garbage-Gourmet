@@ -19,20 +19,22 @@ namespace TK.Gameplay
         Legendary
     }
 
+    [System.Serializable]
+    public class ItemVisual
+    {
+        public Sprite ItemSprite;
+        public string DisplayName;
+        public Vector3 DisplayScale = Vector3.one;
+    }
+
     public class Collectible : MonoBehaviour
     {
         [Header("Item Data")]
         [SerializeField] private ITEM_TYPE _itemType;
         [SerializeField] private RARITY _rarity;
-        [SerializeField] private int _intReward = 1;
 
-        private SpriteRenderer _spriteRenderer;
         private Collider2D _collider;
-
-        void Awake()
-        {
-            
-        }
+        private SpriteRenderer _spriteRenderer;
 
         void Start()
         {
@@ -51,24 +53,22 @@ namespace TK.Gameplay
             if (!other.CompareTag("Player"))
                 return;
 
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            IItemCollector collector = other.GetComponent<IItemCollector>();
 
-            if (player == null || player.hasCollected)
+            if (collector == null || !collector.CanCollect)
                 return;
-
-            player.CollectItem(_itemType, _rarity);
 
             GameSession.CollectedSprite = _spriteRenderer.sprite;
             GameSession.CollectedItemName = name;
 
             _collider.enabled = false;
 
-            StartCoroutine(IEPickupAnimation(player));
+            StartCoroutine(IEPickupAnimation(collector));
         }
 
-        private IEnumerator IEPickupAnimation(PlayerMovement player)
+        private IEnumerator IEPickupAnimation(IItemCollector collector)
         {
-            Transform target = player.HoldPoint;
+            Transform target = collector.HoldPoint;
 
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;

@@ -9,9 +9,8 @@ namespace TK.Gameplay
     public class LevelManager : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private PlayerMovement player;
-        [SerializeField] private CameraMovement cam;
-        [SerializeField] private TransitionAnimationController startController;
+        [SerializeField] private SequenceController _sequenceController;
+        [SerializeField] private PlayerMovement player;                
 
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
@@ -24,48 +23,41 @@ namespace TK.Gameplay
         [Header("End Sequence")]
         [SerializeField] private EndSequenceController endSequence;
 
-        public bool gameStarted { get; private set; }
-        public bool isGameOver { get; private set; }
+        public static LevelManager Instance {get; protected set;}
+        public bool IsGameStarted { get; private set; }
+        public bool IsGameOver { get; private set; }
 
         private int finalScore;
 
         void Start()
         {
-            StartCoroutine(BeginIntroSequence());
+            // StartCoroutine(BeginIntroSequence());
+
+            StartIntro();
         }
 
-        IEnumerator BeginIntroSequence()
+        private void StartIntro()
         {
-            gameStarted = false;
-            isGameOver = false;
+            IsGameStarted = false;
+            IsGameOver = false;
 
-            player.canMove = false;
+            player._canMove = false;
 
-            // Hide visuals first
             SetHandAlpha(0f);
             SetArmAlpha(0f);
 
-            // CAMERA PAN UP
-            yield return cam.PlayIntroPan();
+            _sequenceController.PlayIntroScene(StartGame);
+        }
 
-            // RACCOON ANIMATION
-            if (startController != null)
-                yield return startController.PlaySequence("Play", false);
-
-            // CAMERA DIVE DOWN
-            yield return cam.PlayDiveDown();
-
-            // PRELOAD ARM BEFORE GAME START
+        private void StartGame()
+        {
             arm.ForceRefresh();
-
-            cam.SnapToPlayer();
-            cam.EnableFollow();
 
             StartCoroutine(FadeGameplayVisuals());
 
-            player.canMove = true;
+            player._canMove = true;
             AudioManager.Instance.PlayGameplayMusic();
-            gameStarted = true;
+            IsGameStarted = true;
         }
 
         IEnumerator FadeGameplayVisuals()
@@ -112,32 +104,35 @@ namespace TK.Gameplay
 
         public void WinGame(PlayerMovement playerRef)
         {
-            if (isGameOver) return;
-            isGameOver = true;
+            if (IsGameOver) return;
+            IsGameOver = true;
 
             finalScore = Mathf.RoundToInt(playerRef.GetDepth() * 10f);
             GameSession.FinalScore = finalScore;
             GameSession.PlayerWon = true;
 
-            playerRef.canMove = false;
-            StartCoroutine(RunEndSequence(playerRef, won: true));
+            playerRef._canMove = false;
+            StartCoroutine(RunEndSequence(true));
         }
 
         public void LoseGame(PlayerMovement playerRef)
         {
-            if (isGameOver) return;
-            isGameOver = true;
+            if (IsGameOver) return;
+            IsGameOver = true;
 
             GameSession.FinalScore = 0;
             GameSession.PlayerWon = false;
 
-            playerRef.canMove = false;
-            StartCoroutine(RunEndSequence(playerRef, won: false));
+            playerRef._canMove = false;
+            StartCoroutine(RunEndSequence(false));
         }
 
-        private IEnumerator RunEndSequence(PlayerMovement playerRef, bool won)
+        private IEnumerator RunEndSequence(bool won)
         {
             yield return StartCoroutine(FadeOutGameplayVisuals());
+
+            _sequenceController.PlayEndCamera();
+
             yield return StartCoroutine(endSequence.PlayEndSequence(won));
         }
         private IEnumerator FadeOutGameplayVisuals()
