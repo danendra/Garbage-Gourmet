@@ -59,7 +59,7 @@ namespace TK.Gameplay
 
         void HandleStateTransitions()
         {
-            if (player.hasCollected && state == TrailState.Drawing)
+            if (player.HasCollected && state == TrailState.Drawing)
                 state = TrailState.Retracting;
         }
 
