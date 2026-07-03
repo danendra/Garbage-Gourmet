@@ -9,6 +9,9 @@ namespace TK.Gameplay
         private Camera _mainCamera;
         private Rigidbody2D _rb;
 
+        [Header("Arm")]
+        [SerializeField] private NewArmLineRenderer _armLineRenderer;
+
         // Input/drag settings
 
         [Header("Drag Controls")]
@@ -49,7 +52,21 @@ namespace TK.Gameplay
         // Set to true by the OnInventoryFull event from PlayerInventory.
         private bool _inventoryFull = false;
 
-        public bool hasCollected => _inventoryFull || _distanceTravelled >= _maximumArmReach;
+        private bool _hasCollected = false;
+        public bool HasCollected
+        {
+            get => _hasCollected;
+            set
+            {
+                if (_hasCollected == value) return;
+
+                _hasCollected = value;
+
+                if (_hasCollected)
+                    _armLineRenderer.ChangeStateToRetract();
+            }
+        }
+
         public bool IsDragging   => _isDragging;
         public Vector3 HandPosition => transform.position;
 
@@ -87,10 +104,12 @@ namespace TK.Gameplay
 
         void Update()
         {
+            CheckHasCollected();
+
             if (!_canMove)
                 return;
 
-            if (Touchscreen.current != null && !hasCollected)
+            if (Touchscreen.current != null && !HasCollected)
                 HandleTouch();
         }
 
@@ -115,7 +134,7 @@ namespace TK.Gameplay
 
         private void UpdateVerticalMovement()
         {
-            if (hasCollected)
+            if (HasCollected)
             {
                 _returnSpeed += _returnAcceleration * Time.fixedDeltaTime;
                 _returnSpeed = Mathf.Lerp(_returnSpeed, _maxReturnSpeed, Time.fixedDeltaTime * _returnAcceleration);
@@ -140,6 +159,16 @@ namespace TK.Gameplay
                 finalPosition,
                 Time.fixedDeltaTime * _dragSpeed
             ));
+        }
+
+        private void CheckHasCollected()
+        {
+            if (HasCollected) return;
+
+            if (_inventoryFull || _distanceTravelled >= _maximumArmReach)
+            {
+                HasCollected = true;
+            }
         }
 
         // ── Touch input ────────────────────────────────────────────────────────

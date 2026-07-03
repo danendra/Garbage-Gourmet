@@ -5667,6 +5667,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3861514759626133184, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
+      propertyPath: _armLineRenderer
+      value: 
+      objectReference: {fileID: 1840197601}
+    - target: {fileID: 3861514759626133184, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
       propertyPath: _dragAreaCollider
       value: 
       objectReference: {fileID: 779459298}
