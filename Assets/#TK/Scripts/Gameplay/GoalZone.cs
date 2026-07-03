@@ -18,7 +18,7 @@ namespace TK.Gameplay
                 return;
 
             // Only trigger once the player is ascending.
-            if (!player.hasCollected)
+            if (!player.HasCollected)
                 return;
 
             // Player hit the maximum arm reach without picking anything up.

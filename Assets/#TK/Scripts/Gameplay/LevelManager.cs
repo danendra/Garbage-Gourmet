@@ -15,7 +15,7 @@ namespace TK.Gameplay
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
         [SerializeField] private LineRenderer armLine;
-        [SerializeField] private ArmLineRenderer arm;
+        // [SerializeField] private ArmLineRenderer arm;
 
         [Header("Intro Timing")]
         [SerializeField] private float fadeDuration = 0.18f;
@@ -51,7 +51,7 @@ namespace TK.Gameplay
 
         private void StartGame()
         {
-            arm.ForceRefresh();
+            // arm.ForceRefresh();
 
             StartCoroutine(FadeGameplayVisuals());
 
