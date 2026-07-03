@@ -9,12 +9,12 @@ namespace TK.Gameplay
     {
         [Header("References")]
         [SerializeField] private SequenceController _sequenceController;
-        [SerializeField] private PlayerMovement player;                
+        [SerializeField] private PlayerMovement player;
+        [SerializeField] private ItemSpawner _itemSpawner;
 
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
         [SerializeField] private LineRenderer armLine;
-        [SerializeField] private ArmLineRenderer arm;
 
         [Header("Intro Timing")]
         [SerializeField] private float fadeDuration = 0.18f;
@@ -35,6 +35,13 @@ namespace TK.Gameplay
             StartIntro();
         }
 
+        void Update()
+        {
+            if (!IsGameStarted || IsGameOver) return;
+            // Ini buat handle dynamic food spawn
+            _itemSpawner.TickSpawn(player.transform.position.y);
+        }
+
         private void StartIntro()
         {
             IsGameStarted = false;
@@ -50,8 +57,6 @@ namespace TK.Gameplay
 
         private void StartGame()
         {
-            arm.ForceRefresh();
-
             StartCoroutine(FadeGameplayVisuals());
 
             player._canMove = true;

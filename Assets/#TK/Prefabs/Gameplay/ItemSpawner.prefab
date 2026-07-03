@@ -773,17 +773,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585fc8c6147574b80ba0dd65b8b2c9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpawner
-  totalItems: 75
+  _itemsPerChunk: 3
+  _chunkHeight: 1
+  _spawnLookaheadDistance: 6.5
+  _despawnDistance: 25
   spacing: 2.5
   maxAttempts: 150
-  xmin: {fileID: 0}
-  xmax: {fileID: 0}
-  topY: {fileID: 0}
-  bottomY: {fileID: 0}
+  xmin: {fileID: 2236268937741809929}
+  xmax: {fileID: 6791270538941666605}
+  topY: {fileID: 4516964747361655172}
+  bottomY: {fileID: 6358004450961677661}
   _poolCommon: {fileID: 77372667055263073}
   _poolUncommon: {fileID: 5558046411419877650}
   _poolRare: {fileID: 7879520763633670241}
   _poolBad: {fileID: 8524894383507889110}
+  _commonCount: 18
+  _uncommonCount: 10
+  _rareCount: 7
+  _badCount: 5
 --- !u!1 &8424799138694538891
 GameObject:
   m_ObjectHideFlags: 0
