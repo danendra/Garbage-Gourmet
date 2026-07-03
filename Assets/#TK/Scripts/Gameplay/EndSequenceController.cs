@@ -8,7 +8,7 @@ namespace TK.Gameplay
     public class EndSequenceController : MonoBehaviour
     {
         [SerializeField] private Animator animator;
-        [SerializeField] private ResultUI resultUI;
+        [SerializeField] private ResultController resultController;
 
         [Header("Item Display")]
         [SerializeField] private SpriteRenderer itemDisplay;
@@ -24,32 +24,33 @@ namespace TK.Gameplay
             yield return new WaitForSeconds(0.1f);
 
             // Pickup — fade item in
-            animator.SetTrigger("Pickup");
-            AudioManager.Instance.PlayGrab();
-            yield return null;
-            while (animator.IsInTransition(0))
-                yield return null;
-            yield return WaitForAnimationAt("Pickup", 0.3f);
-            yield return ScaleItem(Vector3.zero, itemDisplayOriginalScale, 0.2f);
-            yield return WaitForAnimationComplete("Pickup");
+            // animator.SetTrigger("Pickup");
+            // AudioManager.Instance.PlayGrab();
+            // yield return null;
+            // while (animator.IsInTransition(0))
+            //     yield return null;
+            // yield return WaitForAnimationAt("Pickup", 0.3f);
+            // yield return ScaleItem(Vector3.zero, itemDisplayOriginalScale, 0.2f);
 
-            // Eat — shrink item out midway through eat animation
-            if (won)
-            {
-                animator.SetTrigger("EatFood");
-                AudioManager.Instance.PlayEatFood();
-                yield return WaitForAnimationAt("EatFood", 0.1f);
-                yield return ScaleItem(itemDisplayOriginalScale, Vector3.zero, 0.2f);
-                yield return WaitForAnimationComplete("EatFood");
-            }
-            else
-            {
-                animator.SetTrigger("EatTrash");
-                AudioManager.Instance.PlayEatTrash();
-                yield return WaitForAnimationAt("EatTrash", 0.1f);
-                yield return ScaleItem(itemDisplayOriginalScale, Vector3.zero, 0.2f);
-                yield return WaitForAnimationComplete("EatTrash");
-            }
+            // yield return WaitForAnimationComplete("Pickup");
+
+            // // Eat — shrink item out midway through eat animation
+            // if (won)
+            // {
+            //     animator.SetTrigger("EatFood");
+            //     AudioManager.Instance.PlayEatFood();
+            //     yield return WaitForAnimationAt("EatFood", 0.1f);
+            //     yield return ScaleItem(itemDisplayOriginalScale, Vector3.zero, 0.2f);
+            //     yield return WaitForAnimationComplete("EatFood");
+            // }
+            // else
+            // {
+            //     animator.SetTrigger("EatTrash");
+            //     AudioManager.Instance.PlayEatTrash();
+            //     yield return WaitForAnimationAt("EatTrash", 0.1f);
+            //     yield return ScaleItem(itemDisplayOriginalScale, Vector3.zero, 0.2f);
+            //     yield return WaitForAnimationComplete("EatTrash");
+            // }
 
             animator.SetTrigger("Rating");
             yield return null;
@@ -59,7 +60,8 @@ namespace TK.Gameplay
             AudioManager.Instance.PlayRating();
             yield return WaitForAnimationComplete("Rating");
             yield return new WaitForSeconds(0.25f);
-            resultUI.Show();
+
+            resultController.PlayResult();
         }
 
         private IEnumerator ScaleItem(Vector3 from, Vector3 to, float duration)

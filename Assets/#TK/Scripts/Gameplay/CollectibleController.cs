@@ -22,14 +22,6 @@ namespace TK.Gameplay
         Legendary
     }
 
-    [System.Serializable]
-    public class ItemVisual
-    {
-        public Sprite ItemSprite;
-        public string DisplayName;
-        public Vector3 DisplayScale = Vector3.one;
-    }
-
     public class CollectibleController : MonoBehaviour
     {
         [Header("Item Data")]
@@ -37,6 +29,10 @@ namespace TK.Gameplay
         [SerializeField] private RARITY _rarity;
         [SerializeField] private int _intScore = 1;
         [SerializeField] private GameObject _goFoodServed;
+
+        public new ITEM_TYPE GetType => _itemType;
+        public RARITY GetRarity => _rarity;
+        public Sprite GetSprite => _spriteRenderer.sprite;
 
         public GameObject GetFoodServed => _goFoodServed;
 
@@ -73,13 +69,15 @@ namespace TK.Gameplay
             StartCoroutine(IEPickupAnimation(collector));
         }
 
-        private IEnumerator IEPickupAnimation(IItemCollector collector)
+        private IEnumerator IEPickupAnimation(IItemCollector _collector)
         {
-            Transform target = collector.HoldPoint;
+            Transform target = _collector.HoldPoint;
 
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
             Vector3 startScale = transform.localScale;
+
+            _collector.AddItem(this);
 
             // ====================================
             // RARITY SETTINGS
@@ -166,7 +164,7 @@ namespace TK.Gameplay
             }
 
             transform.localScale = startScale;
-            transform.localRotation = Quaternion.identity;
+            transform.localRotation = Quaternion.identity;            
         }
     }
 }

@@ -54,7 +54,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3113167136787110338, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Size.y
-      value: 0.24609375
+      value: 0.078832276
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113167136787110338, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.022175383
       objectReference: {fileID: 0}
     - target: {fileID: 3113167136787110338, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_IsTrigger
@@ -72,9 +76,13 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -6415905774673983499, guid: e68df5ffe7bba45ac9a6cb928e7c41fc, type: 3}
+    - target: {fileID: 5975440692612145781, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7657299826903813138, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Name
-      value: C Bottom Bun Variant
+      value: C Bottom Bun
       objectReference: {fileID: 0}
     - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: _itemType

@@ -12,9 +12,13 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 8984754096541894249, guid: 9f9e0e4567e8f48639bd6dd3904a0645, type: 3}
+    - target: {fileID: 1784844944109981287, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2336309638399483904, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_Name
-      value: C Patty Variant
+      value: C Patty
       objectReference: {fileID: 0}
     - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: _itemType
@@ -66,7 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997535712685979088, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_Size.y
-      value: 0.33984375
+      value: 0.08250638
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997535712685979088, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.037554782
       objectReference: {fileID: 0}
     - target: {fileID: 6997535712685979088, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_IsTrigger

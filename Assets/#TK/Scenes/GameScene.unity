@@ -2538,7 +2538,6 @@ GameObject:
   - component: {fileID: 1108094306}
   - component: {fileID: 1108094308}
   - component: {fileID: 1108094307}
-  - component: {fileID: 1108094310}
   m_Layer: 0
   m_Name: Raccoon
   m_TagString: Untagged
@@ -2656,21 +2655,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1108094310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108094303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22cd75bb6d2234414971f40877e457cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EndSequenceController
-  animator: {fileID: 1108094307}
-  resultUI: {fileID: 1209197822}
-  itemDisplay: {fileID: 1933204948}
 --- !u!1 &1192780447
 GameObject:
   m_ObjectHideFlags: 0
@@ -3780,6 +3764,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d4f8c726d2945d0ba02384f2c50f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragControl
+--- !u!114 &1604472476 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6286776642480283045, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
+  m_PrefabInstance: {fileID: 985307588376646337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3c1935e052f48098cc890cfe51051f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Gameplay.PlayerInventory
 --- !u!1 &1619103537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4190,7 +4185,7 @@ MonoBehaviour:
   armLine: {fileID: 2060193816}
   arm: {fileID: 2060193815}
   fadeDuration: 0.18
-  endSequence: {fileID: 1108094310}
+  _result: {fileID: 1768968579}
 --- !u!1 &1768968576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,7 +4198,7 @@ GameObject:
   - component: {fileID: 1768968577}
   - component: {fileID: 1768968579}
   m_Layer: 0
-  m_Name: Garbage Dump
+  m_Name: Result - Garbage Dump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4296,6 +4291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341e1a459b8f24d3d8780b645d501a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultController
+  _inventory: {fileID: 1604472476}
+  _transSpawn: {fileID: 1216343859}
 --- !u!1 &1779023718
 GameObject:
   m_ObjectHideFlags: 0
@@ -4530,6 +4527,7 @@ MonoBehaviour:
   _itemType: 0
   _rarity: 0
   _intScore: 1
+  _goFoodServed: {fileID: 0}
 --- !u!212 &1815447276
 SpriteRenderer:
   serializedVersion: 2
