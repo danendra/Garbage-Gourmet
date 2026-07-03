@@ -1,53 +1,45 @@
+using System.Collections;
 using UnityEngine;
 
 namespace TK.Gameplay
 {
 
-    public enum ItemType
+    public enum ITEM_TYPE
     {
         Food,
         Trash
     }
 
-    public enum Rarity
+    public enum RARITY
     {
         Common,
         Uncommon,
         Rare,
-        Epic,
+        Bad,
         Legendary
     }
 
     [System.Serializable]
     public class ItemVisual
     {
-        public Sprite sprite;
-        public string displayName;
-        public Vector3 displayScale = Vector3.one;
+        public Sprite ItemSprite;
+        public string DisplayName;
+        public Vector3 DisplayScale = Vector3.one;
     }
 
     public class Collectible : MonoBehaviour
     {
         [Header("Item Data")]
-        [SerializeField] private ItemType itemType;
-        [SerializeField] private Rarity rarity;
+        [SerializeField] private ITEM_TYPE _itemType;
+        [SerializeField] private RARITY _rarity;
 
-        [Header("Visual Variants")]
-        [SerializeField] private ItemVisual[] variants;
-
-        private SpriteRenderer sr;
-        private Collider2D col;
-        private PolygonCollider2D poly;
-
-        void Awake()
-        {
-            sr = GetComponent<SpriteRenderer>();
-            poly = GetComponent<PolygonCollider2D>();
-        }
+        private Collider2D _collider;
+        private SpriteRenderer _spriteRenderer;
 
         void Start()
         {
-            SetRandomVisual();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _collider = GetComponent<Collider2D>();
         }
 
         public void Initialize(Vector3 _position, Quaternion _rotation)
@@ -56,77 +48,27 @@ namespace TK.Gameplay
             transform.rotation = _rotation;
         }
 
-        private ItemVisual currentVisual;
-
-        private void SetRandomVisual()
-        {
-            if (variants == null || variants.Length == 0)
-            {
-                Debug.LogWarning(gameObject.name + " has no variants assigned.");
-                return;
-            }
-
-            int randomIndex = Random.Range(0, variants.Length);
-            currentVisual = variants[randomIndex];
-
-            sr.sprite = currentVisual.sprite;
-            transform.localScale = currentVisual.displayScale;
-
-            RefreshCollider();
-        }
-
-        private void RefreshCollider()
-        {
-            if (poly == null)
-                return;
-
-            // Rebuild collider using sprite's Physics Shape
-            poly.pathCount = 0;
-
-            Sprite sprite = sr.sprite;
-
-            if (sprite == null)
-                return;
-
-            int shapeCount = sprite.GetPhysicsShapeCount();
-
-            for (int i = 0; i < shapeCount; i++)
-            {
-                var points = new System.Collections.Generic.List<Vector2>();
-                sprite.GetPhysicsShape(i, points);
-
-                poly.pathCount = i + 1;
-                poly.SetPath(i, points);
-            }
-        }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player"))
                 return;
 
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
+            IItemCollector collector = other.GetComponent<IItemCollector>();
 
-            if (player == null || player.hasCollected)
+            if (collector == null || !collector.CanCollect)
                 return;
 
-            player.CollectItem(itemType, rarity);
+            GameSession.CollectedSprite = _spriteRenderer.sprite;
+            GameSession.CollectedItemName = name;
 
-            GameSession.CollectedSprite = currentVisual.sprite;
-            GameSession.CollectedItemName = currentVisual.displayName;
+            _collider.enabled = false;
 
-            poly.enabled = false;
-
-            StartCoroutine(PickupAnimation(player));
-
-            // transform.SetParent(player.HoldPoint);
-            // transform.localPosition = Vector3.zero;
-            // transform.localRotation = Quaternion.identity;
+            StartCoroutine(IEPickupAnimation(collector));
         }
 
-        private System.Collections.IEnumerator PickupAnimation(PlayerMovement player)
+        private IEnumerator IEPickupAnimation(IItemCollector collector)
         {
-            Transform target = player.HoldPoint;
+            Transform target = collector.HoldPoint;
 
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
@@ -140,24 +82,24 @@ namespace TK.Gameplay
             float popScale = 1.15f;
             float wobbleAngle = 0f;
 
-            switch (rarity)
+            switch (_rarity)
             {
-                case Rarity.Uncommon:
+                case RARITY.Uncommon:
                     popScale = 1.20f;
                     break;
 
-                case Rarity.Rare:
+                case RARITY.Rare:
                     popScale = 1.28f;
                     wobbleAngle = 12f;
                     break;
 
-                case Rarity.Epic:
+                case RARITY.Bad:
                     popScale = 1.38f;
                     wobbleAngle = 18f;
                     snapDuration = 0.10f;
                     break;
 
-                case Rarity.Legendary:
+                case RARITY.Legendary:
                     popScale = 1.55f;
                     wobbleAngle = 25f;
                     snapDuration = 0.08f;

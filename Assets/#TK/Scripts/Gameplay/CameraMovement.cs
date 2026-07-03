@@ -25,6 +25,11 @@ namespace TK.Gameplay
         public IEnumerator PlayIntroPan()
         {
             followPlayer = false;
+            Vector3 _posBottom = bottomView.position;
+            Vector3 _posTop = topView.position;
+            
+            _posBottom.z = -10;
+            _posTop.z = -10;
 
             if (bottomView == null || topView == null)
             {
@@ -32,11 +37,11 @@ namespace TK.Gameplay
                 yield break;
             }
 
-            transform.position = bottomView.position;
+            transform.position = _posBottom;
 
             yield return new WaitForSeconds(1f);
 
-            yield return MoveCam(bottomView.position, topView.position, panDuration);
+            yield return MoveCam(_posBottom, _posTop, panDuration);
         }
 
         public IEnumerator PlayDiveDown()
@@ -45,9 +50,13 @@ namespace TK.Gameplay
             {
                 yield break;
             }
-            Vector3 target = topView.position + Vector3.down * 2f;
+            Vector3 _posTarget = topView.position + Vector3.down * 2f;
+            Vector3 _posTop = topView.position;
 
-            yield return MoveCam(topView.position, target, diveDuration);
+            _posTop.z = -10;
+            _posTarget.z = -10;
+
+            yield return MoveCam(_posTop, _posTarget, diveDuration);
         }
 
         public void EnableFollow()
