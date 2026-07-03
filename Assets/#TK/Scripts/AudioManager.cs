@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Audio;
+using System.Collections;
+using System.Collections.Generic;
 
-namespace TK
+namespace TK.Audio
 {
-
     public class AudioManager : MonoBehaviour
     {
-        public static AudioManager Instance;
+        public static AudioManager Instance { get; private set; }
 
         [Header("Music")]
         [SerializeField] private AudioSource musicSource;
@@ -13,13 +15,13 @@ namespace TK
         [SerializeField] private AudioClip gameplayMusic;
         [SerializeField] private AudioClip resultMusic;
 
-        [Header("SFX")]
+        [Header("SFX System")]
         [SerializeField] private AudioSource sfxSource;
-        [SerializeField] private AudioClip grabSFX;
-        [SerializeField] private AudioClip eatFoodSFX;
-        [SerializeField] private AudioClip eatTrashSFX;
-        [SerializeField] private AudioClip ratingSFX;
-        [SerializeField] private AudioClip buttonClickSFX;
+        [SerializeField] private List<SFXData> sfxDataList = new List<SFXData>();
+        [SerializeField] private int poolSize = 8;
+
+        private List<AudioSource> sfxPool = new List<AudioSource>();
+        private Dictionary<SFXId, SFXData> sfxDictionary = new Dictionary<SFXId, SFXData>();
 
         void Awake()
         {
@@ -27,6 +29,7 @@ namespace TK
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
+                InitializeSFXPool();
             }
             else
             {
@@ -34,9 +37,59 @@ namespace TK
             }
         }
 
-        // =====================================================
-        // MUSIC
-        // =====================================================
+        private void InitializeSFXPool()
+        {
+            sfxDictionary.Clear();
+            foreach (var data in sfxDataList)
+            {
+                if (data != null && !sfxDictionary.ContainsKey(data.Id))
+                {
+                    sfxDictionary.Add(data.Id, data);
+                }
+            }
+
+            for (int i = 0; i < poolSize; i++)
+            {
+                AudioSource src;
+                if (i == 0 && sfxSource != null)
+                {
+                    src = sfxSource;
+                }
+                else
+                {
+                    GameObject go = new GameObject($"SFX_Source_{i}");
+                    go.transform.SetParent(transform);
+                    src = go.AddComponent<AudioSource>();
+                    if (sfxSource != null)
+                    {
+                        CopyAudioSourceSettings(sfxSource, src);
+                    }
+                }
+                src.playOnAwake = false;
+                src.loop = false;
+                sfxPool.Add(src);
+            }
+        }
+
+        private void CopyAudioSourceSettings(AudioSource source, AudioSource target)
+        {
+            target.outputAudioMixerGroup = source.outputAudioMixerGroup;
+            target.mute = source.mute;
+            target.bypassEffects = source.bypassEffects;
+            target.bypassListenerEffects = source.bypassListenerEffects;
+            target.bypassReverbZones = source.bypassReverbZones;
+            target.priority = source.priority;
+            target.volume = source.volume;
+            target.pitch = source.pitch;
+            target.panStereo = source.panStereo;
+            target.spatialBlend = source.spatialBlend;
+            target.reverbZoneMix = source.reverbZoneMix;
+            target.dopplerLevel = source.dopplerLevel;
+            target.spread = source.spread;
+            target.rolloffMode = source.rolloffMode;
+            target.minDistance = source.minDistance;
+            target.maxDistance = source.maxDistance;
+        }
 
         public void PlayMenuMusic() => PlayMusic(menuMusic);
         public void PlayGameplayMusic() => PlayMusic(gameplayMusic);
@@ -52,14 +105,67 @@ namespace TK
 
         public void StopMusic() => musicSource.Stop();
 
-        // =====================================================
-        // SFX
-        // =====================================================
+        public void PlaySFX(SFXId id)
+        {
+            if (!sfxDictionary.TryGetValue(id, out var data) || data == null)
+            {
+                Debug.LogWarning($"SFX with ID {id} not found or SFXData is null!");
+                return;
+            }
 
-        public void PlayGrab() => sfxSource.PlayOneShot(grabSFX);
-        public void PlayEatFood() => sfxSource.PlayOneShot(eatFoodSFX);
-        public void PlayEatTrash() => sfxSource.PlayOneShot(eatTrashSFX);
-        public void PlayRating() => sfxSource.PlayOneShot(ratingSFX);
-        public void PlayButtonClick() => sfxSource.PlayOneShot(buttonClickSFX);
+            AudioResource resource = data.AudioResource;
+            if (resource == null)
+            {
+                Debug.LogWarning($"SFXData for ID {id} has no AudioResource assigned!");
+                return;
+            }
+
+            AudioSource source = GetAvailableAudioSource();
+            if (source == null)
+            {
+                Debug.LogWarning("No available AudioSource in pool to play SFX!");
+                return;
+            }
+
+            source.resource = resource;
+            source.Play();
+            StartCoroutine(IEReturnToPool(source));
+        }
+
+        private AudioSource GetAvailableAudioSource()
+        {
+            foreach (var src in sfxPool)
+            {
+                if (!src.isPlaying)
+                {
+                    return src;
+                }
+            }
+
+            if (sfxPool.Count > 0)
+            {
+                AudioSource busySource = sfxPool[0];
+                busySource.Stop();
+                return busySource;
+            }
+
+            return null;
+        }
+
+        private IEnumerator IEReturnToPool(AudioSource source)
+        {
+            yield return new WaitForSeconds(0.05f);
+            while (source.isPlaying)
+            {
+                yield return null;
+            }
+            source.resource = null;
+        }
+
+        public void PlayGrab() => PlaySFX(SFXId.Grab);
+        public void PlayEatFood() => PlaySFX(SFXId.EatFood);
+        public void PlayEatTrash() => PlaySFX(SFXId.EatTrash);
+        public void PlayRating() => PlaySFX(SFXId.Rating);
+        public void PlayButtonClick() => PlaySFX(SFXId.ButtonClick);
     }
 }
