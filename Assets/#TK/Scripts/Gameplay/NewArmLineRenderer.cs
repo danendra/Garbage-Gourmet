@@ -18,13 +18,13 @@ namespace TK.Gameplay
     {
         [SerializeField] private Transform _anchor;
         [SerializeField] private Transform _target;
-        [SerializeField] private float _maxDistance;
-        [SerializeField] private float _targetDistance;
-        [SerializeField] private float _smoothSpeed;
-        [SerializeField] private float _trailSpeed;
+        [SerializeField] private float _maxDistance = 1f;
+        [SerializeField] private float _targetDistance = 0.2f;
+        [SerializeField] private float _smoothSpeed = 0.02f;
+        [SerializeField] private float _trailSpeed = 360f;
 
-        [SerializeField] private float _wiggleSpeed;
-        [SerializeField] private float _wiggleMagnitude;
+        [SerializeField] private float _wiggleSpeed = 1f;
+        [SerializeField] private float _wiggleMagnitude = 5f;
 
         [SerializeField] private float _snapDuration = 0.4f;
 

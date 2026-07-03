@@ -51,7 +51,7 @@ namespace TK.Gameplay
 
         private void StartGame()
         {
-            arm.ForceRefresh();
+            // arm.ForceRefresh();
 
             StartCoroutine(FadeGameplayVisuals());
 
