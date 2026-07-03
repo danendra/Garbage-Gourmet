@@ -21,7 +21,7 @@ namespace TK.Gameplay
         [SerializeField] private float fadeDuration = 0.18f;
 
         [Header("End Sequence")]
-        [SerializeField] private EndSequenceController endSequence;
+        [SerializeField] private ResultController _result;
 
         public static LevelManager Instance {get; protected set;}
         public bool IsGameStarted { get; private set; }
@@ -133,7 +133,7 @@ namespace TK.Gameplay
 
             _sequenceController.PlayEndCamera();
 
-            yield return StartCoroutine(endSequence.PlayEndSequence(won));
+            _result.PlayResult();
         }
         private IEnumerator FadeOutGameplayVisuals()
         {

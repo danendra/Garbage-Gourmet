@@ -12,7 +12,7 @@ namespace TK.Gameplay
         [Header("Pick Up Settings")]
         [SerializeField] private int _maxPickUpItems = 5;
 
-        private List<CollectedItemData> _heldItems = new List<CollectedItemData>();
+        private List<CollectibleController> _heldItems = new List<CollectibleController>();
 
         // ── IItemCollector ─────────────────────────────────────────────────────
         public bool CanCollect   => !IsFull;
@@ -21,18 +21,18 @@ namespace TK.Gameplay
         // ── Public accessors ───────────────────────────────────────────────────
         public bool IsFull    => _heldItems.Count >= _maxPickUpItems;
         public int  HeldCount => _heldItems.Count;
-        public IReadOnlyList<CollectedItemData> HeldItems => _heldItems;
+        public IReadOnlyList<CollectibleController> HeldItems => _heldItems;
 
         // ── Events ─────────────────────────────────────────────────────────────
         public event System.Action OnItemAdded;
         public event System.Action OnInventoryFull;
 
         // ── IItemCollector: AddItem ────────────────────────────────────────────
-        public void AddItem(CollectedItemData data)
+        public void AddItem(CollectibleController _collectible)
         {
             if (IsFull) return;
 
-            _heldItems.Add(data);
+            _heldItems.Add(_collectible);
 
             OnItemAdded?.Invoke();
 

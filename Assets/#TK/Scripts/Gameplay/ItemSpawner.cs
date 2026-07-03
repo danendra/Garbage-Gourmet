@@ -49,7 +49,7 @@ namespace TK.Gameplay
                 if (!TryFindSpawnPosition(out _spawnPos))
                     continue;
 
-                Collectible _collectibleToSpawn = GetPrefabForDepth(_spawnPos.y);
+                CollectibleController _collectibleToSpawn = GetPrefabForDepth(_spawnPos.y);
 
                 if (_collectibleToSpawn == null)
                     continue;
@@ -103,7 +103,7 @@ namespace TK.Gameplay
         // DEPTH LOOT LOGIC
         // =====================================================
 
-        private Collectible GetPrefabForDepth(float y)
+        private CollectibleController GetPrefabForDepth(float y)
         {
             float top = topY.position.y;
             float bottom = bottomY.position.y;
@@ -117,30 +117,30 @@ namespace TK.Gameplay
             // TOP ZONE
             if (t < 0.25f)
             {
-                if (roll < 20) return _poolBad.Pop<Collectible>(true);
-                return _poolCommon.Pop<Collectible>(true);
+                if (roll < 20) return _poolBad.Pop<CollectibleController>(true);
+                return _poolCommon.Pop<CollectibleController>(true);
             }
 
             // MID ZONE
             if (t < 0.55f)
             {
-                if (roll < 20) return _poolBad.Pop<Collectible>(true);
-                if (roll < 65) return _poolCommon.Pop<Collectible>(true);
-                return _poolUncommon.Pop<Collectible>(true);
+                if (roll < 20) return _poolBad.Pop<CollectibleController>(true);
+                if (roll < 65) return _poolCommon.Pop<CollectibleController>(true);
+                return _poolUncommon.Pop<CollectibleController>(true);
             }
 
             // DEEP ZONE
             if (t < 0.80f)
             {
-                if (roll < 15) return _poolBad.Pop<Collectible>(true);
-                if (roll < 45) return _poolUncommon.Pop<Collectible>(true);
-                return _poolRare.Pop<Collectible>(true);
+                if (roll < 15) return _poolBad.Pop<CollectibleController>(true);
+                if (roll < 45) return _poolUncommon.Pop<CollectibleController>(true);
+                return _poolRare.Pop<CollectibleController>(true);
             }
 
             // BOTTOM ZONE
-            if (roll < 10) return _poolBad.Pop<Collectible>(true);
-            if (roll < 35) return _poolRare.Pop<Collectible>(true);
-            return _poolBad.Pop<Collectible>(true);
+            if (roll < 10) return _poolBad.Pop<CollectibleController>(true);
+            if (roll < 35) return _poolRare.Pop<CollectibleController>(true);
+            return _poolBad.Pop<CollectibleController>(true);
         }
 
         // =====================================================
