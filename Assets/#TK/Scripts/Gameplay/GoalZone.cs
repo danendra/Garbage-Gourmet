@@ -42,10 +42,10 @@ namespace TK.Gameplay
             GameSession.CollectedSprite   = best.ItemSprite;
             GameSession.CollectedItemName = best.DisplayName;
 
-            if (best.Type == ITEM_TYPE.Food)
-                gameManager.WinGame(player);
-            else
+            if (best.Type == ITEM_TYPE.Trash)
                 gameManager.LoseGame(player);
+            else
+                gameManager.WinGame(player);
         }
 
         /// Selects the highest-value item from the inventory (Ini nanti diubah buat validasi list).
@@ -58,7 +58,7 @@ namespace TK.Gameplay
                 CollectedItemData candidate = inventory.HeldItems[i];
 
                 // Food always beats Trash
-                if (candidate.Type == ITEM_TYPE.Food && best.Type == ITEM_TYPE.Trash)
+                if (candidate.Type != ITEM_TYPE.Trash && best.Type == ITEM_TYPE.Trash)
                 {
                     best = candidate;
                     continue;

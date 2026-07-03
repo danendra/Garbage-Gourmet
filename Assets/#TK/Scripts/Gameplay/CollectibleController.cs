@@ -6,14 +6,17 @@ namespace TK.Gameplay
 
     public enum ITEM_TYPE
     {
-        Food,
+        Top_Bun,
+        Bottom_Bun,
+        Patty,
+        Cheese,
+        Vegetable,
         Trash
     }
 
     public enum RARITY
     {
-        Common,
-        Uncommon,
+        Common,        
         Rare,
         Bad,
         Legendary
@@ -27,11 +30,12 @@ namespace TK.Gameplay
         public Vector3 DisplayScale = Vector3.one;
     }
 
-    public class Collectible : MonoBehaviour
+    public class CollectibleController : MonoBehaviour
     {
         [Header("Item Data")]
         [SerializeField] private ITEM_TYPE _itemType;
         [SerializeField] private RARITY _rarity;
+        [SerializeField] private int _intScore = 1;
 
         private Collider2D _collider;
         private SpriteRenderer _spriteRenderer;
@@ -84,10 +88,6 @@ namespace TK.Gameplay
 
             switch (_rarity)
             {
-                case RARITY.Uncommon:
-                    popScale = 1.20f;
-                    break;
-
                 case RARITY.Rare:
                     popScale = 1.28f;
                     wobbleAngle = 12f;

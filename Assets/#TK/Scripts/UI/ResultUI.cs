@@ -120,8 +120,7 @@ namespace TK.UI
 
             switch (rarity)
             {
-                case RARITY.Common: return 1;
-                case RARITY.Uncommon: return 2;
+                case RARITY.Common: return 1;                
                 case RARITY.Rare: return 3;
                 case RARITY.Bad: return 4;
                 case RARITY.Legendary: return 5;
@@ -252,8 +251,7 @@ namespace TK.UI
 
             switch (rarity)
             {
-                case RARITY.Common: return RandomFrom("A humble snack, but appreciated all the same.", "Nothing fancy—still tasty.", "Simple food. Honest flavor.");
-                case RARITY.Uncommon: return RandomFrom("Better than average and twice as exciting.", "A respectable snack with promise.", "You've got an eye for quality.");
+                case RARITY.Common: return RandomFrom("A humble snack, but appreciated all the same.", "Nothing fancy—still tasty.", "Simple food. Honest flavor.");                
                 case RARITY.Rare: return RandomFrom("Hard to find, easy to love.", "This one was worth the trip.", "A premium discovery.");
                 case RARITY.Bad: return RandomFrom("Rich aroma. Elite status.", "The kind of snack others dream about.", "A feast-worthy treasure.");
                 case RARITY.Legendary: return RandomFrom("Whispers spoke of this flavor.", "Some thought it was only a myth.", "The snack of legends has returned.");
