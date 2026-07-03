@@ -31,6 +31,12 @@ namespace TK.Gameplay
             _posBottom.z = -10;
             _posTop.z = -10;
 
+            if (bottomView == null || topView == null)
+            {
+                Debug.LogWarning("[CameraMovement] bottomView or topView is not assigned in the Inspector! Skipping intro pan.");
+                yield break;
+            }
+
             transform.position = _posBottom;
 
             yield return new WaitForSeconds(1f);
@@ -40,6 +46,10 @@ namespace TK.Gameplay
 
         public IEnumerator PlayDiveDown()
         {
+            if (topView == null)
+            {
+                yield break;
+            }
             Vector3 _posTarget = topView.position + Vector3.down * 2f;
             Vector3 _posTop = topView.position;
 
