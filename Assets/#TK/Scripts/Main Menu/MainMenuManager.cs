@@ -13,46 +13,45 @@ namespace TK.MainMenu
         [SerializeField] private TransitionAnimationController introController;
         [SerializeField] private TransitionAnimationController startController;
 
-        [Header("UI Elements")]
+        [Header("UI")]
         [SerializeField] private GameObject titleGroup;
         [SerializeField] private RectTransform gameTitle;
         [SerializeField] private RectTransform tapToStart;
 
-        [Header("DOTween Pro Animations - Intro / Idle")]
+        [Header("Animations")]
         [SerializeField] private DOTweenAnimation hatchOpenAnim;
-        [SerializeField] private DOTweenAnimation titleFadeIntro;
-        [SerializeField] private DOTweenAnimation titleDropIntro;
-        [SerializeField] private DOTweenAnimation titlePopIntro;
-        [SerializeField] private DOTweenAnimation playButtonIntro;
-        [SerializeField] private DOTweenAnimation titleFloatIdle;
-        [SerializeField] private DOTweenAnimation titleTiltIdle;
-        [SerializeField] private DOTweenAnimation playButtonPulseIdle;
-
-        [Header("DOTween Pro Animations - Exit / Tap Sequence")]
         [SerializeField] private DOTweenAnimation titleExitFadeAnim;
-        [SerializeField] private DOTweenAnimation titleExitScaleAnim;
-        [SerializeField] private DOTweenAnimation rippleScaleAnim;    
-        [SerializeField] private DOTweenAnimation rippleFadeAnim;     
-        [SerializeField] private DOTweenAnimation handMoveInAnim;    
-        [SerializeField] private DOTweenAnimation handMoveOutAnim;    
+        [SerializeField] private DOTweenAnimation handMoveInAnim;
+        [SerializeField] private DOTweenAnimation handMoveOutAnim;
 
-        [Header("Raccoon Hand Animation")]
+        [Header("Raccoon Hand")]
         [SerializeField] private RectTransform raccoonHand;
         [SerializeField] private UnityEngine.UI.Image raccoonHandImage;
         [SerializeField] private RectTransform raccoonArm;
         [SerializeField] private RectTransform tapRipple;
 
-        [Header("Hand Sprites")]
+        [Header("Sprites")]
         [SerializeField] private Sprite handOpen;
         [SerializeField] private Sprite handGrab;
 
         private CanvasGroup titleCanvasGroup;
-        private bool readyToStart = false;
-        private bool starting = false;
+        private bool readyToStart;
+        private bool starting;
 
         private float handHeight = 420f;
         private float armWidth = 60f;
         private float currentHandStartY;
+
+        private float hatchFallbackDuration = 1.8f;
+        private float handMoveInFallbackDuration = 0.22f;
+        private float grabToExitDelay = 0.12f;
+        private float handMoveOutFallbackDuration = 0.25f;
+        private float noHandExitDuration = 0.25f;
+
+        private const string AnimIdIntro = "intro";
+        private const string AnimIdIdle = "idle";
+        private const string AnimIdExit = "exit";
+        private const string AnimIdRipple = "ripple";
 
         void Awake()
         {
@@ -145,7 +144,6 @@ namespace TK.MainMenu
 
             if (hatchOpenAnim != null)
             {
-                AudioManager.Instance.PlayButtonClick();
                 hatchOpenAnim.RecreateTweenAndPlay();
                 if (hatchOpenAnim.tween != null)
                 {
@@ -153,23 +151,28 @@ namespace TK.MainMenu
                 }
                 else
                 {
-                    yield return new WaitForSeconds(1.8f);
+                    yield return new WaitForSeconds(hatchFallbackDuration);
                 }
             }
 
-            if (titleFadeIntro != null) titleFadeIntro.DOPlayForward();
-            if (titleDropIntro != null) titleDropIntro.DOPlayForward();
-            if (titlePopIntro != null) titlePopIntro.DOPlayForward();
-            if (playButtonIntro != null) playButtonIntro.DOPlayForward();
+            PlayAllById(titleGroup.transform, AnimIdIntro);
+        }
 
-            yield return new WaitForSeconds(0.8f);
-
-            if (titleFloatIdle != null) titleFloatIdle.DOPlay();
-            if (titleTiltIdle != null) titleTiltIdle.DOPlay();
-            if (playButtonPulseIdle != null) playButtonPulseIdle.DOPlay();
-
+        public void StartIdleAndReady()
+        {
+            PlayAllById(titleGroup.transform, AnimIdIdle);
             readyToStart = true;
             AudioManager.Instance.PlayMenuMusic();
+        }
+
+        public void PlayHatchSFX()
+        {
+            AudioManager.Instance.PlayButtonClick();
+        }
+
+        public void SetHandOpenSprite()
+        {
+            if (raccoonHandImage != null) raccoonHandImage.sprite = handOpen;
         }
 
         private void OnPlayButtonClicked()
@@ -193,13 +196,8 @@ namespace TK.MainMenu
                 }
             }
 
-            if (titleFadeIntro != null) titleFadeIntro.DOKill();
-            if (titleDropIntro != null) titleDropIntro.DOKill();
-            if (titlePopIntro != null) titlePopIntro.DOKill();
-            if (titleFloatIdle != null) titleFloatIdle.DOKill();
-            if (titleTiltIdle != null) titleTiltIdle.DOKill();
-            if (playButtonIntro != null) playButtonIntro.DOKill();
-            if (playButtonPulseIdle != null) playButtonPulseIdle.DOKill();
+            KillAllById(titleGroup.transform, AnimIdIntro);
+            KillAllById(titleGroup.transform, AnimIdIdle);
             if (hatchOpenAnim != null) hatchOpenAnim.DOKill();
 
             RectTransform canvasRect = titleGroup.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
@@ -237,7 +235,6 @@ namespace TK.MainMenu
                 currentHandStartY = startY;
 
                 raccoonHand.anchoredPosition = new Vector2(targetLocalPos.x, startY);
-                raccoonHandImage.sprite = handOpen;
                 raccoonHand.localScale = Vector3.one;
 
                 float tilt = 3f;
@@ -257,16 +254,16 @@ namespace TK.MainMenu
                 }
                 else
                 {
-                    yield return new WaitForSeconds(0.22f);
+                    yield return new WaitForSeconds(handMoveInFallbackDuration);
                 }
 
                 raccoonHandImage.sprite = handGrab;
                 AudioManager.Instance.PlayButtonClick();
 
                 if (titleExitFadeAnim != null) titleExitFadeAnim.RecreateTweenAndPlay();
-                if (titleExitScaleAnim != null) titleExitScaleAnim.RecreateTweenAndPlay();
+                RecreateTweenAndPlayAllById(titleGroup.transform, AnimIdExit);
 
-                if (tapRipple != null && rippleScaleAnim != null && rippleFadeAnim != null)
+                if (tapRipple != null)
                 {
                     tapRipple.anchoredPosition = targetLocalPos;
                     tapRipple.gameObject.SetActive(true);
@@ -275,11 +272,10 @@ namespace TK.MainMenu
                     CanvasGroup rippleCG = tapRipple.GetComponent<CanvasGroup>();
                     if (rippleCG != null) rippleCG.alpha = 0.6f;
 
-                    rippleScaleAnim.RecreateTweenAndPlay();
-                    rippleFadeAnim.RecreateTweenAndPlay(); 
+                    RecreateTweenAndPlayAllById(tapRipple, AnimIdRipple);
                 }
 
-                yield return new WaitForSeconds(0.12f);
+                yield return new WaitForSeconds(grabToExitDelay);
 
                 handMoveOutAnim.endValueV3 = new Vector2(handTargetPos.x, startY);
                 handMoveOutAnim.RecreateTweenAndPlay();
@@ -289,7 +285,7 @@ namespace TK.MainMenu
                 }
                 else
                 {
-                    yield return new WaitForSeconds(0.25f);
+                    yield return new WaitForSeconds(handMoveOutFallbackDuration);
                 }
 
                 raccoonHand.gameObject.SetActive(false);
@@ -297,9 +293,9 @@ namespace TK.MainMenu
             else
             {
                 if (titleExitFadeAnim != null) titleExitFadeAnim.RecreateTweenAndPlay();
-                if (titleExitScaleAnim != null) titleExitScaleAnim.RecreateTweenAndPlay();
+                RecreateTweenAndPlayAllById(titleGroup.transform, AnimIdExit);
                 AudioManager.Instance.PlayButtonClick();
-                yield return new WaitForSeconds(0.25f);
+                yield return new WaitForSeconds(noHandExitDuration);
             }
 
             titleGroup.SetActive(false);
@@ -307,6 +303,24 @@ namespace TK.MainMenu
             yield return startController.PlaySequence("Play", false);
 
             SceneManager.LoadScene("GameScene");
+        }
+
+        private void PlayAllById(Transform root, string id)
+        {
+            foreach (var anim in root.GetComponentsInChildren<DOTweenAnimation>(true))
+                if (anim.id == id) anim.DOPlayForward();
+        }
+
+        private void KillAllById(Transform root, string id)
+        {
+            foreach (var anim in root.GetComponentsInChildren<DOTweenAnimation>(true))
+                if (anim.id == id) anim.DOKill();
+        }
+
+        private void RecreateTweenAndPlayAllById(Transform root, string id)
+        {
+            foreach (var anim in root.GetComponentsInChildren<DOTweenAnimation>(true))
+                if (anim.id == id) anim.RecreateTweenAndPlay();
         }
     }
 }
