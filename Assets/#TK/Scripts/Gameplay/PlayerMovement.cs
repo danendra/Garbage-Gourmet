@@ -62,7 +62,7 @@ namespace TK.Gameplay
 
                 _hasCollected = value;
 
-                if (_hasCollected)
+                if (_hasCollected && _armLineRenderer)
                     _armLineRenderer.ChangeStateToRetract();
             }
         }
