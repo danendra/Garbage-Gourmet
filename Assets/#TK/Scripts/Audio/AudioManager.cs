@@ -9,6 +9,20 @@ namespace TK.Audio
     {
         public static AudioManager Instance { get; private set; }
 
+        [Header("Audio Mixer Routing")]
+        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private string masterVolumeParam = "MasterVolume";
+        [SerializeField] private string musicVolumeParam = "MusicVolume";
+        [SerializeField] private string sfxVolumeParam = "SFXVolume";
+
+        private const string MasterVolumeKey = "MasterVolume";
+        private const string MusicVolumeKey = "MusicVolume";
+        private const string SFXVolumeKey = "SFXVolume";
+
+        private float masterVolume = 1f;
+        private float musicVolume = 1f;
+        private float sfxVolume = 1f;
+
         [Header("Music")]
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioClip menuMusic;
@@ -167,5 +181,53 @@ namespace TK.Audio
         public void PlayEatTrash() => PlaySFX(SFXId.EatTrash);
         public void PlayRating() => PlaySFX(SFXId.Rating);
         public void PlayButtonClick() => PlaySFX(SFXId.ButtonClick);
+
+        private void Start()
+        {
+            LoadVolumeSettings();
+        }
+
+        private void LoadVolumeSettings()
+        {
+            masterVolume = PlayerPrefs.GetFloat(MasterVolumeKey, 1f);
+            musicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
+            sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 1f);
+
+            ApplyVolume(masterVolumeParam, masterVolume);
+            ApplyVolume(musicVolumeParam, musicVolume);
+            ApplyVolume(sfxVolumeParam, sfxVolume);
+        }
+
+        private void ApplyVolume(string parameterName, float linearVolume)
+        {
+            if (audioMixer == null) return;
+            float db = Mathf.Log10(Mathf.Max(linearVolume, 0.0001f)) * 20f;
+            audioMixer.SetFloat(parameterName, db);
+        }
+
+        public float GetMasterVolume() => masterVolume;
+        public float GetMusicVolume() => musicVolume;
+        public float GetSFXVolume() => sfxVolume;
+
+        public void SetMasterVolume(float linearVolume)
+        {
+            masterVolume = Mathf.Clamp01(linearVolume);
+            ApplyVolume(masterVolumeParam, masterVolume);
+            PlayerPrefs.SetFloat(MasterVolumeKey, masterVolume);
+        }
+
+        public void SetMusicVolume(float linearVolume)
+        {
+            musicVolume = Mathf.Clamp01(linearVolume);
+            ApplyVolume(musicVolumeParam, musicVolume);
+            PlayerPrefs.SetFloat(MusicVolumeKey, musicVolume);
+        }
+
+        public void SetSFXVolume(float linearVolume)
+        {
+            sfxVolume = Mathf.Clamp01(linearVolume);
+            ApplyVolume(sfxVolumeParam, sfxVolume);
+            PlayerPrefs.SetFloat(SFXVolumeKey, sfxVolume);
+        }
     }
 }

@@ -3,23 +3,23 @@ guid: 18dcaf919a0c145a1b5f0c2c9d19438f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9124889784852050706
-    second: Bun_Sprite_0
+      213: 6389992351808504773
+    second: BUN_SPRITE_0
   - first:
-      213: 5222687393299848193
-    second: Bun_Sprite_1
+      213: 5712125026993235265
+    second: BUN_SPRITE_1
   - first:
-      213: -2678788280267619161
-    second: Bun_Sprite_2
+      213: -8395247630685996048
+    second: BUN_SPRITE_2
   - first:
-      213: -1429027097477251733
-    second: Bun_Sprite_3
+      213: 7163699865554923873
+    second: BUN_SPRITE_3
   - first:
-      213: 3781626368389682524
-    second: Bun_Sprite_4
+      213: 4366882195537649107
+    second: BUN_SPRITE_4
   - first:
-      213: 5037015791347725736
-    second: Bun_Sprite_5
+      213: 8064203568610132741
+    second: BUN_SPRITE_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,7 +87,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -141,11 +141,33 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Top_Bun_Rare
+      name: BUN_ATAS_HIGH
       rect:
         serializedVersion: 2
-        x: 10
-        y: 93
+        x: 6
+        y: 535
+        width: 506
+        height: 480
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c342073030dda850800000000000000
+      internalID: 6389992351808504773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUN_ATAS_NORMAL
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 610
         width: 506
         height: 334
       alignment: 0
@@ -156,40 +178,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eec8d4f1611ed5180800000000000000
-      internalID: -9124889784852050706
+      spriteID: 145ec8aa27b854f40800000000000000
+      internalID: 5712125026993235265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Top_Bun_Normal
-      rect:
-        serializedVersion: 2
-        x: 527
-        y: 92
-        width: 504
-        height: 335
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 10c5c826386ba7840800000000000000
-      internalID: 5222687393299848193
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Top_Bun_Bad
+      name: BUN_ATAS_BAD
       rect:
         serializedVersion: 2
         x: 1048
-        y: 92
+        y: 609
         width: 501
         height: 335
       alignment: 0
@@ -200,17 +200,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a44b2e704803dad0800000000000000
-      internalID: -2678788280267619161
+      spriteID: 0fb758382c61e7b80800000000000000
+      internalID: -8395247630685996048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bottom_Bun_Rare
+      name: BUN_BAWAH-HIGH
       rect:
         serializedVersion: 2
-        x: 1557
+        x: 8
+        y: 156
+        width: 502
+        height: 210
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1613ae3a2139a6360800000000000000
+      internalID: 7163699865554923873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUN_BAWAH-NORMAL
+      rect:
+        serializedVersion: 2
+        x: 525
         y: 158
         width: 502
         height: 210
@@ -222,41 +244,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b6df5781d631b2ce0800000000000000
-      internalID: -1429027097477251733
+      spriteID: 3dddff858384a9c30800000000000000
+      internalID: 4366882195537649107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bottom_Bun_Normal
+      name: BUN_BAWAH-BAD
       rect:
         serializedVersion: 2
-        x: 2076
-        y: 158
-        width: 502
-        height: 210
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c551e1965290b7430800000000000000
-      internalID: 3781626368389682524
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bottom_Bun_Bad
-      rect:
-        serializedVersion: 2
-        x: 2580
+        x: 1032
         y: 157
-        width: 487
+        width: 484
         height: 209
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a5705bcc2317e540800000000000000
-      internalID: 5037015791347725736
+      spriteID: 503c17f6b6ec9ef60800000000000000
+      internalID: 8064203568610132741
       vertices: []
       indices: 
       edges: []
@@ -276,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3142d13fc53da49a8a68d7a487698c85
+    spriteID: 6f769aaa3e17142b490a54aa06e715a9
     internalID: 0
     vertices: []
     indices: 
@@ -286,12 +286,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bottom_Bun_Bad: 5037015791347725736
-      Bottom_Bun_Normal: 3781626368389682524
-      Bottom_Bun_Rare: -1429027097477251733
-      Top_Bun_Bad: -2678788280267619161
-      Top_Bun_Normal: 5222687393299848193
-      Top_Bun_Rare: -9124889784852050706
+      BUN_ATAS_BAD: -8395247630685996048
+      BUN_ATAS_HIGH: 6389992351808504773
+      BUN_ATAS_NORMAL: 5712125026993235265
+      BUN_BAWAH-BAD: 8064203568610132741
+      BUN_BAWAH-HIGH: 7163699865554923873
+      BUN_BAWAH-NORMAL: 4366882195537649107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 6b9d8bf9cd22c4168a573dc399655dc6
+guid: 481e86bad2a224cccaa134daa7b20cf6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 963983802910877829
-    second: LegendBun_2.0_0
+      213: -1746967549358030333
+    second: PATTY_SPRITE_0
+  - first:
+      213: -6744419352555767078
+    second: PATTY_SPRITE_1
+  - first:
+      213: -6623270614159726237
+    second: PATTY_SPRITE_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +132,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LegendBun_2.0_0
+      name: PATTY_HIGH
       rect:
         serializedVersion: 2
-        x: 6
-        y: 91
-        width: 501
-        height: 331
+        x: 13
+        y: 124
+        width: 498
+        height: 276
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 588abbd4922c06d00800000000000000
-      internalID: 963983802910877829
+      spriteID: 302416a054681c7e0800000000000000
+      internalID: -1746967549358030333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PATTY_NORMAL
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 172
+        width: 498
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adab4a215520762a0800000000000000
+      internalID: -6744419352555767078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PATTY_BAD
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 172
+        width: 498
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 369e9bfc77a6514a0800000000000000
+      internalID: -6623270614159726237
       vertices: []
       indices: 
       edges: []
@@ -151,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 54a62b03528514bed9d85d336c1ca797
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LegendBun_2.0_0: 963983802910877829
+      PATTY_BAD: -6623270614159726237
+      PATTY_HIGH: -1746967549358030333
+      PATTY_NORMAL: -6744419352555767078
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

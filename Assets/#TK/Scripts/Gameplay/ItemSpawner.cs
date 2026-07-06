@@ -25,8 +25,7 @@ namespace TK.Gameplay
         [SerializeField] private Transform bottomY;
 
         [Header("Item Pools")]
-        [SerializeField] private PoolerContainer _poolCommon;
-        [SerializeField] private PoolerContainer _poolUncommon;
+        [SerializeField] private PoolerContainer _poolCommon;        
         [SerializeField] private PoolerContainer _poolRare;
         [SerializeField] private PoolerContainer _poolBad;
 
@@ -324,17 +323,14 @@ namespace TK.Gameplay
             if (t < 0.55f)
             {
                 if (roll < 20)
-                    return TryPop(_poolBad, ref _remainingBad)
-                        ?? TryPop(_poolCommon, ref _remainingCommon)
+                    return TryPop(_poolBad, ref _remainingBad)                        
                         ?? TryPopAny();
 
                 if (roll < 65)
-                    return TryPop(_poolCommon, ref _remainingCommon)
-                        ?? TryPop(_poolUncommon, ref _remainingUncommon)
+                    return TryPop(_poolCommon, ref _remainingCommon)                        
                         ?? TryPopAny();
 
-                return TryPop(_poolUncommon, ref _remainingUncommon)
-                    ?? TryPop(_poolCommon, ref _remainingCommon)
+                return TryPop(_poolCommon, ref _remainingCommon)
                     ?? TryPopAny();
             }
 
@@ -342,17 +338,14 @@ namespace TK.Gameplay
             if (t < 0.80f)
             {
                 if (roll < 15)
-                    return TryPop(_poolBad, ref _remainingBad)
-                        ?? TryPop(_poolUncommon, ref _remainingUncommon)
+                    return TryPop(_poolBad, ref _remainingBad)                        
                         ?? TryPopAny();
 
                 if (roll < 45)
-                    return TryPop(_poolUncommon, ref _remainingUncommon)
-                        ?? TryPop(_poolRare, ref _remainingRare)
+                    return TryPop(_poolRare, ref _remainingRare)
                         ?? TryPopAny();
 
-                return TryPop(_poolRare, ref _remainingRare)
-                    ?? TryPop(_poolUncommon, ref _remainingUncommon)
+                return TryPop(_poolRare, ref _remainingRare)                    
                     ?? TryPopAny();
             }
 
@@ -362,8 +355,7 @@ namespace TK.Gameplay
                     ?? TryPop(_poolRare, ref _remainingRare)
                     ?? TryPopAny();
 
-            return TryPop(_poolRare, ref _remainingRare)
-                ?? TryPop(_poolUncommon, ref _remainingUncommon)
+            return TryPop(_poolRare, ref _remainingRare)                
                 ?? TryPopAny();
         }
 
@@ -384,8 +376,7 @@ namespace TK.Gameplay
         // Nek entek pool e
         private CollectibleController TryPopAny()
         {
-            return TryPop(_poolCommon,   ref _remainingCommon)
-                ?? TryPop(_poolUncommon, ref _remainingUncommon)
+            return TryPop(_poolCommon,   ref _remainingCommon)                
                 ?? TryPop(_poolRare,     ref _remainingRare)
                 ?? TryPop(_poolBad,      ref _remainingBad);
         }

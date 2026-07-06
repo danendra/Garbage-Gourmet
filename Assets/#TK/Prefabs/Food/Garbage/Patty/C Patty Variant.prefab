@@ -9,9 +9,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1784844944109981287, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.97265625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784844944109981287, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.34960938
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784844944109981287, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8984754096541894249, guid: 9f9e0e4567e8f48639bd6dd3904a0645, type: 3}
+      objectReference: {fileID: -6744419352555767078, guid: 481e86bad2a224cccaa134daa7b20cf6, type: 3}
+    - target: {fileID: 1784844944109981287, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2336309638399483904, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_Name
       value: C Patty Variant
@@ -73,12 +85,20 @@ PrefabInstance:
       value: 0.33984375
       objectReference: {fileID: 0}
     - target: {fileID: 6997535712685979088, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.97265625
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997535712685979088, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.34960938
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997535712685979088, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.9609375
+      value: 0.97265625
       objectReference: {fileID: 0}
     - target: {fileID: 6997535712685979088, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.33984375
+      value: 0.34960938
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
