@@ -39,7 +39,7 @@ namespace TK.Gameplay
 
         [Header("Runtime State")]
         private bool _isDragging = false;
-        public bool _canMove = false;
+        private bool _canMove = false;
         private bool _wasTouching;
         private float _targetX;
         private float _currentY;
