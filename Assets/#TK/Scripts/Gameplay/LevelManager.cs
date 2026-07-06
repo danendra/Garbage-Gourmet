@@ -10,7 +10,7 @@ namespace TK.Gameplay
     {
         [Header("References")]
         [SerializeField] private SequenceController _sequenceController;
-        [SerializeField] private PlayerMovement player;
+        [SerializeField] private PlayerMovement _player;
         [SerializeField] private ItemSpawner _itemSpawner;
 
         [Header("Gameplay Visuals")]
@@ -24,15 +24,30 @@ namespace TK.Gameplay
         [Header("End Sequence")]
         [SerializeField] private ResultController _result;
 
-        public static LevelManager Instance {get; protected set;}
+        public static LevelManager Instance { get; protected set; }
+        public PlayerInventory GetPlayerInventory { get; protected set; }
         public bool IsGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
 
         private int finalScore;
 
+        void Awake()
+        {
+            if (Instance)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
         void Start()
         {
             // StartCoroutine(BeginIntroSequence());
+
+            GetPlayerInventory = _player.GetComponent<PlayerInventory>();
 
             StartIntro();
         }
@@ -41,7 +56,7 @@ namespace TK.Gameplay
         {
             if (!IsGameStarted || IsGameOver) return;
             // Ini buat handle dynamic food spawn
-            _itemSpawner.TickSpawn(player.transform.position.y);
+            _itemSpawner.TickSpawn(_player.transform.position.y);
         }
 
         private void StartIntro()
@@ -49,7 +64,7 @@ namespace TK.Gameplay
             IsGameStarted = false;
             IsGameOver = false;
 
-            player.SetCanMove(false);
+            _player.SetCanMove(false);
 
             SetHandAlpha(0f);
             SetArmAlpha(0f);
@@ -63,7 +78,7 @@ namespace TK.Gameplay
 
             StartCoroutine(FadeGameplayVisuals());
 
-            player.SetCanMove(true);
+            _player.SetCanMove(true);        
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
         }

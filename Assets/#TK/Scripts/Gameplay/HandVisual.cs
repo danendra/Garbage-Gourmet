@@ -63,7 +63,7 @@ namespace TK.Gameplay
 
         // ── Pickup visual ──────────────────────────────────────────────────────
 
-        private void OnItemPickedUp()
+        private void OnItemPickedUp(CollectibleController _collectible)
         {
             if (_handRenderer == null || _grabHandSprite == null) return;
 

@@ -39,7 +39,7 @@ namespace TK.Gameplay
 
         [Header("Runtime State")]
         private bool _isDragging = false;
-        public bool _canMove = false;
+        private bool _canMove = false;
         private bool _wasTouching;
         private float _targetX;
         private float _currentY;
@@ -93,7 +93,7 @@ namespace TK.Gameplay
             _inventory.OnInventoryFull -= OnInventoryFull;
         }
 
-        private void OnItemAdded()
+        private void OnItemAdded(CollectibleController _collectible)
         {
             _isDragging = false;
         }
