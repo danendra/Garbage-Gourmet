@@ -39,7 +39,7 @@ namespace TK.Gameplay
 
         [Header("Runtime State")]
         private bool _isDragging = false;
-        public bool CanMove = false;
+        public bool _canMove = false;
         private bool _wasTouching;
         private float _targetX;
         private float _currentY;
@@ -224,6 +224,11 @@ namespace TK.Gameplay
         public float GetDeltaX()      => _velocityX;
         public float GetReturnSpeed() => _returnSpeed;
         public float GetMaxArmReach()   => _maximumArmReach;
+        public bool CanMove => _canMove;
+        public void SetCanMove(bool canMove)
+        {
+            _canMove = canMove;
+        }
 
         // ── Upgrades ───────────────────────────────────────────────────────────
         public void AddArmLength(int amount)
