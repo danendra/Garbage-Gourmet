@@ -10,7 +10,7 @@ namespace TK.Gameplay
     {
         [Header("References")]
         [SerializeField] private SequenceController _sequenceController;
-        [SerializeField] private PlayerMovement player;                
+        [SerializeField] private PlayerMovement _player;
 
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
@@ -23,15 +23,30 @@ namespace TK.Gameplay
         [Header("End Sequence")]
         [SerializeField] private ResultController _result;
 
-        public static LevelManager Instance {get; protected set;}
+        public static LevelManager Instance { get; protected set; }
+        public PlayerInventory GetPlayerInventory { get; protected set; }
         public bool IsGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
 
         private int finalScore;
 
+        void Awake()
+        {
+            if (Instance)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
         void Start()
         {
             // StartCoroutine(BeginIntroSequence());
+
+            GetPlayerInventory = _player.GetComponent<PlayerInventory>();
 
             StartIntro();
         }
@@ -41,7 +56,7 @@ namespace TK.Gameplay
             IsGameStarted = false;
             IsGameOver = false;
 
-            player._canMove = false;
+            _player._canMove = false;
 
             SetHandAlpha(0f);
             SetArmAlpha(0f);
@@ -55,7 +70,7 @@ namespace TK.Gameplay
 
             StartCoroutine(FadeGameplayVisuals());
 
-            player._canMove = true;
+            _player._canMove = true;
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
         }

@@ -92,7 +92,7 @@ namespace TK.Gameplay
             _inventory.OnInventoryFull -= OnInventoryFull;
         }
 
-        private void OnItemAdded()
+        private void OnItemAdded(CollectibleController _collectible)
         {
             _isDragging = false;
         }

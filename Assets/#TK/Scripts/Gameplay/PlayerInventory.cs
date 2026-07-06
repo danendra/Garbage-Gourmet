@@ -21,10 +21,11 @@ namespace TK.Gameplay
         // ── Public accessors ───────────────────────────────────────────────────
         public bool IsFull    => _heldItems.Count >= _maxPickUpItems;
         public int  HeldCount => _heldItems.Count;
+        public int MaxPickUpItems => _maxPickUpItems;
         public IReadOnlyList<CollectibleController> HeldItems => _heldItems;
 
         // ── Events ─────────────────────────────────────────────────────────────
-        public event System.Action OnItemAdded;
+        public event System.Action<CollectibleController> OnItemAdded;
         public event System.Action OnInventoryFull;
 
         // ── IItemCollector: AddItem ────────────────────────────────────────────
@@ -34,7 +35,7 @@ namespace TK.Gameplay
 
             _heldItems.Add(_collectible);
 
-            OnItemAdded?.Invoke();
+            OnItemAdded?.Invoke(_collectible);
 
             if (IsFull)
                 OnInventoryFull?.Invoke();
