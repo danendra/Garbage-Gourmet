@@ -15,8 +15,8 @@ namespace TK.Gameplay
         [SerializeField] private float _despawnDistance        = 25f;
 
         [Header("Spacing")]
-        [SerializeField] private float spacing    = 2.5f;
-        [SerializeField] private int   maxAttempts = 150;
+        [SerializeField] private float _spacing    = 2.5f;
+        [SerializeField] private int   _maxAttempts = 150;
 
         [Header("Spawn Bounds")]
         [SerializeField] private Transform xmin;
@@ -40,7 +40,7 @@ namespace TK.Gameplay
         [SerializeField] private CollectibleController _eventItemPrefab;
 
         [Header("References")]
-        [SerializeField] private PlayerMovement player;
+        [SerializeField] private PlayerMovement _player;
 
         private float _spawnHorizonY;
         private bool  _isInitialized;
@@ -50,7 +50,7 @@ namespace TK.Gameplay
         private int _remainingUncommon;
         private int _remainingRare;
         private int _remainingBad;
-        private int TotalItems => _commonCount + _uncommonCount + _rareCount + _badCount;
+        private int _totalItems => _commonCount + _uncommonCount + _rareCount + _badCount;
 
         private float _cachedTop;
         private float _cachedBottom;
@@ -81,11 +81,9 @@ namespace TK.Gameplay
         {
             if (!_isInitialized) return;
 
-            // Bug 4 fixed: restore despawn so the pool keeps recycling
             DespawnFarItems(playerY);
 
-            // Bug 1 fixed: one-time threshold cross instead of exact float equality
-            if (!_eventItemSpawned && player.DistanceTravelled >= player.MaximumArmReach - _chunkHeight)
+            if (!_eventItemSpawned && _player.GetDepth() >= _player.GetMaxArmReach() - _chunkHeight)
             {
                 _eventItemSpawned = true;
                 SpawnEventItem();
@@ -116,7 +114,7 @@ namespace TK.Gameplay
             _eventItemSpawned = false;
 
             if (_activeItems == null)
-                _activeItems = new List<CollectibleController>(TotalItems);
+                _activeItems = new List<CollectibleController>(_totalItems);
 
             if (_spatialGrid == null)
                 _spatialGrid = new Dictionary<Vector2Int, List<Vector2>>();
@@ -156,7 +154,7 @@ namespace TK.Gameplay
 
             // Cell size = tightest spacing (bottom zone = spacing * 0.7)
             // so a 3×3 neighbourhood always covers the full exclusion radius.
-            _cellSize = spacing * 0.7f;
+            _cellSize = _spacing * 0.7f;
         }
 
         // =====================================================
@@ -232,7 +230,7 @@ namespace TK.Gameplay
 
         private bool TryFindSpawnPosition(float yTop, float yBottom, out Vector2 result)
         {
-            for (int attempt = 0; attempt < maxAttempts; attempt++)
+            for (int attempt = 0; attempt < _maxAttempts; attempt++)
             {
                 float x = Random.Range(_cachedXMin, _cachedXMax);
                 float y = Random.Range(yBottom, yTop);
@@ -410,7 +408,7 @@ namespace TK.Gameplay
             float t = Mathf.InverseLerp(_cachedTop, _cachedBottom, y);
 
             // top = full spacing  |  bottom = tighter spacing
-            return Mathf.Lerp(spacing, spacing * 0.7f, t);
+            return Mathf.Lerp(_spacing, _spacing * 0.7f, t);
         }
 
         // =====================================================
@@ -421,10 +419,10 @@ namespace TK.Gameplay
         {
             if (_eventItemPrefab == null) return;
 
-            float targetY = player.transform.position.y - _spawnLookaheadDistance;
+            float targetY = _player.transform.position.y - _spawnLookaheadDistance;
 
-            float yTop    = targetY + spacing;
-            float yBottom = targetY - spacing;
+            float yTop    = targetY + _spacing;
+            float yBottom = targetY - _spacing;
 
             Vector2 spawnPos = new Vector2(
                 Random.Range(_cachedXMin, _cachedXMax),

@@ -12,7 +12,7 @@ namespace TK.UI
 
         private void Update()
         {
-            _armIndicatorText.text = $"{Mathf.RoundToInt(_playerMovement.DistanceTravelled)}M";
+            _armIndicatorText.text = $"{Mathf.RoundToInt(_playerMovement.GetDepth())}M";
         }
     }
 }

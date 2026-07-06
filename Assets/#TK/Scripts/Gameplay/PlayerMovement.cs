@@ -31,7 +31,6 @@ namespace TK.Gameplay
 
         [Header("Arm Reach")]
         [SerializeField] private float _maximumArmReach = 10f;
-        public float MaximumArmReach => _maximumArmReach;
 
         [Header("Inventory")]
         [SerializeField] private PlayerInventory _inventory;
@@ -44,7 +43,7 @@ namespace TK.Gameplay
         private bool _wasTouching;
         private float _targetX;
         private float _currentY;
-        public float DistanceTravelled = 0f;
+        private float _distanceTravelled = 0f;
         private Vector3 _offset;
         private float _velocityX;
         private float _previousX;
@@ -150,7 +149,7 @@ namespace TK.Gameplay
                 _returnSpeed = 0f;
                 float moveAmount = _speed * Time.fixedDeltaTime;
                 _currentY -= moveAmount;
-                DistanceTravelled += moveAmount; // descend
+                _distanceTravelled += moveAmount; // descend
             }
         }
 
@@ -171,7 +170,7 @@ namespace TK.Gameplay
         {
             if (HasCollected) return;
 
-            if (_inventoryFull || DistanceTravelled >= _maximumArmReach)
+            if (_inventoryFull || _distanceTravelled >= _maximumArmReach)
             {
                 HasCollected = true;
             }
@@ -221,9 +220,10 @@ namespace TK.Gameplay
         }
 
         // ── Public methods ─────────────────────────────────────────────────────
-        public float GetDepth()       => DistanceTravelled;
+        public float GetDepth()       => _distanceTravelled;
         public float GetDeltaX()      => _velocityX;
         public float GetReturnSpeed() => _returnSpeed;
+        public float GetMaxArmReach()   => _maximumArmReach;
 
         // ── Upgrades ───────────────────────────────────────────────────────────
         public void AddArmLength(int amount)
