@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TK.Audio;
 
 namespace TK.Gameplay
 {
@@ -15,12 +16,13 @@ namespace TK.Gameplay
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
         [SerializeField] private LineRenderer armLine;
+        // [SerializeField] private ArmLineRenderer arm;
 
         [Header("Intro Timing")]
         [SerializeField] private float fadeDuration = 0.18f;
 
         [Header("End Sequence")]
-        [SerializeField] private EndSequenceController endSequence;
+        [SerializeField] private ResultController _result;
 
         public static LevelManager Instance {get; protected set;}
         public bool IsGameStarted { get; private set; }
@@ -57,6 +59,8 @@ namespace TK.Gameplay
 
         private void StartGame()
         {
+            // arm.ForceRefresh();
+
             StartCoroutine(FadeGameplayVisuals());
 
             player.CanMove = true;
@@ -137,8 +141,9 @@ namespace TK.Gameplay
 
             _sequenceController.PlayEndCamera();
 
-            yield return StartCoroutine(endSequence.PlayEndSequence(won));
+            _result.PlayResult();
         }
+
         private IEnumerator FadeOutGameplayVisuals()
         {
             float time = fadeDuration;

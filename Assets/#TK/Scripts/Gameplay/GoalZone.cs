@@ -18,7 +18,7 @@ namespace TK.Gameplay
                 return;
 
             // Only trigger once the player is ascending.
-            if (!player.hasCollected)
+            if (!player.HasCollected)
                 return;
 
             // Player hit the maximum arm reach without picking anything up.
@@ -28,7 +28,7 @@ namespace TK.Gameplay
                 return;
             }
 
-            CollectedItemData best = SelectBestItem(inventory);
+            CollectibleController best = SelectBestItem(inventory);
 
             // Store the full list for any future use or remove based on design changes.
             GameSession.CollectedItems.Clear();
@@ -37,41 +37,41 @@ namespace TK.Gameplay
 
             // Store the winning item.
             GameSession.BestItem          = best;
-            GameSession.CollectedItemType = best.Type;
-            GameSession.CollectedRarity   = best.ItemRarity;
-            GameSession.CollectedSprite   = best.ItemSprite;
-            GameSession.CollectedItemName = best.DisplayName;
+            GameSession.CollectedItemType = best.GetType;
+            GameSession.CollectedRarity   = best.GetRarity;
+            GameSession.CollectedSprite   = best.GetSprite;
+            GameSession.CollectedItemName = best.name;
 
-            if (best.Type == ITEM_TYPE.Food)
-                gameManager.WinGame(player);
-            else
+            if (best.GetType == ITEM_TYPE.Trash)
                 gameManager.LoseGame(player);
+            else
+                gameManager.WinGame(player);
         }
 
         /// Selects the highest-value item from the inventory (Ini nanti diubah buat validasi list).
-        private CollectedItemData SelectBestItem(PlayerInventory inventory)
+        private CollectibleController SelectBestItem(PlayerInventory _inventory)
         {
-            CollectedItemData best = inventory.HeldItems[0];
+            CollectibleController _best = _inventory.HeldItems[0];
 
-            for (int i = 1; i < inventory.HeldCount; i++)
+            for (int i = 1; i < _inventory.HeldCount; i++)
             {
-                CollectedItemData candidate = inventory.HeldItems[i];
+                CollectibleController candidate = _inventory.HeldItems[i];
 
                 // Food always beats Trash
-                if (candidate.Type == ITEM_TYPE.Food && best.Type == ITEM_TYPE.Trash)
+                if (candidate.GetType != ITEM_TYPE.Trash && _best.GetType == ITEM_TYPE.Trash)
                 {
-                    best = candidate;
+                    _best = candidate;
                     continue;
                 }
 
                 // Same type — higher rarity wins
-                if (candidate.Type == best.Type && (int)candidate.ItemRarity > (int)best.ItemRarity)
+                if (candidate.GetType == _best.GetType && (int)candidate.GetRarity > (int)_best.GetRarity)
                 {
-                    best = candidate;
+                    _best = candidate;
                 }
             }
 
-            return best;
+            return _best;
         }
     }
 }

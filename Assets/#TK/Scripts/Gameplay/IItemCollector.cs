@@ -7,6 +7,6 @@ namespace TK.Gameplay
     {
         bool CanCollect { get; }
         Transform HoldPoint { get; }
-        void AddItem(CollectedItemData data);
+        void AddItem(CollectibleController collectible);
     }
 }

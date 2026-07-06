@@ -43,8 +43,8 @@ namespace TK.Gameplay
         [SerializeField] private PlayerMovement player;
 
         private float _spawnHorizonY;
-        private bool _isInitialized;
-        private bool _eventItemSpawned;
+        private bool  _isInitialized;
+        private bool  _eventItemSpawned;
 
         private int _remainingCommon;
         private int _remainingUncommon;
@@ -61,7 +61,10 @@ namespace TK.Gameplay
         private Dictionary<Vector2Int, List<Vector2>> _spatialGrid;
         private float _cellSize;
 
+        // =====================================================
         // LIFECYCLE
+        // =====================================================
+
         private IEnumerator Start()
         {
             yield return new WaitForEndOfFrame();
@@ -70,11 +73,18 @@ namespace TK.Gameplay
             ResetState();
         }
 
+        // =====================================================
         // PUBLIC API
+        // =====================================================
+
         public void TickSpawn(float playerY)
         {
             if (!_isInitialized) return;
 
+            // Bug 4 fixed: restore despawn so the pool keeps recycling
+            DespawnFarItems(playerY);
+
+            // Bug 1 fixed: one-time threshold cross instead of exact float equality
             if (!_eventItemSpawned && player.DistanceTravelled >= player.MaximumArmReach - _chunkHeight)
             {
                 _eventItemSpawned = true;
@@ -89,6 +99,10 @@ namespace TK.Gameplay
             ReturnAllToPool();
             ResetState();
         }
+
+        // =====================================================
+        // STATE RESET
+        // =====================================================
 
         private void ResetState()
         {
@@ -112,7 +126,10 @@ namespace TK.Gameplay
             _isInitialized = true;
         }
 
+        // =====================================================
         // POOL RETURN
+        // =====================================================
+
         private void ReturnAllToPool()
         {
             if (_activeItems == null) return;
@@ -126,7 +143,10 @@ namespace TK.Gameplay
             _activeItems.Clear();
         }
 
+        // =====================================================
         // CACHED BOUNDS
+        // =====================================================
+
         private void CacheBounds()
         {
             _cachedTop    = topY.position.y;
@@ -139,7 +159,10 @@ namespace TK.Gameplay
             _cellSize = spacing * 0.7f;
         }
 
+        // =====================================================
         // DYNAMIC SPAWN LOGIC
+        // =====================================================
+
         private void AdvanceHorizon(float playerY)
         {
             while (HasRemainingBudget()
@@ -178,7 +201,11 @@ namespace TK.Gameplay
             }
         }
 
-        // DESPAWN (INI GA KEpAkE, ga di apus incase butuh)
+        // =====================================================
+        // DESPAWN
+        // =====================================================
+
+        // (INI GA KEpAkE, ga di apus incase butuh)
         private void DespawnFarItems(float playerY)
         {
             for (int i = _activeItems.Count - 1; i >= 0; i--)
@@ -199,7 +226,10 @@ namespace TK.Gameplay
             }
         }
 
+        // =====================================================
         // POSITION CHECK  (Spatial grid — O(neighbours) per attempt)
+        // =====================================================
+
         private bool TryFindSpawnPosition(float yTop, float yBottom, out Vector2 result)
         {
             for (int attempt = 0; attempt < maxAttempts; attempt++)
@@ -270,7 +300,10 @@ namespace TK.Gameplay
             );
         }
 
+        // =====================================================
         // DEPTH LOOT LOGIC
+        // =====================================================
+
         // t = 0 bottom ; t = 1 top
         private Collectible GetPoolForDepth(float t)
         {
@@ -336,7 +369,10 @@ namespace TK.Gameplay
                 ?? TryPopAny();
         }
 
+        // =====================================================
         // POP HELPERS
+        // =====================================================
+
         private Collectible TryPop(PoolerContainer pool, ref int remaining)
         {
             if (remaining <= 0) return null;
@@ -364,7 +400,10 @@ namespace TK.Gameplay
                 || _remainingBad      > 0;
         }
 
+        // =====================================================
         // HELPERS
+        // =====================================================
+
         private float GetSpacingForDepth(float y)
         {
             // Uses cached bounds — no Transform property access in hot path
@@ -374,25 +413,36 @@ namespace TK.Gameplay
             return Mathf.Lerp(spacing, spacing * 0.7f, t);
         }
 
-        // Events Spawning
+        // =====================================================
+        // EVENT SPAWNING
+        // =====================================================
+
         public void SpawnEventItem()
         {
             if (_eventItemPrefab == null) return;
 
-            float targetY = player.transform.position.y - _spawnLookaheadDistance *1.5f;
+            // Target Y = just past the player's arm reach limit
+            float targetY = player.transform.position.y - player.MaximumArmReach;
 
+            // Give TryFindSpawnPosition a band centred on the target Y so it
+            // can search for an X that passes the spatial-grid overlap check.
+            // The band is ±spacing wide so the item stays near the reach limit.
             float yTop    = targetY + spacing;
             float yBottom = targetY - spacing;
 
-            Vector2 spawnPos = new Vector2(
-                Random.Range(_cachedXMin, _cachedXMax),
-                Random.Range(yBottom, yTop)
-            );
+            if (!TryFindSpawnPosition(yTop, yBottom, out Vector2 spawnPos))
+            {
+                Debug.LogWarning("SpawnEventItem: no empty space found near arm limit — skipping spawn.");
+                return;
+            }
 
             Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(-18f, 18f));
 
+            // Instantiate a scene instance — never call Initialize on the prefab asset directly
             Collectible instance = Instantiate(_eventItemPrefab);
             instance.Initialize(spawnPos, rot);
+
+            Debug.Log($"Spawned event item at {spawnPos}");
         }
     }
 }

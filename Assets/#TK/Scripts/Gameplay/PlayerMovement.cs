@@ -9,6 +9,9 @@ namespace TK.Gameplay
         private Camera _mainCamera;
         private Rigidbody2D _rb;
 
+        [Header("Arm")]
+        [SerializeField] private NewArmLineRenderer _armLineRenderer;
+
         // Input/drag settings
 
         [Header("Drag Controls")]
@@ -49,8 +52,24 @@ namespace TK.Gameplay
         // Set to true by the OnInventoryFull event from PlayerInventory.
         private bool _inventoryFull = false;
 
-        public bool hasCollected => _inventoryFull || DistanceTravelled >= _maximumArmReach;
-        public bool IsDragging   => _isDragging;
+        // dev: HasCollected as a settable property so arm retract can be
+        // triggered the moment collection is confirmed
+        private bool _hasCollected = false;
+        public bool HasCollected
+        {
+            get => _hasCollected;
+            set
+            {
+                if (_hasCollected == value) return;
+
+                _hasCollected = value;
+
+                if (_hasCollected && _armLineRenderer)
+                    _armLineRenderer.ChangeStateToRetract();
+            }
+        }
+
+        public bool IsDragging    => _isDragging;
         public Vector3 HandPosition => transform.position;
 
         // ── Unity lifecycle ────────────────────────────────────────────────────
@@ -87,10 +106,14 @@ namespace TK.Gameplay
 
         void Update()
         {
+            // Evaluates inventory-full and arm-reach conditions and
+            // sets HasCollected (which also triggers arm retract)
+            CheckHasCollected();
+
             if (!CanMove)
                 return;
 
-            if (Touchscreen.current != null && !hasCollected)
+            if (Touchscreen.current != null && !HasCollected)
                 HandleTouch();
         }
 
@@ -115,7 +138,7 @@ namespace TK.Gameplay
 
         private void UpdateVerticalMovement()
         {
-            if (hasCollected)
+            if (HasCollected)
             {
                 _returnSpeed += _returnAcceleration * Time.fixedDeltaTime;
                 _returnSpeed = Mathf.Lerp(_returnSpeed, _maxReturnSpeed, Time.fixedDeltaTime * _returnAcceleration);
@@ -140,6 +163,18 @@ namespace TK.Gameplay
                 finalPosition,
                 Time.fixedDeltaTime * _dragSpeed
             ));
+        }
+
+        // Checks arm-reach and inventory conditions each frame and
+        // sets HasCollected exactly once via its property setter
+        private void CheckHasCollected()
+        {
+            if (HasCollected) return;
+
+            if (_inventoryFull || DistanceTravelled >= _maximumArmReach)
+            {
+                HasCollected = true;
+            }
         }
 
         // ── Touch input ────────────────────────────────────────────────────────
@@ -186,8 +221,8 @@ namespace TK.Gameplay
         }
 
         // ── Public methods ─────────────────────────────────────────────────────
-        public float GetDepth()      => DistanceTravelled;
-        public float GetDeltaX()     => _velocityX;
+        public float GetDepth()       => DistanceTravelled;
+        public float GetDeltaX()      => _velocityX;
         public float GetReturnSpeed() => _returnSpeed;
 
         // ── Upgrades ───────────────────────────────────────────────────────────
