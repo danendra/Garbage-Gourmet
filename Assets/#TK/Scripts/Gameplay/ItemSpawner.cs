@@ -36,8 +36,15 @@ namespace TK.Gameplay
         [SerializeField] private int _rareCount     = 7;
         [SerializeField] private int _badCount      = 5;
 
+        [Header("Event Items")]
+        [SerializeField] private Collectible _eventItemPrefab;
+
+        [Header("References")]
+        [SerializeField] private PlayerMovement player;
+
         private float _spawnHorizonY;
         private bool _isInitialized;
+        private bool _eventItemSpawned;
 
         private int _remainingCommon;
         private int _remainingUncommon;
@@ -68,6 +75,12 @@ namespace TK.Gameplay
         {
             if (!_isInitialized) return;
 
+            if (!_eventItemSpawned && player.DistanceTravelled >= player.MaximumArmReach - _chunkHeight)
+            {
+                _eventItemSpawned = true;
+                SpawnEventItem();
+            }
+
             AdvanceHorizon(playerY);
         }
 
@@ -85,7 +98,8 @@ namespace TK.Gameplay
             _remainingBad      = _badCount;
 
             // Horizon starts at the very top; chunks advance downward
-            _spawnHorizonY = _cachedTop;
+            _spawnHorizonY    = _cachedTop;
+            _eventItemSpawned = false;
 
             if (_activeItems == null)
                 _activeItems = new List<Collectible>(TotalItems);
@@ -358,6 +372,27 @@ namespace TK.Gameplay
 
             // top = full spacing  |  bottom = tighter spacing
             return Mathf.Lerp(spacing, spacing * 0.7f, t);
+        }
+
+        // Events Spawning
+        public void SpawnEventItem()
+        {
+            if (_eventItemPrefab == null) return;
+
+            float targetY = player.transform.position.y - _spawnLookaheadDistance *1.5f;
+
+            float yTop    = targetY + spacing;
+            float yBottom = targetY - spacing;
+
+            Vector2 spawnPos = new Vector2(
+                Random.Range(_cachedXMin, _cachedXMax),
+                Random.Range(yBottom, yTop)
+            );
+
+            Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(-18f, 18f));
+
+            Collectible instance = Instantiate(_eventItemPrefab);
+            instance.Initialize(spawnPos, rot);
         }
     }
 }

@@ -37,11 +37,11 @@ namespace TK.Gameplay
 
         [Header("Runtime State")]
         private bool _isDragging = false;
-        public bool _canMove = false;
+        public bool CanMove = false;
         private bool _wasTouching;
         private float _targetX;
         private float _currentY;
-        private float _distanceTravelled = 0f;
+        public float DistanceTravelled = 0f;
         private Vector3 _offset;
         private float _velocityX;
         private float _previousX;
@@ -49,7 +49,7 @@ namespace TK.Gameplay
         // Set to true by the OnInventoryFull event from PlayerInventory.
         private bool _inventoryFull = false;
 
-        public bool hasCollected => _inventoryFull || _distanceTravelled >= _maximumArmReach;
+        public bool hasCollected => _inventoryFull || DistanceTravelled >= _maximumArmReach;
         public bool IsDragging   => _isDragging;
         public Vector3 HandPosition => transform.position;
 
@@ -87,7 +87,7 @@ namespace TK.Gameplay
 
         void Update()
         {
-            if (!_canMove)
+            if (!CanMove)
                 return;
 
             if (Touchscreen.current != null && !hasCollected)
@@ -96,7 +96,7 @@ namespace TK.Gameplay
 
         void FixedUpdate()
         {
-            if (!_canMove)
+            if (!CanMove)
                 return;
 
             UpdateSpeed();
@@ -127,7 +127,7 @@ namespace TK.Gameplay
                 _returnSpeed = 0f;
                 float moveAmount = _speed * Time.fixedDeltaTime;
                 _currentY -= moveAmount;
-                _distanceTravelled += moveAmount; // descend
+                DistanceTravelled += moveAmount; // descend
             }
         }
 
@@ -186,7 +186,7 @@ namespace TK.Gameplay
         }
 
         // ── Public methods ─────────────────────────────────────────────────────
-        public float GetDepth()      => _distanceTravelled;
+        public float GetDepth()      => DistanceTravelled;
         public float GetDeltaX()     => _velocityX;
         public float GetReturnSpeed() => _returnSpeed;
 
