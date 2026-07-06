@@ -11,6 +11,7 @@ namespace TK.Gameplay
         [Header("References")]
         [SerializeField] private SequenceController _sequenceController;
         [SerializeField] private PlayerMovement _player;
+        [SerializeField] private ItemSpawner _itemSpawner;
 
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
@@ -51,12 +52,19 @@ namespace TK.Gameplay
             StartIntro();
         }
 
+        void Update()
+        {
+            if (!IsGameStarted || IsGameOver) return;
+            // Ini buat handle dynamic food spawn
+            _itemSpawner.TickSpawn(_player.transform.position.y);
+        }
+
         private void StartIntro()
         {
             IsGameStarted = false;
             IsGameOver = false;
 
-            _player._canMove = false;
+            _player.SetCanMove(false);
 
             SetHandAlpha(0f);
             SetArmAlpha(0f);
@@ -70,7 +78,7 @@ namespace TK.Gameplay
 
             StartCoroutine(FadeGameplayVisuals());
 
-            _player._canMove = true;
+            _player.SetCanMove(true);        
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
         }
@@ -126,7 +134,7 @@ namespace TK.Gameplay
             GameSession.FinalScore = finalScore;
             GameSession.PlayerWon = true;
 
-            playerRef._canMove = false;
+            playerRef.SetCanMove(false);
             StartCoroutine(RunEndSequence(true));
         }
 
@@ -138,7 +146,7 @@ namespace TK.Gameplay
             GameSession.FinalScore = 0;
             GameSession.PlayerWon = false;
 
-            playerRef._canMove = false;
+            playerRef.SetCanMove(false);
             StartCoroutine(RunEndSequence(false));
         }
 
@@ -150,6 +158,7 @@ namespace TK.Gameplay
 
             _result.PlayResult();
         }
+
         private IEnumerator FadeOutGameplayVisuals()
         {
             float time = fadeDuration;
