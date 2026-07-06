@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6034de73d3fa7486c9a2841e6015a0f5, type: 3}
+  m_Name: Golden Deluxe
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
+  CollectibleIngredients:
+  - {fileID: 3444456717332883107, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}
+  - {fileID: 4178720529856141901, guid: 92db90e40124c4b50b80505f2d14fe5c, type: 3}
+  - {fileID: 7037511910683221632, guid: 617373c718569401f9c50f67b9692e1e, type: 3}
+  - {fileID: 7224101535367519288, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
+  - {fileID: 3229043367557133839, guid: e37e9c7189a7047538fe31f68c23562e, type: 3}
+  IsRarityFixed: 1
+  IsSame: 0
+  FltMultiplier: 2

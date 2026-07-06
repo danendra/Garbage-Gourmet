@@ -9,6 +9,8 @@ namespace TK.Data
     {
         [Tooltip("Ingredient arrangement from bottom to top")]
         public CollectibleController[] CollectibleIngredients;
+        public bool IsRarityFixed;
+        public bool IsSame;
         public float FltMultiplier;
     }
 }
