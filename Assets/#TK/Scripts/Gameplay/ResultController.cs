@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using Anoa;
-using System.Linq;
 
 namespace TK.Gameplay
 {
@@ -25,27 +25,8 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayResult()
         {
-            List<CollectibleController> _listCollectible = AnoaModule.RandomList(_inventory.HeldItems.ToArray());
-            CollectibleController _collectibleBun;
+            List<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();            
             GameObject _object;
-
-            //Move Bottom Bun to first
-            _collectibleBun = _listCollectible.Find(_item => _item.GetType == ITEM_TYPE.Bottom_Bun);
-
-            if (_collectibleBun)
-            {
-                _listCollectible.Remove(_collectibleBun);
-                _listCollectible.Insert(0, _collectibleBun);
-            }
-
-            //Move Top Bun to last
-            _collectibleBun = _listCollectible.Find(_item => _item.GetType == ITEM_TYPE.Top_Bun);
-
-            if (_collectibleBun)
-            {
-                _listCollectible.Remove(_collectibleBun);
-                _listCollectible.Insert(_listCollectible.Count, _collectibleBun);
-            }
 
             int _index = 6;
 

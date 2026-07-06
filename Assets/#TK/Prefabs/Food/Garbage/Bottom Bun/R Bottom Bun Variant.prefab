@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 2336309638399483904, guid: 8cc1e84dcee50404b9240d115d7929d8, type: 3}
     - target: {fileID: 9016238616997666900, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
       propertyPath: m_Name
-      value: R Bottom Bun Variant Variant
+      value: R Bottom Bun Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
