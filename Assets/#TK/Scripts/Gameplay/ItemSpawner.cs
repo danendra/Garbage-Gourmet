@@ -37,7 +37,7 @@ namespace TK.Gameplay
         [SerializeField] private int _badCount      = 5;
 
         [Header("Event Items")]
-        [SerializeField] private Collectible _eventItemPrefab;
+        [SerializeField] private CollectibleController _eventItemPrefab;
 
         [Header("References")]
         [SerializeField] private PlayerMovement player;
@@ -57,7 +57,7 @@ namespace TK.Gameplay
         private float _cachedXMin;
         private float _cachedXMax;
 
-        private List<Collectible> _activeItems;
+        private List<CollectibleController> _activeItems;
         private Dictionary<Vector2Int, List<Vector2>> _spatialGrid;
         private float _cellSize;
 
@@ -116,7 +116,7 @@ namespace TK.Gameplay
             _eventItemSpawned = false;
 
             if (_activeItems == null)
-                _activeItems = new List<Collectible>(TotalItems);
+                _activeItems = new List<CollectibleController>(TotalItems);
 
             if (_spatialGrid == null)
                 _spatialGrid = new Dictionary<Vector2Int, List<Vector2>>();
@@ -134,7 +134,7 @@ namespace TK.Gameplay
         {
             if (_activeItems == null) return;
 
-            foreach (Collectible item in _activeItems)
+            foreach (CollectibleController item in _activeItems)
             {
                 if (item != null && item.gameObject.activeSelf)
                     item.gameObject.SetActive(false);
@@ -188,7 +188,7 @@ namespace TK.Gameplay
 
                 float t = Mathf.InverseLerp(_cachedTop, _cachedBottom, spawnPos.y);
 
-                Collectible collectible = GetPoolForDepth(t);
+                CollectibleController collectible = GetPoolForDepth(t);
                 if (collectible == null) break;
 
                 float randomZ  = Random.Range(-18f, 18f);
@@ -210,7 +210,7 @@ namespace TK.Gameplay
         {
             for (int i = _activeItems.Count - 1; i >= 0; i--)
             {
-                Collectible item = _activeItems[i];
+                CollectibleController item = _activeItems[i];
 
                 if (item == null || !item.gameObject.activeSelf)
                 {
@@ -305,7 +305,7 @@ namespace TK.Gameplay
         // =====================================================
 
         // t = 0 bottom ; t = 1 top
-        private Collectible GetPoolForDepth(float t)
+        private CollectibleController GetPoolForDepth(float t)
         {
             int roll = Random.Range(0, 100);
 
@@ -373,18 +373,18 @@ namespace TK.Gameplay
         // POP HELPERS
         // =====================================================
 
-        private Collectible TryPop(PoolerContainer pool, ref int remaining)
+        private CollectibleController TryPop(PoolerContainer pool, ref int remaining)
         {
             if (remaining <= 0) return null;
 
-            Collectible item = pool.Pop<Collectible>(true);
+            CollectibleController item = pool.Pop<CollectibleController>(true);
             if (item != null) remaining--;
 
             return item;
         }
 
         // Nek entek pool e
-        private Collectible TryPopAny()
+        private CollectibleController TryPopAny()
         {
             return TryPop(_poolCommon,   ref _remainingCommon)
                 ?? TryPop(_poolUncommon, ref _remainingUncommon)
@@ -421,25 +421,19 @@ namespace TK.Gameplay
         {
             if (_eventItemPrefab == null) return;
 
-            // Target Y = just past the player's arm reach limit
-            float targetY = player.transform.position.y - player.MaximumArmReach;
+            float targetY = player.transform.position.y - _spawnLookaheadDistance;
 
-            // Give TryFindSpawnPosition a band centred on the target Y so it
-            // can search for an X that passes the spatial-grid overlap check.
-            // The band is ±spacing wide so the item stays near the reach limit.
             float yTop    = targetY + spacing;
             float yBottom = targetY - spacing;
 
-            if (!TryFindSpawnPosition(yTop, yBottom, out Vector2 spawnPos))
-            {
-                Debug.LogWarning("SpawnEventItem: no empty space found near arm limit — skipping spawn.");
-                return;
-            }
+            Vector2 spawnPos = new Vector2(
+                Random.Range(_cachedXMin, _cachedXMax),
+                Random.Range(yBottom, yTop)
+            );
 
             Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(-18f, 18f));
 
-            // Instantiate a scene instance — never call Initialize on the prefab asset directly
-            Collectible instance = Instantiate(_eventItemPrefab);
+            CollectibleController instance = Instantiate(_eventItemPrefab);
             instance.Initialize(spawnPos, rot);
 
             Debug.Log($"Spawned event item at {spawnPos}");
