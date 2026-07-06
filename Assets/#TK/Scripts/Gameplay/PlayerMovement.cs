@@ -231,9 +231,9 @@ namespace TK.Gameplay
         }
 
         // ── Upgrades ───────────────────────────────────────────────────────────
-        public void AddArmLength(int amount)
+        public void SetArmLength(int amount)
         {
-            _maximumArmReach += amount;
+            _maximumArmReach = amount;
         }
     }
 }

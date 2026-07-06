@@ -42,9 +42,9 @@ namespace TK.Gameplay
         }
 
         // ── Upgrade ────────────────────────────────────────────────────────────
-        public void AddMaxPickUpItems(int amount)
+        public void SetMaxPickUpItems(int amount)
         {
-            _maxPickUpItems += amount;
+            _maxPickUpItems = amount;
         }
     }
 }
