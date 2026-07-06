@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 5975440692612145781, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 4366882195537649107, guid: 18dcaf919a0c145a1b5f0c2c9d19438f, type: 3}
+      objectReference: {fileID: 7163699865554923873, guid: 18dcaf919a0c145a1b5f0c2c9d19438f, type: 3}
     - target: {fileID: 5975440692612145781, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_SortingOrder
       value: 7
@@ -102,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7657299826903813138, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Name
-      value: C Bottom Bun
+      value: H Bottom Bun
       objectReference: {fileID: 0}
     - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: _itemType

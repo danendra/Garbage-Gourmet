@@ -276,6 +276,8 @@ MonoBehaviour:
   - {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
   - {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
   - {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+  - {fileID: 360745728927559762, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
+  - {fileID: 5401126700109834945, guid: 86e392be68c994136804abed47da8d34, type: 3}
   parent: {fileID: 0}
   poolSize: 5
 --- !u!1 &1699569333750099803
@@ -354,9 +356,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
   poolPrefabs:
-  - {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
-  - {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
-  - {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+  - {fileID: 853287525945685311, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
+  - {fileID: 3528432588435494041, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
+  - {fileID: 8358240769541418234, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
+  - {fileID: 7356334416653025982, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
+  - {fileID: 4340099201132360574, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
   parent: {fileID: 0}
   poolSize: 5
 --- !u!1 &3154131509484417702
@@ -754,7 +758,6 @@ Transform:
   m_Children:
   - {fileID: 3430336443023211473}
   - {fileID: 2743183643704863362}
-  - {fileID: 861170401732621744}
   - {fileID: 2073636519230001782}
   - {fileID: 3736569059784164297}
   m_Father: {fileID: 0}
@@ -775,70 +778,21 @@ MonoBehaviour:
   _chunkHeight: 1
   _spawnLookaheadDistance: 6.5
   _despawnDistance: 25
-  spacing: 2.5
-  maxAttempts: 150
+  _spacing: 2.5
+  _maxAttempts: 150
   xmin: {fileID: 2236268937741809929}
   xmax: {fileID: 6791270538941666605}
   topY: {fileID: 4516964747361655172}
   bottomY: {fileID: 6358004450961677661}
   _poolCommon: {fileID: 77372667055263073}
-  _poolUncommon: {fileID: 5558046411419877650}
   _poolRare: {fileID: 7879520763633670241}
   _poolBad: {fileID: 8524894383507889110}
   _commonCount: 18
   _uncommonCount: 10
   _rareCount: 7
   _badCount: 5
---- !u!1 &8424799138694538891
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 861170401732621744}
-  - component: {fileID: 5558046411419877650}
-  m_Layer: 0
-  m_Name: Pool Uncommon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &861170401732621744
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424799138694538891}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.8, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3715533332280558363}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5558046411419877650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424799138694538891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6156fad1cfed149688a16fd0c52a2486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
-  poolPrefabs:
-  - {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
-  - {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
-  - {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
-  parent: {fileID: 0}
-  poolSize: 5
+  _eventItemPrefab: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &9033443977756876929
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,9 +838,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
   poolPrefabs:
-  - {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
-  - {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
-  - {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+  - {fileID: 5442896496718430395, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}
+  - {fileID: 427390545385617560, guid: 617373c718569401f9c50f67b9692e1e, type: 3}
+  - {fileID: 5227548257447153687, guid: e37e9c7189a7047538fe31f68c23562e, type: 3}
+  - {fileID: 1421352454339104, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
+  - {fileID: 6753686997757230165, guid: 92db90e40124c4b50b80505f2d14fe5c, type: 3}
   parent: {fileID: 0}
   poolSize: 5
 --- !u!1 &9201111563393667745

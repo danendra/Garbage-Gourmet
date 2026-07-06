@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 330894185113454029}
   - component: {fileID: 5975440692612145781}
   - component: {fileID: 3113167136787110338}
-  - component: {fileID: 8716565346548842337}
-  - component: {fileID: 2068085320042060153}
+  - component: {fileID: 8141993671275834603}
   m_Layer: 0
-  m_Name: C Top Bun Base
+  m_Name: B Top Bun
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,9 +81,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 11
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5712125026993235265, guid: 18dcaf919a0c145a1b5f0c2c9d19438f, type: 3}
+  m_Sprite: {fileID: -8395247630685996048, guid: 18dcaf919a0c145a1b5f0c2c9d19438f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,47 +123,46 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.07480176}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.98828125, y: 0.65234375}
+    oldSize: {x: 0.9785156, y: 0.6542969}
     newSize: {x: 0.98828125, y: 0.65234375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9785156, y: 0.6464844}
+  m_Size: {x: 0.9785156, y: 0.22209993}
   m_EdgeRadius: 0
---- !u!114 &8716565346548842337
-MonoBehaviour:
+--- !u!50 &8141993671275834603
+Rigidbody2D:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7657299826903813138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4338fd3c0eda44e3eaab00bb621d9ff4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectible
-  _itemType: 0
-  _rarity: 0
-  _intScore: 1
-  _goFoodServed: {fileID: 7657299826903813138, guid: a77d1f8fa41bb4dd2b48483f7ac3cce5, type: 3}
---- !u!114 &2068085320042060153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7657299826903813138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e67da051dfb47f1922fd1824470ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerObject
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
