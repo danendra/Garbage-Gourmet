@@ -47,13 +47,18 @@ namespace TK.Gameplay
                 _listCollectible.Insert(_listCollectible.Count, _collectibleBun);
             }
 
+            int _index = 6;
+
             foreach (CollectibleController _collectible in _listCollectible)
             {
                 _object = Instantiate(_collectible.GetFoodServed, _transSpawn.position, quaternion.identity, _transSpawn);
                 _object.transform.localScale = Vector3.one * 3;
+                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
                 _object.SetActive(true);
 
                 yield return new WaitForSeconds(0.3f);
+
+                _index++;
             }
         }
 

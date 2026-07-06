@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e68df5ffe7bba45ac9a6cb928e7c41fc
+guid: 8b632b186d2db4ab18b6b7041a017b38
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6415905774673983499
-    second: BunBawah_0
+      213: 4297686462833305177
+    second: LETTUCE_SPRITE_0
+  - first:
+      213: -542089908195155198
+    second: LETTUCE_SPRITE_1
+  - first:
+      213: 3392627785727187367
+    second: LETTUCE_SPRITE_2
+  - first:
+      213: 6284838756965990140
+    second: LETTUCE_SPRITE_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +135,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BunBawah_0
+      name: LETTUCE_HIGH
       rect:
         serializedVersion: 2
-        x: 4
-        y: 193
-        width: 505
-        height: 126
+        x: 11
+        y: 115
+        width: 486
+        height: 280
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f70e2cd0bf16f6a0800000000000000
-      internalID: -6415905774673983499
+      spriteID: 9562f2d511374ab30800000000000000
+      internalID: 4297686462833305177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LETTUCE_NORMAL
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 156
+        width: 495
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20324b1c91c1a78f0800000000000000
+      internalID: -542089908195155198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LETTUCE_BAD
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 156
+        width: 413
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfeb09b0d8b383750800000000000000
+      internalID: 6284838756965990140
       vertices: []
       indices: 
       edges: []
@@ -151,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2f04f3d592f0340e3a20311b1d2c2029
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +214,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BunBawah_0: -6415905774673983499
+      LETTUCE_BAD: 6284838756965990140
+      LETTUCE_HIGH: 4297686462833305177
+      LETTUCE_NORMAL: -542089908195155198
+      LETTUCE_SPRITE_2: 3392627785727187367
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
