@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b24edbe892704727b5fcd7836eacf50, type: 3}
+  m_Name: MainMenuUIConfig
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Data.MainMenuUIConfig
+  bottomNavSize: {x: 800, y: 100}
+  bottomNavOffset: {x: 0, y: 40}
+  buttonSpacing: 30
+  unselectedSprite: {fileID: -4555792684141993172, guid: 1368e0dca73454b15bde5ec12eda6e08, type: 3}
+  selectedSprite: {fileID: 4329560128403829692, guid: 1944489cb64c14acead257dac946febc, type: 3}
+  unselectedSize: {x: 200, y: 80}
+  selectedSize: {x: 200, y: 100}
+  stallIconSprite: {fileID: -7108168582394019121, guid: 5deb9d3e7a2e647a0bd13aa17ea8cadf, type: 3}
+  upgradeIconSprite: {fileID: -1551200533590106951, guid: 97abfdfb09d9a4c79b11c2204c39302d, type: 3}
+  settingsIconSprite: {fileID: -5068268520347327316, guid: 3fe9b9b06817a49859d8b9f5f16cb062, type: 3}
+  selectedIconScale: 1
+  unselectedIconScale: 0.7
+  selectedTextTopOffset: 2
+  selectedTextBottomOffset: -102
+  stallLabel: STALL
+  upgradeLabel: UPGRADE
+  settingsLabel: SETTINGS
+  backgroundColor: {r: 0.08, g: 0.08, b: 0.08, a: 0.7}
+  buttonNormalColor: {r: 0.22, g: 0.22, b: 0.22, a: 0.9}
+  buttonHighlightedColor: {r: 0.35, g: 0.35, b: 0.35, a: 0.95}
+  buttonPressedColor: {r: 0.12, g: 0.12, b: 0.12, a: 0.9}
+  buttonSelectedColor: {r: 0.28, g: 0.28, b: 0.28, a: 0.9}
