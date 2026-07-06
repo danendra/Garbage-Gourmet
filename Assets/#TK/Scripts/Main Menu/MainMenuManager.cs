@@ -18,6 +18,9 @@ namespace TK.MainMenu
         [SerializeField] private GameObject titleGroup;
         [SerializeField] private RectTransform gameTitle;
         [SerializeField] private RectTransform tapToStart;
+        [SerializeField] private RectTransform upgradeButton;
+        [SerializeField] private CanvasGroup upgradeCanvasGroup;
+        [SerializeField] private RectTransform upgradeExitButton;
 
         [Header("Animations")]
         [SerializeField] private DOTweenAnimation hatchOpenAnim;
@@ -322,6 +325,27 @@ namespace TK.MainMenu
         {
             foreach (var anim in root.GetComponentsInChildren<DOTweenAnimation>(true))
                 if (anim.id == id) anim.RecreateTweenAndPlay();
+        }
+
+        // Upgrade View
+        public void ShowUpgradeView()
+        {
+            if (upgradeCanvasGroup != null)
+            {
+                upgradeCanvasGroup.alpha = 1f;
+                upgradeCanvasGroup.interactable = true;
+                upgradeCanvasGroup.blocksRaycasts = true;
+            }
+        }
+
+        public void HideUpgradeView()
+        {
+            if (upgradeCanvasGroup != null)
+            {
+                upgradeCanvasGroup.alpha = 0f;
+                upgradeCanvasGroup.interactable = false;
+                upgradeCanvasGroup.blocksRaycasts = false;
+            }
         }
     }
 }
