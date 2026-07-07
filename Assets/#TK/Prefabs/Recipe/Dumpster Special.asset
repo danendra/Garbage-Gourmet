@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6034de73d3fa7486c9a2841e6015a0f5, type: 3}
+  m_Name: Dumpster Special
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
+  CollectibleIngredients:
+  - {fileID: 8039869676958307111, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
+  - {fileID: 6376823975279334758, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
+  - {fileID: 6103402353796805249, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
+  - {fileID: 167430920777688230, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
+  - {fileID: 1709759367571524322, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
+  IsRarityFixed: 1
+  IsSame: 0
+  FltMultiplier: 3

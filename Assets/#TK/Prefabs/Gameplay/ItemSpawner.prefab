@@ -25,12 +25,69 @@ Transform:
   m_GameObject: {fileID: 752770678363459629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -73.8, z: 0.032532416}
+  m_LocalPosition: {x: 0, y: -83.54, z: 0.032532416}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3736569059784164297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1098720205461988921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3033191155581585175}
+  - component: {fileID: 6919336051837744045}
+  m_Layer: 0
+  m_Name: Pool Level 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3033191155581585175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098720205461988921}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3715533332280558363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6919336051837744045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098720205461988921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6156fad1cfed149688a16fd0c52a2486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
+  poolPrefabs:
+  - {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+  - {fileID: 360745728927559762, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
+  - {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
+  - {fileID: 5401126700109834945, guid: 86e392be68c994136804abed47da8d34, type: 3}
+  - {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+  - {fileID: 5227548257447153687, guid: e37e9c7189a7047538fe31f68c23562e, type: 3}
+  - {fileID: 1421352454339104, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
+  - {fileID: 6753686997757230165, guid: 92db90e40124c4b50b80505f2d14fe5c, type: 3}
+  - {fileID: 427390545385617560, guid: 617373c718569401f9c50f67b9692e1e, type: 3}
+  - {fileID: 5442896496718430395, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}
+  parent: {fileID: 0}
+  poolSize: 5
 --- !u!1 &1242218687212748219
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,8 +147,8 @@ Transform:
   m_GameObject: {fileID: 1379212315163713156}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.12, y: -33.2389, z: 0}
-  m_LocalScale: {x: 1.2702694, y: 92.104034, z: 1}
+  m_LocalPosition: {x: 4.12, y: -36.9018, z: 0}
+  m_LocalScale: {x: 1.2702694, y: 99.4263, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3736569059784164297}
@@ -239,7 +296,7 @@ GameObject:
   - component: {fileID: 2743183643704863362}
   - component: {fileID: 77372667055263073}
   m_Layer: 0
-  m_Name: Pool Common
+  m_Name: Pool Level 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,12 +330,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
   poolPrefabs:
-  - {fileID: 8587321363766256968, guid: 93960f1a641a74d7e81888cf5117ad6f, type: 3}
-  - {fileID: 5437167908848851601, guid: b7455f8cb57e040f0827028d8234295f, type: 3}
-  - {fileID: -1691949534302438406, guid: 5572dd8f2138e40b3963a96b479c3e03, type: 3}
-  - {fileID: 2881507141041580634, guid: 773971d0190c747a1a1668b3d1745e24, type: 3}
-  - {fileID: 8228942457436462962, guid: a6beb0e9303a941649019567b25afb46, type: 3}
-  - {fileID: 1239641098284944505, guid: 499480437b4914d90bc8a94a6a4fe5aa, type: 3}
+  - {fileID: 853287525945685311, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
+  - {fileID: 8358240769541418234, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
+  - {fileID: 3528432588435494041, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
+  - {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+  - {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
+  - {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+  - {fileID: 4340099201132360574, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
+  - {fileID: 7356334416653025982, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
   parent: {fileID: 0}
   poolSize: 5
 --- !u!1 &1699569333750099803
@@ -323,7 +382,7 @@ GameObject:
   - component: {fileID: 3430336443023211473}
   - component: {fileID: 8524894383507889110}
   m_Layer: 0
-  m_Name: Pool Bad
+  m_Name: Pool Level 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,8 +416,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
   poolPrefabs:
-  - {fileID: 5384939281917705278, guid: 38650d7a469d548b0965d05535364b75, type: 3}
-  - {fileID: 5232890315780783781, guid: e6ec1b8417efb4c5a8ea841085fbdb0c, type: 3}
+  - {fileID: 853287525945685311, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
+  - {fileID: 3528432588435494041, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
+  - {fileID: 8358240769541418234, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
   parent: {fileID: 0}
   poolSize: 5
 --- !u!1 &3154131509484417702
@@ -524,8 +584,8 @@ Transform:
   m_GameObject: {fileID: 5795446598342673667}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.17, y: -33.34, z: 0}
-  m_LocalScale: {x: 1.5153859, y: 92.104034, z: 1}
+  m_LocalPosition: {x: -4.17, y: -37.0555, z: 0}
+  m_LocalScale: {x: 1.5153859, y: 99.536835, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3736569059784164297}
@@ -756,8 +816,8 @@ Transform:
   m_Children:
   - {fileID: 3430336443023211473}
   - {fileID: 2743183643704863362}
-  - {fileID: 861170401732621744}
   - {fileID: 2073636519230001782}
+  - {fileID: 3033191155581585175}
   - {fileID: 3736569059784164297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -773,66 +833,107 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585fc8c6147574b80ba0dd65b8b2c9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpawner
-  totalItems: 75
-  spacing: 2.5
-  maxAttempts: 150
-  xmin: {fileID: 0}
-  xmax: {fileID: 0}
-  topY: {fileID: 0}
-  bottomY: {fileID: 0}
-  _poolCommon: {fileID: 77372667055263073}
-  _poolUncommon: {fileID: 5558046411419877650}
-  _poolRare: {fileID: 7879520763633670241}
-  _poolBad: {fileID: 8524894383507889110}
---- !u!1 &8424799138694538891
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 861170401732621744}
-  - component: {fileID: 5558046411419877650}
-  m_Layer: 0
-  m_Name: Pool Uncommon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &861170401732621744
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424799138694538891}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.8, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3715533332280558363}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5558046411419877650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424799138694538891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6156fad1cfed149688a16fd0c52a2486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
-  poolPrefabs:
-  - {fileID: 7652828609911750713, guid: eed8e9e020ef64e48bf46a270b37aa31, type: 3}
-  - {fileID: 827111036340939983, guid: e5687356a77ab44579ca1cb6a56feeab, type: 3}
-  parent: {fileID: 0}
-  poolSize: 5
+  _itemsPerChunk: 3
+  _chunkHeight: 1
+  _spawnLookaheadDistance: 6.5
+  _despawnDistance: 25
+  _spacing: 2.5
+  _maxAttempts: 10
+  _xmin: {fileID: 2236268937741809929}
+  _xmax: {fileID: 6791270538941666605}
+  _topY: {fileID: 4516964747361655172}
+  _bottomY: {fileID: 6358004450961677661}
+  _subLevels:
+  - MinDepth: 0
+    MaxDepth: 0.1
+    Pool: {fileID: 8524894383507889110}
+    Count: 20
+    Entries:
+    - Prefab: {fileID: 853287525945685311, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
+      Weight: 33.33
+    - Prefab: {fileID: 3528432588435494041, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
+      Weight: 33.33
+    - Prefab: {fileID: 8358240769541418234, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
+      Weight: 33.33
+    TrashWeight: 15
+    TrashPrefabs: []
+  - MinDepth: 0.11
+    MaxDepth: 0.3
+    Pool: {fileID: 77372667055263073}
+    Count: 32
+    Entries:
+    - Prefab: {fileID: 853287525945685311, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
+      Weight: 15.6
+    - Prefab: {fileID: 3528432588435494041, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
+      Weight: 10.4
+    - Prefab: {fileID: 8358240769541418234, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
+      Weight: 15.6
+    - Prefab: {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      Weight: 14.1
+    - Prefab: {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
+      Weight: 11.4
+    - Prefab: {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      Weight: 14.1
+    - Prefab: {fileID: 4340099201132360574, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
+      Weight: 15.6
+    - Prefab: {fileID: 7356334416653025982, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
+      Weight: 5.2
+    TrashWeight: 15
+    TrashPrefabs: []
+  - MinDepth: 0.31
+    MaxDepth: 0.6
+    Pool: {fileID: 7879520763633670241}
+    Count: 48
+    Entries:
+    - Prefab: {fileID: 4340099201132360574, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
+      Weight: 16.7
+    - Prefab: {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      Weight: 13.9
+    - Prefab: {fileID: 7356334416653025982, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
+      Weight: 5.6
+    - Prefab: {fileID: 360745728927559762, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
+      Weight: 4.6
+    - Prefab: {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
+      Weight: 9.3
+    - Prefab: {fileID: 5401126700109834945, guid: 86e392be68c994136804abed47da8d34, type: 3}
+      Weight: 13.9
+    - Prefab: {fileID: 5227548257447153687, guid: e37e9c7189a7047538fe31f68c23562e, type: 3}
+      Weight: 8.3
+    - Prefab: {fileID: 5442896496718430395, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}
+      Weight: 22.1
+    - Prefab: {fileID: 427390545385617560, guid: 617373c718569401f9c50f67b9692e1e, type: 3}
+      Weight: 5.6
+    TrashWeight: 20
+    TrashPrefabs: []
+  - MinDepth: 0.61
+    MaxDepth: 0.95
+    Pool: {fileID: 6919336051837744045}
+    Count: 72
+    Entries:
+    - Prefab: {fileID: 6240682896086201707, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      Weight: 7.5
+    - Prefab: {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
+      Weight: 5
+    - Prefab: {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      Weight: 7.5
+    - Prefab: {fileID: 360745728927559762, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
+      Weight: 2.5
+    - Prefab: {fileID: 5401126700109834945, guid: 86e392be68c994136804abed47da8d34, type: 3}
+      Weight: 7.25
+    - Prefab: {fileID: 5227548257447153687, guid: e37e9c7189a7047538fe31f68c23562e, type: 3}
+      Weight: 17.5
+    - Prefab: {fileID: 427390545385617560, guid: 617373c718569401f9c50f67b9692e1e, type: 3}
+      Weight: 11.7
+    - Prefab: {fileID: 5442896496718430395, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}
+      Weight: 17.5
+    - Prefab: {fileID: 1421352454339104, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
+      Weight: 5.8
+    - Prefab: {fileID: 6753686997757230165, guid: 92db90e40124c4b50b80505f2d14fe5c, type: 3}
+      Weight: 17.5
+    TrashWeight: 25
+    TrashPrefabs: []
+  _eventItemPrefab: {fileID: 7271019100313349323, guid: e95fc1134e39b4f19837b1cf622b5ebf, type: 3}
+  _player: {fileID: 0}
 --- !u!1 &9033443977756876929
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +945,7 @@ GameObject:
   - component: {fileID: 2073636519230001782}
   - component: {fileID: 7879520763633670241}
   m_Layer: 0
-  m_Name: Pool Rare
+  m_Name: Pool Level 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,8 +979,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Anoa.Module.PoolerContainer
   poolPrefabs:
-  - {fileID: 5900889759201876433, guid: fa1b45bc91b0143c4b035a3f507f7b1f, type: 3}
-  - {fileID: 6534387074359175498, guid: e95fc1134e39b4f19837b1cf622b5ebf, type: 3}
+  - {fileID: 4340099201132360574, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
+  - {fileID: 2068085320042060153, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+  - {fileID: 7356334416653025982, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
+  - {fileID: 360745728927559762, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
+  - {fileID: 6862057163309379093, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
+  - {fileID: 5401126700109834945, guid: 86e392be68c994136804abed47da8d34, type: 3}
+  - {fileID: 5227548257447153687, guid: e37e9c7189a7047538fe31f68c23562e, type: 3}
+  - {fileID: 5442896496718430395, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}
+  - {fileID: 427390545385617560, guid: 617373c718569401f9c50f67b9692e1e, type: 3}
   parent: {fileID: 0}
   poolSize: 5
 --- !u!1 &9201111563393667745

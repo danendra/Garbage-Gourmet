@@ -1,16 +1,21 @@
-using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
-using TK.Audio;
+using System.Linq;
+using UnityEngine;
 
 namespace TK.Gameplay
 {
-    using Module;
+    using Data;
+    using Audio;    
 
     public class LevelManager : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private SequenceController _sequenceController;
-        [SerializeField] private PlayerMovement player;                
+        [SerializeField] private PlayerMovement _player;
+        [SerializeField] private ItemSpawner _itemSpawner;
+        [SerializeField] private RecipeData[] _arrRecipes;
+        [SerializeField] private GameObject _objRaccoon;
 
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
@@ -21,19 +26,41 @@ namespace TK.Gameplay
         [SerializeField] private float fadeDuration = 0.18f;
 
         [Header("End Sequence")]
-        [SerializeField] private EndSequenceController endSequence;
+        [SerializeField] private ResultController _result;
 
-        public static LevelManager Instance {get; protected set;}
+        public static LevelManager Instance { get; protected set; }
+        public PlayerInventory GetPlayerInventory { get; protected set; }
         public bool IsGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
 
         private int finalScore;
 
+        void Awake()
+        {
+            if (Instance)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
         void Start()
         {
             // StartCoroutine(BeginIntroSequence());
 
+            GetPlayerInventory = _player.GetComponent<PlayerInventory>();
+
             StartIntro();
+        }
+
+        void Update()
+        {
+            if (!IsGameStarted || IsGameOver) return;
+            // Ini buat handle dynamic food spawn
+            _itemSpawner.TickSpawn(_player.transform.position.y);
         }
 
         private void StartIntro()
@@ -41,7 +68,7 @@ namespace TK.Gameplay
             IsGameStarted = false;
             IsGameOver = false;
 
-            player._canMove = false;
+            _player.SetCanMove(false);
 
             SetHandAlpha(0f);
             SetArmAlpha(0f);
@@ -52,10 +79,11 @@ namespace TK.Gameplay
         private void StartGame()
         {
             // arm.ForceRefresh();
+            _objRaccoon.SetActive(false);
 
             StartCoroutine(FadeGameplayVisuals());
 
-            player._canMove = true;
+            _player.SetCanMove(true);        
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
         }
@@ -102,6 +130,22 @@ namespace TK.Gameplay
         // WIN / LOSE
         // =====================
 
+        public bool FindRecipe(IEnumerable<CollectibleController> _ieCollectible, out RecipeData _recipe)
+        {                    
+            for (int i = 0; i < _arrRecipes.Length; i++)
+            {
+                if (_arrRecipes[i].IsIngredientCorrect(_ieCollectible))
+                {
+                    _recipe = _arrRecipes[i];
+
+                    return true;
+                }
+            }
+
+            _recipe = null;
+            return false;
+        }
+
         public void WinGame(PlayerMovement playerRef)
         {
             if (IsGameOver) return;
@@ -111,7 +155,7 @@ namespace TK.Gameplay
             GameSession.FinalScore = finalScore;
             GameSession.PlayerWon = true;
 
-            playerRef._canMove = false;
+            playerRef.SetCanMove(false);
             StartCoroutine(RunEndSequence(true));
         }
 
@@ -123,7 +167,7 @@ namespace TK.Gameplay
             GameSession.FinalScore = 0;
             GameSession.PlayerWon = false;
 
-            playerRef._canMove = false;
+            playerRef.SetCanMove(false);
             StartCoroutine(RunEndSequence(false));
         }
 
@@ -133,8 +177,9 @@ namespace TK.Gameplay
 
             _sequenceController.PlayEndCamera();
 
-            yield return StartCoroutine(endSequence.PlayEndSequence(won));
+            _result.PlayResult();
         }
+
         private IEnumerator FadeOutGameplayVisuals()
         {
             float time = fadeDuration;

@@ -31,7 +31,6 @@ namespace TK.Gameplay
 
         [Header("Arm Reach")]
         [SerializeField] private float _maximumArmReach = 10f;
-        public float MaximumArmReach => _maximumArmReach;
 
         [Header("Inventory")]
         [SerializeField] private PlayerInventory _inventory;
@@ -40,7 +39,7 @@ namespace TK.Gameplay
 
         [Header("Runtime State")]
         private bool _isDragging = false;
-        public bool _canMove = false;
+        private bool _canMove = false;
         private bool _wasTouching;
         private float _targetX;
         private float _currentY;
@@ -52,6 +51,8 @@ namespace TK.Gameplay
         // Set to true by the OnInventoryFull event from PlayerInventory.
         private bool _inventoryFull = false;
 
+        // dev: HasCollected as a settable property so arm retract can be
+        // triggered the moment collection is confirmed
         private bool _hasCollected = false;
         public bool HasCollected
         {
@@ -62,12 +63,12 @@ namespace TK.Gameplay
 
                 _hasCollected = value;
 
-                if (_hasCollected)
+                if (_hasCollected && _armLineRenderer)
                     _armLineRenderer.ChangeStateToRetract();
             }
         }
 
-        public bool IsDragging   => _isDragging;
+        public bool IsDragging    => _isDragging;
         public Vector3 HandPosition => transform.position;
 
         // ── Unity lifecycle ────────────────────────────────────────────────────
@@ -92,7 +93,7 @@ namespace TK.Gameplay
             _inventory.OnInventoryFull -= OnInventoryFull;
         }
 
-        private void OnItemAdded()
+        private void OnItemAdded(CollectibleController _collectible)
         {
             _isDragging = false;
         }
@@ -104,9 +105,11 @@ namespace TK.Gameplay
 
         void Update()
         {
+            // Evaluates inventory-full and arm-reach conditions and
+            // sets HasCollected (which also triggers arm retract)
             CheckHasCollected();
 
-            if (!_canMove)
+            if (!CanMove)
                 return;
 
             if (Touchscreen.current != null && !HasCollected)
@@ -115,7 +118,7 @@ namespace TK.Gameplay
 
         void FixedUpdate()
         {
-            if (!_canMove)
+            if (!CanMove)
                 return;
 
             UpdateSpeed();
@@ -161,6 +164,8 @@ namespace TK.Gameplay
             ));
         }
 
+        // Checks arm-reach and inventory conditions each frame and
+        // sets HasCollected exactly once via its property setter
         private void CheckHasCollected()
         {
             if (HasCollected) return;
@@ -215,14 +220,20 @@ namespace TK.Gameplay
         }
 
         // ── Public methods ─────────────────────────────────────────────────────
-        public float GetDepth()      => _distanceTravelled;
-        public float GetDeltaX()     => _velocityX;
+        public float GetDepth()       => _distanceTravelled;
+        public float GetDeltaX()      => _velocityX;
         public float GetReturnSpeed() => _returnSpeed;
+        public float GetMaxArmReach()   => _maximumArmReach;
+        public bool CanMove => _canMove;
+        public void SetCanMove(bool canMove)
+        {
+            _canMove = canMove;
+        }
 
         // ── Upgrades ───────────────────────────────────────────────────────────
-        public void AddArmLength(int amount)
+        public void SetArmLength(int amount)
         {
-            _maximumArmReach += amount;
+            _maximumArmReach = amount;
         }
     }
 }
