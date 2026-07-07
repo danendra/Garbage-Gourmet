@@ -1,98 +1,93 @@
 using UnityEngine;
-using System.Collections;
+using DG.Tweening;
 
 namespace TK.Gameplay
 {
-    // Responsible for all hand visuals: tilt based on horizontal velocity and sprite-swap + squeeze animation on item pickup.
+    public enum HAND_VISUAL_STATE
+    {
+        Idle,
+        Grab
+        
+    }
+
     public class HandVisual : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField] private PlayerMovement _player;
-        [SerializeField] private PlayerInventory _inventory;
+        public Transform Transform => transform;
 
-        [Header("Tilt Settings")]
-        [SerializeField] private float _smoothTime = 0.1f;
-        [SerializeField] private float _maxAngle = 15f;
+        // components
+        private Animator _animator;
 
-        [Header("Hand Sprites")]
-        [SerializeField] private SpriteRenderer _handRenderer;
-        [SerializeField] private Sprite _openHandSprite;
-        [SerializeField] private Sprite _grabHandSprite;
+        private static readonly int IdleTrigger = Animator.StringToHash("Idle");
+        private static readonly int GrabTrigger = Animator.StringToHash("Grab");
 
-        private float _currentAngle;
-        private float _angleVelocity;
-        private Vector3 _handDefaultScale;
-
-        // ── Unity lifecycle ────────────────────────────────────────────────────
-
-        void Start()
+        // state
+        private HAND_VISUAL_STATE _state = HAND_VISUAL_STATE.Idle;
+        public HAND_VISUAL_STATE State
         {
-            if (_handRenderer != null)
+            get => _state;
+            set
             {
-                _handDefaultScale = _handRenderer.transform.localScale;
+                if (_state == value) return;
+                _state = value;
 
-                if (_openHandSprite != null)
-                    _handRenderer.sprite = _openHandSprite;
+                HandleStateChange();
             }
+        }
+        public void ChangeStateToIdle() => State = HAND_VISUAL_STATE.Idle;
+        public void ChangeStateToGrab() => State = HAND_VISUAL_STATE.Grab;
 
-            _inventory.OnItemAdded += OnItemPickedUp;
+        // tween
+        private Vector3 _baseScale;
+        private Sequence _scaleSequence;
+
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+            _baseScale = transform.localScale;
         }
 
-        void OnDestroy()
+        private void Start()
         {
-            _inventory.OnItemAdded -= OnItemPickedUp;
+            HandleStateChange();
         }
 
-        // ── Update: tilt ───────────────────────────────────────────────────────
-
-        void Update()
+        private void HandleStateChange()
         {
-            if (_player == null) return;
-
-            float targetAngle = Mathf.Clamp(_player.GetDeltaX() * 6f, -25f, 25f);
-
-            _currentAngle = Mathf.SmoothDampAngle(
-                _currentAngle,
-                targetAngle,
-                ref _angleVelocity,
-                0.08f
-            );
-
-            transform.localRotation = Quaternion.Euler(0f, 0f, _currentAngle);
-        }
-
-        // ── Pickup visual ──────────────────────────────────────────────────────
-
-        private void OnItemPickedUp()
-        {
-            if (_handRenderer == null || _grabHandSprite == null) return;
-
-            _handRenderer.sprite = _grabHandSprite;
-            _handRenderer.transform.localScale = new Vector3(
-                _handDefaultScale.x * 1.12f,
-                _handDefaultScale.y * 0.88f,
-                _handDefaultScale.z
-            );
-
-            StartCoroutine(HandScaleBack());
-        }
-
-        private IEnumerator HandScaleBack()
-        {
-            Transform hand = _handRenderer.transform;
-            Vector3 startScale = hand.localScale;
-
-            float time = 0f;
-            float duration = 0.12f;
-
-            while (time < duration)
+            PlaySquashStretch(intensity: 1.5f, timeMultiplier: 1f);
+            switch (_state)
             {
-                time += Time.deltaTime;
-                hand.localScale = Vector3.Lerp(startScale, _handDefaultScale, time / duration);
-                yield return null;
+                case HAND_VISUAL_STATE.Idle:
+                    _animator.SetTrigger(IdleTrigger);
+                    
+                    break;
+                case HAND_VISUAL_STATE.Grab:
+                    _animator.SetTrigger(GrabTrigger);
+                    break;
             }
-
-            hand.localScale = _handDefaultScale;
         }
+
+        // squash and stretch
+        public void PlaySquashStretch(float intensity = 1f, float timeMultiplier = 1f) 
+        {
+            if (_scaleSequence != null && _scaleSequence.IsActive())
+                _scaleSequence.Kill();
+
+            _scaleSequence = CreateSquashStretchTween(intensity, timeMultiplier);
+        }
+
+        private Sequence CreateSquashStretchTween(float intensity = 1f, float timeMultiplier = 1f) 
+        {
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(transform.DOScale(Squash(intensity), 0.04f * timeMultiplier).SetEase(Ease.InExpo));
+            sequence.Append(transform.DOScale(Stretch(intensity), 0.06f * timeMultiplier).SetEase(Ease.OutExpo));
+            sequence.Append(transform.DOScale(_baseScale, 0.10f * timeMultiplier).SetEase(Ease.OutExpo));
+
+            return sequence;
+        }
+
+        private Vector3 Squash(float intensity) => new Vector3(_baseScale.x * (1f + 0.25f * intensity), _baseScale.y * (1f - 0.30f * intensity), _baseScale.z * (1f + 0.25f * intensity));
+        private Vector3 Stretch(float intensity) => new Vector3(_baseScale.x * (1f - 0.15f * intensity), _baseScale.y * (1f + 0.35f * intensity), _baseScale.z * (1f - 0.15f * intensity));
+        
     }
 }

@@ -168,7 +168,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.Racoon-Test
+    Standalone: com.MariaRegina.Racoon-Test
     iPhone: com.MariaRegina.Racoon-Test
   buildNumber:
     Standalone: 0

@@ -1,203 +1,278 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using DG.Tweening;
 
 namespace TK.Gameplay
 {
-    [RequireComponent(typeof(LineRenderer))]
-    public class ArmLineRenderer : MonoBehaviour
+    public enum ARM_LINE_STATE
     {
-        [Header("References")]
-        [SerializeField] private Transform startPoint;
-        [SerializeField] private PlayerMovement player;
+        Inactive,
+        Growing,
+        Snap,
+        Retract
+    }
 
-        [Header("Trail Settings")]
-        [SerializeField] private float minDistance = 0.03f;
-        [SerializeField] private float pointLifetime = 1f;
-        [SerializeField] private int maxPoints = 80;
+    [RequireComponent(typeof(LineRenderer))]
+    public class NewArmLineRenderer : MonoBehaviour
+    {
+        [SerializeField] private Transform _anchor;
+        [SerializeField] private Transform _target;
+        [SerializeField] private float _maxDistance = 1f;
+        [SerializeField] private float _targetDistance = 0.2f;
+        [SerializeField] private float _smoothSpeed = 0.02f;
+        [SerializeField] private float _trailSpeed = 360f;
 
-        [Header("Retract Settings")]
-        [SerializeField] private float retractSpeed = 12f;
-        [SerializeField] private float retractFinishDistance = 0.05f;
+        [SerializeField] private float _wiggleSpeed = 1f;
+        [SerializeField] private float _wiggleMagnitude = 5f;
 
-        [Header("Render Settings")]
-        [SerializeField] private float width = 0.5f;
+        [SerializeField] private float _snapDuration = 0.4f;
 
-        private LineRenderer lr;
+        private Sequence _snapSequence;
+        
+        private List<Vector3> _pointPositions = new List<Vector3>();
+        private List<Vector3> _pointVelocities = new List<Vector3>();
 
-        private List<Vector3> path = new List<Vector3>();
-        private List<float> pointTimes = new List<float>();
+        private int _growIndex;
 
-        private Vector3 lastPos;
+        // components
+        private LineRenderer _lineRenderer;
 
-        private enum TrailState
+        // state
+        private ARM_LINE_STATE _state = ARM_LINE_STATE.Inactive;
+        public ARM_LINE_STATE State
         {
-            Drawing,
-            Retracting,
-            Idle
-        }
-
-        private TrailState state = TrailState.Drawing;
-
-        void Start()
-        {
-            lr = GetComponent<LineRenderer>();
-            lr.useWorldSpace = true;
-            lr.widthMultiplier = width;
-
-            ForceRefresh();
-        }
-
-        void Update()
-        {
-            Vector3 handPos = player.HandPosition;
-
-            HandleStateTransitions();
-            SimulateTrail(handPos);
-            AnchorRoot();
-            Draw();
-        }
-
-        void HandleStateTransitions()
-        {
-            if (player.HasCollected && state == TrailState.Drawing)
-                state = TrailState.Retracting;
-        }
-
-        void SimulateTrail(Vector3 handPos)
-        {
-            switch (state)
+            get => _state;
+            set
             {
-                case TrailState.Drawing:
-                    AddPoints(handPos);
-                    DecayPoints();
-                    break;
+                if (_state == value) return;
+                _state = value;
 
-                case TrailState.Retracting:
-                    RetractTrail(handPos);
-                    break;
+                HandleStateChange();
             }
         }
 
-        void AddPoints(Vector3 handPos)
+        public void ChangeStateToInactive() => State = ARM_LINE_STATE.Inactive;
+        public void ChangeStateToGrowing() => State = ARM_LINE_STATE.Growing;
+        public void ChangeStateToSnap() => State = ARM_LINE_STATE.Snap;
+        public void ChangeStateToRetract() => State = ARM_LINE_STATE.Retract;
+
+        public Vector3 GetHandSegmentDirection()
         {
-            float dist = Vector3.Distance(handPos, lastPos);
+            if (_pointPositions.Count < 2) return Vector3.up;
 
-            if (dist >= minDistance)
-            {
-                Vector3 dir = (handPos - lastPos).normalized;
-
-                while (dist >= minDistance)
-                {
-                    Vector3 newPoint = lastPos + dir * minDistance;
-
-                    path.Add(newPoint);
-                    pointTimes.Add(Time.time);
-
-                    lastPos = newPoint;
-                    dist = Vector3.Distance(handPos, lastPos);
-                }
-            }
-
-            while (path.Count > maxPoints)
-            {
-                path.RemoveAt(0);
-                pointTimes.RemoveAt(0);
-            }
+            Vector3 dir = _pointPositions[1] - _pointPositions[0];
+            return dir.sqrMagnitude < 0.0001f ? Vector3.up : dir.normalized;
         }
 
-        void DecayPoints()
+        private void Awake()
         {
-            for (int i = path.Count - 1; i >= 0; i--)
-            {
-                if (Time.time - pointTimes[i] > pointLifetime)
-                {
-                    path.RemoveAt(i);
-                    pointTimes.RemoveAt(i);
-                }
-            }
-        }
+            _lineRenderer = GetComponent<LineRenderer>();
 
-        void RetractTrail(Vector3 handPos)
-        {
-            if (path.Count == 0)
+            if (_anchor == null || _target == null)
             {
-                state = TrailState.Idle;
+                Debug.LogError($"{nameof(NewArmLineRenderer)} on {name} is missing _anchor or _target.", this);
+                enabled = false;
                 return;
             }
+            ResetChain();
+        }
 
-            Vector3 start = startPoint.position;
+        private void Start()
+        {
+            HandleStateChange();
+        }
 
-            for (int i = 0; i < path.Count; i++)
+        private void Update()
+        {
+            if (_state == ARM_LINE_STATE.Inactive) return;
+
+            PinFirstAndLastPoints();
+
+            switch (_state)
             {
-                float t = (float)i / (path.Count - 1);
+                case ARM_LINE_STATE.Growing:
+                    UpdateGrowing();
+                    UpdatePositionMovement();
+                    break;
+            }
 
-                Vector3 target = Vector3.Lerp(start, handPos, t);
+            ApplyPositionsToLineRenderer();
+        }
 
-                path[i] = Vector3.Lerp(
-                    path[i],
-                    target,
-                    retractSpeed * Time.deltaTime
+        private void OnDestroy()
+        {
+            KillSnapSequence();
+        }
+
+        public event Action OnSnapToLineStarted;
+        public event Action OnSnapToLineEnded;
+
+        private void SnapToLine(int firstN)
+        {
+            KillSnapSequence();
+
+            Vector3 anchorPos = _anchor.position;
+            Vector3 targetPos = _target.position;
+            int lastIndex = _pointPositions.Count - 1;
+
+            // Don't include the pinned endpoints
+            int count = Mathf.Clamp(firstN, 0, lastIndex - 1);
+
+            _snapSequence = DOTween.Sequence();
+
+            for (int i = 1; i <= count; i++)
+            {
+                float t = (float)i / lastIndex;
+                Vector3 straightLinePoint = Vector3.Lerp(targetPos, anchorPos, t);
+
+                int index = i;
+                Tween tween = DOTween.To(
+                    () => _pointPositions[index],
+                    value => _pointPositions[index] = value,
+                    straightLinePoint,
+                    _snapDuration
+                ).SetEase(Ease.OutElastic);
+
+                _snapSequence.Join(tween);
+            }
+
+            _snapSequence.OnComplete(() =>
+            {
+                _snapSequence = null;
+
+                State = ARM_LINE_STATE.Retract;
+                OnSnapToLineEnded?.Invoke();
+            });
+
+            OnSnapToLineStarted?.Invoke();
+        }
+
+        private void KillSnapSequence()
+        {
+            _snapSequence?.Kill();
+            _snapSequence = null;
+        }
+
+        private void ResetChain()
+        {
+            _pointPositions.Clear();
+            _pointVelocities.Clear();
+
+            _pointPositions.Add(_target.position); // index 0: target
+            _pointPositions.Add(_anchor.position); // last index: anchor
+            _pointVelocities.Add(Vector3.zero);
+            _pointVelocities.Add(Vector3.zero);
+
+            _growIndex = 0;
+        }
+
+        private void UpdateGrowing()
+        {
+            int targetIndex = _pointPositions.Count - 1;
+
+            while (Vector3.Distance(_pointPositions[_growIndex], _pointPositions[targetIndex]) > _maxDistance)
+            {
+                Vector3 frontierPoint = _pointPositions[_growIndex];
+                Vector3 targetPoint = _pointPositions[targetIndex];
+
+                Vector3 direction = (targetPoint - frontierPoint).normalized;
+                Vector3 newPoint = frontierPoint + direction * _targetDistance;
+
+                int insertIndex = _growIndex + 1;
+                _pointPositions.Insert(insertIndex, newPoint);
+                _pointVelocities.Insert(insertIndex, Vector3.zero);
+
+                _growIndex = insertIndex;
+                targetIndex++; // shifted right by the insert
+            }
+        }
+
+        private void PinFirstAndLastPoints()
+        {
+            // keep the two ends pinned every frame
+            _pointPositions[0] = _target.position;
+            _pointPositions[_pointPositions.Count - 1] = _anchor.position;
+        }
+
+        private void UpdatePositionMovement()
+        {
+            for (int i = 1; i < _pointPositions.Count - 1; i++)
+            {
+                Vector3 previous = _pointPositions[i - 1];
+                Vector3 next = _pointPositions[i + 1];
+
+                Vector3 direction = (next - previous).normalized;
+
+                // rotate the direction itself by a wiggling angle so it undulates like a snake
+                float wiggleAngle = Mathf.Sin(Time.time * _wiggleSpeed + i) * _wiggleMagnitude;
+                Vector3 wiggledDirection = Quaternion.AngleAxis(wiggleAngle, Vector3.forward) * direction;
+
+                Vector3 desiredPosition = previous + wiggledDirection * _targetDistance;
+
+                Vector3 velocity = _pointVelocities[i];
+                float smoothTime = Mathf.Max(_smoothSpeed, 0.0001f) + i / Mathf.Max(_trailSpeed, 0.0001f);
+
+                _pointPositions[i] = Vector3.SmoothDamp(
+                    _pointPositions[i],
+                    desiredPosition,
+                    ref velocity,
+                    smoothTime
                 );
-            }
 
-            if (Vector3.Distance(path[0], handPos) < retractFinishDistance)
-            {
-                path.Clear();
-                pointTimes.Clear();
-                state = TrailState.Idle;
+                _pointVelocities[i] = velocity;
             }
         }
 
-        void Draw()
+        private void ApplyPositionsToLineRenderer()
         {
-            if (path.Count == 0)
+            _lineRenderer.positionCount = _pointPositions.Count;
+            for (int i = 0; i < _pointPositions.Count; i++)
             {
-                lr.positionCount = 0;
-                return;
-            }
-
-            lr.positionCount = path.Count + 2;
-
-            lr.SetPosition(0, startPoint.position);
-
-            for (int i = 0; i < path.Count; i++)
-                lr.SetPosition(i + 1, path[i]);
-
-            lr.SetPosition(path.Count + 1, player.HandPosition);
-        }
-
-        void AnchorRoot()
-        {
-            if (path.Count > 1)
-            {
-                path[0] = Vector3.Lerp(startPoint.position, player.HandPosition, 0.2f);
-                path[1] = Vector3.Lerp(startPoint.position, player.HandPosition, 0.4f);
+                _lineRenderer.SetPosition(i, _pointPositions[i]);
             }
         }
 
-        // ==========================
-        // FIX FOR INTRO DELAY
-        // ==========================
-        public void ForceRefresh()
+        private void RetractToLine()
         {
-            lastPos = player.HandPosition;
+            Vector3 anchorPos = _anchor.position;
+            Vector3 targetPos = _target.position;
 
-            path.Clear();
-            pointTimes.Clear();
+            _pointPositions.Clear();
+            _pointVelocities.Clear();
 
-            Vector3 mid = Vector3.Lerp(
-                startPoint.position,
-                player.HandPosition,
-                0.35f
-            );
+            _pointPositions.Add(targetPos);
+            _pointPositions.Add(anchorPos);
+            _pointVelocities.Add(Vector3.zero);
+            _pointVelocities.Add(Vector3.zero);
 
-            path.Add(mid);
-            pointTimes.Add(Time.time);
+            _growIndex = 0;
+        }
 
-            path.Add(player.HandPosition);
-            pointTimes.Add(Time.time);
+        private void HandleStateChange()
+        {
+            switch (_state)
+            {
+                case ARM_LINE_STATE.Inactive:
+                    if (_lineRenderer.enabled) _lineRenderer.enabled = false;
+                    break;
 
-            Draw();
+                case ARM_LINE_STATE.Growing:
+                    ResetChain();
+                    if (!_lineRenderer.enabled) _lineRenderer.enabled = true;
+                    break;
+
+                case ARM_LINE_STATE.Snap:
+                    if (!_lineRenderer.enabled) _lineRenderer.enabled = true;
+                    SnapToLine(40); // snap to a straight line
+                    break;
+
+                case ARM_LINE_STATE.Retract:
+                    if (!_lineRenderer.enabled) _lineRenderer.enabled = true;
+                    RetractToLine();
+                    break;
+            }
         }
     }
 }

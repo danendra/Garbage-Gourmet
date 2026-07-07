@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4b3df6271c0e343ceac9546d754748ef
+guid: 7d22bd9ea6daa4599b80d50f047246a7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4224174088872396439
-    second: ArmLineTile_0
+      213: -3445209629672613677
+    second: ArmLineTile 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ArmLineTile_0
+      name: ArmLineTile 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 969f95bfb08b065c0800000000000000
-      internalID: -4224174088872396439
+      spriteID: 3d8db9668182030d0800000000000000
+      internalID: -3445209629672613677
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ArmLineTile_0: -4224174088872396439
+      ArmLineTile 1_0: -3445209629672613677
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
