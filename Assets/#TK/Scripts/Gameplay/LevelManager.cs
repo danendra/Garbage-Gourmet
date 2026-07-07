@@ -1,10 +1,12 @@
-using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
-using TK.Audio;
+using System.Linq;
+using UnityEngine;
 
 namespace TK.Gameplay
 {
-    using Module;
+    using Data;
+    using Audio;    
 
     public class LevelManager : MonoBehaviour
     {
@@ -12,6 +14,7 @@ namespace TK.Gameplay
         [SerializeField] private SequenceController _sequenceController;
         [SerializeField] private PlayerMovement _player;
         [SerializeField] private ItemSpawner _itemSpawner;
+        [SerializeField] private RecipeData[] _arrRecipes;
 
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
@@ -124,6 +127,22 @@ namespace TK.Gameplay
         // =====================
         // WIN / LOSE
         // =====================
+
+        public bool FindRecipe(IEnumerable<CollectibleController> _ieCollectible, out RecipeData _recipe)
+        {                    
+            for (int i = 0; i < _arrRecipes.Length; i++)
+            {
+                if (_arrRecipes[i].IsIngredientCorrect(_ieCollectible))
+                {
+                    _recipe = _arrRecipes[i];
+
+                    return true;
+                }
+            }
+
+            _recipe = null;
+            return false;
+        }
 
         public void WinGame(PlayerMovement playerRef)
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using Anoa;
+using TK.Data;
 
 namespace TK.Gameplay
 {
@@ -25,7 +26,7 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayResult()
         {
-            List<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();            
+            IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();            
             GameObject _object;
 
             int _index = 6;
@@ -40,6 +41,17 @@ namespace TK.Gameplay
                 yield return new WaitForSeconds(0.3f);
 
                 _index++;
+            }
+
+            RecipeData _recipe = null;
+
+            if (LevelManager.Instance.FindRecipe(_listCollectible, out _recipe))
+            {
+                Debug.Log(_recipe.name);
+            }
+            else
+            {
+                Debug.Log("Any Burger");
             }
         }
 
