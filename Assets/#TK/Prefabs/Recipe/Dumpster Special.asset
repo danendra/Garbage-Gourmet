@@ -20,4 +20,4 @@ MonoBehaviour:
   - {fileID: 1709759367571524322, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
   IsRarityFixed: 1
   IsSame: 0
-  FltMultiplier: 2
+  FltMultiplier: 3
