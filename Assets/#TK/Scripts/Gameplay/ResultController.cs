@@ -53,7 +53,7 @@ namespace TK.Gameplay
 
                 StartCoroutine(IEDelayShowScore(_collectible.GetScore, _object));
 
-                yield return new WaitForSeconds(0.3f);                
+                yield return new WaitForSeconds(0.4f);                
 
                 _index++;
             }
@@ -92,7 +92,7 @@ namespace TK.Gameplay
             txtScore.gameObject.SetActive(true);
             txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.45f);
 
             txtScore.gameObject.SetActive(false);
         }

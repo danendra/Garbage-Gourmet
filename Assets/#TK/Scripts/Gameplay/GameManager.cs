@@ -9,7 +9,8 @@ namespace TK.Gameplay
     {
         public static GameManager Instance { get; private set; }
 
-        [Header("Upgrade Data")]
+        [Header("Data")]
+        [SerializeField] private RecipeData[] _arrRecipes;
         [SerializeField] private UpgradeData _upgradeData;
 
         private int _playerMoney;
@@ -25,6 +26,7 @@ namespace TK.Gameplay
         public bool CanUpgradeArm    => _armLevel    < _upgradeData.MaxArmLevel && _playerMoney >= _upgradeData.ArmLengthLevels[_armLevel + 1].Cost;
         public bool CanUpgradePickUp => _pickUpLevel < _upgradeData.MaxPickUpLevel && _playerMoney >= _upgradeData.MaxPickUpLevels[_pickUpLevel + 1].Cost;
         public bool CanUpgradeRelease => _releaseLevel < _upgradeData.MaxReleaseLevel && _playerMoney >= _upgradeData.MaxReleaseLevels[_releaseLevel + 1].Cost;
+        public RecipeData[] GetAllRecipes => _arrRecipes;
 
         public event System.Action<int> OnArmUpgraded;
         public event System.Action<int> OnPickUpUpgraded;
