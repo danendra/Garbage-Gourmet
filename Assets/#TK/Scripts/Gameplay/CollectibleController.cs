@@ -33,6 +33,7 @@ namespace TK.Gameplay
         public new ITEM_TYPE GetType => _itemType;
         public RARITY GetRarity => _rarity;
         public Sprite GetSprite => _spriteRenderer.sprite;
+        public int GetScore => _intScore;
 
         public GameObject GetFoodServed => _goFoodServed;
 
