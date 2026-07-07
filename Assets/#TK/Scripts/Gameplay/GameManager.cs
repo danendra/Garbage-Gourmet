@@ -11,17 +11,23 @@ namespace TK.Gameplay
         [Header("Upgrade Data")]
         [SerializeField] private UpgradeData _upgradeData;
 
+        private int _playerMoney;
+
         private int _armLevel;
         private int _pickUpLevel;
+        private int _releaseLevel;
 
         public int ArmLevel    => _armLevel;
         public int PickUpLevel => _pickUpLevel;
+        public int ReleaseLevel => _releaseLevel;
 
-        public bool CanUpgradeArm    => _armLevel    < _upgradeData.MaxArmLevel;
-        public bool CanUpgradePickUp => _pickUpLevel < _upgradeData.MaxPickUpLevel;
+        public bool CanUpgradeArm    => _armLevel    < _upgradeData.MaxArmLevel && _playerMoney >= _upgradeData.ArmLengthLevels[_armLevel + 1].cost;
+        public bool CanUpgradePickUp => _pickUpLevel < _upgradeData.MaxPickUpLevel && _playerMoney >= _upgradeData.MaxPickUpLevels[_pickUpLevel + 1].cost;
+        public bool CanUpgradeRelease => _releaseLevel < _upgradeData.MaxReleaseLevel && _playerMoney >= _upgradeData.MaxReleaseLevels[_releaseLevel + 1].cost;
 
         public event System.Action<int> OnArmUpgraded;
         public event System.Action<int> OnPickUpUpgraded;
+        public event System.Action<int> OnReleaseUpgraded;
 
         private void Awake()
         {
@@ -67,6 +73,16 @@ namespace TK.Gameplay
             return true;
         }
 
+        public bool UpgradeRelease()
+        {
+            if (!CanUpgradeRelease) return false;
+
+            _releaseLevel++;
+            UpgradeSaveSystem.SaveReleaseLevel(_releaseLevel);
+            OnReleaseUpgraded?.Invoke(_releaseLevel);
+            return true;
+        }
+
         public int PeekNextArmLength()
         {
             return _upgradeData.GetArmLength(_armLevel + 1);
@@ -77,23 +93,29 @@ namespace TK.Gameplay
             return _upgradeData.GetMaxPickUp(_pickUpLevel + 1);
         }
 
+        public int PeekNextMaxRelease()
+        {
+            return _upgradeData.GetMaxRelease(_releaseLevel + 1);
+        }
+
         public void ResetUpgrades()
         {
             _armLevel    = 0;
             _pickUpLevel = 0;
+            _releaseLevel = 0;
             UpgradeSaveSystem.ResetAll();
-
-            Debug.Log($"Upgrades reset. Arm level: {PlayerPrefs.GetInt("upgrade_arm_level", 0)}, Pick up level: {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
         }
 
         private void LoadUpgrades()
         {
             _armLevel    = UpgradeSaveSystem.LoadArmLevel();
             _pickUpLevel = UpgradeSaveSystem.LoadPickUpLevel();
+            _releaseLevel = UpgradeSaveSystem.LoadReleaseLevel();
 
             // Clamp in case the SO tier count was reduced after saving
             _armLevel    = Mathf.Clamp(_armLevel,    0, _upgradeData.MaxArmLevel);
             _pickUpLevel = Mathf.Clamp(_pickUpLevel, 0, _upgradeData.MaxPickUpLevel);
+            _releaseLevel = Mathf.Clamp(_releaseLevel, 0, _upgradeData.MaxReleaseLevel);
         }
 
         // INI BUAT TESTING
