@@ -114,7 +114,7 @@ namespace TK.Gameplay
             _releaseLevel = UpgradeSaveSystem.LoadReleaseLevel();
 
             // Clamp in case the SO tier count was reduced after saving
-            _armLevel    = Mathf.Clamp(_armLevel,    0, _upgradeData.MaxArmLevel);
+            _armLevel    = Mathf.Clamp(_armLevel,    1, _upgradeData.MaxArmLevel);
             _pickUpLevel = Mathf.Clamp(_pickUpLevel, 0, _upgradeData.MaxPickUpLevel);
             _releaseLevel = Mathf.Clamp(_releaseLevel, 0, _upgradeData.MaxReleaseLevel);
         }
