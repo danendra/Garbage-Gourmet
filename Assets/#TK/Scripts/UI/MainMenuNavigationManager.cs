@@ -1,4 +1,5 @@
 using UnityEngine;
+using TK.MainMenu;
 
 namespace TK.UI
 {
@@ -17,6 +18,8 @@ namespace TK.UI
         [SerializeField] private UnityEngine.UI.Button openCollectionButton;
 
         private MainMenuPanel activePanel;
+
+        public MainMenuPanel ActivePanel => activePanel;
 
         private void Awake()
         {
@@ -67,6 +70,11 @@ namespace TK.UI
             // Show the new target panel
             activePanel = targetPanel;
             activePanel.Show();
+
+            if (MainMenuManager.Instance != null)
+            {
+                MainMenuManager.Instance.SetMenuButtonsState(false);
+            }
         }
 
         public void CloseActivePanel()
@@ -75,6 +83,23 @@ namespace TK.UI
             {
                 activePanel.Hide();
                 activePanel = null;
+            }
+
+            if (MainMenuManager.Instance != null)
+            {
+                MainMenuManager.Instance.SetMenuButtonsState(true);
+            }
+        }
+
+        public void NotifyPanelClosed(MainMenuPanel panel)
+        {
+            if (activePanel == panel)
+            {
+                activePanel = null;
+                if (MainMenuManager.Instance != null)
+                {
+                    MainMenuManager.Instance.SetMenuButtonsState(true);
+                }
             }
         }
 

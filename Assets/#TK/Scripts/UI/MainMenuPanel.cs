@@ -22,6 +22,10 @@ namespace TK.UI
         protected virtual void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            {
+                canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            }
             rectTransform = GetComponent<RectTransform>();
         }
 
@@ -79,6 +83,11 @@ namespace TK.UI
             canvasGroup.interactable = false;
 
             if (transitionTween != null) transitionTween.Kill();
+
+            if (MainMenuNavigationManager.Instance != null && MainMenuNavigationManager.Instance.ActivePanel == this)
+            {
+                MainMenuNavigationManager.Instance.NotifyPanelClosed(this);
+            }
 
             if (immediate)
             {
