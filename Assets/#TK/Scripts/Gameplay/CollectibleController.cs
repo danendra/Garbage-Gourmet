@@ -59,7 +59,7 @@ namespace TK.Gameplay
 
             IItemCollector collector = other.GetComponent<IItemCollector>();
 
-            if (collector == null || !collector.CanCollect || LevelManager.Instance.GetPlayerMovement.HasCollected)
+            if (collector == null || !collector.CanCollect || LevelManager.Instance.GetHandMovement.State == HAND_STATE.Ascent)
                 return;
 
             GameSession.CollectedSprite = _spriteRenderer.sprite;
