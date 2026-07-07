@@ -16,7 +16,6 @@ namespace TK.Gameplay
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         public void CameraShake(CinemachineImpulseSource impulseSource, float force = 1f)
