@@ -24,6 +24,7 @@ namespace TK.Gameplay
         public PoolerContainer Pool;
         public int Count;
         public WeightedPoolEntry[] Entries;
+        [Range(0f, 100f)] public float TrashWeight;
     }
 
     public class ItemSpawner : MonoBehaviour
@@ -47,11 +48,15 @@ namespace TK.Gameplay
         [Header("Sub-Level Pools")]
         [SerializeField] private SubLevelPool[] _subLevels;
 
+        [Header("Trash")]
+        [SerializeField] private GameObject[] _trashPrefabs;
+
         [Header("Event Items")]
         [SerializeField] private CollectibleController _eventItemPrefab;
 
         [Header("References")]
         [SerializeField] private PlayerMovement _player;
+
 
         // ── Runtime ──────────────────────────────────────────────────────────
         private float _spawnHorizonY;
@@ -98,8 +103,6 @@ namespace TK.Gameplay
         public void TickSpawn(float playerY)
         {
             if (!_isInitialized) return;
-
-            DespawnFarItems(playerY);
 
             if (!_eventItemSpawned && _player.GetDepth() >= _player.GetMaxArmReach() - _chunkHeight)
             {
@@ -211,41 +214,29 @@ namespace TK.Gameplay
                 // t = 0 → top of play area   |   t = 1 → bottom of play area
                 float t = Mathf.InverseLerp(_cachedTop, _cachedBottom, spawnPos.y);
 
-                CollectibleController collectible = GetPoolForDepth(t);
-                if (collectible == null) break;
+                float      randomZ = Random.Range(-18f, 18f);
+                Quaternion rot     = Quaternion.Euler(0f, 0f, randomZ);
+                int levelIndex = FindSubLevelIndex(t);
 
-                float randomZ  = Random.Range(-18f, 18f);
-                Quaternion rot = Quaternion.Euler(0f, 0f, randomZ);
+                float trashChance = levelIndex >= 0 ? _subLevels[levelIndex].TrashWeight : 0f;
 
-                collectible.Initialize(spawnPos, rot);
+                if (Random.Range(0f, 100f) < trashChance)
+                {
+                    SpawnTrash(spawnPos, rot);
+                }
+                else
+                {
+                    CollectibleController collectible = levelIndex >= 0
+                        ? PopWeighted(levelIndex) ?? TryPopAny()
+                        : TryPopAny();
+
+                    if (collectible == null) break;
+
+                    collectible.Initialize(spawnPos, rot);
+                    _activeItems.Add(collectible);
+                }
 
                 AddToGrid(spawnPos);
-                _activeItems.Add(collectible);
-            }
-        }
-
-        // =====================================================
-        // DESPAWN
-        // =====================================================
-
-        // (INI GA KEpAkE, ga di apus incase butuh)
-        private void DespawnFarItems(float playerY)
-        {
-            for (int i = _activeItems.Count - 1; i >= 0; i--)
-            {
-                CollectibleController item = _activeItems[i];
-
-                if (item == null || !item.gameObject.activeSelf)
-                {
-                    _activeItems.RemoveAt(i);
-                    continue;
-                }
-
-                if (item.transform.position.y > playerY + _despawnDistance)
-                {
-                    item.gameObject.SetActive(false);
-                    _activeItems.RemoveAt(i);
-                }
             }
         }
 
@@ -327,20 +318,17 @@ namespace TK.Gameplay
         // DEPTH LOOT LOGIC
         // =====================================================
 
-        private CollectibleController GetPoolForDepth(float t)
+        private int FindSubLevelIndex(float t)
         {
-            if (_subLevels == null || _subLevels.Length == 0) return null;
+            if (_subLevels == null) return -1;
 
-            // Find the first sub-level whose depth range covers t
             for (int i = 0; i < _subLevels.Length; i++)
             {
-                SubLevelPool level = _subLevels[i];
-                if (t >= level.MinDepth && t <= level.MaxDepth)
-                    return PopWeighted(i) ?? TryPopAny();
+                if (t >= _subLevels[i].MinDepth && t <= _subLevels[i].MaxDepth)
+                    return i;
             }
 
-            // No zone matched this depth — fall back to any available item
-            return TryPopAny();
+            return -1;
         }
 
         private CollectibleController PopWeighted(int levelIndex)
@@ -409,6 +397,22 @@ namespace TK.Gameplay
                 if (remaining > 0) return true;
 
             return false;
+        }
+
+        // =====================================================
+        // TRASH SPAWNING
+        // =====================================================
+
+        private void SpawnTrash(Vector2 pos, Quaternion rot)
+        {
+            if (_trashPrefabs == null || _trashPrefabs.Length == 0) return;
+
+            GameObject prefab = _trashPrefabs[Random.Range(0, _trashPrefabs.Length)];
+            if (prefab == null) return;
+
+            GameObject instance    = Instantiate(prefab);
+            instance.transform.position = new Vector3(pos.x, pos.y, 0f);
+            instance.transform.rotation = rot;
         }
 
         // =====================================================

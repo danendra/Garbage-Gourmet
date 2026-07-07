@@ -117,50 +117,5 @@ namespace TK.Gameplay
             _pickUpLevel = Mathf.Clamp(_pickUpLevel, 0, _upgradeData.MaxPickUpLevel);
             _releaseLevel = Mathf.Clamp(_releaseLevel, 0, _upgradeData.MaxReleaseLevel);
         }
-
-        // INI BUAT TESTING
-        public void UpgradeArmLevel()
-        {
-            if (!CanUpgradeArm) return;
-
-            _armLevel++;
-            UpgradeSaveSystem.SaveArmLevel(_armLevel);
-            OnArmUpgraded?.Invoke(_armLevel);
-
-            Debug.Log($"Arm level upgraded to {PlayerPrefs.GetInt("upgrade_arm_level", 0)}");
-        }
-
-        public void UpgradePickUpLevel()
-        {
-            if (!CanUpgradePickUp) return;
-
-            _pickUpLevel++;
-            UpgradeSaveSystem.SavePickUpLevel(_pickUpLevel);
-            OnPickUpUpgraded?.Invoke(_pickUpLevel);
-
-            Debug.Log($"Pick up level upgraded to {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
-        }
-
-        public void DegradeArmLevel()
-        {
-            if (_armLevel <= 0) return;
-
-            _armLevel--;
-            UpgradeSaveSystem.SaveArmLevel(_armLevel);
-            OnArmUpgraded?.Invoke(_armLevel);
-
-            Debug.Log($"Arm level degraded to {PlayerPrefs.GetInt("upgrade_arm_level", 0)}");
-        }
-
-        public void DegradePickUpLevel()
-        {
-            if (_pickUpLevel <= 0) return;
-
-            _pickUpLevel--;
-            UpgradeSaveSystem.SavePickUpLevel(_pickUpLevel);
-            OnPickUpUpgraded?.Invoke(_pickUpLevel);
-
-            Debug.Log($"Pick up level degraded to {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
-        }
     }
 }
