@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5646207389878518060, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8571033493250355019, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
       propertyPath: m_Name
       value: R Cheese Variant
