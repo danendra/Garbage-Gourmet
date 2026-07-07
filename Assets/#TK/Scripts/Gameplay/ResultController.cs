@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 
 using Anoa.Module;
@@ -36,6 +35,8 @@ namespace TK.Gameplay
             int _intScore = 0;
 
             IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
+            List<GameObject> _listObject = new List<GameObject>();
+
             _objRaccoon.SetActive(true);
 
             GameObject _object;
@@ -44,16 +45,35 @@ namespace TK.Gameplay
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
-                _object = Instantiate(_collectible.GetFoodServed, _transSpawn.position, quaternion.identity, _transSpawn);
+                _object = Instantiate(_collectible.GetFoodServed, _collectible.transform.position + Vector3.up * 10.0f + Vector3.right * Random.Range(-3.0f, 3.0f), Quaternion.identity, _transSpawn);
+
+                _listObject.Add(_object);
+
                 _object.transform.localScale = Vector3.one;
-                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
+                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;                
+
+                _object.transform.DOMove(_transSpawn.position, 1.0f).SetEase(Ease.OutBack);
                 _object.SetActive(true);
+
+                yield return new WaitForSeconds(Random.Range(0.0f, 0.1f));
+
+                _index++;
+            }            
+
+            _index = 0;
+
+            foreach (CollectibleController _collectible in _listCollectible)
+            {
+                _object = _listObject[_index];
+
+                _object.transform.position = _transSpawn.position;
+                _object.transform.rotation = Quaternion.identity;
 
                 _intScore += _collectible.GetScore;
 
                 StartCoroutine(IEDelayShowScore(_collectible.GetScore, _object));
 
-                yield return new WaitForSeconds(0.4f);                
+                yield return new WaitForSeconds(0.4f);
 
                 _index++;
             }
