@@ -21,9 +21,9 @@ namespace TK.Gameplay
         public int PickUpLevel => _pickUpLevel;
         public int ReleaseLevel => _releaseLevel;
 
-        public bool CanUpgradeArm    => _armLevel    < _upgradeData.MaxArmLevel && _playerMoney >= _upgradeData.ArmLengthLevels[_armLevel + 1].cost;
-        public bool CanUpgradePickUp => _pickUpLevel < _upgradeData.MaxPickUpLevel && _playerMoney >= _upgradeData.MaxPickUpLevels[_pickUpLevel + 1].cost;
-        public bool CanUpgradeRelease => _releaseLevel < _upgradeData.MaxReleaseLevel && _playerMoney >= _upgradeData.MaxReleaseLevels[_releaseLevel + 1].cost;
+        public bool CanUpgradeArm    => _armLevel    < _upgradeData.MaxArmLevel && _playerMoney >= _upgradeData.ArmLengthLevels[_armLevel + 1].Cost;
+        public bool CanUpgradePickUp => _pickUpLevel < _upgradeData.MaxPickUpLevel && _playerMoney >= _upgradeData.MaxPickUpLevels[_pickUpLevel + 1].Cost;
+        public bool CanUpgradeRelease => _releaseLevel < _upgradeData.MaxReleaseLevel && _playerMoney >= _upgradeData.MaxReleaseLevels[_releaseLevel + 1].Cost;
 
         public event System.Action<int> OnArmUpgraded;
         public event System.Action<int> OnPickUpUpgraded;
