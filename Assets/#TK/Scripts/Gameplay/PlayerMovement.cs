@@ -173,6 +173,7 @@ namespace TK.Gameplay
             if (_inventoryFull || _distanceTravelled >= _maximumArmReach)
             {
                 HasCollected = true;
+
             }
         }
 

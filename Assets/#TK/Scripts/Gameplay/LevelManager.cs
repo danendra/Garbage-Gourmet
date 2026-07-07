@@ -26,7 +26,8 @@ namespace TK.Gameplay
 
         public HandMovement Hand => _hand;
         public static LevelManager Instance { get; protected set; }
-        public PlayerInventory GetPlayerInventory { get; protected set; }
+        public PlayerMovement GetPlayerMovement => _player;
+        public PlayerInventory GetPlayerInventory { get; protected set; }        
         public bool IsGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
 
@@ -110,11 +111,11 @@ namespace TK.Gameplay
 
         public bool FindRecipe(IEnumerable<CollectibleController> _ieCollectible, out RecipeData _recipe)
         {                    
-            for (int i = 0; i < _arrRecipes.Length; i++)
+            for (int i = 0; i < GameManager.Instance.GetAllRecipes.Length; i++)
             {
-                if (_arrRecipes[i].IsIngredientCorrect(_ieCollectible))
+                if (GameManager.Instance.GetAllRecipes[i].IsIngredientCorrect(_ieCollectible))
                 {
-                    _recipe = _arrRecipes[i];
+                    _recipe = GameManager.Instance.GetAllRecipes[i];
 
                     return true;
                 }

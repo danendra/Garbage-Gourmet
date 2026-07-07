@@ -62,11 +62,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5044281746457199090, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
       propertyPath: m_Name
-      value: R Patty Variant Variant
+      value: R Patty Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6103402353796805249, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
       propertyPath: _rarity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103402353796805249, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
+      propertyPath: _intScore
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 6103402353796805249, guid: 59b1d5351f2844dfaabc79f659fab65b, type: 3}
       propertyPath: _goFoodServed

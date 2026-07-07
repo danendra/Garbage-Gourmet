@@ -65,6 +65,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8039869676958307111, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
+      propertyPath: _intScore
+      value: 20000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8039869676958307111, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 2336309638399483904, guid: 8cc1e84dcee50404b9240d115d7929d8, type: 3}

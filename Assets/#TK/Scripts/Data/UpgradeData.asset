@@ -12,5 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85712afbfeb4142b7b84abad8cd52e72, type: 3}
   m_Name: UpgradeData
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.UpgradeData
-  ArmLengthLevels: 0f000000190000003200000064000000
-  MaxPickUpLevels: 01000000030000000500000008000000
+  ArmLengthLevels:
+  - Value: 15
+    Cost: 0
+  - Value: 30
+    Cost: 40000
+  - Value: 60
+    Cost: 360000
+  - Value: 95
+    Cost: 1080000
+  - Value: 100
+    Cost: 3000000
+  MaxPickUpLevels:
+  - Value: 4
+    Cost: 40000
+  - Value: 5
+    Cost: 120000
+  - Value: 6
+    Cost: 360000
+  - Value: 7
+    Cost: 1080000
+  - Value: 8
+    Cost: 3000000
+  MaxReleaseLevels:
+  - Value: 1
+    Cost: 40000
+  - Value: 2
+    Cost: 120000
+  - Value: 3
+    Cost: 360000
+  - Value: 4
+    Cost: 1080000
+  - Value: 5
+    Cost: 3000000
