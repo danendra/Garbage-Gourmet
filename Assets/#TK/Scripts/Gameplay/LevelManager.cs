@@ -15,6 +15,7 @@ namespace TK.Gameplay
         [SerializeField] private PlayerMovement _player;
         [SerializeField] private ItemSpawner _itemSpawner;
         [SerializeField] private RecipeData[] _arrRecipes;
+        [SerializeField] private GameObject _objRaccoon;
 
         [Header("Gameplay Visuals")]
         [SerializeField] private SpriteRenderer handSprite;
@@ -78,6 +79,7 @@ namespace TK.Gameplay
         private void StartGame()
         {
             // arm.ForceRefresh();
+            _objRaccoon.SetActive(false);
 
             StartCoroutine(FadeGameplayVisuals());
 

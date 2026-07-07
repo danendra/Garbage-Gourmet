@@ -25,6 +25,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1784844944109981287, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784844944109981287, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
