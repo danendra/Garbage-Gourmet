@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5389753231096079893, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
       propertyPath: m_Name
-      value: H Vegetable Variant
+      value: R Vegetable Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6376823975279334758, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
       propertyPath: _rarity
