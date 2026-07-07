@@ -26,7 +26,7 @@ namespace TK.Gameplay
 
         public HandMovement Hand => _hand;
         public static LevelManager Instance { get; protected set; }
-        public PlayerMovement GetPlayerMovement => _player;
+        public HandMovement GetHandMovement => _hand;
         public PlayerInventory GetPlayerInventory { get; protected set; }        
         public bool IsGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
