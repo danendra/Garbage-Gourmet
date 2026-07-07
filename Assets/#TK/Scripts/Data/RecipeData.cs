@@ -5,6 +5,7 @@ using UnityEngine;
 namespace TK.Data
 {
     using Gameplay;
+    using UnityEditor.Tilemaps;
 
     [CreateAssetMenu(fileName = "RecipeData", menuName = "TK/RecipeData")]
     public class RecipeData : ScriptableObject
@@ -17,7 +18,11 @@ namespace TK.Data
 
         public bool IsIngredientCorrect(IEnumerable<CollectibleController> _ieCollectible)
         {
-            if (IsSame)
+            if(CollectibleIngredients.Length == 1 && _ieCollectible.Count() == 1)
+            {
+                return true;
+            }
+            else if (IsSame)
             {
                 ITEM_TYPE _type = CollectibleIngredients[0].GetType;
                 RARITY _rarity = CollectibleIngredients[0].GetRarity;

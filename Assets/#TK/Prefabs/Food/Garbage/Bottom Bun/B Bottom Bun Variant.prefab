@@ -14,11 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 8064203568610132741, guid: 18dcaf919a0c145a1b5f0c2c9d19438f, type: 3}
     - target: {fileID: 2336309638399483904, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_Name
-      value: B Bottom Bun Variant Variant
+      value: B Bottom Bun Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: _rarity
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: _intScore
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: _goFoodServed

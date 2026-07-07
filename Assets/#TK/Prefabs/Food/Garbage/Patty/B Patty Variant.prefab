@@ -14,11 +14,15 @@ PrefabInstance:
       objectReference: {fileID: -6623270614159726237, guid: 481e86bad2a224cccaa134daa7b20cf6, type: 3}
     - target: {fileID: 3012219416004230014, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
       propertyPath: m_Name
-      value: B Patty Variant Variant
+      value: B Patty Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4287086023423395853, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
       propertyPath: _rarity
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287086023423395853, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
+      propertyPath: _intScore
+      value: 25000
       objectReference: {fileID: 0}
     - target: {fileID: 4287086023423395853, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}
       propertyPath: _goFoodServed

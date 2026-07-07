@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6862609213058637479}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 128.88853, y: 357.35953, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,4 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ac218f801584aa9b4b5179e4a83d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TK.Gameplay.GameManager
+  _arrRecipes:
+  - {fileID: 11400000, guid: d4b57713973de43cda882545f9551a37, type: 2}
+  - {fileID: 11400000, guid: b53ea0a5a61f34f34ab048d542a507bb, type: 2}
+  - {fileID: 11400000, guid: ffb71e55d76cf49478c3f3921e82d793, type: 2}
+  - {fileID: 11400000, guid: 0c32dde472f4e40158c8e58aaa731630, type: 2}
+  - {fileID: 11400000, guid: 0e65f268863d64df2aeec36ea9e15381, type: 2}
+  - {fileID: 11400000, guid: cc1e2faca7b6a4f89b4ccbc5f80af2fa, type: 2}
+  - {fileID: 11400000, guid: 687d0ae6e04194992a1e3662c46071dd, type: 2}
+  - {fileID: 11400000, guid: 7eb07eb63e2a14ffd82c8ecfec00d507, type: 2}
+  - {fileID: 11400000, guid: d719be21ec7be432cab49aacd7bb9bd7, type: 2}
+  - {fileID: 11400000, guid: cc579414104ce4f5ba14e346838af596, type: 2}
+  - {fileID: 11400000, guid: 344cef08df9064a62986083aaea95c4d, type: 2}
+  - {fileID: 11400000, guid: 879492b0c2fc4437984eeae987a3019f, type: 2}
+  - {fileID: 11400000, guid: 407dbf1fe197b43e5889d56a41856fd1, type: 2}
+  - {fileID: 11400000, guid: a589f22379b5d4eaeb3bd743e07dfa19, type: 2}
+  - {fileID: 11400000, guid: 5417db6b106c0454a8a513ebb657d054, type: 2}
+  - {fileID: 11400000, guid: cb054f2e0df75426091f399386dbb8ae, type: 2}
+  - {fileID: 11400000, guid: 5e3e30c739a3d4cb69821bc920f2dac1, type: 2}
+  - {fileID: 11400000, guid: 5de7fa15dffe94c0d9ae98b5a20e3f5c, type: 2}
+  - {fileID: 11400000, guid: 2f6c0938cc4314c5a956128a4fc398d5, type: 2}
+  - {fileID: 11400000, guid: b2d24f8764f014645bdec9443226559a, type: 2}
   _upgradeData: {fileID: 11400000, guid: 19e2c6e2994da4aa2beb76ef4678f20b, type: 2}
