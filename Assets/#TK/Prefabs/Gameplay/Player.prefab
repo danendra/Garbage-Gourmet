@@ -356,6 +356,37 @@ Transform:
   - {fileID: 7874145782925350454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6700516829178472727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7066985012868159292}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7066985012868159292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6700516829178472727}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7874145782925350454}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7456672791959664991
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,8 +398,9 @@ GameObject:
   - component: {fileID: 7874145782925350454}
   - component: {fileID: 692220580974257040}
   - component: {fileID: 1701349894714476340}
-  - component: {fileID: 6436944652096357334}
   - component: {fileID: 1497941004899570717}
+  - component: {fileID: 6436944652096357334}
+  - component: {fileID: 4750084568014814213}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Player
@@ -390,6 +422,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4556319982944866340}
+  - {fileID: 7066985012868159292}
   m_Father: {fileID: 7281172305281225752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &692220580974257040
@@ -465,27 +498,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6436944652096357334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7456672791959664991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 976ff7a4d4e6748189c694123e0a0140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _descentSpeed: 2
-  _ascentTarget: {fileID: 7281172305281225752}
-  _ascentDurationPerUnit: 0.1
-  _armLineRenderer: {fileID: 5867592802919636803}
-  _dragSensitivity: 0.004
-  _minX: -4
-  _maxX: 4
-  _smoothTime: 0.15
-  _handVisual: {fileID: 2615440538947970650}
 --- !u!114 &1497941004899570717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,3 +551,41 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &6436944652096357334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456672791959664991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976ff7a4d4e6748189c694123e0a0140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _descentSpeed: 2
+  _ascentTarget: {fileID: 7281172305281225752}
+  _ascentDurationPerUnit: 0.1
+  _dragSensitivity: 0.004
+  _minX: -4
+  _maxX: 4
+  _smoothTime: 0.15
+  _handVisual: {fileID: 2615440538947970650}
+  _armLineRenderer: {fileID: 5867592802919636803}
+  _playerTransform: {fileID: 7281172305281225752}
+  _inventory: {fileID: 4750084568014814213}
+  _maximumArmReach: 10
+--- !u!114 &4750084568014814213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456672791959664991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3c1935e052f48098cc890cfe51051f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Gameplay.PlayerInventory
+  _holdPoint: {fileID: 7066985012868159292}
+  _maxPickUpItems: 3

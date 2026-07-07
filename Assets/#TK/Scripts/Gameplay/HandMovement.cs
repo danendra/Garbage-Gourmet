@@ -9,6 +9,7 @@ namespace TK.Gameplay
 {
     public enum HAND_STATE
     {
+        Hidden,
         Idle,
         Descent,
         Holding,
@@ -20,7 +21,7 @@ namespace TK.Gameplay
         [SerializeField] private float _descentSpeed = 1f;
         [SerializeField] private Transform _ascentTarget;
         [SerializeField] private float _ascentDurationPerUnit = 1f;
-        [SerializeField] private NewArmLineRenderer _armLineRenderer;
+        
 
         [Header("Horizontal Movement")]
         [SerializeField] private float _dragSensitivity = 0.02f; // how much movement per pixel dragged
@@ -30,10 +31,17 @@ namespace TK.Gameplay
 
         [Header("Components")]
         [SerializeField] private HandVisual _handVisual;
+        [SerializeField] private ArmLineRenderer _armLineRenderer;
+        [SerializeField] private Transform _playerTransform;
+        [SerializeField] private PlayerInventory _inventory;
+
+        [Header("Arm Reach")]
+        [SerializeField] private float _maximumArmReach = 10f;
 
         private Rigidbody2D _rb;
         private CinemachineImpulseSource _impulseSource;
         private Sequence _ascentSequence;
+        private SpriteRenderer _handVisualSprite;
 
         // horizontal drag-to-target movement
         private float _targetX;
@@ -56,10 +64,16 @@ namespace TK.Gameplay
             }
         }
 
+        private bool _inventoryFull = false;
+
+        public float GetDepth() => Mathf.Abs(_playerTransform.position.y - transform.position.y);
+
+        public void ChangeStateToHidden() => State = HAND_STATE.Hidden;
         public void ChangeStateToIdle() => State = HAND_STATE.Idle;
         public void ChangeStateToDescent() => State = HAND_STATE.Descent;
         public void ChangeStateToHolding() => State = HAND_STATE.Holding;
         public void ChangeStateToAscent() => State = HAND_STATE.Ascent;
+
 
         private void Awake()
         {
@@ -67,7 +81,11 @@ namespace TK.Gameplay
             _rb.gravityScale = 0f;
             _rb.linearDamping = 0f;
 
+            _inventory = GetComponent<PlayerInventory>();
+
             _impulseSource = GetComponent<CinemachineImpulseSource>();
+
+            _handVisualSprite = _handVisual.GetComponent<SpriteRenderer>();
 
             _targetX = _rb.position.x;
         }
@@ -81,6 +99,7 @@ namespace TK.Gameplay
         {
             _armLineRenderer.OnSnapToLineStarted += HandleSnapToLineStarted;
             _armLineRenderer.OnSnapToLineEnded += HandleSnapToLineEnded;
+            _inventory.OnInventoryFull += HandleInventoryFull;
 
             EnhancedTouchSupport.Enable();
         }
@@ -89,6 +108,7 @@ namespace TK.Gameplay
         {
             _armLineRenderer.OnSnapToLineStarted -= HandleSnapToLineStarted;
             _armLineRenderer.OnSnapToLineEnded -= HandleSnapToLineEnded;
+            _inventory.OnInventoryFull -= HandleInventoryFull;
 
             EnhancedTouchSupport.Disable();
 
@@ -108,6 +128,11 @@ namespace TK.Gameplay
             State = HAND_STATE.Ascent;
         }
 
+        private void HandleInventoryFull()
+        {
+            _inventoryFull = true;
+        }
+
         private void Update()
         {
             // --- TEST INPUT: keys 1-4 to force state changes ---
@@ -116,8 +141,11 @@ namespace TK.Gameplay
             if (Input.GetKeyDown(KeyCode.Alpha3)) State = HAND_STATE.Holding;
             if (Input.GetKeyDown(KeyCode.Alpha4)) State = HAND_STATE.Ascent;
 
+            
+
             if (_state == HAND_STATE.Descent)
             {
+                CheckTimeToAscent();
                 HandleTouchInput();
             }
         }
@@ -156,22 +184,40 @@ namespace TK.Gameplay
             }
         }
 
+        public event Action OnAscended;
+
         private void HandleStateChange()
         {
             switch (_state)
             {
+                case HAND_STATE.Hidden:
+                    if (_handVisualSprite.enabled)
+                        _handVisualSprite.enabled = false;
+                    _armLineRenderer.ChangeStateToInactive();
+                    
+                    break;
+
                 case HAND_STATE.Idle:
+                    if (!_handVisualSprite.enabled)
+                        _handVisualSprite.enabled = true;
+
                     _rb.linearVelocity = Vector2.zero;
                     _targetX = _rb.position.x; // stop horizontal movement
                     _armLineRenderer.ChangeStateToGrowing();
                     _handVisual.ChangeStateToIdle();
                     break;
                 case HAND_STATE.Descent:
+                    if (!_handVisualSprite.enabled)
+                        _handVisualSprite.enabled = true;
+
                     _rb.bodyType = RigidbodyType2D.Dynamic; // physics-driven again
                     _armLineRenderer.ChangeStateToGrowing();
                     _handVisual.ChangeStateToIdle();
                     break;
                 case HAND_STATE.Holding:
+                    if (!_handVisualSprite.enabled)
+                        _handVisualSprite.enabled = true;
+
                     _rb.linearVelocity = Vector2.zero;
                     _targetX = _rb.position.x;
                     CameraShakeManager.Instance.CameraShake(_impulseSource, 1f);
@@ -179,6 +225,9 @@ namespace TK.Gameplay
                     _handVisual.ChangeStateToGrab();
                     break;
                 case HAND_STATE.Ascent:
+                    if (!_handVisualSprite.enabled)
+                        _handVisualSprite.enabled = true;
+
                     _rb.linearVelocity = Vector2.zero;
                     _rb.bodyType = RigidbodyType2D.Kinematic; // hand off to DOTween
 
@@ -190,7 +239,11 @@ namespace TK.Gameplay
                         transform.DOMove(_ascentTarget.position, duration)
                             .SetEase(Ease.InBack, 0.5f)
                     );
-                    _ascentSequence.AppendCallback(() => State = HAND_STATE.Idle);
+                    _ascentSequence.AppendCallback(() => 
+                    {
+                        State = HAND_STATE.Idle;
+                        OnAscended?.Invoke();
+                    });
                     break;
             }
         }
@@ -227,6 +280,14 @@ namespace TK.Gameplay
             float tiltAngle = Vector2.SignedAngle(Vector2.up, dir);
 
             _handVisual.transform.rotation = Quaternion.Euler(0f, 0f, tiltAngle);
+        }
+
+        private void CheckTimeToAscent()
+        {
+            if (_inventoryFull || GetDepth() >= _maximumArmReach)
+            {
+                ChangeStateToHolding();
+            }
         }
     }
 }

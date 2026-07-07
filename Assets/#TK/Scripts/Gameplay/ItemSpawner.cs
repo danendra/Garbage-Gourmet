@@ -55,7 +55,7 @@ namespace TK.Gameplay
         [SerializeField] private CollectibleController _eventItemPrefab;
 
         [Header("References")]
-        [SerializeField] private PlayerMovement _player;
+        [SerializeField] private HandMovement _hand;
 
 
         // ── Runtime ──────────────────────────────────────────────────────────
@@ -104,11 +104,11 @@ namespace TK.Gameplay
         {
             if (!_isInitialized) return;
 
-            if (!_eventItemSpawned && _player.GetDepth() >= _player.GetMaxArmReach() - _chunkHeight)
-            {
-                _eventItemSpawned = true;
-                SpawnEventItem();
-            }
+            // if (!_eventItemSpawned && _hand.GetDepth() >= _hand.GetMaxArmReach() - _chunkHeight)
+            // {
+            //     _eventItemSpawned = true;
+            //     SpawnEventItem();
+            // }
 
             AdvanceHorizon(playerY);
         }
@@ -437,7 +437,7 @@ namespace TK.Gameplay
             if (_eventItemPrefab == null) return;
 
             // Target Y = just past the player's arm reach limit
-            float targetY = _player.transform.position.y - _spawnLookaheadDistance;
+            float targetY = _hand.transform.position.y - _spawnLookaheadDistance;
 
             float yTop    = targetY + _spacing;
             float yBottom = targetY - _spacing;

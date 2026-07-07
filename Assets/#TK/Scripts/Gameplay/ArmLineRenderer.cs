@@ -15,7 +15,7 @@ namespace TK.Gameplay
     }
 
     [RequireComponent(typeof(LineRenderer))]
-    public class NewArmLineRenderer : MonoBehaviour
+    public class ArmLineRenderer : MonoBehaviour
     {
         [SerializeField] private Transform _anchor;
         [SerializeField] private Transform _target;
@@ -72,7 +72,7 @@ namespace TK.Gameplay
 
             if (_anchor == null || _target == null)
             {
-                Debug.LogError($"{nameof(NewArmLineRenderer)} on {name} is missing _anchor or _target.", this);
+                Debug.LogError($"{nameof(ArmLineRenderer)} on {name} is missing _anchor or _target.", this);
                 enabled = false;
                 return;
             }

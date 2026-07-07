@@ -10,7 +10,7 @@ namespace TK.Gameplay
         private Rigidbody2D _rb;
 
         [Header("Arm")]
-        [SerializeField] private NewArmLineRenderer _armLineRenderer;
+        [SerializeField] private ArmLineRenderer _armLineRenderer;
 
         // Input/drag settings
 
