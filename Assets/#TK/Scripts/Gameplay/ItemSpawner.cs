@@ -1,39 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 using Anoa.Module;
 
 namespace TK.Gameplay
 {
+    [Serializable]
+    public class WeightedPoolEntry
+    {
+        public PoolerObject Prefab;
+        public float Weight;
+    }
+
+    [Serializable]
+    public class SubLevelPool
+    {
+        [Range(0f, 1f)] public float MinDepth;   
+        [Range(0f, 1f)] public float MaxDepth;  
+        public PoolerContainer Pool;
+        public int Count;
+        public WeightedPoolEntry[] Entries;
+        [Range(0f, 100f)] public float TrashWeight;
+    }
+
     public class ItemSpawner : MonoBehaviour
     {
         [Header("Dynamic Spawning")]
-        [SerializeField] private int   _itemsPerChunk          = 3;
-        [SerializeField] private float _chunkHeight            = 6f;
+        [SerializeField] private int _itemsPerChunk = 3;
+        [SerializeField] private float _chunkHeight = 6f;
         [SerializeField] private float _spawnLookaheadDistance = 20f;
-        [SerializeField] private float _despawnDistance        = 25f;
+        [SerializeField] private float _despawnDistance = 25f;
 
         [Header("Spacing")]
-        [SerializeField] private float _spacing    = 2.5f;
-        [SerializeField] private int   _maxAttempts = 150;
+        [SerializeField] private float _spacing = 2.5f;
+        [SerializeField] private int _maxAttempts = 150;
 
         [Header("Spawn Bounds")]
-        [SerializeField] private Transform xmin;
-        [SerializeField] private Transform xmax;
-        [SerializeField] private Transform topY;
-        [SerializeField] private Transform bottomY;
+        [SerializeField] private Transform _xmin;
+        [SerializeField] private Transform _xmax;
+        [SerializeField] private Transform _topY;
+        [SerializeField] private Transform _bottomY;
 
-        [Header("Item Pools")]
-        [SerializeField] private PoolerContainer _poolCommon;        
-        [SerializeField] private PoolerContainer _poolRare;
-        [SerializeField] private PoolerContainer _poolBad;
+        [Header("Sub-Level Pools")]
+        [SerializeField] private SubLevelPool[] _subLevels;
 
-        [Header("Rarity Counts")]
-        [SerializeField] private int _commonCount   = 18;
-        [SerializeField] private int _uncommonCount = 10;
-        [SerializeField] private int _rareCount     = 7;
-        [SerializeField] private int _badCount      = 5;
+        [Header("Trash")]
+        [SerializeField] private GameObject[] _trashPrefabs;
 
         [Header("Event Items")]
         [SerializeField] private CollectibleController _eventItemPrefab;
@@ -41,15 +57,23 @@ namespace TK.Gameplay
         [Header("References")]
         [SerializeField] private PlayerMovement _player;
 
+
+        // ── Runtime ──────────────────────────────────────────────────────────
         private float _spawnHorizonY;
         private bool  _isInitialized;
         private bool  _eventItemSpawned;
+        private int[] _remainingCounts;
 
-        private int _remainingCommon;
-        private int _remainingUncommon;
-        private int _remainingRare;
-        private int _remainingBad;
-        private int _totalItems => _commonCount + _uncommonCount + _rareCount + _badCount;
+        private int TotalItems
+        {
+            get
+            {
+                if (_subLevels == null) return 0;
+                int total = 0;
+                foreach (SubLevelPool sl in _subLevels) total += sl.Count;
+                return total;
+            }
+        }
 
         private float _cachedTop;
         private float _cachedBottom;
@@ -80,8 +104,6 @@ namespace TK.Gameplay
         {
             if (!_isInitialized) return;
 
-            DespawnFarItems(playerY);
-
             if (!_eventItemSpawned && _player.GetDepth() >= _player.GetMaxArmReach() - _chunkHeight)
             {
                 _eventItemSpawned = true;
@@ -103,17 +125,23 @@ namespace TK.Gameplay
 
         private void ResetState()
         {
-            _remainingCommon   = _commonCount;
-            _remainingUncommon = _uncommonCount;
-            _remainingRare     = _rareCount;
-            _remainingBad      = _badCount;
+            // Rebuild the per-level budget array from Inspector data
+            if (_subLevels != null && _subLevels.Length > 0)
+            {
+                _remainingCounts = new int[_subLevels.Length];
+                for (int i = 0; i < _subLevels.Length; i++)
+                    _remainingCounts[i] = _subLevels[i].Count;
+            }
+            else
+            {
+                _remainingCounts = Array.Empty<int>();
+            }
 
-            // Horizon starts at the very top; chunks advance downward
             _spawnHorizonY    = _cachedTop;
             _eventItemSpawned = false;
 
             if (_activeItems == null)
-                _activeItems = new List<CollectibleController>(_totalItems);
+                _activeItems = new List<CollectibleController>(TotalItems);
 
             if (_spatialGrid == null)
                 _spatialGrid = new Dictionary<Vector2Int, List<Vector2>>();
@@ -146,10 +174,10 @@ namespace TK.Gameplay
 
         private void CacheBounds()
         {
-            _cachedTop    = topY.position.y;
-            _cachedBottom = bottomY.position.y;
-            _cachedXMin   = xmin.position.x;
-            _cachedXMax   = xmax.position.x;
+            _cachedTop    = _topY.position.y;
+            _cachedBottom = _bottomY.position.y;
+            _cachedXMin   = _xmin.position.x;
+            _cachedXMax   = _xmax.position.x;
 
             // Cell size = tightest spacing (bottom zone = spacing * 0.7)
             // so a 3×3 neighbourhood always covers the full exclusion radius.
@@ -183,43 +211,32 @@ namespace TK.Gameplay
                 if (!TryFindSpawnPosition(chunkTop, chunkBottom, out Vector2 spawnPos))
                     continue;
 
+                // t = 0 → top of play area   |   t = 1 → bottom of play area
                 float t = Mathf.InverseLerp(_cachedTop, _cachedBottom, spawnPos.y);
 
-                CollectibleController collectible = GetPoolForDepth(t);
-                if (collectible == null) break;
+                float      randomZ = Random.Range(-18f, 18f);
+                Quaternion rot     = Quaternion.Euler(0f, 0f, randomZ);
+                int levelIndex = FindSubLevelIndex(t);
 
-                float randomZ  = Random.Range(-18f, 18f);
-                Quaternion rot = Quaternion.Euler(0f, 0f, randomZ);
+                float trashChance = levelIndex >= 0 ? _subLevels[levelIndex].TrashWeight : 0f;
 
-                collectible.Initialize(spawnPos, rot);
+                if (Random.Range(0f, 100f) < trashChance)
+                {
+                    SpawnTrash(spawnPos, rot);
+                }
+                else
+                {
+                    CollectibleController collectible = levelIndex >= 0
+                        ? PopWeighted(levelIndex) ?? TryPopAny()
+                        : TryPopAny();
+
+                    if (collectible == null) break;
+
+                    collectible.Initialize(spawnPos, rot);
+                    _activeItems.Add(collectible);
+                }
 
                 AddToGrid(spawnPos);
-                _activeItems.Add(collectible);
-            }
-        }
-
-        // =====================================================
-        // DESPAWN
-        // =====================================================
-
-        // (INI GA KEpAkE, ga di apus incase butuh)
-        private void DespawnFarItems(float playerY)
-        {
-            for (int i = _activeItems.Count - 1; i >= 0; i--)
-            {
-                CollectibleController item = _activeItems[i];
-
-                if (item == null || !item.gameObject.activeSelf)
-                {
-                    _activeItems.RemoveAt(i);
-                    continue;
-                }
-
-                if (item.transform.position.y > playerY + _despawnDistance)
-                {
-                    item.gameObject.SetActive(false);
-                    _activeItems.RemoveAt(i);
-                }
             }
         }
 
@@ -301,92 +318,101 @@ namespace TK.Gameplay
         // DEPTH LOOT LOGIC
         // =====================================================
 
-        // t = 0 bottom ; t = 1 top
-        private CollectibleController GetPoolForDepth(float t)
+        private int FindSubLevelIndex(float t)
         {
-            int roll = Random.Range(0, 100);
+            if (_subLevels == null) return -1;
 
-            // TOP ZONE
-            if (t < 0.25f)
+            for (int i = 0; i < _subLevels.Length; i++)
             {
-                if (roll < 20)
-                    return TryPop(_poolBad, ref _remainingBad)
-                        ?? TryPop(_poolCommon, ref _remainingCommon)
-                        ?? TryPopAny();
-
-                return TryPop(_poolCommon, ref _remainingCommon)
-                    ?? TryPop(_poolBad, ref _remainingBad)
-                    ?? TryPopAny();
+                if (t >= _subLevels[i].MinDepth && t <= _subLevels[i].MaxDepth)
+                    return i;
             }
 
-            // MID ZONE
-            if (t < 0.55f)
+            return -1;
+        }
+
+        private CollectibleController PopWeighted(int levelIndex)
+        {
+            if (_remainingCounts[levelIndex] <= 0) return null;
+
+            SubLevelPool        level   = _subLevels[levelIndex];
+            WeightedPoolEntry[] entries = level.Entries;
+
+            if (entries == null || entries.Length == 0) return null;
+
+            // Sum all weights in this table
+            float totalWeight = 0f;
+            foreach (WeightedPoolEntry e in entries)
+                totalWeight += e.Weight;
+
+            if (totalWeight <= 0f) return null;
+
+            // Weighted roll — works with any float weights, not just 0–100
+            float roll        = Random.Range(0f, totalWeight);
+            float accumulated = 0f;
+
+            foreach (WeightedPoolEntry e in entries)
             {
-                if (roll < 20)
-                    return TryPop(_poolBad, ref _remainingBad)                        
-                        ?? TryPopAny();
+                accumulated += e.Weight;
+                if (roll < accumulated)
+                {
+                    if (e.Prefab == null) return null;
 
-                if (roll < 65)
-                    return TryPop(_poolCommon, ref _remainingCommon)                        
-                        ?? TryPopAny();
+                    // Use the prefab's own name as the pool key — no string typing needed
+                    CollectibleController item =
+                        level.Pool.Pop<CollectibleController>(e.Prefab.name);
 
-                return TryPop(_poolCommon, ref _remainingCommon)
-                    ?? TryPopAny();
+                    if (item != null)
+                        _remainingCounts[levelIndex]--;
+
+                    return item;
+                }
             }
 
-            // DEEP ZONE
-            if (t < 0.80f)
-            {
-                if (roll < 15)
-                    return TryPop(_poolBad, ref _remainingBad)                        
-                        ?? TryPopAny();
-
-                if (roll < 45)
-                    return TryPop(_poolRare, ref _remainingRare)
-                        ?? TryPopAny();
-
-                return TryPop(_poolRare, ref _remainingRare)                    
-                    ?? TryPopAny();
-            }
-
-            // BOTTOM ZONE
-            if (roll < 10)
-                return TryPop(_poolBad, ref _remainingBad)
-                    ?? TryPop(_poolRare, ref _remainingRare)
-                    ?? TryPopAny();
-
-            return TryPop(_poolRare, ref _remainingRare)                
-                ?? TryPopAny();
+            return null;
         }
 
         // =====================================================
         // POP HELPERS
         // =====================================================
 
-        private CollectibleController TryPop(PoolerContainer pool, ref int remaining)
-        {
-            if (remaining <= 0) return null;
-
-            CollectibleController item = pool.Pop<CollectibleController>(true);
-            if (item != null) remaining--;
-
-            return item;
-        }
-
-        // Nek entek pool e
         private CollectibleController TryPopAny()
         {
-            return TryPop(_poolCommon,   ref _remainingCommon)                
-                ?? TryPop(_poolRare,     ref _remainingRare)
-                ?? TryPop(_poolBad,      ref _remainingBad);
+            for (int i = 0; i < _subLevels.Length; i++)
+            {
+                if (_remainingCounts[i] <= 0) continue;
+
+                CollectibleController item = PopWeighted(i);
+                if (item != null) return item;
+            }
+
+            return null;
         }
 
         private bool HasRemainingBudget()
         {
-            return _remainingCommon   > 0
-                || _remainingUncommon > 0
-                || _remainingRare     > 0
-                || _remainingBad      > 0;
+            if (_remainingCounts == null) return false;
+
+            foreach (int remaining in _remainingCounts)
+                if (remaining > 0) return true;
+
+            return false;
+        }
+
+        // =====================================================
+        // TRASH SPAWNING
+        // =====================================================
+
+        private void SpawnTrash(Vector2 pos, Quaternion rot)
+        {
+            if (_trashPrefabs == null || _trashPrefabs.Length == 0) return;
+
+            GameObject prefab = _trashPrefabs[Random.Range(0, _trashPrefabs.Length)];
+            if (prefab == null) return;
+
+            GameObject instance    = Instantiate(prefab);
+            instance.transform.position = new Vector3(pos.x, pos.y, 0f);
+            instance.transform.rotation = rot;
         }
 
         // =====================================================
@@ -410,15 +436,17 @@ namespace TK.Gameplay
         {
             if (_eventItemPrefab == null) return;
 
+            // Target Y = just past the player's arm reach limit
             float targetY = _player.transform.position.y - _spawnLookaheadDistance;
 
             float yTop    = targetY + _spacing;
             float yBottom = targetY - _spacing;
 
-            Vector2 spawnPos = new Vector2(
-                Random.Range(_cachedXMin, _cachedXMax),
-                Random.Range(yBottom, yTop)
-            );
+            if (!TryFindSpawnPosition(yTop, yBottom, out Vector2 spawnPos))
+            {
+                Debug.LogWarning("SpawnEventItem: no empty space found near arm limit — skipping spawn.");
+                return;
+            }
 
             Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(-18f, 18f));
 

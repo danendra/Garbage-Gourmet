@@ -1,9 +1,10 @@
 using UnityEngine;
-using TK.Data;
-using TK.Gameplay;
+using UnityEngine.SceneManagement;
 
 namespace TK.Gameplay
 {
+    using Data;    
+
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
@@ -162,5 +163,24 @@ namespace TK.Gameplay
 
             Debug.Log($"Pick up level degraded to {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
         }
+
+        #region Change Scene
+
+        public void LoadScene(int _intIndex)
+        {
+            SceneManager.LoadScene(_intIndex);
+        }
+
+        public void LoadScene(string _strScene)
+        {
+            SceneManager.LoadScene(_strScene);
+        }
+
+        public void Restart()
+        {
+            LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        #endregion
     }
 }
