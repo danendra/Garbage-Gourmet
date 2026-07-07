@@ -22,7 +22,7 @@ namespace TK.Data
             {
                 return true;
             }
-            else if (IsSame)
+            else if (IsSame && _ieCollectible.Count() > 2)
             {
                 ITEM_TYPE _type = CollectibleIngredients[0].GetType;
                 RARITY _rarity = CollectibleIngredients[0].GetRarity;
