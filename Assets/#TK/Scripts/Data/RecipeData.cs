@@ -11,14 +11,14 @@ namespace TK.Data
     public class RecipeData : ScriptableObject
     {
         [Tooltip("Ingredient arrangement from bottom to top")]
-        public CollectibleController[] CollectibleIngredients;        
+        public CollectibleController[] CollectibleIngredients;
         public bool IsRarityFixed;
         public bool IsSame;
         public float FltMultiplier;
 
         public bool IsIngredientCorrect(IEnumerable<CollectibleController> _ieCollectible)
         {
-            if(CollectibleIngredients.Length == 1 && _ieCollectible.Count() == 1)
+            if (CollectibleIngredients.Length == 1 && _ieCollectible.Count() == 1)
             {
                 return true;
             }
@@ -29,11 +29,11 @@ namespace TK.Data
 
                 if (IsRarityFixed)
                 {
-                    return _ieCollectible.All(_collectible => _collectible.GetType == _type && _collectible.GetRarity == _rarity);  
+                    return _ieCollectible.All(_collectible => _collectible.GetType == _type && _collectible.GetRarity == _rarity);
                 }
                 else
-                {                    
-                    return _ieCollectible.All(_collectible => _collectible.GetType == _type);                    
+                {
+                    return _ieCollectible.All(_collectible => _collectible.GetType == _type);
                 }
             }
             else if (IsRarityFixed)
@@ -50,6 +50,19 @@ namespace TK.Data
 
                 return _typeRecipe.SequenceEqual(_typeCollect);
             }
+        }
+
+        public void AddBurger()
+        {            
+            int _intTotalMake = PlayerPrefs.GetInt("BURGER_" + name, 0);
+            _intTotalMake++;
+
+            PlayerPrefs.SetInt("BURGER_" + name, _intTotalMake);
+        }
+
+        public bool IsNew()
+        {
+            return PlayerPrefs.HasKey("BURGER_" + name);            
         }
     }
 }
