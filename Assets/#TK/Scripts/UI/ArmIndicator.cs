@@ -1,6 +1,5 @@
-using TK.Gameplay;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 namespace TK.UI
 {
@@ -8,11 +7,11 @@ namespace TK.UI
     public class ArmIndicator : MonoBehaviour
     {
         [SerializeField] private HandMovement _handMovement;
-        [SerializeField] private TextMeshProUGUI _armIndicatorText;
+        [SerializeField] private Slider _slider;
 
         private void Update()
         {
-            _armIndicatorText.text = $"{Mathf.RoundToInt(_handMovement.GetDepth())}M";
+            _slider.value = _handMovement.GetDepth();
         }
     }
 }

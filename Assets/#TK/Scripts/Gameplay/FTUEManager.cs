@@ -23,6 +23,9 @@ namespace TK.Gameplay
         [Header("Settings")]
         [SerializeField] private float _dragThreshold = 50f; 
 
+        [Header("Timing")]
+        [SerializeField] private float _InventoryHoldTime = 1f;
+
         private enum FTUEGameplayStep { None, WaitForDrag, WaitForTap }
         private FTUEGameplayStep _currentStep = FTUEGameplayStep.None;
 
@@ -106,7 +109,7 @@ namespace TK.Gameplay
             _inventoryFTUECanDismiss = false;
             _currentStep = FTUEGameplayStep.WaitForTap;
 
-            DOVirtual.DelayedCall(5f, () =>
+            DOVirtual.DelayedCall(_InventoryHoldTime, () =>
             {
                 _inventoryFTUECanDismiss = true;
             }, ignoreTimeScale: true).SetId(this);

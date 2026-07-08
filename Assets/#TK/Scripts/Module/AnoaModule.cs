@@ -38,17 +38,21 @@ namespace Anoa
             return result;
         }
 
-        public static string ConvertCurency(double amount)
+        public static string ConvertCurency(float amount)
         {
             string result = amount.ToString();
 
-            if (amount > 1000000000)
+            if (amount >= 1000000000000)
             {
-                result = (amount / 1000000).ToString("F2") + "M";
+                result = ConvertThousand(amount / 1000000000) + "B";
+            }
+            else if (amount > 1000000000)
+            {
+                result = ConvertThousand(amount / 1000000) + "M";
             }
             else if (amount > 1000000)
             {
-                result = (amount / 1000).ToString("F2") + "K";
+                result = ConvertThousand(amount / 1000) + "K";
             }
             //else if (amount > 1000)
             //{
