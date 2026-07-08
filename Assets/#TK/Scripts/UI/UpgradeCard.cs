@@ -5,6 +5,7 @@ using TK.Data;
 
 namespace TK.UI
 {
+    using Anoa;
     public class UpgradeCard : MonoBehaviour
     {
         [Header("UI Component References")]
@@ -37,7 +38,7 @@ namespace TK.UI
                 }
                 else
                 {
-                    if (costText != null) costText.text = $"Upgrade | <sprite=0> {nextCost.ToString("N0")}";
+                    if (costText != null) costText.text = $"Upgrade | <sprite=0> {AnoaModule.ConvertCurency(nextCost)}";
 
                     upgradeButton.interactable = canAfford;
                     upgradeButton.onClick.AddListener(() => onUpgradeClick?.Invoke());
