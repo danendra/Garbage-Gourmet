@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 1768719759322570764, guid: 8f7b398284c3b42108233e72a2a42971, type: 3}
+    - target: {fileID: 7005819842446982128, guid: 52e438fe5afb1431392cc5b369d89e28, type: 3}
+      propertyPath: _fltMultiplier
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8325725901139052675, guid: 52e438fe5afb1431392cc5b369d89e28, type: 3}
       propertyPath: m_Name
       value: Trash_2 Variant

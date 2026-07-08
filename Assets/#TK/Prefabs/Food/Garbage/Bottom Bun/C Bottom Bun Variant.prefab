@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: _intScore
-      value: 15000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: _itemType
@@ -104,6 +104,14 @@ PrefabInstance:
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 2336309638399483904, guid: 749f7988069574ff2b2eec54d042b21b, type: 3}
+    - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      propertyPath: _fltMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      propertyPath: _intMultiplier
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

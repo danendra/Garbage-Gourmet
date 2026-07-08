@@ -14,12 +14,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 167430920777688230, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
       propertyPath: _intScore
-      value: 90000
+      value: 45000
       objectReference: {fileID: 0}
     - target: {fileID: 167430920777688230, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 7449892750102204580, guid: bcdfe73ab7b1545eba58e6aa1c1cd6ff, type: 3}
+    - target: {fileID: 167430920777688230, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
+      propertyPath: _fltMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1216413998670944213, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
       propertyPath: m_Name
       value: R Cheese Variant

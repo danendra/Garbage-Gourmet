@@ -7,6 +7,7 @@ namespace TK.Data
         private const string KEY_ARM_LEVEL    = "upgrade_arm_level";
         private const string KEY_PICKUP_LEVEL = "upgrade_pickup_level";
         private const string KEY_RELEASE_LEVEL = "upgrade_release_level";
+        private const string KEY_COINS = "player_coins";
 
         public static void SaveArmLevel(int level)
         {
@@ -41,8 +42,6 @@ namespace TK.Data
             return PlayerPrefs.GetInt(KEY_RELEASE_LEVEL, 0);
         }
 
-        private const string KEY_COINS = "player_coins";
-
         public static void SaveCoins(int amount)
         {
             PlayerPrefs.SetInt(KEY_COINS, amount);
@@ -51,7 +50,7 @@ namespace TK.Data
 
         public static int LoadCoins()
         {
-            return PlayerPrefs.GetInt(KEY_COINS, 1000);
+            return PlayerPrefs.GetInt(KEY_COINS, 0);
         }
 
         public static void ResetAll()
