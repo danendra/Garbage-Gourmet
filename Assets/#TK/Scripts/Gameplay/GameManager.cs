@@ -67,7 +67,10 @@ namespace TK.Gameplay
                 hand.SetArmLength(_upgradeData.GetArmLength(_armLevel));
 
             if (inventory != null)
+            {
                 inventory.SetMaxPickUpItems(_upgradeData.GetMaxPickUp(_pickUpLevel));
+                inventory.SetReleaseChance(_upgradeData.GetMaxRelease(_releaseLevel));
+            }
         }
 
         public bool UpgradeArm()
@@ -139,7 +142,7 @@ namespace TK.Gameplay
         #region  Scoring
 
         public void AddPoint(int _intPoint)
-        {   
+        {
             intCurrentPoint += _intPoint;
 
             if (_intPoint > 0)

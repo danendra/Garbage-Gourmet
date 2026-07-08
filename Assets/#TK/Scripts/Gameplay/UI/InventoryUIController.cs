@@ -19,6 +19,7 @@ namespace TK.UI
 
             _inventory = LevelManager.Instance.GetPlayerInventory;
             _inventory.OnItemAdded += OnItemAdded;
+            _inventory.OnItemRemoved += OnItemRemoved;
 
             Initialize();
         }
@@ -26,6 +27,7 @@ namespace TK.UI
         void OnDestroy()
         {
             _inventory.OnItemAdded -= OnItemAdded;
+            _inventory.OnItemRemoved -= OnItemRemoved;
         }
 
         public void Initialize()
@@ -46,6 +48,11 @@ namespace TK.UI
         public void OnItemAdded(CollectibleController _collectible)
         {
             _arrInventoryBox[_inventory.HeldItems.Count - 1].AddItem(_collectible.GetSprite);            
+        }
+
+        public void OnItemRemoved(int _intIndex)
+        {
+            _arrInventoryBox[_intIndex].RemoveItem();
         }
 
         // Update is called once per frame
