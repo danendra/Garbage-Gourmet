@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: f67fe4195996e41c9ba109da527b341b
+guid: 6b3045a4548bb4737be44678c5b93edf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3465939690350225561
-    second: CharacterEat_0
+      213: -3785303248457180991
+    second: TRASH_SPRITE_0
+  - first:
+      213: 3872707640602409252
+    second: TRASH_SPRITE_1
+  - first:
+      213: 7695296389557667190
+    second: TRASH_SPRITE_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +52,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterEat_0
+      name: TRASH_SPRITE_0
       rect:
         serializedVersion: 2
-        x: 249
-        y: 0
-        width: 1088
-        height: 1778
+        x: 71
+        y: 178
+        width: 380
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7675fb7073286efc0800000000000000
-      internalID: -3465939690350225561
+      spriteID: 1c8d39c30c6e77bc0800000000000000
+      internalID: -3785303248457180991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TRASH_SPRITE_1
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 197
+        width: 366
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4293c05a41f9eb530800000000000000
+      internalID: 3872707640602409252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TRASH_SPRITE_2
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 162
+        width: 351
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6754eec7b4f2bca60800000000000000
+      internalID: 7695296389557667190
       vertices: []
       indices: 
       edges: []
@@ -151,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CharacterEat_0: -3465939690350225561
+      TRASH_SPRITE_0: -3785303248457180991
+      TRASH_SPRITE_1: 3872707640602409252
+      TRASH_SPRITE_2: 7695296389557667190
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

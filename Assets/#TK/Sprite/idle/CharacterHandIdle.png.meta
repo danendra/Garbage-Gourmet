@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: f67fe4195996e41c9ba109da527b341b
+guid: 96ae1260fd6e84bd096b0ae2e7830482
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3465939690350225561
-    second: CharacterEat_0
+      213: -4289082319356781156
+    second: CharacterHandIdle_0
+  - first:
+      213: -529777998769766253
+    second: CharacterHandIdle_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterEat_0
+      name: CharacterHandIdle_0
       rect:
         serializedVersion: 2
-        x: 249
-        y: 0
-        width: 1088
-        height: 1778
+        x: 700
+        y: 805
+        width: 194
+        height: 69
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7675fb7073286efc0800000000000000
-      internalID: -3465939690350225561
+      spriteID: c9d9456ea5e1a74c0800000000000000
+      internalID: -4289082319356781156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterHandIdle_1
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 801
+        width: 178
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 390c28d87b9d5a8f0800000000000000
+      internalID: -529777998769766253
       vertices: []
       indices: 
       edges: []
@@ -161,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CharacterEat_0: -3465939690350225561
+      CharacterHandIdle_0: -4289082319356781156
+      CharacterHandIdle_1: -529777998769766253
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

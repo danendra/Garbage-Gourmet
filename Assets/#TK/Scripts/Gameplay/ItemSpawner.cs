@@ -49,7 +49,7 @@ namespace TK.Gameplay
         [SerializeField] private SubLevelPool[] _subLevels;
 
         [Header("Trash")]
-        [SerializeField] private GameObject[] _trashPrefabs;
+        [SerializeField] private PoolerContainer _poolTrash;
 
         [Header("Event Items")]
         [SerializeField] private CollectibleController _eventItemPrefab;
@@ -405,14 +405,12 @@ namespace TK.Gameplay
 
         private void SpawnTrash(Vector2 pos, Quaternion rot)
         {
-            if (_trashPrefabs == null || _trashPrefabs.Length == 0) return;
+            GameObject _objTrash = _poolTrash.Pop(true);
+            if (_objTrash == null) return;
 
-            GameObject prefab = _trashPrefabs[Random.Range(0, _trashPrefabs.Length)];
-            if (prefab == null) return;
-
-            GameObject instance    = Instantiate(prefab);
-            instance.transform.position = new Vector3(pos.x, pos.y, 0f);
-            instance.transform.rotation = rot;
+            _objTrash.SetActive(true);
+            _objTrash.transform.position = new Vector3(pos.x, pos.y, 0f);
+            _objTrash.transform.rotation = rot;
         }
 
         // =====================================================
