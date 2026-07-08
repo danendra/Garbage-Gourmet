@@ -88,7 +88,7 @@ namespace TK.Gameplay
                 _object.transform.position = _transSpawn.position;
                 _object.transform.rotation = Quaternion.identity;
 
-                _intScore += _collectible.GetScore;
+                _intScore += Mathf.RoundToInt(_collectible.GetScore * _collectible.GetMultiplier);
 
                 StartCoroutine(IEDelayShowScore(_collectible, _object));
 

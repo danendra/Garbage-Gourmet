@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7d04f37be9c62400994d6108082ab76b
+guid: 4590a576499504333ac81842219d83fd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7817885047799447740
-    second: Trash_Spray paint can_0
+      213: -2624937791226354099
+    second: Panel Result_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -56,7 +56,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0.15
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -97,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,7 +110,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -139,47 +126,33 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Trash_Spray paint can_0
+      name: Panel Result_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 69
-        width: 207
-        height: 106
+        x: 0
+        y: 0
+        width: 1206
+        height: 821
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 44f731f48fa418390800000000000000
-      internalID: -7817885047799447740
+      spriteID: d4664748cf8529bd0800000000000000
+      internalID: -2624937791226354099
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
     customData: 
-    physicsShape:
-    - - {x: 87.5, y: -11.5}
-      - {x: 105.5, y: -6.5}
-      - {x: 100.5, y: 20.5}
-      - {x: 72.5, y: 19.5}
-      - {x: 37.5, y: 44.5}
-      - {x: -9.5, y: 2.5}
-      - {x: -45.5, y: 41.5}
-      - {x: -84.5, y: 37.5}
-      - {x: -100.5, y: -9.5}
-      - {x: -93.5, y: -50.5}
-      - {x: -72.5, y: -50.5}
-      - {x: -48.5, y: -39.5}
-      - {x: 25.5, y: -59.5}
-      - {x: 68.5, y: -59.5}
+    physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -188,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Trash_Spray paint can_0: -7817885047799447740
+      Panel Result_0: -2624937791226354099
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
