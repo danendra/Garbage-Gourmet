@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 namespace TK.Gameplay
 {
 
     public enum ITEM_TYPE
     {
-        Top_Bun,        
+        Top_Bun,
         Cheese,
-        Patty,        
+        Patty,
         Vegetable,
         Bottom_Bun,
         Trash
@@ -16,7 +17,7 @@ namespace TK.Gameplay
 
     public enum RARITY
     {
-        Common,        
+        Common,
         Rare,
         Bad,
         Legendary
@@ -67,105 +68,75 @@ namespace TK.Gameplay
 
             _collider.enabled = false;
 
-            StartCoroutine(IEPickupAnimation(collector));
+            PlayPickupAnimation(collector);
         }
 
-        private IEnumerator IEPickupAnimation(IItemCollector _collector)
+        private void PlayPickupAnimation(IItemCollector _collector)
         {
+            // TODO: fix draw order
             Transform target = _collector.HoldPoint;
-
-            Vector3 startPos = transform.position;
-            Quaternion startRot = transform.rotation;
             Vector3 startScale = transform.localScale;
 
+            // Preserve sign in case scale.x/y is used for sprite flipping
+            Vector3 scaleSign = new Vector3(
+                Mathf.Sign(startScale.x),
+                Mathf.Sign(startScale.y),
+                1f
+            );
+
             _collector.AddItem(this);
+            transform.SetParent(target, true); // worldPositionStays = true, keeps current visual pose
 
             // ====================================
-            // RARITY SETTINGS
+            // VARIABILITY SETTINGS
             // ====================================
+            float snapDuration = Random.Range(0.10f, 0.15f);
+            float settleDuration = Random.Range(0.10f, 0.15f);
+            float popScaleMult = Random.Range(1.08f, 1.22f);
+            float wobbleAngle = Random.Range(-20f, 20f);
 
-            float snapDuration = 0.12f;
-            float popScale = 1.15f;
-            float wobbleAngle = 0f;
+            // 2D jitter — X/Y only, Z locked to 0 to avoid messing with sorting
+            Vector3 jitterOffset = new Vector3(
+                Random.Range(-.3f, .3f),
+                Random.Range(-.3f, .3f),
+                0f
+            );
 
-            switch (_rarity)
+            float jitterZRot = Random.Range(-45f, 45f);
+
+            Vector3 popScale = new Vector3(
+                Mathf.Abs(startScale.x) * popScaleMult * scaleSign.x,
+                Mathf.Abs(startScale.y) * popScaleMult * scaleSign.y,
+                startScale.z
+            );
+
+            Sequence seq = DOTween.Sequence();
+
+            // ====================================
+            // SNAP TO HAND (local space — tracks hand automatically)
+            // ====================================
+            seq.Append(transform.DOLocalMove(jitterOffset, snapDuration).SetEase(Ease.OutQuad));
+            seq.Join(transform.DOLocalRotate(Vector3.zero, snapDuration, RotateMode.Fast).SetEase(Ease.OutQuad));
+            seq.Join(transform.DOScale(popScale, snapDuration).SetEase(Ease.OutBack));
+
+            seq.AppendCallback(() =>
             {
-                case RARITY.Rare:
-                    popScale = 1.28f;
-                    wobbleAngle = 12f;
-                    break;
-
-                case RARITY.Bad:
-                    popScale = 1.38f;
-                    wobbleAngle = 18f;
-                    snapDuration = 0.10f;
-                    break;
-
-                case RARITY.Legendary:
-                    popScale = 1.55f;
-                    wobbleAngle = 25f;
-                    snapDuration = 0.08f;
-                    break;
-            }
-
-            // ====================================
-            // SNAP TO HAND
-            // ====================================
-
-            float time = 0f;
-
-            while (time < snapDuration)
-            {
-                time += Time.deltaTime;
-                float t = Mathf.Clamp01(time / snapDuration);
-
-                transform.position = Vector3.Lerp(startPos, target.position, t);
-                transform.rotation = Quaternion.Lerp(startRot, target.rotation, t);
-
-                transform.localScale =
-                    Vector3.Lerp(startScale, startScale * popScale, t);
-
-                yield return null;
-            }
-
-            // ====================================
-            // PARENT TO HAND
-            // ====================================
-
-            transform.SetParent(target, true);
-            transform.localPosition = Vector3.zero;
-
-            // wobble start
-            transform.localRotation =
-                Quaternion.Euler(0, 0, wobbleAngle);
+                transform.localRotation = Quaternion.Euler(0f, 0f, wobbleAngle);
+            });
 
             // ====================================
             // SETTLE BACK
             // ====================================
+            seq.Append(transform.DOScale(startScale, settleDuration).SetEase(Ease.OutQuad));
+            seq.Join(transform.DOLocalRotate(new Vector3(0f, 0f, jitterZRot), settleDuration, RotateMode.Fast).SetEase(Ease.OutQuad));
 
-            time = 0f;
-            float settleDuration = 0.12f;
-
-            while (time < settleDuration)
+            seq.OnComplete(() =>
             {
-                time += Time.deltaTime;
-                float t = Mathf.Clamp01(time / settleDuration);
+                transform.localScale = startScale;
+                transform.localRotation = Quaternion.Euler(0f, 0f, jitterZRot);
+            });
 
-                transform.localScale =
-                    Vector3.Lerp(startScale * popScale, startScale, t);
-
-                transform.localRotation =
-                    Quaternion.Lerp(
-                        Quaternion.Euler(0, 0, wobbleAngle),
-                        Quaternion.identity,
-                        t
-                    );
-
-                yield return null;
-            }
-
-            transform.localScale = startScale;
-            transform.localRotation = Quaternion.identity;            
+            seq.SetLink(gameObject);
         }
     }
 }
