@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using TK.Audio;
+using TK.Data;
 using DG.Tweening;
 
 namespace TK.MainMenu
@@ -32,6 +33,11 @@ namespace TK.MainMenu
         private bool starting;
 
         private int _currentPoint;
+
+        // ── Debug reset (Beta) ─────────────────────────────────────────────────
+        private const float DebugResetWindow = 0.5f;
+        private float _upgradeHitTime   = -999f;
+        private float _collectionHitTime = -999f;
 
         void Awake()
         {
@@ -74,6 +80,12 @@ namespace TK.MainMenu
                 _currentPoint = GameManager.Instance.intCurrentMoney;
                 txtPoint.text = AnoaModule.ConvertCurency(_currentPoint);
             }
+
+            // DEBUG RESEt buat beta
+            if (upgradeButton != null)
+                upgradeButton.GetComponent<UnityEngine.UI.Button>()?.onClick.AddListener(() => { _upgradeHitTime = Time.unscaledTime; TryDebugReset(); });
+            if (collectionButton != null)
+                collectionButton.GetComponent<UnityEngine.UI.Button>()?.onClick.AddListener(() => { _collectionHitTime = Time.unscaledTime; TryDebugReset(); });
         }
 
         IEnumerator Start()
@@ -154,6 +166,21 @@ namespace TK.MainMenu
             }
         }
 
+
+        private void TryDebugReset()
+        {
+            if (Mathf.Abs(_upgradeHitTime - _collectionHitTime) > DebugResetWindow) return;
+
+            Debug.Log("[MainMenuManager] Debug reset triggered — wiping all saves.");
+            UpgradeSaveSystem.ResetAll();
+            FTUESaveSystem.ResetAll();
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+
+            if (GameManager.Instance != null) GameManager.Instance.Initialize();
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
         public void SetMenuButtonsState(bool visible)
         {
