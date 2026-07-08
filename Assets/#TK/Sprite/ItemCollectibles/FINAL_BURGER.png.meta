@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3e81efb8c5f484fe4a29710de5b926d2
+guid: 88de25a42235140d7a4d66b40720fe74
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3729537420728511258
-    second: BACKGROUND_TRASH_0
+      213: -5430609518578582576
+    second: FINAL_BURGER_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,19 +40,19 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 220
-  spriteBorder: {x: 0, y: 10, z: 0, w: 10}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BACKGROUND_TRASH_0
+      name: FINAL_BURGER_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1035
-        height: 3113
+        x: 198
+        y: 88
+        width: 632
+        height: 831
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1bac03368af1c330800000000000000
-      internalID: 3729537420728511258
+      spriteID: 0dbb44b5a6992a4b0800000000000000
+      internalID: -5430609518578582576
       vertices: []
       indices: 
       edges: []
@@ -151,8 +151,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BACKGROUND_TRASH_0: 3729537420728511258
+      FINAL_BURGER_0: -5430609518578582576
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
