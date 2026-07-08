@@ -17,7 +17,7 @@ namespace TK.Data
 
         public static int LoadArmLevel()
         {
-            return PlayerPrefs.GetInt(KEY_ARM_LEVEL, 1);
+            return PlayerPrefs.GetInt(KEY_ARM_LEVEL, 0);
         }
 
         // ── Max Pick Up ──────────────────────────────────────────────────────────
