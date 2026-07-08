@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace TK.Gameplay
@@ -34,6 +35,8 @@ namespace TK.Gameplay
         public event System.Action<int> OnPickUpUpgraded;
         public event System.Action<int> OnReleaseUpgraded;
 
+        public event System.Action OnPointUpdate;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -64,7 +67,10 @@ namespace TK.Gameplay
                 hand.SetArmLength(_upgradeData.GetArmLength(_armLevel));
 
             if (inventory != null)
+            {
                 inventory.SetMaxPickUpItems(_upgradeData.GetMaxPickUp(_pickUpLevel));
+                inventory.SetReleaseChance(_upgradeData.GetMaxRelease(_releaseLevel));
+            }
         }
 
         public bool UpgradeArm()
@@ -136,7 +142,7 @@ namespace TK.Gameplay
         #region  Scoring
 
         public void AddPoint(int _intPoint)
-        {   
+        {
             intCurrentPoint += _intPoint;
 
             if (_intPoint > 0)
@@ -144,6 +150,8 @@ namespace TK.Gameplay
 
             PlayerPrefs.SetInt("CURRENT_POINT", intCurrentPoint);
             PlayerPrefs.SetInt("CUMMULATIVE_POINT", intCummulativePoint);
+
+            OnPointUpdate?.Invoke();
         }
 
         #endregion

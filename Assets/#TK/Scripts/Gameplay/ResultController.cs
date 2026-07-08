@@ -10,6 +10,7 @@ using TMPro;
 namespace TK.Gameplay
 {
     using Data;
+    using TK.UI;
 
     public class ResultController : MonoBehaviour
     {
@@ -43,6 +44,7 @@ namespace TK.Gameplay
             List<Rigidbody2D> _listRB = new List<Rigidbody2D>();
 
             _objRaccoon.SetActive(true);
+            UIManager.Instance.HideGameplay();
 
             GameObject _object;
             Rigidbody2D _rb;
