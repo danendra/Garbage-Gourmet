@@ -32,6 +32,11 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayResult()
         {
+            ///
+            /// IVAN disini flow animasi makannya ya
+            /// tutup mulut dulu baru delay buat buka mulutnya
+            /// 
+
             int _intScore = 0;
 
             IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
@@ -98,6 +103,10 @@ namespace TK.Gameplay
             yield return new WaitForSeconds(1.0f);
 
             _dgAnimation.RecreateTweenAndPlay();
+
+            ///
+            /// IVAN disini kasih delay tutup mulut dan makan
+            /// 
 
             GameManager.Instance.AddPoint(_intScore);
 
