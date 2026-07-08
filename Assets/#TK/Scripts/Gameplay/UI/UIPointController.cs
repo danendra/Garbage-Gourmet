@@ -20,7 +20,7 @@ namespace TK.UI
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            _floatCurrentPoint = GameManager.Instance.intCurrentPoint;
+            _floatCurrentPoint = GameManager.Instance.intCurrentMoney;
             _txtPoint.text = AnoaModule.ConvertCurency(_floatCurrentPoint);
 
             _isUpdated = false;
@@ -35,7 +35,7 @@ namespace TK.UI
 
         public void UpdatePoint()
         {
-            _floatTargetPoint = GameManager.Instance.intCurrentPoint;
+            _floatTargetPoint = GameManager.Instance.intCurrentMoney;
 
             _fltSpeed = _floatTargetPoint - _floatCurrentPoint;
 
