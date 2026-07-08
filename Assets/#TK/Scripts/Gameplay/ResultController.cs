@@ -40,6 +40,7 @@ namespace TK.Gameplay
             _objRaccoon.SetActive(true);
 
             GameObject _object;
+            Rigidbody2D _rb;
 
             int _index = 6;
 
@@ -50,22 +51,27 @@ namespace TK.Gameplay
                 _listObject.Add(_object);
 
                 _object.transform.localScale = Vector3.one;
-                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;                
+                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
 
                 _object.transform.DOMove(_transSpawn.position, 1.0f).SetEase(Ease.OutBack);
                 _object.SetActive(true);
 
-                yield return new WaitForSeconds(Random.Range(0.0f, 0.1f));
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 
                 _index++;
-            }            
+            }
+
+            yield return new WaitForSeconds(0.5f);
 
             _index = 0;
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
                 _object = _listObject[_index];
+                _rb = _object.GetComponent<Rigidbody2D>();
 
+                _rb.linearVelocity = Vector2.zero;
+                _rb.angularVelocity = 0;
                 _object.transform.position = _transSpawn.position;
                 _object.transform.rotation = Quaternion.identity;
 
