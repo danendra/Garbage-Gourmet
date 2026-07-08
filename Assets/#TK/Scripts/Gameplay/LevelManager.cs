@@ -98,6 +98,8 @@ namespace TK.Gameplay
 
             if (!FTUESaveSystem.LoadFTUEGameplayCompleted())
                 FTUEManager.Instance.StartGameplayFTUE();
+            else if (UpgradeSaveSystem.LoadReleaseLevel() >= 1 && !FTUESaveSystem.LoadFTUEReleaseCompleted())
+                FTUEManager.Instance.StartReleaseFTUE();
         }
 
         // =====================
