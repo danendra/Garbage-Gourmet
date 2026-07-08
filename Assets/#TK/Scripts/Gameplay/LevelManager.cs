@@ -8,6 +8,7 @@ namespace TK.Gameplay
     using Data;
     using Audio;
     using UnityEngine.XR;
+    using TK.UI;
 
     public class LevelManager : MonoBehaviour
     {
@@ -79,8 +80,8 @@ namespace TK.Gameplay
             // arm.ForceRefresh();
             _objRaccoon.SetActive(false);
 
-            StartCoroutine(FadeGameplayVisuals());
-
+            UIManager.Instance.ShowGameplay();
+            
             _hand.ChangeStateToDescent();
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
@@ -91,25 +92,6 @@ namespace TK.Gameplay
 
             if (!FTUESaveSystem.LoadFTUEGameplayCompleted())
                 FTUEManager.Instance.StartGameplayFTUE();
-        }
-
-        IEnumerator FadeGameplayVisuals()
-        {
-            float time = 0f;
-
-            while (time < fadeDuration)
-            {
-                time += Time.deltaTime;
-                float t = time / fadeDuration;
-
-                // SetHandAlpha(t);
-                // SetArmAlpha(t);
-
-                yield return null;
-            }
-
-            // SetHandAlpha(1f);
-            // SetArmAlpha(1f);
         }
 
         // =====================

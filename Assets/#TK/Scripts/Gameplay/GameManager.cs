@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace TK.Gameplay
@@ -33,6 +34,8 @@ namespace TK.Gameplay
         public event System.Action<int> OnArmUpgraded;
         public event System.Action<int> OnPickUpUpgraded;
         public event System.Action<int> OnReleaseUpgraded;
+
+        public event System.Action OnPointUpdate;
 
         private void Awake()
         {
@@ -144,6 +147,8 @@ namespace TK.Gameplay
 
             PlayerPrefs.SetInt("CURRENT_POINT", intCurrentPoint);
             PlayerPrefs.SetInt("CUMMULATIVE_POINT", intCummulativePoint);
+
+            OnPointUpdate?.Invoke();
         }
 
         #endregion
