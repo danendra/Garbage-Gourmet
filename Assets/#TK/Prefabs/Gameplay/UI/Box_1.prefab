@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3551574318807279102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2210687331542367954}
+  - component: {fileID: -832230595094288105}
   - component: {fileID: 5268228823917076852}
   - component: {fileID: 923994521043214393}
   m_Layer: 5
@@ -92,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2210687331542367954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -113,6 +114,22 @@ RectTransform:
   m_AnchoredPosition: {x: 40, y: -40}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-832230595094288105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8812480525325977595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9438c7a6ab4c54b5cb418c22a0a1cd23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryBoxController
+  _imgBg: {fileID: 923994521043214393}
+  _imgIcon: {fileID: 6745509000025576810}
+  _sprEmptyBg: {fileID: 21300000, guid: e1d9b1d699abc4cbebe175d1777376ae, type: 3}
+  _sprFillBg: {fileID: 21300000, guid: 1b5464b4793e14344a20a53c711a27d9, type: 3}
 --- !u!222 &5268228823917076852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -141,7 +158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e1d9b1d699abc4cbebe175d1777376ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

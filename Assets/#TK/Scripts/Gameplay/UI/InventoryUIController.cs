@@ -8,7 +8,7 @@ namespace TK.UI
 
     public class InventoryUIController : MonoBehaviour
     {
-        [SerializeField] protected Image[] _arrImageIcons;
+        [SerializeField] protected InventoryBoxController[] _arrInventoryBox;
 
         protected PlayerInventory _inventory;
 
@@ -30,25 +30,22 @@ namespace TK.UI
 
         public void Initialize()
         {
-            for (int i = 0; i < _arrImageIcons.Length; i++)
+            for (int i = 0; i < _arrInventoryBox.Length; i++)
             {
                 if(i < _inventory.MaxPickUpItems)
                 {
-                    _arrImageIcons[i].transform.parent.gameObject.SetActive(true);
+                    _arrInventoryBox[i].gameObject.SetActive(true);
                 }
                 else
                 {
-                    _arrImageIcons[i].transform.parent.gameObject.SetActive(false);
-                }
-                
-                _arrImageIcons[i].gameObject.SetActive(false);
+                    _arrInventoryBox[i].gameObject.SetActive(false);
+                }                
             }
         }
 
         public void OnItemAdded(CollectibleController _collectible)
         {
-            _arrImageIcons[_inventory.HeldItems.Count - 1].sprite = _collectible.GetSprite;
-            _arrImageIcons[_inventory.HeldItems.Count - 1].gameObject.SetActive(true);
+            _arrInventoryBox[_inventory.HeldItems.Count - 1].AddItem(_collectible.GetSprite);            
         }
 
         // Update is called once per frame

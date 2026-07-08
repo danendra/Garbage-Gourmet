@@ -86,7 +86,7 @@ namespace TK.Gameplay
             IsGameStarted = true;
 
             #if UNITY_EDITOR
-            FTUESaveSystem.ResetAll();
+            // FTUESaveSystem.ResetAll();
             #endif
 
             if (!FTUESaveSystem.LoadFTUEGameplayCompleted())
