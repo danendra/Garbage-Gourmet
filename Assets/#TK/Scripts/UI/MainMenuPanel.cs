@@ -19,9 +19,21 @@ namespace TK.UI
 
         public bool IsShown { get; private set; }
 
+        private void EnsureCanvasGroup()
+        {
+            if (canvasGroup == null)
+            {
+                canvasGroup = GetComponent<CanvasGroup>();
+            }
+            if (canvasGroup == null)
+            {
+                canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            }
+        }
+
         protected virtual void Awake()
         {
-            canvasGroup = GetComponent<CanvasGroup>();
+            EnsureCanvasGroup();
             rectTransform = GetComponent<RectTransform>();
         }
 
@@ -29,6 +41,8 @@ namespace TK.UI
         {
             IsShown = true;
             gameObject.SetActive(true);
+
+            EnsureCanvasGroup();
 
             if (transitionTween != null) transitionTween.Kill();
 
@@ -48,7 +62,6 @@ namespace TK.UI
             canvasGroup.blocksRaycasts = false;
             canvasGroup.interactable = false;
 
-            // Play click sound when opening
             if (TK.Audio.AudioManager.Instance != null)
             {
                 TK.Audio.AudioManager.Instance.PlayButtonClick();
@@ -64,8 +77,11 @@ namespace TK.UI
 
             seq.OnComplete(() =>
             {
-                canvasGroup.blocksRaycasts = true;
-                canvasGroup.interactable = true;
+                if (canvasGroup != null)
+                {
+                    canvasGroup.blocksRaycasts = true;
+                    canvasGroup.interactable = true;
+                }
                 OnShown();
             });
 
@@ -75,10 +91,18 @@ namespace TK.UI
         public virtual void Hide(bool immediate = false)
         {
             IsShown = false;
+
+            EnsureCanvasGroup();
+
             canvasGroup.blocksRaycasts = false;
             canvasGroup.interactable = false;
 
             if (transitionTween != null) transitionTween.Kill();
+
+            if (MainMenuNavigationManager.Instance != null && MainMenuNavigationManager.Instance.ActivePanel == this)
+            {
+                MainMenuNavigationManager.Instance.NotifyPanelClosed(this);
+            }
 
             if (immediate)
             {
@@ -88,7 +112,6 @@ namespace TK.UI
                 return;
             }
 
-            // Play click sound when closing
             if (TK.Audio.AudioManager.Instance != null)
             {
                 TK.Audio.AudioManager.Instance.PlayButtonClick();

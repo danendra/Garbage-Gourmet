@@ -8,7 +8,6 @@ namespace TK.Data
         private const string KEY_PICKUP_LEVEL = "upgrade_pickup_level";
         private const string KEY_RELEASE_LEVEL = "upgrade_release_level";
 
-        // ── Arm Length ───────────────────────────────────────────────────────────
         public static void SaveArmLevel(int level)
         {
             PlayerPrefs.SetInt(KEY_ARM_LEVEL, level);
@@ -20,7 +19,6 @@ namespace TK.Data
             return PlayerPrefs.GetInt(KEY_ARM_LEVEL, 0);
         }
 
-        // ── Max Pick Up ──────────────────────────────────────────────────────────
         public static void SavePickUpLevel(int level)
         {
             PlayerPrefs.SetInt(KEY_PICKUP_LEVEL, level);
@@ -43,11 +41,25 @@ namespace TK.Data
             return PlayerPrefs.GetInt(KEY_RELEASE_LEVEL, 0);
         }
 
+        private const string KEY_COINS = "player_coins";
+
+        public static void SaveCoins(int amount)
+        {
+            PlayerPrefs.SetInt(KEY_COINS, amount);
+            PlayerPrefs.Save();
+        }
+
+        public static int LoadCoins()
+        {
+            return PlayerPrefs.GetInt(KEY_COINS, 1000);
+        }
+
         public static void ResetAll()
         {
             PlayerPrefs.DeleteKey(KEY_ARM_LEVEL);
             PlayerPrefs.DeleteKey(KEY_PICKUP_LEVEL);
             PlayerPrefs.DeleteKey(KEY_RELEASE_LEVEL);
+            PlayerPrefs.DeleteKey(KEY_COINS);
             PlayerPrefs.Save();
         }
     }
