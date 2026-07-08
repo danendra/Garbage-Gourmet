@@ -10,7 +10,7 @@ using TMPro;
 namespace TK.Gameplay
 {
     using Data;
-    using TK.UI;
+    using UI;
 
     public class ResultController : MonoBehaviour
     {
@@ -122,18 +122,20 @@ namespace TK.Gameplay
             {
                 _rbItem.gameObject.SetActive(false);
             }
+
             _racoonVisual.ChangeStateToIdle();
-            
 
-            GameManager.Instance.AddPoint(_intScore);
+            UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore);
 
-            do
-            {
-                yield return null;
-            }
-            while (!Input.GetMouseButtonUp(0));
+            // GameManager.Instance.AddPoint(_intScore);
 
-            GameManager.Instance.LoadScene(0);
+            // do
+            // {
+            //     yield return null;
+            // }
+            // while (!Input.GetMouseButtonUp(0));
+
+            // GameManager.Instance.LoadScene(0);
         }
 
         public IEnumerator IEDelayShowScore(CollectibleController _collectible, GameObject _object)
