@@ -17,7 +17,7 @@ namespace TK.Gameplay
         [SerializeField] private HandMovement _hand;
         [SerializeField] private ItemSpawner _itemSpawner;
         [SerializeField] private RecipeData[] _arrRecipes;
-        [SerializeField] private GameObject _objRaccoon;
+        [SerializeField] private RaccoonVisual _raccoonVisual;
 
         [Header("Intro Timing")]
         [SerializeField] private float fadeDuration = 0.18f;
@@ -84,7 +84,8 @@ namespace TK.Gameplay
         private void StartGame()
         {
             // arm.ForceRefresh();
-            _objRaccoon.SetActive(false);
+            // _objRaccoon.SetActive(false);
+            _raccoonVisual.ChangeStateToIdle();
 
             UIManager.Instance.ShowGameplay();
             
