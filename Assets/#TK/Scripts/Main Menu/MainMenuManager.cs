@@ -26,6 +26,9 @@ namespace TK.MainMenu
         [SerializeField] private float noHandExitDuration = 0.25f;
         [SerializeField] private float introTransitionDelay = 0.5f;
 
+        [Header("Scene Settings")]
+        [SerializeField] private string targetSceneName = "GameScene";
+
         private UnityEngine.UI.Button playButtonComponent;
         private bool starting;
 
@@ -136,11 +139,11 @@ namespace TK.MainMenu
 
             try
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+                UnityEngine.SceneManagement.SceneManager.LoadScene(targetSceneName);
             }
             catch (System.Exception e)
             {
-                UnityEngine.Debug.LogError("Error loading GameScene: " + e);
+                UnityEngine.Debug.LogError($"Error loading {targetSceneName}: " + e);
             }
         }
 

@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6034de73d3fa7486c9a2841e6015a0f5, type: 3}
   m_Name: Excellent, Except
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
+  CollectionName: Excellent, except
+  CollectionImage: {fileID: 0}
+  CollectionDescription: A flawless burger, wrecked by one bad lettuce leaf. Rude,
+    honestly.
   CollectibleIngredients:
   - {fileID: 3444456717332883107, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}
   - {fileID: 6376823975279334758, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}

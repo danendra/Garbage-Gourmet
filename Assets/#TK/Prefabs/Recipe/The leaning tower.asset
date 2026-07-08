@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6034de73d3fa7486c9a2841e6015a0f5, type: 3}
   m_Name: The leaning tower
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
+  CollectionName: The leaning tower
+  CollectionImage: {fileID: 0}
+  CollectionDescription: Eight ingredients stacked to the limit. It wobbles. We checked
+    twice.
   CollectibleIngredients:
   - {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
   - {fileID: 3364345851935182041, guid: 86e392be68c994136804abed47da8d34, type: 3}

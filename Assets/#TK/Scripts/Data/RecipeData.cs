@@ -10,6 +10,13 @@ namespace TK.Data
     [CreateAssetMenu(fileName = "RecipeData", menuName = "TK/RecipeData")]
     public class RecipeData : ScriptableObject
     {
+        [Header("Collection Display Data")]
+        public string CollectionName;
+        public Sprite CollectionImage;
+        [TextArea(3, 5)]
+        public string CollectionDescription;
+
+        [Header("Recipe Logic Data")]
         [Tooltip("Ingredient arrangement from bottom to top")]
         public CollectibleController[] CollectibleIngredients;
         public bool IsRarityFixed;
