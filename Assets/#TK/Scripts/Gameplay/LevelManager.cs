@@ -81,9 +81,16 @@ namespace TK.Gameplay
 
             StartCoroutine(FadeGameplayVisuals());
 
-            _hand.ChangeStateToDescent();      
+            _hand.ChangeStateToDescent();
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
+
+            #if UNITY_EDITOR
+            FTUESaveSystem.ResetAll();
+            #endif
+
+            if (!FTUESaveSystem.LoadFTUEGameplayCompleted())
+                FTUEManager.Instance.StartGameplayFTUE();
         }
 
         IEnumerator FadeGameplayVisuals()
