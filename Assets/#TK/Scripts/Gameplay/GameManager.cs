@@ -47,10 +47,10 @@ namespace TK.Gameplay
         }
 
         //Panggil waktu start game scene
-        public void ApplyUpgradesToPlayer(PlayerMovement arm, PlayerInventory inventory)
+        public void ApplyUpgradesToPlayer(HandMovement hand, PlayerInventory inventory)
         {
-            if (arm != null)
-                arm.SetArmLength(_upgradeData.GetArmLength(_armLevel));
+            if (hand != null)
+                hand.SetArmLength(_upgradeData.GetArmLength(_armLevel));
 
             if (inventory != null)
                 inventory.SetMaxPickUpItems(_upgradeData.GetMaxPickUp(_pickUpLevel));
@@ -115,55 +115,10 @@ namespace TK.Gameplay
             _pickUpLevel = UpgradeSaveSystem.LoadPickUpLevel();
             _releaseLevel = UpgradeSaveSystem.LoadReleaseLevel();
 
-            // Clamp in case the SO tier count was reduced after saving
-            _armLevel    = Mathf.Clamp(_armLevel,    1, _upgradeData.MaxArmLevel);
+            // Arm level start di level 1 defaultnya
+            _armLevel    = Mathf.Clamp(_armLevel,    0, _upgradeData.MaxArmLevel);
             _pickUpLevel = Mathf.Clamp(_pickUpLevel, 0, _upgradeData.MaxPickUpLevel);
             _releaseLevel = Mathf.Clamp(_releaseLevel, 0, _upgradeData.MaxReleaseLevel);
-        }
-
-        // INI BUAT TESTING
-        public void UpgradeArmLevel()
-        {
-            if (!CanUpgradeArm) return;
-
-            _armLevel++;
-            UpgradeSaveSystem.SaveArmLevel(_armLevel);
-            OnArmUpgraded?.Invoke(_armLevel);
-
-            Debug.Log($"Arm level upgraded to {PlayerPrefs.GetInt("upgrade_arm_level", 0)}");
-        }
-
-        public void UpgradePickUpLevel()
-        {
-            if (!CanUpgradePickUp) return;
-
-            _pickUpLevel++;
-            UpgradeSaveSystem.SavePickUpLevel(_pickUpLevel);
-            OnPickUpUpgraded?.Invoke(_pickUpLevel);
-
-            Debug.Log($"Pick up level upgraded to {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
-        }
-
-        public void DegradeArmLevel()
-        {
-            if (_armLevel <= 0) return;
-
-            _armLevel--;
-            UpgradeSaveSystem.SaveArmLevel(_armLevel);
-            OnArmUpgraded?.Invoke(_armLevel);
-
-            Debug.Log($"Arm level degraded to {PlayerPrefs.GetInt("upgrade_arm_level", 0)}");
-        }
-
-        public void DegradePickUpLevel()
-        {
-            if (_pickUpLevel <= 0) return;
-
-            _pickUpLevel--;
-            UpgradeSaveSystem.SavePickUpLevel(_pickUpLevel);
-            OnPickUpUpgraded?.Invoke(_pickUpLevel);
-
-            Debug.Log($"Pick up level degraded to {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
         }
 
         #region Change Scene

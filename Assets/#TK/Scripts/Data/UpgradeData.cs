@@ -49,7 +49,7 @@ namespace TK.Data
 
         public int GetArmLength(int level)
         {
-            level = Mathf.Clamp(level, 1, MaxArmLevel);
+            level = Mathf.Clamp(level, 0, MaxArmLevel);
             return ArmLengthLevels[level].Value;
         }
 

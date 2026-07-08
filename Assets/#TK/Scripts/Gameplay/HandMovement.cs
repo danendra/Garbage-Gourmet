@@ -289,5 +289,10 @@ namespace TK.Gameplay
                 ChangeStateToHolding();
             }
         }
+
+        public void SetArmLength(float length)
+        {
+            _maximumArmReach = length;
+        }
     }
 }
