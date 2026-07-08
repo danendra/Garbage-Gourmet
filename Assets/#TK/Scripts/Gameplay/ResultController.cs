@@ -18,7 +18,7 @@ namespace TK.Gameplay
         [SerializeField] private Transform _transSpawn;
         [SerializeField] private PoolerContainer poolScore;
         [SerializeField] private PoolerContainer poolMultiplier;
-        [SerializeField] private GameObject _objRaccoon;
+        [SerializeField] private RaccoonVisual _racoonVisual;
         [SerializeField] private DOTweenAnimation _dgAnimation;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,13 +38,19 @@ namespace TK.Gameplay
             /// IVAN disini flow animasi makannya ya
             /// tutup mulut dulu baru delay buat buka mulutnya
             /// 
+            _racoonVisual.ChangeStateToIdle();
+            yield return new WaitForSeconds(0.5f);
+            _racoonVisual.ChangeStateToEat();
+
+            // sip aman
+            
 
             int _intScore = 0;
 
             IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
             List<Rigidbody2D> _listRB = new List<Rigidbody2D>();
 
-            _objRaccoon.SetActive(true);
+            // _objRaccoon.SetActive(true);
             UIManager.Instance.HideGameplay();
 
             GameObject _object;
@@ -108,10 +114,16 @@ namespace TK.Gameplay
             yield return new WaitForSeconds(1.0f);
 
             _dgAnimation.RecreateTweenAndPlay();
+            
+            yield return new WaitForSeconds(1.0f);
 
-            ///
-            /// IVAN disini kasih delay tutup mulut dan makan
-            /// 
+            // deactivate rb game object
+            foreach (Rigidbody2D _rbItem in _listRB)
+            {
+                _rbItem.gameObject.SetActive(false);
+            }
+            _racoonVisual.ChangeStateToIdle();
+            
 
             GameManager.Instance.AddPoint(_intScore);
 
