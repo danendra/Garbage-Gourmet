@@ -6,7 +6,8 @@ using DG.Tweening;
 
 namespace TK.MainMenu
 {
-    using Module;
+    using Anoa;
+    using Gameplay;
 
     public class MainMenuManager : MonoBehaviour
     {
@@ -17,6 +18,7 @@ namespace TK.MainMenu
         [SerializeField] private RectTransform settingsButton;
         [SerializeField] private RectTransform collectionButton;
         [SerializeField] private RectTransform upgradeButton;
+        [SerializeField] private TMPro.TextMeshProUGUI txtPoint;
 
         [Header("Animations")]
         [SerializeField] private DOTweenAnimation hatchOpenAnim;
@@ -28,6 +30,8 @@ namespace TK.MainMenu
 
         private UnityEngine.UI.Button playButtonComponent;
         private bool starting;
+
+        private int _currentPoint;
 
         void Awake()
         {
@@ -63,6 +67,12 @@ namespace TK.MainMenu
             else
             {
                 Debug.LogWarning("[MainMenuManager] No Button component found on or around tapToStart! Please assign the PlayButton to tapToStart in the Inspector.");
+            }
+
+            if(txtPoint != null)
+            {
+                _currentPoint = GameManager.Instance.intCurrentMoney;
+                txtPoint.text = AnoaModule.ConvertCurency(_currentPoint);
             }
         }
 

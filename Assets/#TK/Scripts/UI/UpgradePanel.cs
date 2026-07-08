@@ -8,9 +8,6 @@ namespace TK.UI
 {
     public class UpgradePanel : MainMenuPanel
     {
-        [Header("Currency UI")]
-        [SerializeField] private TextMeshProUGUI coinsText;
-
         [Header("Container & Prefab")]
         [SerializeField] private RectTransform cardContainer;
         [SerializeField] private UpgradeCard cardPrefab;
@@ -62,10 +59,6 @@ namespace TK.UI
             if (cardContainer == null || cardPrefab == null) return;
 
             int currentCoins = UpgradeSaveSystem.LoadCoins();
-            if (coinsText != null)
-            {
-                coinsText.text = currentCoins.ToString();
-            }
 
             int totalUpgrades = upgradesList.Count;
 
@@ -183,6 +176,11 @@ namespace TK.UI
             UpgradeSaveSystem.SaveCoins(currentCoins - cost);
 
             SaveUpgradeLevel(data.upgradeKey, currentLevel + 1);
+
+            if (TK.Gameplay.GameManager.Instance != null)
+            {
+                TK.Gameplay.GameManager.Instance.ReloadUpgradeLevels();
+            }
 
             if (TK.Audio.AudioManager.Instance != null)
             {

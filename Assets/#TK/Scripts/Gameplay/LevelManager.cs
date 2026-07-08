@@ -53,6 +53,12 @@ namespace TK.Gameplay
             GetPlayerInventory = _hand.GetComponent<PlayerInventory>();
 
             StartIntro();
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.ApplyUpgradesToPlayer(_hand, GetPlayerInventory);
+                Debug.Log($"[LevelManager] Applied upgrades to player: ArmLevel={GameManager.Instance.ArmLevel}, PickUpLevel={GameManager.Instance.PickUpLevel}, ReleaseLevel={GameManager.Instance.ReleaseLevel}");
+            }
         }
 
         void Update()
