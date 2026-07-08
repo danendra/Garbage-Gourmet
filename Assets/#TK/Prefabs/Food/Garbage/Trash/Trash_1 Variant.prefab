@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 8686195125353706152, guid: fe7a17b5888064a1c857a40da0b1efe5, type: 3}
+    - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      propertyPath: _fltMultiplier
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

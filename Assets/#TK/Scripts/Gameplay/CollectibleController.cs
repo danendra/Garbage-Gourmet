@@ -29,12 +29,14 @@ namespace TK.Gameplay
         [SerializeField] private ITEM_TYPE _itemType;
         [SerializeField] private RARITY _rarity;
         [SerializeField] private int _intScore = 1;
+        [SerializeField] private float _fltMultiplier = 1;
         [SerializeField] private GameObject _goFoodServed;
 
         public new ITEM_TYPE GetType => _itemType;
         public RARITY GetRarity => _rarity;
         public Sprite GetSprite => _spriteRenderer.sprite;
         public int GetScore => _intScore;
+        public float GetMultiplier => _fltMultiplier;
 
         public GameObject GetFoodServed => _goFoodServed;
 

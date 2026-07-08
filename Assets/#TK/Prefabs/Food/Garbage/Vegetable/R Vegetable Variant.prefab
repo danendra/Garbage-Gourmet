@@ -74,12 +74,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376823975279334758, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
       propertyPath: _intScore
-      value: 30000
+      value: 15000
       objectReference: {fileID: 0}
     - target: {fileID: 6376823975279334758, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 6281387230344098194, guid: 4455506e47e104dc891e0e4609833f2b, type: 3}
+    - target: {fileID: 6376823975279334758, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
+      propertyPath: _fltMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8243124676477470834, guid: 270b25ccba9c34c0789a7fa9e5374a0d, type: 3}
       propertyPath: m_Sprite
       value: 

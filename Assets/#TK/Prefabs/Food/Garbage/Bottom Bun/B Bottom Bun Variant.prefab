@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 2336309638399483904, guid: 4b2a0df80e6604a2788297ba12c7f2fc, type: 3}
+    - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: _fltMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5674427922810825183, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.27555
