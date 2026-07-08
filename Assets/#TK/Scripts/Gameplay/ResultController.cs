@@ -55,7 +55,7 @@ namespace TK.Gameplay
                 _rb = _object.GetComponent<Rigidbody2D>();
                 _listRB.Add(_rb);
 
-                _object.transform.localScale = Vector3.one;
+                _object.transform.localScale = Vector3.one * 2;
                 _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
 
                 _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);                
@@ -73,8 +73,7 @@ namespace TK.Gameplay
             {
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;                
-
-                _rb.WakeUp();
+                
                 _rb.linearVelocity = Vector2.zero;
                 _rb.angularVelocity = 0;
                 _object.transform.position = _transSpawn.position;
@@ -88,6 +87,9 @@ namespace TK.Gameplay
 
                 _index++;
             }
+
+            if(_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
+                _intScore = 0;
 
             RecipeData _recipe = null;
 
