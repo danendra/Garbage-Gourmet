@@ -6,11 +6,13 @@ namespace TK.UI
 {
     public class UIManager : MonoBehaviour
     {
+        [SerializeField] private UIResultController _uiResult;
         [SerializeField] private DOTweenAnimation _tweenStar;
         [SerializeField] private DOTweenAnimation _tweenInventory;
         [SerializeField] private DOTweenAnimation _tweenBar;
 
         public static UIManager Instance {get; protected set;}
+        public UIResultController GetUIResult => _uiResult;
 
         void Awake()
         {

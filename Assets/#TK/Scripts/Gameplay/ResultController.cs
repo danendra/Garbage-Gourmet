@@ -10,7 +10,7 @@ using TMPro;
 namespace TK.Gameplay
 {
     using Data;
-    using TK.UI;
+    using UI;
 
     public class ResultController : MonoBehaviour
     {
