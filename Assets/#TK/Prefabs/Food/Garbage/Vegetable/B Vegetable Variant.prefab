@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 3955594862227913343, guid: 9f1dec6e0709249a1b28c921b082456b, type: 3}
+    - target: {fileID: 3364345851935182041, guid: 86e392be68c994136804abed47da8d34, type: 3}
+      propertyPath: _fltMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4324521229598932906, guid: 86e392be68c994136804abed47da8d34, type: 3}
       propertyPath: m_Name
       value: B Vegetable Variant

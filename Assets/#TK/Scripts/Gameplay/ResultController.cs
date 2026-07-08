@@ -17,6 +17,7 @@ namespace TK.Gameplay
         [SerializeField] private PlayerInventory _inventory;
         [SerializeField] private Transform _transSpawn;
         [SerializeField] private PoolerContainer poolScore;
+        [SerializeField] private PoolerContainer poolMultiplier;
         [SerializeField] private GameObject _objRaccoon;
         [SerializeField] private DOTweenAnimation _dgAnimation;
 
@@ -60,7 +61,7 @@ namespace TK.Gameplay
                 _object.transform.localScale = Vector3.one * 2;
                 _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
 
-                _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);                
+                _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);
 
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 
@@ -74,8 +75,8 @@ namespace TK.Gameplay
             foreach (CollectibleController _collectible in _listCollectible)
             {
                 _rb = _listRB[_index];
-                _object = _rb.gameObject;                
-                
+                _object = _rb.gameObject;
+
                 _rb.linearVelocity = Vector2.zero;
                 _rb.angularVelocity = 0;
                 _object.transform.position = _transSpawn.position;
@@ -83,14 +84,14 @@ namespace TK.Gameplay
 
                 _intScore += _collectible.GetScore;
 
-                StartCoroutine(IEDelayShowScore(_collectible.GetScore, _object));
+                StartCoroutine(IEDelayShowScore(_collectible, _object));
 
                 yield return new WaitForSeconds(0.4f);
 
                 _index++;
             }
 
-            if(_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
+            if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
                 _intScore = 0;
 
             RecipeData _recipe = null;
@@ -123,19 +124,42 @@ namespace TK.Gameplay
             GameManager.Instance.LoadScene(0);
         }
 
-        public IEnumerator IEDelayShowScore(int _intScore, GameObject _object)
+        public IEnumerator IEDelayShowScore(CollectibleController _collectible, GameObject _object)
         {
             yield return new WaitForSeconds(1.0f);
 
             TMP_Text txtScore = poolScore.Pop<TMP_Text>();
-            txtScore.text = _intScore.ToString();
-            txtScore.transform.position = _object.transform.position + Vector3.right * 0.2f;
-            txtScore.gameObject.SetActive(true);
-            txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
+            TMP_Text txtMultiplier = poolMultiplier.Pop<TMP_Text>();
+            int _intTarget = Mathf.RoundToInt(_collectible.GetScore * _collectible.GetMultiplier);
+            float _fltTime = 0;
 
-            yield return new WaitForSeconds(0.45f);
+            txtMultiplier.text = "X" + _collectible.GetMultiplier;
+            txtScore.text = _collectible.GetScore.ToString();
+
+            txtMultiplier.transform.position = _object.transform.position + Vector3.right * 0.2f;
+            txtScore.transform.position = _object.transform.position + Vector3.right * -0.2f;
+
+            txtMultiplier.gameObject.SetActive(true);
+            txtScore.gameObject.SetActive(true);
+
+            txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
+            txtMultiplier.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
+
+            while (_fltTime < 0.3f)
+            {
+                txtScore.text = Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f).ToString();
+
+                _fltTime += Time.deltaTime;
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            txtScore.text = _intTarget.ToString();
+
+            yield return new WaitForSeconds(0.35f);
 
             txtScore.gameObject.SetActive(false);
+            txtMultiplier.gameObject.SetActive(false);
         }
 
         // Update is called once per frame
