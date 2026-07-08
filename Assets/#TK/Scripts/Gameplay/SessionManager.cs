@@ -6,13 +6,13 @@ namespace TK.Gameplay
     public class SessionManager : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private PlayerMovement _playerMovement;
+        [SerializeField] private HandMovement _handMovement;
         [SerializeField] private PlayerInventory _inventoryManager;
-
 
         private void Start()
         {
-            GameManager.Instance.ApplyUpgradesToPlayer(_playerMovement, _inventoryManager);
+            GameManager.Instance.ApplyUpgradesToPlayer(_handMovement, _inventoryManager);
+            Debug.Log($"SessionManager: Applied upgrades to player. Arm Level: {GameManager.Instance.ArmLevel}, Pick Up Level: {GameManager.Instance.PickUpLevel}");
         }
     }
 }

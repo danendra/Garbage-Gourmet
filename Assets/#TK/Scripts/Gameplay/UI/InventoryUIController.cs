@@ -10,29 +10,29 @@ namespace TK.UI
     {
         [SerializeField] protected Image[] _arrImageIcons;
 
-        protected PlayerInventory _playerInventory;
+        protected PlayerInventory _inventory;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         IEnumerator Start()
         {
             yield return new WaitForEndOfFrame();
 
-            _playerInventory = LevelManager.Instance.GetPlayerInventory;
-            _playerInventory.OnItemAdded += OnItemAdded;
+            _inventory = LevelManager.Instance.GetPlayerInventory;
+            _inventory.OnItemAdded += OnItemAdded;
 
             Initialize();
         }
 
         void OnDestroy()
         {
-            _playerInventory.OnItemAdded -= OnItemAdded;
+            _inventory.OnItemAdded -= OnItemAdded;
         }
 
         public void Initialize()
         {
             for (int i = 0; i < _arrImageIcons.Length; i++)
             {
-                if(i < _playerInventory.MaxPickUpItems)
+                if(i < _inventory.MaxPickUpItems)
                 {
                     _arrImageIcons[i].transform.parent.gameObject.SetActive(true);
                 }
@@ -47,8 +47,8 @@ namespace TK.UI
 
         public void OnItemAdded(CollectibleController _collectible)
         {
-            _arrImageIcons[_playerInventory.HeldItems.Count - 1].sprite = _collectible.GetSprite;
-            _arrImageIcons[_playerInventory.HeldItems.Count - 1].gameObject.SetActive(true);
+            _arrImageIcons[_inventory.HeldItems.Count - 1].sprite = _collectible.GetSprite;
+            _arrImageIcons[_inventory.HeldItems.Count - 1].gameObject.SetActive(true);
         }
 
         // Update is called once per frame

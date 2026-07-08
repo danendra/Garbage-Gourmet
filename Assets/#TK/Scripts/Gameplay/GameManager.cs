@@ -1,14 +1,16 @@
 using UnityEngine;
-using TK.Data;
-using TK.Gameplay;
+using UnityEngine.SceneManagement;
 
 namespace TK.Gameplay
 {
+    using Data;    
+
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
 
-        [Header("Upgrade Data")]
+        [Header("Data")]
+        [SerializeField] private RecipeData[] _arrRecipes;
         [SerializeField] private UpgradeData _upgradeData;
 
         private int _playerMoney;
@@ -24,6 +26,7 @@ namespace TK.Gameplay
         public bool CanUpgradeArm    => _armLevel    < _upgradeData.MaxArmLevel && _playerMoney >= _upgradeData.ArmLengthLevels[_armLevel + 1].Cost;
         public bool CanUpgradePickUp => _pickUpLevel < _upgradeData.MaxPickUpLevel && _playerMoney >= _upgradeData.MaxPickUpLevels[_pickUpLevel + 1].Cost;
         public bool CanUpgradeRelease => _releaseLevel < _upgradeData.MaxReleaseLevel && _playerMoney >= _upgradeData.MaxReleaseLevels[_releaseLevel + 1].Cost;
+        public RecipeData[] GetAllRecipes => _arrRecipes;
 
         public event System.Action<int> OnArmUpgraded;
         public event System.Action<int> OnPickUpUpgraded;
@@ -44,10 +47,10 @@ namespace TK.Gameplay
         }
 
         //Panggil waktu start game scene
-        public void ApplyUpgradesToPlayer(PlayerMovement arm, PlayerInventory inventory)
+        public void ApplyUpgradesToPlayer(HandMovement hand, PlayerInventory inventory)
         {
-            if (arm != null)
-                arm.SetArmLength(_upgradeData.GetArmLength(_armLevel));
+            if (hand != null)
+                hand.SetArmLength(_upgradeData.GetArmLength(_armLevel));
 
             if (inventory != null)
                 inventory.SetMaxPickUpItems(_upgradeData.GetMaxPickUp(_pickUpLevel));
@@ -112,55 +115,29 @@ namespace TK.Gameplay
             _pickUpLevel = UpgradeSaveSystem.LoadPickUpLevel();
             _releaseLevel = UpgradeSaveSystem.LoadReleaseLevel();
 
-            // Clamp in case the SO tier count was reduced after saving
+            // Arm level start di level 1 defaultnya
             _armLevel    = Mathf.Clamp(_armLevel,    0, _upgradeData.MaxArmLevel);
             _pickUpLevel = Mathf.Clamp(_pickUpLevel, 0, _upgradeData.MaxPickUpLevel);
             _releaseLevel = Mathf.Clamp(_releaseLevel, 0, _upgradeData.MaxReleaseLevel);
         }
 
-        // INI BUAT TESTING
-        public void UpgradeArmLevel()
+        #region Change Scene
+
+        public void LoadScene(int _intIndex)
         {
-            if (!CanUpgradeArm) return;
-
-            _armLevel++;
-            UpgradeSaveSystem.SaveArmLevel(_armLevel);
-            OnArmUpgraded?.Invoke(_armLevel);
-
-            Debug.Log($"Arm level upgraded to {PlayerPrefs.GetInt("upgrade_arm_level", 0)}");
+            SceneManager.LoadScene(_intIndex);
         }
 
-        public void UpgradePickUpLevel()
+        public void LoadScene(string _strScene)
         {
-            if (!CanUpgradePickUp) return;
-
-            _pickUpLevel++;
-            UpgradeSaveSystem.SavePickUpLevel(_pickUpLevel);
-            OnPickUpUpgraded?.Invoke(_pickUpLevel);
-
-            Debug.Log($"Pick up level upgraded to {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
+            SceneManager.LoadScene(_strScene);
         }
 
-        public void DegradeArmLevel()
+        public void Restart()
         {
-            if (_armLevel <= 0) return;
-
-            _armLevel--;
-            UpgradeSaveSystem.SaveArmLevel(_armLevel);
-            OnArmUpgraded?.Invoke(_armLevel);
-
-            Debug.Log($"Arm level degraded to {PlayerPrefs.GetInt("upgrade_arm_level", 0)}");
+            LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        public void DegradePickUpLevel()
-        {
-            if (_pickUpLevel <= 0) return;
-
-            _pickUpLevel--;
-            UpgradeSaveSystem.SavePickUpLevel(_pickUpLevel);
-            OnPickUpUpgraded?.Invoke(_pickUpLevel);
-
-            Debug.Log($"Pick up level degraded to {PlayerPrefs.GetInt("upgrade_pickup_level", 0)}");
-        }
+        #endregion
     }
 }

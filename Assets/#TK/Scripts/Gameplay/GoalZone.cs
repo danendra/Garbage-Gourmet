@@ -6,25 +6,28 @@ namespace TK.Gameplay
     {
         [SerializeField] LevelManager gameManager;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnEnable()
         {
-            if (!other.CompareTag("Player"))
-                return;
+            gameManager.Hand.OnAscended += OnAscended;
+        }
 
-            PlayerMovement  player    = other.GetComponent<PlayerMovement>();
-            PlayerInventory inventory = other.GetComponent<PlayerInventory>();
+        private void OnDisable()
+        {
+            gameManager.Hand.OnAscended += OnAscended;
+        }
 
-            if (player == null || inventory == null)
-                return;
+        private void OnAscended()
+        {
+            HandMovement hand = gameManager.Hand;
+            PlayerInventory inventory = gameManager.GetPlayerInventory;
 
-            // Only trigger once the player is ascending.
-            if (!player.HasCollected)
+            if (hand == null || inventory == null)
                 return;
 
             // Player hit the maximum arm reach without picking anything up.
             if (inventory.HeldCount == 0)
             {
-                gameManager.LoseGame(player);
+                gameManager.LoseGame(hand);
                 return;
             }
 
@@ -36,16 +39,16 @@ namespace TK.Gameplay
                 GameSession.CollectedItems.Add(item);
 
             // Store the winning item.
-            GameSession.BestItem          = best;
+            GameSession.BestItem = best;
             GameSession.CollectedItemType = best.GetType;
-            GameSession.CollectedRarity   = best.GetRarity;
-            GameSession.CollectedSprite   = best.GetSprite;
+            GameSession.CollectedRarity = best.GetRarity;
+            GameSession.CollectedSprite = best.GetSprite;
             GameSession.CollectedItemName = best.name;
 
             if (best.GetType == ITEM_TYPE.Trash)
-                gameManager.LoseGame(player);
+                gameManager.LoseGame(hand);
             else
-                gameManager.WinGame(player);
+                gameManager.WinGame(hand);
         }
 
         /// Selects the highest-value item from the inventory (Ini nanti diubah buat validasi list).

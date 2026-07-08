@@ -1,22 +1,22 @@
-using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
-using TK.Audio;
+using System.Linq;
+using UnityEngine;
 
 namespace TK.Gameplay
 {
-    using Module;
+    using Data;
+    using Audio;
+    using UnityEngine.XR;
 
     public class LevelManager : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private SequenceController _sequenceController;
-        [SerializeField] private PlayerMovement _player;
+        [SerializeField] private HandMovement _hand;
         [SerializeField] private ItemSpawner _itemSpawner;
-
-        [Header("Gameplay Visuals")]
-        [SerializeField] private SpriteRenderer handSprite;
-        [SerializeField] private LineRenderer armLine;
-        // [SerializeField] private ArmLineRenderer arm;
+        [SerializeField] private RecipeData[] _arrRecipes;
+        [SerializeField] private GameObject _objRaccoon;
 
         [Header("Intro Timing")]
         [SerializeField] private float fadeDuration = 0.18f;
@@ -24,8 +24,10 @@ namespace TK.Gameplay
         [Header("End Sequence")]
         [SerializeField] private ResultController _result;
 
+        public HandMovement Hand => _hand;
         public static LevelManager Instance { get; protected set; }
-        public PlayerInventory GetPlayerInventory { get; protected set; }
+        public HandMovement GetHandMovement => _hand;
+        public PlayerInventory GetPlayerInventory { get; protected set; }        
         public bool IsGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
 
@@ -47,7 +49,7 @@ namespace TK.Gameplay
         {
             // StartCoroutine(BeginIntroSequence());
 
-            GetPlayerInventory = _player.GetComponent<PlayerInventory>();
+            GetPlayerInventory = _hand.GetComponent<PlayerInventory>();
 
             StartIntro();
         }
@@ -56,7 +58,7 @@ namespace TK.Gameplay
         {
             if (!IsGameStarted || IsGameOver) return;
             // Ini buat handle dynamic food spawn
-            _itemSpawner.TickSpawn(_player.transform.position.y);
+            _itemSpawner.TickSpawn(_hand.transform.position.y);
         }
 
         private void StartIntro()
@@ -64,10 +66,10 @@ namespace TK.Gameplay
             IsGameStarted = false;
             IsGameOver = false;
 
-            _player.SetCanMove(false);
+            _hand.ChangeStateToHidden();
 
-            SetHandAlpha(0f);
-            SetArmAlpha(0f);
+            // SetHandAlpha(0f);
+            // SetArmAlpha(0f);
 
             _sequenceController.PlayIntroScene(StartGame);
         }
@@ -75,10 +77,11 @@ namespace TK.Gameplay
         private void StartGame()
         {
             // arm.ForceRefresh();
+            _objRaccoon.SetActive(false);
 
             StartCoroutine(FadeGameplayVisuals());
 
-            _player.SetCanMove(true);        
+            _hand.ChangeStateToDescent();      
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
         }
@@ -92,40 +95,37 @@ namespace TK.Gameplay
                 time += Time.deltaTime;
                 float t = time / fadeDuration;
 
-                SetHandAlpha(t);
-                SetArmAlpha(t);
+                // SetHandAlpha(t);
+                // SetArmAlpha(t);
 
                 yield return null;
             }
 
-            SetHandAlpha(1f);
-            SetArmAlpha(1f);
-        }
-
-        void SetHandAlpha(float alpha)
-        {
-            Color c = handSprite.color;
-            c.a = alpha;
-            handSprite.color = c;
-        }
-
-        void SetArmAlpha(float alpha)
-        {
-            Color a = armLine.startColor;
-            Color b = armLine.endColor;
-
-            a.a = alpha;
-            b.a = alpha;
-
-            armLine.startColor = a;
-            armLine.endColor = b;
+            // SetHandAlpha(1f);
+            // SetArmAlpha(1f);
         }
 
         // =====================
         // WIN / LOSE
         // =====================
 
-        public void WinGame(PlayerMovement playerRef)
+        public bool FindRecipe(IEnumerable<CollectibleController> _ieCollectible, out RecipeData _recipe)
+        {                    
+            for (int i = 0; i < GameManager.Instance.GetAllRecipes.Length; i++)
+            {
+                if (GameManager.Instance.GetAllRecipes[i].IsIngredientCorrect(_ieCollectible))
+                {
+                    _recipe = GameManager.Instance.GetAllRecipes[i];
+
+                    return true;
+                }
+            }
+
+            _recipe = null;
+            return false;
+        }
+
+        public void WinGame(HandMovement playerRef)
         {
             if (IsGameOver) return;
             IsGameOver = true;
@@ -134,11 +134,10 @@ namespace TK.Gameplay
             GameSession.FinalScore = finalScore;
             GameSession.PlayerWon = true;
 
-            playerRef.SetCanMove(false);
             StartCoroutine(RunEndSequence(true));
         }
 
-        public void LoseGame(PlayerMovement playerRef)
+        public void LoseGame(HandMovement playerRef)
         {
             if (IsGameOver) return;
             IsGameOver = true;
@@ -146,7 +145,6 @@ namespace TK.Gameplay
             GameSession.FinalScore = 0;
             GameSession.PlayerWon = false;
 
-            playerRef.SetCanMove(false);
             StartCoroutine(RunEndSequence(false));
         }
 
@@ -166,12 +164,12 @@ namespace TK.Gameplay
             {
                 time -= Time.deltaTime;
                 float t = time / fadeDuration;
-                SetHandAlpha(t);
-                SetArmAlpha(t);
+                // SetHandAlpha(t);
+                // SetArmAlpha(t);
                 yield return null;
             }
-            SetHandAlpha(0f);
-            SetArmAlpha(0f);
+            // SetHandAlpha(0f);
+            // SetArmAlpha(0f);
         }
     }
 }

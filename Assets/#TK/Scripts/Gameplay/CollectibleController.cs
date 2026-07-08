@@ -6,11 +6,11 @@ namespace TK.Gameplay
 
     public enum ITEM_TYPE
     {
-        Top_Bun,
-        Bottom_Bun,
-        Patty,
+        Top_Bun,        
         Cheese,
+        Patty,        
         Vegetable,
+        Bottom_Bun,
         Trash
     }
 
@@ -33,6 +33,7 @@ namespace TK.Gameplay
         public new ITEM_TYPE GetType => _itemType;
         public RARITY GetRarity => _rarity;
         public Sprite GetSprite => _spriteRenderer.sprite;
+        public int GetScore => _intScore;
 
         public GameObject GetFoodServed => _goFoodServed;
 
@@ -58,7 +59,7 @@ namespace TK.Gameplay
 
             IItemCollector collector = other.GetComponent<IItemCollector>();
 
-            if (collector == null || !collector.CanCollect)
+            if (collector == null || !collector.CanCollect || LevelManager.Instance.GetHandMovement.State == HAND_STATE.Ascent)
                 return;
 
             GameSession.CollectedSprite = _spriteRenderer.sprite;

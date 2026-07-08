@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434323398569183065, guid: 92db90e40124c4b50b80505f2d14fe5c, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3120585187670616382, guid: 92db90e40124c4b50b80505f2d14fe5c, type: 3}
       propertyPath: m_Name
       value: R Vegetable Variant
