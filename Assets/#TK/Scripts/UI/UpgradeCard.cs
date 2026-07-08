@@ -5,6 +5,7 @@ using TK.Data;
 
 namespace TK.UI
 {
+    using Anoa;
     public class UpgradeCard : MonoBehaviour
     {
         [Header("UI Component References")]
@@ -50,12 +51,12 @@ namespace TK.UI
                         if (canAfford)
                         {
                             if (affordableStarAsset != null) costText.spriteAsset = affordableStarAsset;
-                            costText.text = $"Upgrade | <sprite=0> {nextCost.ToString("N0")}";
+                            costText.text = $"Upgrade | <sprite=0> {AnoaModule.ConvertCurency(nextCost)}";
                         }
                         else
                         {
                             if (unaffordableStarAsset != null) costText.spriteAsset = unaffordableStarAsset;
-                            costText.text = $"Collect <sprite=0> {nextCost.ToString("N0")} to upgrade";
+                            costText.text = $"Collect <sprite=0> {AnoaModule.ConvertCurency(nextCost)} to upgrade";
                         }
                     }
 

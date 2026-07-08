@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -12,6 +13,10 @@ namespace TK.Gameplay
 
     public class HandVisual : MonoBehaviour
     {
+
+        [Header("Components")]
+        [SerializeField] private PlayerInventory _inventory;
+
         public Transform Transform => transform;
 
         // components
@@ -19,6 +24,7 @@ namespace TK.Gameplay
 
         private static readonly int IdleTrigger = Animator.StringToHash("Idle");
         private static readonly int GrabTrigger = Animator.StringToHash("Grab");
+        private static readonly int QuickGrabTrigger = Animator.StringToHash("QuickGrab");
 
         // state
         private HAND_VISUAL_STATE _state = HAND_VISUAL_STATE.Idle;
@@ -46,6 +52,16 @@ namespace TK.Gameplay
             _baseScale = transform.localScale;
         }
 
+        private void OnEnable()
+        {
+            _inventory.OnItemAdded += HandleItemAdded;
+        }
+
+        private void OnDisable()
+        {
+            _inventory.OnItemAdded -= HandleItemAdded;
+        }
+
         private void Start()
         {
             HandleStateChange();
@@ -64,6 +80,12 @@ namespace TK.Gameplay
                     _animator.SetTrigger(GrabTrigger);
                     break;
             }
+        }
+
+        private void HandleItemAdded(CollectibleController collectible)
+        {
+            PlaySquashStretch();
+            _animator.SetTrigger(QuickGrabTrigger);
         }
 
         // squash and stretch

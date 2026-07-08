@@ -8,6 +8,7 @@ namespace TK.Gameplay
     using Data;
     using Audio;
     using UnityEngine.XR;
+    using TK.UI;
 
     public class LevelManager : MonoBehaviour
     {
@@ -16,7 +17,7 @@ namespace TK.Gameplay
         [SerializeField] private HandMovement _hand;
         [SerializeField] private ItemSpawner _itemSpawner;
         [SerializeField] private RecipeData[] _arrRecipes;
-        [SerializeField] private GameObject _objRaccoon;
+        [SerializeField] private RaccoonVisual _raccoonVisual;
 
         [Header("Intro Timing")]
         [SerializeField] private float fadeDuration = 0.18f;
@@ -52,6 +53,12 @@ namespace TK.Gameplay
             GetPlayerInventory = _hand.GetComponent<PlayerInventory>();
 
             StartIntro();
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.ApplyUpgradesToPlayer(_hand, GetPlayerInventory);
+                Debug.Log($"[LevelManager] Applied upgrades to player: ArmLevel={GameManager.Instance.ArmLevel}, PickUpLevel={GameManager.Instance.PickUpLevel}, ReleaseLevel={GameManager.Instance.ReleaseLevel}");
+            }
         }
 
         void Update()
@@ -77,32 +84,23 @@ namespace TK.Gameplay
         private void StartGame()
         {
             // arm.ForceRefresh();
-            _objRaccoon.SetActive(false);
+            // _objRaccoon.SetActive(false);
+            _raccoonVisual.ChangeStateToIdle();
 
-            StartCoroutine(FadeGameplayVisuals());
-
-            _hand.ChangeStateToDescent();      
+            UIManager.Instance.ShowGameplay();
+            
+            _hand.ChangeStateToDescent();
             AudioManager.Instance.PlayGameplayMusic();
             IsGameStarted = true;
-        }
 
-        IEnumerator FadeGameplayVisuals()
-        {
-            float time = 0f;
+            #if UNITY_EDITOR
+            // FTUESaveSystem.ResetAll();
+            #endif
 
-            while (time < fadeDuration)
-            {
-                time += Time.deltaTime;
-                float t = time / fadeDuration;
-
-                // SetHandAlpha(t);
-                // SetArmAlpha(t);
-
-                yield return null;
-            }
-
-            // SetHandAlpha(1f);
-            // SetArmAlpha(1f);
+            if (!FTUESaveSystem.LoadFTUEGameplayCompleted())
+                FTUEManager.Instance.StartGameplayFTUE();
+            else if (UpgradeSaveSystem.LoadReleaseLevel() >= 1 && !FTUESaveSystem.LoadFTUEReleaseCompleted())
+                FTUEManager.Instance.StartReleaseFTUE();
         }
 
         // =====================

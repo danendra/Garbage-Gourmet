@@ -46,6 +46,8 @@ namespace TK.Gameplay
         // horizontal drag-to-target movement
         private float _targetX;
         private float _xVelocity; // used internally by SmoothDamp
+        
+        public float RawDragDeltaX { get; private set; }
 
         // touch drag tracking
         private Vector2 _lastTouchPos;
@@ -135,23 +137,23 @@ namespace TK.Gameplay
 
         private void Update()
         {
-            // --- TEST INPUT: keys 1-4 to force state changes ---
-            if (Input.GetKeyDown(KeyCode.Alpha1)) State = HAND_STATE.Idle;
-            if (Input.GetKeyDown(KeyCode.Alpha2)) State = HAND_STATE.Descent;
-            if (Input.GetKeyDown(KeyCode.Alpha3)) State = HAND_STATE.Holding;
-            if (Input.GetKeyDown(KeyCode.Alpha4)) State = HAND_STATE.Ascent;
-
             
-
             if (_state == HAND_STATE.Descent)
             {
                 CheckTimeToAscent();
+                HandleTouchInput();
+            }
+            else if (_state == HAND_STATE.Idle)
+            {
+                // Buat FTUE, biar player bisa drag tangan sebelum turun
                 HandleTouchInput();
             }
         }
 
         private void HandleTouchInput()
         {
+            RawDragDeltaX = 0f;
+
             if (Touch.activeTouches.Count == 0)
             {
                 _dragging = false;
@@ -172,6 +174,7 @@ namespace TK.Gameplay
                     if (_dragging)
                     {
                         float deltaX = touch.screenPosition.x - _lastTouchPos.x;
+                        RawDragDeltaX = Mathf.Abs(deltaX);
                         _targetX = Mathf.Clamp(_targetX + deltaX * _dragSensitivity, _minX, _maxX);
                         _lastTouchPos = touch.screenPosition;
                     }

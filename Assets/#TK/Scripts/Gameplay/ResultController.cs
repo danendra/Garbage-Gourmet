@@ -10,13 +10,15 @@ using TMPro;
 namespace TK.Gameplay
 {
     using Data;
+    using TK.UI;
 
     public class ResultController : MonoBehaviour
     {
         [SerializeField] private PlayerInventory _inventory;
         [SerializeField] private Transform _transSpawn;
         [SerializeField] private PoolerContainer poolScore;
-        [SerializeField] private GameObject _objRaccoon;
+        [SerializeField] private PoolerContainer poolMultiplier;
+        [SerializeField] private RaccoonVisual _racoonVisual;
         [SerializeField] private DOTweenAnimation _dgAnimation;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,51 +34,71 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayResult()
         {
+            ///
+            /// IVAN disini flow animasi makannya ya
+            /// tutup mulut dulu baru delay buat buka mulutnya
+            /// 
+            _racoonVisual.ChangeStateToIdle();
+            yield return new WaitForSeconds(0.5f);
+            _racoonVisual.ChangeStateToEat();
+
+            // sip aman
+            
+
             int _intScore = 0;
 
             IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
-            List<GameObject> _listObject = new List<GameObject>();
+            List<Rigidbody2D> _listRB = new List<Rigidbody2D>();
 
-            _objRaccoon.SetActive(true);
+            // _objRaccoon.SetActive(true);
+            UIManager.Instance.HideGameplay();
 
             GameObject _object;
+            Rigidbody2D _rb;
 
             int _index = 6;
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
-                _object = Instantiate(_collectible.GetFoodServed, _collectible.transform.position + Vector3.up * 10.0f + Vector3.right * Random.Range(-3.0f, 3.0f), Quaternion.identity, _transSpawn);
+                _object = Instantiate(_collectible.GetFoodServed, _collectible.transform.position + Vector3.up * 10.0f + Vector3.right * Random.Range(-2.0f, 2.0f), Quaternion.identity, _transSpawn);
+                _rb = _object.GetComponent<Rigidbody2D>();
+                _listRB.Add(_rb);
 
-                _listObject.Add(_object);
+                _object.transform.localScale = Vector3.one * 2;
+                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
 
-                _object.transform.localScale = Vector3.one;
-                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;                
+                _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);
 
-                _object.transform.DOMove(_transSpawn.position, 1.0f).SetEase(Ease.OutBack);
-                _object.SetActive(true);
-
-                yield return new WaitForSeconds(Random.Range(0.0f, 0.1f));
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 
                 _index++;
-            }            
+            }
+
+            yield return new WaitForSeconds(0.5f);
 
             _index = 0;
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
-                _object = _listObject[_index];
+                _rb = _listRB[_index];
+                _object = _rb.gameObject;
 
+                _rb.linearVelocity = Vector2.zero;
+                _rb.angularVelocity = 0;
                 _object.transform.position = _transSpawn.position;
                 _object.transform.rotation = Quaternion.identity;
 
-                _intScore += _collectible.GetScore;
+                _intScore += Mathf.RoundToInt(_collectible.GetScore * _collectible.GetMultiplier);
 
-                StartCoroutine(IEDelayShowScore(_collectible.GetScore, _object));
+                StartCoroutine(IEDelayShowScore(_collectible, _object));
 
                 yield return new WaitForSeconds(0.4f);
 
                 _index++;
             }
+
+            if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
+                _intScore = 0;
 
             RecipeData _recipe = null;
 
@@ -92,6 +114,18 @@ namespace TK.Gameplay
             yield return new WaitForSeconds(1.0f);
 
             _dgAnimation.RecreateTweenAndPlay();
+            
+            yield return new WaitForSeconds(1.0f);
+
+            // deactivate rb game object
+            foreach (Rigidbody2D _rbItem in _listRB)
+            {
+                _rbItem.gameObject.SetActive(false);
+            }
+            _racoonVisual.ChangeStateToIdle();
+            
+
+            GameManager.Instance.AddPoint(_intScore);
 
             do
             {
@@ -102,19 +136,42 @@ namespace TK.Gameplay
             GameManager.Instance.LoadScene(0);
         }
 
-        public IEnumerator IEDelayShowScore(int _intScore, GameObject _object)
+        public IEnumerator IEDelayShowScore(CollectibleController _collectible, GameObject _object)
         {
             yield return new WaitForSeconds(1.0f);
 
             TMP_Text txtScore = poolScore.Pop<TMP_Text>();
-            txtScore.text = _intScore.ToString();
-            txtScore.transform.position = _object.transform.position + Vector3.right * 0.2f;
-            txtScore.gameObject.SetActive(true);
-            txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
+            TMP_Text txtMultiplier = poolMultiplier.Pop<TMP_Text>();
+            int _intTarget = Mathf.RoundToInt(_collectible.GetScore * _collectible.GetMultiplier);
+            float _fltTime = 0;
 
-            yield return new WaitForSeconds(0.45f);
+            txtMultiplier.text = "X" + _collectible.GetMultiplier;
+            txtScore.text = _collectible.GetScore.ToString();
+
+            txtMultiplier.transform.position = _object.transform.position + Vector3.right * 0.2f;
+            txtScore.transform.position = _object.transform.position + Vector3.right * -0.2f;
+
+            txtMultiplier.gameObject.SetActive(true);
+            txtScore.gameObject.SetActive(true);
+
+            txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
+            txtMultiplier.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
+
+            while (_fltTime < 0.3f)
+            {
+                txtScore.text = Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f).ToString();
+
+                _fltTime += Time.deltaTime;
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            txtScore.text = _intTarget.ToString();
+
+            yield return new WaitForSeconds(0.35f);
 
             txtScore.gameObject.SetActive(false);
+            txtMultiplier.gameObject.SetActive(false);
         }
 
         // Update is called once per frame
