@@ -5,7 +5,6 @@ using UnityEngine;
 namespace TK.Data
 {
     using Gameplay;
-    using UnityEditor.Tilemaps;
 
     [CreateAssetMenu(fileName = "RecipeData", menuName = "TK/RecipeData")]
     public class RecipeData : ScriptableObject
