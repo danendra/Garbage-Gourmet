@@ -137,14 +137,7 @@ namespace TK.Gameplay
 
         private void Update()
         {
-            // --- TEST INPUT: keys 1-4 to force state changes ---
-            if (Input.GetKeyDown(KeyCode.Alpha1)) State = HAND_STATE.Idle;
-            if (Input.GetKeyDown(KeyCode.Alpha2)) State = HAND_STATE.Descent;
-            if (Input.GetKeyDown(KeyCode.Alpha3)) State = HAND_STATE.Holding;
-            if (Input.GetKeyDown(KeyCode.Alpha4)) State = HAND_STATE.Ascent;
-
             
-
             if (_state == HAND_STATE.Descent)
             {
                 CheckTimeToAscent();

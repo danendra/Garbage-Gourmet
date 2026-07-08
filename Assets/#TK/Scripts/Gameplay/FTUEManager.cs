@@ -13,8 +13,7 @@ namespace TK.Gameplay
         [Header("FTUE UI")]
         [SerializeField] private GameObject _movementFTUE;
         [SerializeField] private GameObject _inventoryFTUE;
-        [SerializeField] private GameObject _collectionFTUE;
-        [SerializeField] private GameObject _upgradeFTUE;
+        [SerializeField] private GameObject _releaseFTUE;
 
         [Header("Player References")]
         [SerializeField] private HandMovement _handMovement;
@@ -26,7 +25,7 @@ namespace TK.Gameplay
         [Header("Timing")]
         [SerializeField] private float _InventoryHoldTime = 1f;
 
-        private enum FTUEGameplayStep { None, WaitForDrag, WaitForTap }
+        private enum FTUEGameplayStep { None, WaitForDrag, WaitForTap, WaitForDoubleTap }
         private FTUEGameplayStep _currentStep = FTUEGameplayStep.None;
 
         private bool _inventoryFTUECanDismiss = false;
@@ -58,6 +57,10 @@ namespace TK.Gameplay
 
                 case FTUEGameplayStep.WaitForTap:
                     CheckTap();
+                    break;
+                
+                case FTUEGameplayStep.WaitForDoubleTap:
+                    CheckDoubleTap();
                     break;
             }
         }
@@ -101,6 +104,17 @@ namespace TK.Gameplay
             ShowInventoryFTUE();
         }
 
+        public void StartReleaseFTUE()
+        {
+            _inventory.OnItemAdded += OnFirstItemAddedForRelease;
+        }
+
+        private void OnFirstItemAddedForRelease(CollectibleController _collectible)
+        {
+            _inventory.OnItemAdded -= OnFirstItemAddedForRelease;
+            ShowReleaseFTUE();
+        }
+
         private void ShowInventoryFTUE()
         {
             Time.timeScale = 0f;
@@ -134,6 +148,36 @@ namespace TK.Gameplay
             Time.timeScale = 1f;
 
             FTUESaveSystem.SaveFTUEGameplayCompleted(true);
+        }
+
+        private void ShowReleaseFTUE()
+        {
+            Time.timeScale = 0f;
+
+            _releaseFTUE.SetActive(true);
+            _currentStep = FTUEGameplayStep.WaitForDoubleTap;
+        }
+
+        private void CheckDoubleTap()
+        {
+            if (Touch.activeTouches.Count > 0 &&
+                Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
+            {
+                if (_releaseFTUE.activeSelf)
+                {
+                    OnReleaseFTUECompleted();
+                }
+            }
+        }
+
+        private void OnReleaseFTUECompleted()
+        {
+            _currentStep = FTUEGameplayStep.None;
+
+            _releaseFTUE.SetActive(false);
+            Time.timeScale = 1f;
+
+            FTUESaveSystem.SaveFTUEReleaseCompleted(true);
         }
     }
 }
