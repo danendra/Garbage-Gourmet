@@ -35,37 +35,43 @@ namespace TK.Gameplay
             int _intScore = 0;
 
             IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
-            List<GameObject> _listObject = new List<GameObject>();
+            List<Rigidbody2D> _listRB = new List<Rigidbody2D>();
 
             _objRaccoon.SetActive(true);
 
             GameObject _object;
+            Rigidbody2D _rb;
 
             int _index = 6;
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
-                _object = Instantiate(_collectible.GetFoodServed, _collectible.transform.position + Vector3.up * 10.0f + Vector3.right * Random.Range(-3.0f, 3.0f), Quaternion.identity, _transSpawn);
-
-                _listObject.Add(_object);
+                _object = Instantiate(_collectible.GetFoodServed, _collectible.transform.position + Vector3.up * 10.0f + Vector3.right * Random.Range(-2.0f, 2.0f), Quaternion.identity, _transSpawn);
+                _rb = _object.GetComponent<Rigidbody2D>();
+                _listRB.Add(_rb);
 
                 _object.transform.localScale = Vector3.one;
-                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;                
+                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
 
-                _object.transform.DOMove(_transSpawn.position, 1.0f).SetEase(Ease.OutBack);
-                _object.SetActive(true);
+                _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);                
 
-                yield return new WaitForSeconds(Random.Range(0.0f, 0.1f));
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 
                 _index++;
-            }            
+            }
+
+            yield return new WaitForSeconds(0.5f);
 
             _index = 0;
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
-                _object = _listObject[_index];
+                _rb = _listRB[_index];
+                _object = _rb.gameObject;                
 
+                _rb.WakeUp();
+                _rb.linearVelocity = Vector2.zero;
+                _rb.angularVelocity = 0;
                 _object.transform.position = _transSpawn.position;
                 _object.transform.rotation = Quaternion.identity;
 
@@ -92,6 +98,8 @@ namespace TK.Gameplay
             yield return new WaitForSeconds(1.0f);
 
             _dgAnimation.RecreateTweenAndPlay();
+
+            GameManager.Instance.AddPoint(_intScore);
 
             do
             {

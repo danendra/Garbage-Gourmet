@@ -1,4 +1,5 @@
 using UnityEngine;
+using TK.MainMenu;
 
 namespace TK.UI
 {
@@ -18,6 +19,8 @@ namespace TK.UI
 
         private MainMenuPanel activePanel;
 
+        public MainMenuPanel ActivePanel => activePanel;
+
         private void Awake()
         {
             if (Instance == null)
@@ -30,7 +33,6 @@ namespace TK.UI
                 return;
             }
 
-            // Bind navigation button listeners
             if (openSettingsButton != null)
                 openSettingsButton.onClick.AddListener(OpenSettings);
             if (openUpgradeButton != null)
@@ -38,7 +40,6 @@ namespace TK.UI
             if (openCollectionButton != null)
                 openCollectionButton.onClick.AddListener(OpenCollection);
 
-            // Initially hide all panels immediately
             CloseAllImmediately();
         }
 
@@ -50,23 +51,24 @@ namespace TK.UI
         {
             if (targetPanel == null) return;
 
-            // Toggle behavior: if the clicked panel is already open, close it
             if (activePanel == targetPanel && targetPanel.IsShown)
             {
                 CloseActivePanel();
                 return;
             }
 
-            // If there's an active panel, hide it
             if (activePanel != null && activePanel.IsShown)
             {
-                // Pass immediate:true to prevent playing click sound twice
                 activePanel.Hide(true);
             }
 
-            // Show the new target panel
             activePanel = targetPanel;
             activePanel.Show();
+
+            if (MainMenuManager.Instance != null)
+            {
+                MainMenuManager.Instance.SetMenuButtonsState(false);
+            }
         }
 
         public void CloseActivePanel()
@@ -75,6 +77,23 @@ namespace TK.UI
             {
                 activePanel.Hide();
                 activePanel = null;
+            }
+
+            if (MainMenuManager.Instance != null)
+            {
+                MainMenuManager.Instance.SetMenuButtonsState(true);
+            }
+        }
+
+        public void NotifyPanelClosed(MainMenuPanel panel)
+        {
+            if (activePanel == panel)
+            {
+                activePanel = null;
+                if (MainMenuManager.Instance != null)
+                {
+                    MainMenuManager.Instance.SetMenuButtonsState(true);
+                }
             }
         }
 

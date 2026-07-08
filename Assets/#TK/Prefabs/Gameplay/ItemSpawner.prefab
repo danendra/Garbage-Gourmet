@@ -845,7 +845,7 @@ MonoBehaviour:
   _bottomY: {fileID: 6358004450961677661}
   _subLevels:
   - MinDepth: 0
-    MaxDepth: 0.1
+    MaxDepth: 0.2
     Pool: {fileID: 8524894383507889110}
     Count: 20
     Entries:
@@ -856,9 +856,8 @@ MonoBehaviour:
     - Prefab: {fileID: 8358240769541418234, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
       Weight: 33.33
     TrashWeight: 15
-    TrashPrefabs: []
   - MinDepth: 0.11
-    MaxDepth: 0.3
+    MaxDepth: 0.4
     Pool: {fileID: 77372667055263073}
     Count: 32
     Entries:
@@ -879,9 +878,8 @@ MonoBehaviour:
     - Prefab: {fileID: 7356334416653025982, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
       Weight: 5.2
     TrashWeight: 15
-    TrashPrefabs: []
   - MinDepth: 0.31
-    MaxDepth: 0.6
+    MaxDepth: 0.7
     Pool: {fileID: 7879520763633670241}
     Count: 48
     Entries:
@@ -904,7 +902,6 @@ MonoBehaviour:
     - Prefab: {fileID: 427390545385617560, guid: 617373c718569401f9c50f67b9692e1e, type: 3}
       Weight: 5.6
     TrashWeight: 20
-    TrashPrefabs: []
   - MinDepth: 0.61
     MaxDepth: 0.95
     Pool: {fileID: 6919336051837744045}
@@ -931,9 +928,9 @@ MonoBehaviour:
     - Prefab: {fileID: 6753686997757230165, guid: 92db90e40124c4b50b80505f2d14fe5c, type: 3}
       Weight: 17.5
     TrashWeight: 25
-    TrashPrefabs: []
+  _trashPrefabs: []
   _eventItemPrefab: {fileID: 7271019100313349323, guid: e95fc1134e39b4f19837b1cf622b5ebf, type: 3}
-  _player: {fileID: 0}
+  _hand: {fileID: 0}
 --- !u!1 &9033443977756876929
 GameObject:
   m_ObjectHideFlags: 0
