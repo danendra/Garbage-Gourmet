@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6034de73d3fa7486c9a2841e6015a0f5, type: 3}
   m_Name: Rabbit food
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
+  CollectionName: Rabbit food
+  CollectionImage: {fileID: 0}
+  CollectionDescription: Three lettuce leaves and nothing else. Raccoons don't eat
+    salad. This one's confused.
   CollectibleIngredients:
   - {fileID: 3364345851935182041, guid: 86e392be68c994136804abed47da8d34, type: 3}
   - {fileID: 3364345851935182041, guid: 86e392be68c994136804abed47da8d34, type: 3}

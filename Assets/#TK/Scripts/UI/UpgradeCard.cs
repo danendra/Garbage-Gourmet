@@ -16,6 +16,14 @@ namespace TK.UI
         [SerializeField] private TextMeshProUGUI costText;
         [SerializeField] private Button upgradeButton;
 
+        [Header("Button State Sprites")]
+        [SerializeField] private Sprite affordableSprite;
+        [SerializeField] private Sprite unaffordableSprite;
+
+        [Header("Text Sprite Assets")]
+        [SerializeField] private TMP_SpriteAsset affordableStarAsset;
+        [SerializeField] private TMP_SpriteAsset unaffordableStarAsset;
+
         public void Setup(UpgradeItemData data, int currentLevel, bool isMaxLevel, bool canAfford, int nextCost, System.Action onUpgradeClick)
         {
             if (iconImage != null) iconImage.sprite = data.icon;
@@ -38,7 +46,31 @@ namespace TK.UI
                 }
                 else
                 {
-                    if (costText != null) costText.text = $"Upgrade | <sprite=0> {AnoaModule.ConvertCurency(nextCost)}";
+                    if (costText != null) 
+                    {
+                        if (canAfford)
+                        {
+                            if (affordableStarAsset != null) costText.spriteAsset = affordableStarAsset;
+                            costText.text = $"Upgrade | <sprite=0> {AnoaModule.ConvertCurency(nextCost)}";
+                        }
+                        else
+                        {
+                            if (unaffordableStarAsset != null) costText.spriteAsset = unaffordableStarAsset;
+                            costText.text = $"Collect <sprite=0> {AnoaModule.ConvertCurency(nextCost)} to upgrade";
+                        }
+                    }
+
+                    if (upgradeButton.image != null)
+                    {
+                        if (canAfford && affordableSprite != null)
+                        {
+                            upgradeButton.image.sprite = affordableSprite;
+                        }
+                        else if (!canAfford && unaffordableSprite != null)
+                        {
+                            upgradeButton.image.sprite = unaffordableSprite;
+                        }
+                    }
 
                     upgradeButton.interactable = canAfford;
                     upgradeButton.onClick.AddListener(() => onUpgradeClick?.Invoke());

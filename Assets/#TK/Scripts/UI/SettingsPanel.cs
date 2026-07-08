@@ -7,6 +7,18 @@ namespace TK.UI
 {
     public class SettingsPanel : MainMenuPanel
     {
+        private const string PREFS_MASTER_VOL = "MasterVolume";
+        private const string PREFS_MUSIC_VOL = "MusicVolume";
+        private const string PREFS_SFX_VOL = "SFXVolume";
+
+        private const string METHOD_GET_MASTER_VOL = "GetMasterVolume";
+        private const string METHOD_GET_MUSIC_VOL = "GetMusicVolume";
+        private const string METHOD_GET_SFX_VOL = "GetSFXVolume";
+
+        private const string METHOD_SET_MASTER_VOL = "SetMasterVolume";
+        private const string METHOD_SET_MUSIC_VOL = "SetMusicVolume";
+        private const string METHOD_SET_SFX_VOL = "SetSFXVolume";
+
         [Header("Settings UI Components")]
         [SerializeField] private Slider masterVolumeSlider;
         [SerializeField] private Slider musicVolumeSlider;
@@ -40,9 +52,9 @@ namespace TK.UI
         {
             if (AudioManager.Instance == null) return;
 
-            float master = GetVolumeFromManager("GetMasterVolume", "MasterVolume", 1f);
-            float music = GetVolumeFromManager("GetMusicVolume", "MusicVolume", 1f);
-            float sfx = GetVolumeFromManager("GetSFXVolume", "SFXVolume", 1f);
+            float master = GetVolumeFromManager(METHOD_GET_MASTER_VOL, PREFS_MASTER_VOL, 1f);
+            float music = GetVolumeFromManager(METHOD_GET_MUSIC_VOL, PREFS_MUSIC_VOL, 1f);
+            float sfx = GetVolumeFromManager(METHOD_GET_SFX_VOL, PREFS_SFX_VOL, 1f);
 
             if (masterVolumeSlider != null) masterVolumeSlider.value = master;
             if (musicVolumeSlider != null) musicVolumeSlider.value = music;
@@ -51,19 +63,19 @@ namespace TK.UI
 
         private void SetMasterVolume(float val)
         {
-            SetVolumeInManager("SetMasterVolume", "MasterVolume", val);
-            // Fallback for simple master volume control if mixer is not implemented
+            SetVolumeInManager(METHOD_SET_MASTER_VOL, PREFS_MASTER_VOL, val);
+
             AudioListener.volume = val;
         }
 
         private void SetMusicVolume(float val)
         {
-            SetVolumeInManager("SetMusicVolume", "MusicVolume", val);
+            SetVolumeInManager(METHOD_SET_MUSIC_VOL, PREFS_MUSIC_VOL, val);
         }
 
         private void SetSFXVolume(float val)
         {
-            SetVolumeInManager("SetSFXVolume", "SFXVolume", val);
+            SetVolumeInManager(METHOD_SET_SFX_VOL, PREFS_SFX_VOL, val);
         }
 
         private float GetVolumeFromManager(string methodName, string prefsKey, float defaultVal)
