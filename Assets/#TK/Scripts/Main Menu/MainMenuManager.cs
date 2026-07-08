@@ -21,18 +21,12 @@ namespace TK.MainMenu
         [Header("Animations")]
         [SerializeField] private DOTweenAnimation hatchOpenAnim;
 
-        [Header("Animation Settings")]
-        [SerializeField] private string animIdIntro = "intro";
-        [SerializeField] private string animIdIdle = "idle";
-        [SerializeField] private string animIdExit = "exit";
-
         [Header("Timing Fallbacks & Delays")]
         [SerializeField] private float hatchFallbackDuration = 1.8f;
         [SerializeField] private float noHandExitDuration = 0.25f;
         [SerializeField] private float introTransitionDelay = 0.5f;
 
         private UnityEngine.UI.Button playButtonComponent;
-        private bool readyToStart;
         private bool starting;
 
         void Awake()
@@ -76,18 +70,12 @@ namespace TK.MainMenu
         {
             if (hatchOpenAnim != null)
             {
-                hatchOpenAnim.RecreateTweenAndPlay();
-                if (hatchOpenAnim.tween != null)
-                {
-                    yield return hatchOpenAnim.tween.WaitForCompletion();
-                }
-                else
-                {
-                    yield return new WaitForSeconds(hatchFallbackDuration);
-                }
-            }
+                var hatchImg = hatchOpenAnim.GetComponent<UnityEngine.UI.Image>();
+                if (hatchImg != null) hatchImg.raycastTarget = false;
 
-            PlayAllById(transform, animIdIntro);
+                hatchOpenAnim.RecreateTweenAndPlay();
+                yield return new WaitForSeconds(hatchFallbackDuration);
+            }
 
             yield return new WaitForSeconds(introTransitionDelay);
             StartIdleAndReady();
@@ -95,59 +83,67 @@ namespace TK.MainMenu
 
         public void StartIdleAndReady()
         {
-            if (readyToStart) return;
-            PlayAllById(transform, animIdIdle);
-            readyToStart = true;
-            AudioManager.Instance.PlayMenuMusic();
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayMenuMusic();
+            }
         }
 
         public void PlayHatchSFX()
         {
-            AudioManager.Instance.PlayButtonClick();
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayButtonClick();
+            }
         }
 
         private void OnPlayButtonClicked()
         {
-            if (!readyToStart || starting)
+            if (starting)
                 return;
 
-            StartCoroutine(IEBeginGame());
+            try
+            {
+                StartCoroutine(IEBeginGame());
+            }
+            catch (System.Exception e)
+            {
+                UnityEngine.Debug.LogError("Error starting IEBeginGame: " + e);
+            }
         }
 
         IEnumerator IEBeginGame()
         {
             starting = true;
 
-            KillAllById(transform, animIdIntro);
-            KillAllById(transform, animIdIdle);
-            if (hatchOpenAnim != null) hatchOpenAnim.DOKill();
+            try
+            {
+                if (hatchOpenAnim != null) hatchOpenAnim.DOKill();
 
-            SetMenuButtonsState(false);
+                SetMenuButtonsState(false);
 
-            RecreateTweenAndPlayAllById(transform, animIdExit);
-            AudioManager.Instance.PlayButtonClick();
+                if (AudioManager.Instance != null) 
+                {
+                    AudioManager.Instance.PlayButtonClick();
+                }
+            }
+            catch (System.Exception e)
+            {
+                UnityEngine.Debug.LogError("Error during IEBeginGame prep: " + e);
+            }
+
             yield return new WaitForSeconds(noHandExitDuration);
 
-            SceneManager.LoadScene("GameScene");
+            try
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+            }
+            catch (System.Exception e)
+            {
+                UnityEngine.Debug.LogError("Error loading GameScene: " + e);
+            }
         }
 
-        private void PlayAllById(Transform root, string id)
-        {
-            foreach (var anim in root.GetComponentsInChildren<DOTweenAnimation>(true))
-                if (anim.id == id) anim.DOPlayForward();
-        }
-
-        private void KillAllById(Transform root, string id)
-        {
-            foreach (var anim in root.GetComponentsInChildren<DOTweenAnimation>(true))
-                if (anim.id == id) anim.DOKill();
-        }
-
-        private void RecreateTweenAndPlayAllById(Transform root, string id)
-        {
-            foreach (var anim in root.GetComponentsInChildren<DOTweenAnimation>(true))
-                if (anim.id == id) anim.RecreateTweenAndPlay();
-        }
 
         public void SetMenuButtonsState(bool visible)
         {
@@ -160,12 +156,10 @@ namespace TK.MainMenu
                 }
             }
 
-            // Get the root GameObject of the play button to prevent deactivating it under any circumstance
             GameObject playButtonGO = null;
             if (playButtonComponent != null) playButtonGO = playButtonComponent.gameObject;
             else if (tapToStart != null) playButtonGO = tapToStart.gameObject;
 
-            // Safety check: Do not deactivate the play button if it's assigned to any other slot by mistake
             if (upgradeButton != null && upgradeButton.gameObject != playButtonGO && (tapToStart == null || upgradeButton.gameObject != tapToStart.gameObject)) 
             {
                 upgradeButton.gameObject.SetActive(visible);

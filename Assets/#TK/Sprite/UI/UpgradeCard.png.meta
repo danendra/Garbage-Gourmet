@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dfa11566ab08b4306b509077c3cf005e
+guid: 7878c9e7336c74779886b1698e0a3350
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6204300702833405445
-    second: CollectionButton_0
+      213: -7769099458016553895
+    second: UpgradeCard_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CollectionButton_0
+      name: UpgradeCard_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 386
-        height: 218
+        width: 887
+        height: 379
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf198efe165e5e9a0800000000000000
-      internalID: -6204300702833405445
+      spriteID: 9545e34943d9e2490800000000000000
+      internalID: -7769099458016553895
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CollectionButton_0: -6204300702833405445
+      UpgradeCard_0: -7769099458016553895
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
