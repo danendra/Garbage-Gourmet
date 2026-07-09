@@ -48,14 +48,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2492696859276641764, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -169740924457554928, guid: 170b80b766953420382630f4b762d07a, type: 3}
     - target: {fileID: 3640810603333054697, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.92578125
       objectReference: {fileID: 0}
-    - target: {fileID: 5431331628183341918, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -169740924457554928, guid: 170b80b766953420382630f4b762d07a, type: 3}
     - target: {fileID: 7009156762137531978, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}
       propertyPath: _rarity
       value: 2
@@ -80,7 +80,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: B Cheese Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

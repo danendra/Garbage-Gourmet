@@ -60,10 +60,6 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5646207389878518060, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
-      propertyPath: m_MaskInteraction
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8571033493250355019, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
       propertyPath: m_Name
       value: R Cheese Variant
@@ -71,6 +67,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7224101535367519288, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
     - {fileID: 1421352454339104, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

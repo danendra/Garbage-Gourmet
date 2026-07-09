@@ -64,7 +64,7 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.46875
       objectReference: {fileID: 0}
-    - target: {fileID: 5975440692612145781, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+    - target: {fileID: 4261854843470310607, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 221790193684785848, guid: 170b80b766953420382630f4b762d07a, type: 3}
@@ -88,11 +88,8 @@ PrefabInstance:
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 9045771167005898098, guid: f645c2aae0bb5489681449ed20910eab, type: 3}
-    - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
-      propertyPath: _fltMultiplier
-      value: 1.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

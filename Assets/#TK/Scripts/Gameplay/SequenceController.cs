@@ -29,8 +29,6 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayIntroScene(UnityAction _action)
         {
-            yield return new WaitForSeconds(1.0f);
-
             _cameraPlayer.SetInactive();
             _cameraBottom.SetInactive();
             _cameraTop.SetActive(_cinemachineBrain);
