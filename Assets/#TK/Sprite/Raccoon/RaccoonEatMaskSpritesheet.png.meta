@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 127d6b4ccabd144069f4b0baa776b31b
+guid: 4bb4dd4356f4d463cb72c3cd2ecafa15
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7022776609045746908
-    second: RacoonEatLowerJawSpritesheet_0
-  - first:
-      213: -7974557793512117482
-    second: RacoonEatLowerJawSpritesheet_1
-  - first:
-      213: 139160037378000056
-    second: RacoonEatLowerJawSpritesheet_2
-  - first:
-      213: 7199872844103060134
-    second: RacoonEatLowerJawSpritesheet_3
-  - first:
-      213: 3098377644365725557
-    second: RacoonEatLowerJawSpritesheet_4
+      213: -1097330784370157958
+    second: RaccoonEatMaskSpritesheet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -138,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RacoonEatLowerJawSpritesheet_0
+      name: RaccoonEatMaskSpritesheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1850
-        height: 1850
+        width: 2032
+        height: 2032
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,96 +141,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42be7e0e1e51a8e90800000000000000
-      internalID: -7022776609045746908
+      spriteID: a76148c277f75c0f0800000000000000
+      internalID: -1097330784370157958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RacoonEatLowerJawSpritesheet_1
+      name: RaccoonEatMaskSpritesheet_1
       rect:
         serializedVersion: 2
-        x: 1850
+        x: 2032
         y: 0
-        width: 1850
-        height: 1850
+        width: 2032
+        height: 2032
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 61b23e410fda45190800000000000000
-      internalID: -7974557793512117482
+      spriteID: 7a66f0523ca2640a5ab14b88013e7c75
+      internalID: -889603127
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RacoonEatLowerJawSpritesheet_2
+      name: RaccoonEatMaskSpritesheet_2
       rect:
         serializedVersion: 2
-        x: 3700
+        x: 4064
         y: 0
-        width: 1850
-        height: 1850
+        width: 2032
+        height: 2032
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8b488d211556ee100800000000000000
-      internalID: 139160037378000056
+      spriteID: 6b4f875b879b14a44acfb53aa4b882fb
+      internalID: 1175522152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RacoonEatLowerJawSpritesheet_3
+      name: RaccoonEatMaskSpritesheet_3
       rect:
         serializedVersion: 2
-        x: 5550
+        x: 6096
         y: 0
-        width: 1850
-        height: 1850
+        width: 2032
+        height: 2032
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6aa8eb484361be360800000000000000
-      internalID: 7199872844103060134
+      spriteID: 2ef7d286dceb0404f9a56441825bf203
+      internalID: 939369324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RacoonEatLowerJawSpritesheet_4
+      name: RaccoonEatMaskSpritesheet_4
       rect:
         serializedVersion: 2
-        x: 7400
+        x: 8128
         y: 0
-        width: 1850
-        height: 1850
+        width: 2032
+        height: 2032
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 57f3e683d06affa20800000000000000
-      internalID: 3098377644365725557
+      spriteID: 89f53583cbc584e28a4a9f2cd300e5f7
+      internalID: 559105489
       vertices: []
       indices: 
       edges: []
@@ -251,7 +239,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 45e92a82c86184d7fa088d7bd608187c
+    spriteID: f2e8beb8771934400a5dfa6e6076f12f
     internalID: 0
     vertices: []
     indices: 
@@ -261,13 +249,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":1850.0,"y":1850.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":2032.0,"y":2032.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      RacoonEatLowerJawSpritesheet_0: -7022776609045746908
-      RacoonEatLowerJawSpritesheet_1: -7974557793512117482
-      RacoonEatLowerJawSpritesheet_2: 139160037378000056
-      RacoonEatLowerJawSpritesheet_3: 7199872844103060134
-      RacoonEatLowerJawSpritesheet_4: 3098377644365725557
+      RaccoonEatMaskSpritesheet_0: -1097330784370157958
+      RaccoonEatMaskSpritesheet_1: -889603127
+      RaccoonEatMaskSpritesheet_2: 1175522152
+      RaccoonEatMaskSpritesheet_3: 939369324
+      RaccoonEatMaskSpritesheet_4: 559105489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5949301427896196012
 Transform:
   m_ObjectHideFlags: 0
@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6523055984591686739, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
+  m_Sprite: {fileID: -790733552613176345, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.8, y: 19.2}
+  m_Size: {x: 20.32, y: 20.339844}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,11 +105,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   frames:
-  - {fileID: 6523055984591686739, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
-  - {fileID: 6643076840941425334, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
-  - {fileID: -4757458082943988884, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
-  - {fileID: -8869856685205044493, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
-  - {fileID: -5758848467234691338, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
+  - {fileID: -790733552613176345, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
+  - {fileID: 7047675795769754388, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
+  - {fileID: -7307281813709049404, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
+  - {fileID: 8217022039337803912, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
+  - {fileID: -7257090855200591228, guid: 8fc6bb910648f46979e25191d0e97061, type: 3}
   _frameIndex: 0
 --- !u!1 &3377986660405874015
 GameObject:
@@ -121,8 +121,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5460191899220434947}
   - component: {fileID: 8691923023337421129}
+  - component: {fileID: 1163038715658376659}
   m_Layer: 0
-  m_Name: Sprite Mask
+  m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,8 +138,8 @@ Transform:
   m_GameObject: {fileID: 3377986660405874015}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.89, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1737751079784431609}
@@ -191,7 +192,7 @@ SpriteMask:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8177471321811730583, guid: 87aaca0a643d54397ba969dab4fc8875, type: 3}
+  m_Sprite: {fileID: -1097330784370157958, guid: 4bb4dd4356f4d463cb72c3cd2ecafa15, type: 3}
   m_MaskAlphaCutoff: 0.2
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -202,6 +203,25 @@ SpriteMask:
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
   m_MaskSource: 0
+--- !u!114 &1163038715658376659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3377986660405874015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f691a047de0e42b7a23fba71561feef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Module.SpriteMask1DSpritesheet
+  frames:
+  - {fileID: -1097330784370157958, guid: 4bb4dd4356f4d463cb72c3cd2ecafa15, type: 3}
+  - {fileID: -889603127, guid: 4bb4dd4356f4d463cb72c3cd2ecafa15, type: 3}
+  - {fileID: 1175522152, guid: 4bb4dd4356f4d463cb72c3cd2ecafa15, type: 3}
+  - {fileID: 939369324, guid: 4bb4dd4356f4d463cb72c3cd2ecafa15, type: 3}
+  - {fileID: 559105489, guid: 4bb4dd4356f4d463cb72c3cd2ecafa15, type: 3}
+  _frameIndex: 0
 --- !u!1 &5058267290128104254
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1737751079784431609
 Transform:
   m_ObjectHideFlags: 0
@@ -388,12 +408,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3275288589655090353, guid: 9d6645544bd094361bba96785d75116d, type: 3}
+  m_Sprite: {fileID: -1020348543990149662, guid: 9d6645544bd094361bba96785d75116d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.34, y: 8.742063}
+  m_Size: {x: 20.32, y: 20.339844}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -411,9 +431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TK.Module.SpriteRenderer1DSpritesheet
   frames:
-  - {fileID: -3275288589655090353, guid: 9d6645544bd094361bba96785d75116d, type: 3}
-  - {fileID: 3837684469005378679, guid: 9d6645544bd094361bba96785d75116d, type: 3}
-  - {fileID: -5451817228164035867, guid: 9d6645544bd094361bba96785d75116d, type: 3}
-  - {fileID: -1173186307114876298, guid: 9d6645544bd094361bba96785d75116d, type: 3}
-  - {fileID: 454976866759501308, guid: 9d6645544bd094361bba96785d75116d, type: 3}
+  - {fileID: -1020348543990149662, guid: 9d6645544bd094361bba96785d75116d, type: 3}
+  - {fileID: 6624174074569768643, guid: 9d6645544bd094361bba96785d75116d, type: 3}
+  - {fileID: 6456201831834965878, guid: 9d6645544bd094361bba96785d75116d, type: 3}
+  - {fileID: -6919656624133361175, guid: 9d6645544bd094361bba96785d75116d, type: 3}
+  - {fileID: -2688700652325357502, guid: 9d6645544bd094361bba96785d75116d, type: 3}
   _frameIndex: 0
