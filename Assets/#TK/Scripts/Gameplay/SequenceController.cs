@@ -13,6 +13,7 @@ namespace TK.Gameplay
         [SerializeField] private CameraTransition _cameraTop;
         [SerializeField] private CameraTransition _cameraPlayer;
         [SerializeField] private TransitionAnimationController animationRacoon;
+        [SerializeField] private RaccoonVisual _raccoonVisual;
 
         protected CinemachineBrain _cinemachineBrain;
 
@@ -34,11 +35,10 @@ namespace TK.Gameplay
             _cameraTop.SetActive(_cinemachineBrain);
 
             yield return new WaitForSeconds(_cameraTop.BlendDuration);
+            
+            _raccoonVisual.ChangeStateToTrash();
 
             yield return new WaitForSeconds(1.0f);
-            ///
-            /// IVAN disini animasi korek2 sampah
-            //yield return animationRacoon.PlaySequence("Play", false);
 
             _cameraTop.SetInactive();
             _cameraPlayer.SetActive(_cinemachineBrain);

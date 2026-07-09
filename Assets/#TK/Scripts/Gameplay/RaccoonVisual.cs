@@ -24,6 +24,7 @@ namespace TK.Gameplay
         private SpriteRenderer1DSpritesheet _visualIdleSpritesheet;
         private SpriteRenderer1DSpritesheet _visualEatSpritesheet;
         private SpriteRenderer1DSpritesheet _visualTrashSpritesheet;
+        private Animator _handAnimator;
         private SpriteMask1DSpritesheet _visualEatMaskSpritesheet;
 
         public Transform Transform => transform;
@@ -73,6 +74,7 @@ namespace TK.Gameplay
             _visualEatSpritesheet = _visualEat.GetComponent<SpriteRenderer1DSpritesheet>();
             _visualEatMaskSpritesheet = _visualEat.GetComponentInChildren<SpriteMask1DSpritesheet>();
             _visualTrashSpritesheet = _visualTrash.GetComponent<SpriteRenderer1DSpritesheet>();
+            _handAnimator = _visualTrash.GetComponentInChildren<Animator>();
         }
 
         private void Start()
@@ -86,8 +88,9 @@ namespace TK.Gameplay
             // DEBUG
             if (Input.GetKeyDown(KeyCode.Alpha1)) State = RACCOON_VISUAL_STATE.Idle;
             if (Input.GetKeyDown(KeyCode.Alpha2)) State = RACCOON_VISUAL_STATE.Eat;
-            if (Input.GetKeyDown(KeyCode.Alpha3)) Stage++;
-            if (Input.GetKeyDown(KeyCode.Alpha4)) Stage--;
+            if (Input.GetKeyDown(KeyCode.Alpha3)) State = RACCOON_VISUAL_STATE.Trash;
+            if (Input.GetKeyDown(KeyCode.Alpha4)) Stage++;
+            if (Input.GetKeyDown(KeyCode.Alpha5)) Stage--;
         }
 
         private void HandleStateChange()
@@ -119,14 +122,11 @@ namespace TK.Gameplay
         {
             PlaySquashStretch(intensity: 1.5f, timeMultiplier: 1f);
 
-            if (!_visualIdleSpritesheet) return;
-            _visualIdleSpritesheet.SetFrame(_stage);
-
-            if (!_visualEatSpritesheet) return;
-            _visualEatSpritesheet.SetFrame(_stage);
-
-            if (!_visualEatMaskSpritesheet) return;
-            _visualEatMaskSpritesheet.SetFrame(_stage);
+            if (_visualIdleSpritesheet) _visualIdleSpritesheet.SetFrame(_stage);
+            if (_visualEatSpritesheet) _visualEatSpritesheet.SetFrame(_stage);
+            if (_visualEatMaskSpritesheet) _visualEatMaskSpritesheet.SetFrame(_stage);
+            if (_visualTrashSpritesheet) _visualTrashSpritesheet.SetFrame(_stage);
+            if (_handAnimator) _handAnimator.SetTrigger(Animator.StringToHash("Stage" + _stage));
         }
 
         // squash and stretch
