@@ -3639,7 +3639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BATAS
+  m_text: LIMIT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8303f31fb049441229e263bca1526837, type: 2}
   m_sharedMaterial: {fileID: -5727007746618160437, guid: 8303f31fb049441229e263bca1526837, type: 2}

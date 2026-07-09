@@ -12,7 +12,7 @@ namespace TK.UI
 
         void Start()
         {
-                       
+            _rectFlag.gameObject.SetActive(false);
         }
 
         public void UpdateFlag()
@@ -21,7 +21,9 @@ namespace TK.UI
             Vector2 _pos = _rectFlag.anchoredPosition;
             _pos.y = _fltPos;
 
-            _rectFlag.anchoredPosition = _pos; 
+            _rectFlag.anchoredPosition = _pos;
+
+            _rectFlag.gameObject.SetActive(true);
         }
 
         private void Update()

@@ -37,7 +37,9 @@ namespace TK.Gameplay
         [SerializeField] private PlayerInventory _inventory;
 
         [Header("Arm Reach")]
-        [SerializeField] private float _maximumArmReach = 10f;
+        [SerializeField] private Transform _transLimitInfo;
+
+        private float _maximumArmReach = 10f;
 
         private Rigidbody2D _rb;
         private CinemachineImpulseSource _impulseSource;
@@ -300,6 +302,8 @@ namespace TK.Gameplay
         public void SetArmLength(float length)
         {
             _maximumArmReach = length;
+
+            _transLimitInfo.position = new Vector2(0, _playerTransform.position.y - _maximumArmReach);
         }
     }
 }
