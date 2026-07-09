@@ -11,7 +11,9 @@ namespace TK.Data
     {
         [Header("Collection Display Data")]
         public string CollectionName;
-        public Sprite CollectionImage;
+        public RectTransform rectPrefab;
+        public Sprite spriteIcon;
+
         [TextArea(3, 5)]
         public string CollectionDescription;
 

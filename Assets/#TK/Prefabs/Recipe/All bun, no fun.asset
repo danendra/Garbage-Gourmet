@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: All bun, no fun
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: All bun, no fun
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 2777588952211970658, guid: 394df510274e047b9b997331779b61bf, type: 3}
   CollectionDescription: Eight buns, no filling. A sandwich in theory, just bread
     in practice.
   CollectibleIngredients:

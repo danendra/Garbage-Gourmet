@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6034de73d3fa7486c9a2841e6015a0f5, type: 3}
-  m_Name: The gambler
+  m_Name: Borgir Triad
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: "Borgir Triad\L"
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 7233469955916387846, guid: b981d5f80008c45308efde57f0a903bc, type: 3}
   CollectionDescription: Every ingredient disagreed with the others.
   CollectibleIngredients:
   - {fileID: 4287086023423395853, guid: fceeb9638a98840c9856366eb87a70e2, type: 3}

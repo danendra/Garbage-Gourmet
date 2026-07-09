@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Top heavy
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Top heavy
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 2852259487601421811, guid: ab10e86ef6eaa4b74ba36e727dbc43fc, type: 3}
   CollectionDescription: This burger will not pass code review.
   CollectibleIngredients:
   - {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}

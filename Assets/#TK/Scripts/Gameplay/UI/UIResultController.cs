@@ -70,6 +70,7 @@ namespace TK.UI
             {
                 _txtBurgerName.text = _recipe.name;
                 _objNew.SetActive(_recipe.IsNew());
+                _recipe.AddBurger();
 
                 Invoke("FinalizeScore", 1.5f);
             }

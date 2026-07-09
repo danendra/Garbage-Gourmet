@@ -151,11 +151,8 @@ namespace TK.UI
                 if (i < config.pageItems.Count)
                 {
                     RecipeData collectionData = config.pageItems[i];
-                    
-                    // TODO: Connect to SaveData system to check if 'collectionData' is unlocked by the player
-                    bool isUnlocked = true; 
-                    
-                    card.Setup(collectionData, isUnlocked);
+                                        
+                    card.Setup(collectionData);
                     
                     // Ensure the card's game object is active in case it was disabled
                     card.gameObject.SetActive(true);
@@ -173,9 +170,10 @@ namespace TK.UI
             if (config.pageItems == null || config.pageItems.Count == 0) return;
 
             RecipeData data = config.pageItems[0]; 
+            posterFoodImage.sprite = data.spriteIcon;
 
             // TODO: Connect to SaveData system to check if 'data' is unlocked by the player
-            bool isUnlocked = true; 
+            bool isUnlocked = !data.IsNew(); 
 
             if (isUnlocked)
             {
@@ -187,14 +185,14 @@ namespace TK.UI
 
                 if (posterFoodImage != null) 
                 {
-                    posterFoodImage.sprite = data.CollectionImage;
+                    // posterFoodImage.sprite = data.CollectionImage;
                     posterFoodImage.color = unlockedColor;
                 }
                 
                 if (posterBackgroundImage != null)
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
-                    posterBackgroundImage.color = unlockedColor;
+                    // posterBackgroundImage.color = unlockedColor;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
 
@@ -215,14 +213,14 @@ namespace TK.UI
 
                 if (posterFoodImage != null) 
                 {
-                    posterFoodImage.sprite = data.CollectionImage;
+                    // posterFoodImage.sprite = data.CollectionImage;
                     posterFoodImage.color = lockedShadowColor;
                 }
                 
                 if (posterBackgroundImage != null)
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
-                    posterBackgroundImage.color = lockedShadowColor;
+                    // posterBackgroundImage.color = lockedShadowColor;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
 

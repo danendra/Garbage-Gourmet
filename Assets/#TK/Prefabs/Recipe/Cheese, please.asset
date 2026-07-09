@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cheese, please
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Cheese, please
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 5862585535276203048, guid: fa49c3f47bf014ef290a377aab7e2433, type: 3}
   CollectionDescription: A cheese sandwich, if you squint hard.
   CollectibleIngredients:
   - {fileID: 7009156762137531978, guid: c45bf37df4bc149bd9b3e53578bbc60e, type: 3}

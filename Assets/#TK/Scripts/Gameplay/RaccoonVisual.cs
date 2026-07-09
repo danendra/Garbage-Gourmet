@@ -77,9 +77,22 @@ namespace TK.Gameplay
             _handAnimator = _visualTrash.GetComponentInChildren<Animator>();
         }
 
+        private void OnEnable()
+        {
+            GameManager.Instance.OnPointUpdate += HandlePointUpdate;
+            
+        }
+
+        private void OnDisable()
+        {
+            GameManager.Instance.OnPointUpdate -= HandlePointUpdate;
+        }
+
+
         private void Start()
         {
             HandleStateChange();
+            HandlePointUpdate();
             HandleStageChange();
         }
 
@@ -114,8 +127,27 @@ namespace TK.Gameplay
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(false);
                     _visualTrash.SetActive(true);
+                    ApplyStageTrigger();
                     break;
             }
+        }
+
+        private void ApplyStageTrigger()
+        {
+            if (_handAnimator) _handAnimator.SetTrigger(Animator.StringToHash("Stage" + _stage));
+        }
+
+        private void HandlePointUpdate()
+        {
+            int totalPoint = GameManager.Instance.intCummulativePoint;
+
+            Debug.Log($"[RaccoonVisual] totalPoint = {totalPoint}");
+
+            if (totalPoint < 800000) Stage = 0;
+            else if (totalPoint < 1500000) Stage = 1;
+            else if (totalPoint < 4000000) Stage = 2;
+            else if (totalPoint < 8000000) Stage = 3;
+            else Stage = 4;
         }
 
         private void HandleStageChange()
@@ -126,7 +158,7 @@ namespace TK.Gameplay
             if (_visualEatSpritesheet) _visualEatSpritesheet.SetFrame(_stage);
             if (_visualEatMaskSpritesheet) _visualEatMaskSpritesheet.SetFrame(_stage);
             if (_visualTrashSpritesheet) _visualTrashSpritesheet.SetFrame(_stage);
-            if (_handAnimator) _handAnimator.SetTrigger(Animator.StringToHash("Stage" + _stage));
+            ApplyStageTrigger();
         }
 
         // squash and stretch
