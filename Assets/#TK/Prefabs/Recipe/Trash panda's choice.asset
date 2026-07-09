@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Trash panda's choice
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Trash panda's choice
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 8482010545017678746, guid: de86d571d26f84e34be802bb1e4142f8, type: 3}
   CollectionDescription: Even trash pandas get lucky sometimes.
   CollectibleIngredients:
   - {fileID: 8039869676958307111, guid: b4551d972ab2b495784a0d31cf27cac1, type: 3}

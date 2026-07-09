@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Tower of Heaven
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Tower of heaven
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 5813985291895149102, guid: bfc58a6f23b0e4074a33b78280566bd6, type: 3}
+  spriteIcon: {fileID: -3063211260592660690, guid: 116f7c2f11af04e34bc740a74bd1baab, type: 3}
   CollectionDescription: You actually did it. We're still surprised! Eight ingredients,
     every single one excellent.
   CollectibleIngredients:

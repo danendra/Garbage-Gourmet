@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rabbit food
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Rabbit food
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 1845652971449016602, guid: b354f6e461f6d4de39cf002de060cb32, type: 3}
   CollectionDescription: Three lettuce leaves and nothing else. Raccoons don't eat
     salad. This one's confused.
   CollectibleIngredients:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bunception
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Bunception
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 621219421446701586, guid: 7716a8c1d892d4d96a5f85dcce7654e2, type: 3}
   CollectionDescription: bread bread bread
   CollectibleIngredients:
   - {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}

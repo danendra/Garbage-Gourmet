@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Naked lunch
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Naked lunch
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 4978064981726702468, guid: 94abd628638e3442a8c1afd36402e07c, type: 3}
   CollectionDescription: One lonely item, served alone. We never coded a minimum.
     This one's on us.
   CollectibleIngredients:

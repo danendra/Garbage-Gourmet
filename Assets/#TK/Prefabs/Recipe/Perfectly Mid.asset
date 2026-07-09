@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Perfectly Mid
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Perfectly mid
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 4041302026940017996, guid: 5361749e4412d488f933fc921e6ef880, type: 3}
   CollectionDescription: Every ingredient exactly average. Nothing wrong. Nothing
     memorable either.
   CollectibleIngredients:

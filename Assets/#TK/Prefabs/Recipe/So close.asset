@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: So close
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: So close
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 240829427927858859, guid: 81347f7ca99944a7ca871bef9950452b, type: 3}
   CollectionDescription: Four excellent picks, ruined by one bad cheese. So close
     to perfect, every single time.
   CollectibleIngredients:

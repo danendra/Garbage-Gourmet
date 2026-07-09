@@ -545,11 +545,196 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3937997541490740564, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2599672835206531276, guid: e1f3671bffeb6490d995684b8653b00a, type: 3}
+    - target: {fileID: 3937997541490740564, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937997541490740564, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.81247777
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937997541490740564, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8975287
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937997541490740564, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9622642
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135617693724803142, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135617693724803142, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813017040098166942, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813017040098166942, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813017040098166942, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813017040098166942, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813017040098166942, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813017040098166942, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813017040098166942, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200685934350967623, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8841083740164355093, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      propertyPath: splashScreen
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9064487125784990914, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7321950208830421104}
   m_SourcePrefab: {fileID: 100100000, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+--- !u!224 &7321950208830421102 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4135617693724803142, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+  m_PrefabInstance: {fileID: 7321950208830421101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7321950208830421103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9064487125784990914, guid: d613efdfd982c49a2bce0d4f247c50f5, type: 3}
+  m_PrefabInstance: {fileID: 7321950208830421101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7321950208830421104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321950208830421103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::DG.Tweening.DOTweenAnimation
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  targetIsSelf: 1
+  targetGO: {fileID: 0}
+  tweenTargetIsTargetGO: 1
+  delay: 0
+  duration: 0.1
+  easeType: 1
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 1
+  loops: -1
+  id: 
+  isRelative: 0
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  autoGenerate: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 7321950208830421102}
+  animationType: 3
+  targetType: 11
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 0, y: 0, z: 2}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalBool1: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalShakeRandomnessMode: 0
+  optionalString: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
