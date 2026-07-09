@@ -68,7 +68,7 @@ namespace TK.Data
 
         public bool IsNew()
         {
-            return PlayerPrefs.HasKey("BURGER_" + name);            
+            return !PlayerPrefs.HasKey("BURGER_" + name);            
         }
     }
 }
