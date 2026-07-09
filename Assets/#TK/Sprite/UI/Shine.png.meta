@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 28aa2c694b0834d6bade6115077f5acf
+guid: c27bd4f8f1a6940d8bdefe1c0f6765f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3368042958199173987
-    second: UpgradeButtonFinal_0
+      213: 2813274282232148420
+    second: Shine_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UpgradeButtonFinal_0
+      name: Shine_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 453
-        height: 298
+        width: 1
+        height: 1
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 363b7bfc931bdbe20800000000000000
-      internalID: 3368042958199173987
+      spriteID: 4c17038ed02ca0720800000000000000
+      internalID: 2813274282232148420
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UpgradeButtonFinal_0: 3368042958199173987
+      Shine_0: 2813274282232148420
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
