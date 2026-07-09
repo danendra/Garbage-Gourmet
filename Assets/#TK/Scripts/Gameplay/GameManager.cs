@@ -27,6 +27,8 @@ namespace TK.Gameplay
         public int PlayerCoins => UpgradeSaveSystem.LoadCoins();
         public RecipeData[] GetAllRecipes => _arrRecipes;
 
+        public bool SplashCompleted { get; private set; } = false;
+
         public event System.Action<int> OnArmUpgraded;
         public event System.Action<int> OnPickUpUpgraded;
         public event System.Action<int> OnReleaseUpgraded;
@@ -45,6 +47,16 @@ namespace TK.Gameplay
             DontDestroyOnLoad(gameObject);
 
             Initialize();
+        }
+
+        public void Start()
+        {
+            // UpgradeSaveSystem.ResetAll(); 
+            // FTUESaveSystem.ResetAll();
+            if(!FTUESaveSystem.LoadFTUEFirstLaunchCompleted())
+            {
+                SceneManager.LoadScene("GameScene");
+            }
         }
 
         public void Initialize()
@@ -141,5 +153,10 @@ namespace TK.Gameplay
         }
 
         #endregion
+
+        public void SetSplashCompleted(bool _bCompleted)
+        {
+            SplashCompleted = _bCompleted;
+        }
     }
 }

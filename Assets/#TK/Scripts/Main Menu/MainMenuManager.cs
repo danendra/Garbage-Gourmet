@@ -20,6 +20,7 @@ namespace TK.MainMenu
         [SerializeField] private RectTransform collectionButton;
         [SerializeField] private RectTransform upgradeButton;
         [SerializeField] private TMPro.TextMeshProUGUI txtPoint;
+        [SerializeField] private GameObject _splashScreen;
 
         [Header("Animations")]
         [SerializeField] private DOTweenAnimation hatchOpenAnim;
@@ -87,6 +88,11 @@ namespace TK.MainMenu
 
         IEnumerator Start()
         {
+            if (GameManager.Instance != null && GameManager.Instance.SplashCompleted)
+            {
+                HideSplash();
+            }
+
             if (GameManager.Instance != null)
             {
                 _currentPoint = GameManager.Instance.intCurrentMoney;
@@ -214,6 +220,12 @@ namespace TK.MainMenu
             {
                 collectionButton.gameObject.SetActive(visible);
             }
+        }
+
+        public void HideSplash()
+        {
+            _splashScreen.SetActive(false);
+            GameManager.Instance.SetSplashCompleted(true);
         }
     }
 }
