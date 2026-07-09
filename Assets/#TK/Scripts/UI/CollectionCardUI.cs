@@ -15,6 +15,7 @@ namespace TK.UI
         [SerializeField] private Transform _transIconParent;
         [SerializeField] private TextMeshProUGUI collectionNameText;
         [SerializeField] private TextMeshProUGUI multiplierText;
+
         [SerializeField] private GameObject lockedNameScribble;
         [SerializeField] private GameObject lockedMultiplierScribble;
 
@@ -75,6 +76,7 @@ namespace TK.UI
 
             if (isUnlockedStatus)
             {
+
                 if (lockedNameScribble != null) lockedNameScribble.SetActive(false);
                 if (lockedMultiplierScribble != null) lockedMultiplierScribble.SetActive(false);
 
@@ -92,6 +94,7 @@ namespace TK.UI
             }
             else
             {
+
                 if (lockedNameScribble != null) lockedNameScribble.SetActive(true);
                 if (lockedMultiplierScribble != null) lockedMultiplierScribble.SetActive(true);
 

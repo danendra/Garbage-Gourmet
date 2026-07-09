@@ -38,10 +38,7 @@ namespace TK.MainMenu
 
         private int _currentPoint;
 
-        // ── Debug reset (Beta) ─────────────────────────────────────────────────
-        private const float DebugResetWindow = 0.5f;
-        private float _upgradeHitTime   = -999f;
-        private float _collectionHitTime = -999f;
+        // Beta debug reset has been migrated to SettingsPanel Reset Game UI
 
         void Awake()
         {
@@ -79,11 +76,6 @@ namespace TK.MainMenu
                 Debug.LogWarning("[MainMenuManager] No Button component found on or around tapToStart! Please assign the PlayButton to tapToStart in the Inspector.");
             }
 
-            // DEBUG RESEt buat beta
-            if (upgradeButton != null)
-                upgradeButton.GetComponent<UnityEngine.UI.Button>()?.onClick.AddListener(() => { _upgradeHitTime = Time.unscaledTime; TryDebugReset(); });
-            if (collectionButton != null)
-                collectionButton.GetComponent<UnityEngine.UI.Button>()?.onClick.AddListener(() => { _collectionHitTime = Time.unscaledTime; TryDebugReset(); });
         }
 
         IEnumerator Start()
@@ -171,21 +163,6 @@ namespace TK.MainMenu
         }
 
 
-        private void TryDebugReset()
-        {
-            if (Mathf.Abs(_upgradeHitTime - _collectionHitTime) > DebugResetWindow) return;
-
-            Debug.Log("[MainMenuManager] Debug reset triggered — wiping all saves.");
-            UpgradeSaveSystem.ResetAll();
-            FTUESaveSystem.ResetAll();
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
-
-            if (GameManager.Instance != null) GameManager.Instance.Initialize();
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
         public void SetMenuButtonsState(bool visible)
         {
             if (playButtonComponent != null)
@@ -214,6 +191,21 @@ namespace TK.MainMenu
             if (collectionButton != null && collectionButton.gameObject != playButtonGO && (tapToStart == null || collectionButton.gameObject != tapToStart.gameObject)) 
             {
                 collectionButton.gameObject.SetActive(visible);
+            }
+        }
+
+        public void BringCoinUIToFront()
+        {
+            if (txtPoint != null)
+            {
+                if (txtPoint.transform.parent != null)
+                {
+                    txtPoint.transform.parent.SetAsLastSibling();
+                }
+                else
+                {
+                    txtPoint.transform.SetAsLastSibling();
+                }
             }
         }
 
