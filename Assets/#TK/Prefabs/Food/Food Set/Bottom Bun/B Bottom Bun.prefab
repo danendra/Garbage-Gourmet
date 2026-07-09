@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 8064203568610132741, guid: 18dcaf919a0c145a1b5f0c2c9d19438f, type: 3}
+    - target: {fileID: 4261854843470310607, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7657299826903813138, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Name
       value: B Bottom Bun

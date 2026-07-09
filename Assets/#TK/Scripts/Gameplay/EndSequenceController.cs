@@ -17,41 +17,11 @@ namespace TK.Gameplay
 
         public IEnumerator PlayEndSequence(bool won)
         {
-            // Set the sprite but keep it hidden
-            itemDisplay.sprite = GameSession.CollectedSprite;
+            // Set the sprite but keep it hidden            
             itemDisplayOriginalScale = itemDisplay.transform.localScale;
             itemDisplay.transform.localScale = Vector3.zero;
 
             yield return new WaitForSeconds(0.1f);
-
-            // Pickup — fade item in
-            // animator.SetTrigger("Pickup");
-            // AudioManager.Instance.PlayGrab();
-            // yield return null;
-            // while (animator.IsInTransition(0))
-            //     yield return null;
-            // yield return WaitForAnimationAt("Pickup", 0.3f);
-            // yield return ScaleItem(Vector3.zero, itemDisplayOriginalScale, 0.2f);
-
-            // yield return WaitForAnimationComplete("Pickup");
-
-            // // Eat — shrink item out midway through eat animation
-            // if (won)
-            // {
-            //     animator.SetTrigger("EatFood");
-            //     AudioManager.Instance.PlayEatFood();
-            //     yield return WaitForAnimationAt("EatFood", 0.1f);
-            //     yield return ScaleItem(itemDisplayOriginalScale, Vector3.zero, 0.2f);
-            //     yield return WaitForAnimationComplete("EatFood");
-            // }
-            // else
-            // {
-            //     animator.SetTrigger("EatTrash");
-            //     AudioManager.Instance.PlayEatTrash();
-            //     yield return WaitForAnimationAt("EatTrash", 0.1f);
-            //     yield return ScaleItem(itemDisplayOriginalScale, Vector3.zero, 0.2f);
-            //     yield return WaitForAnimationComplete("EatTrash");
-            // }
 
             animator.SetTrigger("Rating");
             yield return null;

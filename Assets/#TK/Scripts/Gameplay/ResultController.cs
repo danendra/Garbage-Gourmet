@@ -60,7 +60,7 @@ namespace TK.Gameplay
 
                 _rb.gravityScale = 0;
                 _object.transform.localScale = Vector3.one * 2;
-                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
+                _object.GetComponentInChildren<SpriteRenderer>().sortingOrder = _index;
 
                 _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);
 
