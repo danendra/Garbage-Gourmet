@@ -151,11 +151,8 @@ namespace TK.UI
                 if (i < config.pageItems.Count)
                 {
                     RecipeData collectionData = config.pageItems[i];
-                    
-                    // TODO: Connect to SaveData system to check if 'collectionData' is unlocked by the player
-                    bool isUnlocked = true; 
-                    
-                    card.Setup(collectionData, isUnlocked);
+                                        
+                    card.Setup(collectionData);
                     
                     // Ensure the card's game object is active in case it was disabled
                     card.gameObject.SetActive(true);

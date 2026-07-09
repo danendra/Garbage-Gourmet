@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TK.UI.RecipeCardUI
   frontFace: {fileID: 4733687004251442781}
-  collectionImage: {fileID: 0}
+  _transIconParent: {fileID: 8896710251956953963}
   collectionNameText: {fileID: 6219099982681962342}
   multiplierText: {fileID: 3246522091466436919}
   lockedOverlay: {fileID: 0}
@@ -222,8 +222,6 @@ MonoBehaviour:
   backDescriptionText: {fileID: 163732156462824143}
   flipDuration: 0.4
   multiplierFormat: X{0} Multiplier
-  unlockedColor: {r: 1, g: 1, b: 1, a: 1}
-  shadowColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &5600209640114925379
 MonoBehaviour:
   m_ObjectHideFlags: 0
