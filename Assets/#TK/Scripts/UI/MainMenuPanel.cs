@@ -10,8 +10,6 @@ namespace TK.UI
         [SerializeField] protected float transitionDuration = 0.3f;
         [SerializeField] protected Ease showEase = Ease.OutBack;
         [SerializeField] protected Ease hideEase = Ease.InQuad;
-        [SerializeField] protected bool scaleTransition = true;
-        [SerializeField] protected float minScale = 0.9f;
 
         protected CanvasGroup canvasGroup;
         protected RectTransform rectTransform;
@@ -51,10 +49,6 @@ namespace TK.UI
                 canvasGroup.alpha = 1f;
                 canvasGroup.blocksRaycasts = true;
                 canvasGroup.interactable = true;
-                if (scaleTransition && rectTransform != null)
-                {
-                    rectTransform.localScale = Vector3.one;
-                }
                 OnShown();
                 return;
             }
@@ -64,16 +58,11 @@ namespace TK.UI
 
             if (TK.Audio.AudioManager.Instance != null)
             {
-                TK.Audio.AudioManager.Instance.PlayButtonClick();
+                TK.Audio.AudioManager.Instance.PlayPanelOpen();
             }
 
             Sequence seq = DOTween.Sequence();
             seq.Append(canvasGroup.DOFade(1f, transitionDuration).From(0f));
-
-            if (scaleTransition && rectTransform != null)
-            {
-                seq.Join(rectTransform.DOScale(1f, transitionDuration).From(minScale).SetEase(showEase));
-            }
 
             seq.OnComplete(() =>
             {
@@ -114,16 +103,11 @@ namespace TK.UI
 
             if (TK.Audio.AudioManager.Instance != null)
             {
-                TK.Audio.AudioManager.Instance.PlayButtonClick();
+                TK.Audio.AudioManager.Instance.PlayPanelClose();
             }
 
             Sequence seq = DOTween.Sequence();
             seq.Append(canvasGroup.DOFade(0f, transitionDuration).SetEase(hideEase));
-
-            if (scaleTransition && rectTransform != null)
-            {
-                seq.Join(rectTransform.DOScale(minScale, transitionDuration).SetEase(hideEase));
-            }
 
             seq.OnComplete(() =>
             {

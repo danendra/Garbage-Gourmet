@@ -122,10 +122,7 @@ namespace TK.MainMenu
 
         public void PlayHatchSFX()
         {
-            if (AudioManager.Instance != null)
-            {
-                AudioManager.Instance.PlayButtonClick();
-            }
+            // Sound removed per user request
         }
 
         private void OnPlayButtonClicked()
@@ -152,11 +149,6 @@ namespace TK.MainMenu
                 if (hatchOpenAnim != null) hatchOpenAnim.DOKill();
 
                 SetMenuButtonsState(false);
-
-                if (AudioManager.Instance != null) 
-                {
-                    AudioManager.Instance.PlayButtonClick();
-                }
             }
             catch (System.Exception e)
             {
