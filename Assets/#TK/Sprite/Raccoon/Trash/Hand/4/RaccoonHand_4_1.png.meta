@@ -129,10 +129,10 @@ TextureImporter:
       name: RaccoonHand_4_1_0
       rect:
         serializedVersion: 2
-        x: 1108
-        y: 697
-        width: 450
-        height: 399
+        x: 1076
+        y: 674
+        width: 538
+        height: 544
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
