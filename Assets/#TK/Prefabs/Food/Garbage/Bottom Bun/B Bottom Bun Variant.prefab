@@ -21,6 +21,10 @@ PrefabInstance:
       value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
+      propertyPath: _itemType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665783465117848435, guid: 06c94aab0339c4b3ba89591becbc4c4c, type: 3}
       propertyPath: _goFoodServed
       value: 
       objectReference: {fileID: 2336309638399483904, guid: 4b2a0df80e6604a2788297ba12c7f2fc, type: 3}

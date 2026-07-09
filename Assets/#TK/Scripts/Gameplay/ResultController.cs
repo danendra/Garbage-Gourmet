@@ -9,7 +9,7 @@ using TMPro;
 
 namespace TK.Gameplay
 {
-    using Data;
+    using Data;    
     using UI;
 
     public class ResultController : MonoBehaviour
@@ -20,7 +20,7 @@ namespace TK.Gameplay
         [SerializeField] private PoolerContainer poolScore;
         [SerializeField] private PoolerContainer poolMultiplier;
         [SerializeField] private RaccoonVisual _racoonVisual;
-        [SerializeField] private DOTweenAnimation _dgAnimation;        
+        [SerializeField] private DOTweenAnimation _dgAnimation;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -34,10 +34,10 @@ namespace TK.Gameplay
         }
 
         private IEnumerator IEPlayResult()
-        {
+        {            
             _racoonVisual.ChangeStateToIdle();
             yield return new WaitForSeconds(0.5f);
-            _racoonVisual.ChangeStateToEat();            
+            _racoonVisual.ChangeStateToEat();
 
             int _intScore = 0;
 
@@ -78,7 +78,7 @@ namespace TK.Gameplay
             {
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
-                
+
                 _rb.freezeRotation = true;
                 _rb.linearVelocity = Vector2.zero;
                 _rb.angularVelocity = 0;
@@ -95,24 +95,29 @@ namespace TK.Gameplay
                 _index++;
             }
 
-            if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
-                _intScore = 0;
-
             RecipeData _recipe = null;
+            bool _isTrash = false;
 
-            if (LevelManager.Instance.FindRecipe(_listCollectible, out _recipe))
+            if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
             {
-                Debug.Log(_recipe.name);
+                _isTrash = true;
             }
             else
-            {
-                Debug.Log("Any Burger");
+            {                
+                if (LevelManager.Instance.FindRecipe(_listCollectible, out _recipe))
+                {
+                    Debug.Log(_recipe.name);
+                }
+                else
+                {
+                    Debug.Log("Any Burger");
+                }
             }
 
             yield return new WaitForSeconds(1.0f);
 
             _dgAnimation.RecreateTweenAndPlay();
-            
+
             yield return new WaitForSeconds(1.0f);
 
             // deactivate rb game object
@@ -125,7 +130,7 @@ namespace TK.Gameplay
 
             yield return new WaitForSeconds(0.5f);
 
-            UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore);
+            UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore, _isTrash);
         }
 
         public IEnumerator IEDelayShowScore(CollectibleController _collectible, GameObject _object)

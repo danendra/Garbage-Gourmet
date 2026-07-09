@@ -11,8 +11,8 @@ namespace TK.Gameplay
         Cheese,
         Patty,
         Vegetable,
-        Bottom_Bun,
-        Trash
+        Trash,
+        Bottom_Bun        
     }
 
     public enum RARITY
