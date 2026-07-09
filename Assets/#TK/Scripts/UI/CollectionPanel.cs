@@ -163,7 +163,6 @@ namespace TK.UI
                 else
                 {
                     card.Clear();
-                    // Optional: You can choose to set it inactive if you don't want empty grid slots to show
                     // card.gameObject.SetActive(false); 
                 }
             }
