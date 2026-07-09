@@ -33,7 +33,7 @@ namespace TK.Gameplay
         public event System.Action<int> OnPickUpUpgraded;
         public event System.Action<int> OnReleaseUpgraded;
 
-        public event System.Action OnPointUpdate;
+        public event System.Action OnPointUpdate;        
 
         private void Awake()
         {

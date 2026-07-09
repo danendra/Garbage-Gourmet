@@ -31,10 +31,11 @@ namespace TK.Gameplay
         // ── Events ─────────────────────────────────────────────────────────────
         public event System.Action<CollectibleController> OnItemAdded;
         public event System.Action<int> OnItemRemoved;
-        public event System.Action OnInventoryFull;       
+        public event System.Action OnInventoryFull;  
+        public event System.Action<int> OnReleaseUpdate;     
 
         private bool _isFirstTouch;
-        private float _fltDelayDoubleTouch = 0.2f;
+        private float _fltDelayDoubleTouch = 0.5f;
         private float _fltCountdown; 
 
         // ── IItemCollector: AddItem ────────────────────────────────────────────
@@ -59,10 +60,12 @@ namespace TK.Gameplay
         public void SetReleaseChance(int _intAmount)
         {
             IntReleaseChance = _intAmount;
+
+            OnReleaseUpdate?.Invoke(IntReleaseChance);
         }
 
         private void ReleaseItem()
-        {
+        {            
             if (_heldItems.Count > 0)
             {
                 CollectibleController _collectible = _heldItems.Pop();
@@ -72,15 +75,17 @@ namespace TK.Gameplay
                 OnItemRemoved.Invoke(_heldItems.Count);
 
                 IntReleaseChance--;
+
+                OnReleaseUpdate?.Invoke(IntReleaseChance);
             }
         }
 
         void Update()
         {
             if (Input.GetMouseButtonDown(0) && IntReleaseChance > 0)
-            {
+            {                                
                 if (_isFirstTouch)
-                {
+                {                    
                     ReleaseItem();
 
                     _isFirstTouch = false;
@@ -99,7 +104,7 @@ namespace TK.Gameplay
                     _fltCountdown -= Time.deltaTime;
 
                     if (_fltCountdown < 0)
-                    {
+                    {                        
                         _isFirstTouch = false;
                     }
                 }

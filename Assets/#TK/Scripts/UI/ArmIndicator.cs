@@ -12,16 +12,18 @@ namespace TK.UI
 
         void Start()
         {
-                       
+            _rectFlag.gameObject.SetActive(false);
         }
 
         public void UpdateFlag()
         {
-            float _fltPos = Mathf.Lerp(780, -675, _handMovement.GetMaxReach / 105.0f);
+            float _fltPos = Mathf.Lerp(780, -675, _handMovement.GetMaxReach / 100.0f);
             Vector2 _pos = _rectFlag.anchoredPosition;
             _pos.y = _fltPos;
 
-            _rectFlag.anchoredPosition = _pos; 
+            _rectFlag.anchoredPosition = _pos;
+
+            _rectFlag.gameObject.SetActive(true);
         }
 
         private void Update()
