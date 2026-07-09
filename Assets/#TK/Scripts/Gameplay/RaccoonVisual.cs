@@ -8,7 +8,8 @@ namespace TK.Gameplay
     public enum RACCOON_VISUAL_STATE
     {
         Idle,
-        Eat
+        Eat,
+        Trash
         
     }
 
@@ -18,9 +19,11 @@ namespace TK.Gameplay
         [Header("Components")]
         [SerializeField] private GameObject _visualIdle;
         [SerializeField] private GameObject _visualEat;
+        [SerializeField] private GameObject _visualTrash;
 
         private SpriteRenderer1DSpritesheet _visualIdleSpritesheet;
         private SpriteRenderer1DSpritesheet _visualEatSpritesheet;
+        private SpriteRenderer1DSpritesheet _visualTrashSpritesheet;
         private SpriteMask1DSpritesheet _visualEatMaskSpritesheet;
 
         public Transform Transform => transform;
@@ -57,6 +60,7 @@ namespace TK.Gameplay
         }
         public void ChangeStateToIdle() => State = RACCOON_VISUAL_STATE.Idle;
         public void ChangeStateToEat() => State = RACCOON_VISUAL_STATE.Eat;
+        public void ChangeStateToTrash() => State = RACCOON_VISUAL_STATE.Trash;
 
         // tween
         private Vector3 _baseScale;
@@ -67,9 +71,8 @@ namespace TK.Gameplay
             _baseScale = transform.localScale;
             _visualIdleSpritesheet = _visualIdle.GetComponent<SpriteRenderer1DSpritesheet>();
             _visualEatSpritesheet = _visualEat.GetComponent<SpriteRenderer1DSpritesheet>();
-
-            Transform maskChild = _visualEat.transform.Find("Mask");
-            _visualEatMaskSpritesheet = maskChild.GetComponent<SpriteMask1DSpritesheet>();
+            _visualEatMaskSpritesheet = _visualEat.GetComponentInChildren<SpriteMask1DSpritesheet>();
+            _visualTrashSpritesheet = _visualTrash.GetComponent<SpriteRenderer1DSpritesheet>();
         }
 
         private void Start()
@@ -95,11 +98,19 @@ namespace TK.Gameplay
                 case RACCOON_VISUAL_STATE.Idle:
                     _visualIdle.SetActive(true);
                     _visualEat.SetActive(false);
+                    _visualTrash.SetActive(false);
                     break;
 
                 case RACCOON_VISUAL_STATE.Eat:
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(true);
+                    _visualTrash.SetActive(false);
+                    break;
+                
+                case RACCOON_VISUAL_STATE.Trash:
+                    _visualIdle.SetActive(false);
+                    _visualEat.SetActive(false);
+                    _visualTrash.SetActive(true);
                     break;
             }
         }

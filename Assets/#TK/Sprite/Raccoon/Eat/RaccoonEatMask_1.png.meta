@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 8fc6bb910648f46979e25191d0e97061
+guid: 0a289e2f076bf4282b468a2493ffcdad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -790733552613176345
-    second: RaccoonIdleSpritesheet_0
-  - first:
-      213: 7047675795769754388
-    second: RaccoonIdleSpritesheet_1
-  - first:
-      213: -7307281813709049404
-    second: RaccoonIdleSpritesheet_2
-  - first:
-      213: 8217022039337803912
-    second: RaccoonIdleSpritesheet_3
-  - first:
-      213: -7257090855200591228
-    second: RaccoonIdleSpritesheet_4
+      213: -335672255835283511
+    second: RaccoonEatMask_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -151,111 +139,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonIdleSpritesheet_0
+      name: RaccoonEatMask_1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2032
-        height: 2032
+        width: 2000
+        height: 1586
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7eb428cf500c605f0800000000000000
-      internalID: -790733552613176345
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RaccoonIdleSpritesheet_1
-      rect:
-        serializedVersion: 2
-        x: 2032
-        y: 0
-        width: 2032
-        height: 2032
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 41389facbcf5ec160800000000000000
-      internalID: 7047675795769754388
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RaccoonIdleSpritesheet_2
-      rect:
-        serializedVersion: 2
-        x: 4064
-        y: 0
-        width: 2032
-        height: 2032
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4c13334f7e1579a90800000000000000
-      internalID: -7307281813709049404
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RaccoonIdleSpritesheet_3
-      rect:
-        serializedVersion: 2
-        x: 6096
-        y: 0
-        width: 2032
-        height: 2032
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8802946520ab80270800000000000000
-      internalID: 8217022039337803912
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RaccoonIdleSpritesheet_4
-      rect:
-        serializedVersion: 2
-        x: 8128
-        y: 0
-        width: 2032
-        height: 2032
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 48278012152a94b90800000000000000
-      internalID: -7257090855200591228
+      spriteID: 9cfdbfd9cd3775bf0800000000000000
+      internalID: -335672255835283511
       vertices: []
       indices: 
       edges: []
@@ -264,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 420a4dc0c07414c42a47b660788a1a60
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -272,15 +172,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":2032.0,"y":2032.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      RaccoonIdleSpritesheet_0: -790733552613176345
-      RaccoonIdleSpritesheet_1: 7047675795769754388
-      RaccoonIdleSpritesheet_2: -7307281813709049404
-      RaccoonIdleSpritesheet_3: 8217022039337803912
-      RaccoonIdleSpritesheet_4: -7257090855200591228
+      RaccoonEatMask_1_0: -335672255835283511
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
