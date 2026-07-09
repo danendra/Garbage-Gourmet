@@ -1,22 +1,25 @@
 fileFormatVersion: 2
-guid: 9d6645544bd094361bba96785d75116d
+guid: cbb2df9eab79f437393ba2c0d76e4ac7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1020348543990149662
-    second: RaccoonEatSpritesheet_0
+      213: -6659118179117956688
+    second: RaccoonHand_0_0_0
   - first:
-      213: 6624174074569768643
-    second: RaccoonEatSpritesheet_1
+      213: -1714231618076461356
+    second: RaccoonHand_0_0_1
   - first:
-      213: 6456201831834965878
-    second: RaccoonEatSpritesheet_2
+      213: 6777449750506681162
+    second: RaccoonHand_0_0_2
   - first:
-      213: -6919656624133361175
-    second: RaccoonEatSpritesheet_3
+      213: 734156786989305648
+    second: RaccoonHand_0_0_3
   - first:
-      213: -2688700652325357502
-    second: RaccoonEatSpritesheet_4
+      213: -4176534824996469754
+    second: RaccoonHand_0_0_4
+  - first:
+      213: 6152992892092145151
+    second: RaccoonHand_0_0_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +61,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -84,7 +87,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -134,128 +137,137 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonEatSpritesheet_0
+      name: RaccoonHand_0_0_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2032
-        height: 2032
+        x: 769
+        y: 1061
+        width: 20
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2ed4160c76ef6d1f0800000000000000
-      internalID: -1020348543990149662
+      spriteID: 0b104503c4f0693a0800000000000000
+      internalID: -6659118179117956688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RaccoonEatSpritesheet_1
+      name: RaccoonHand_0_0_1
       rect:
         serializedVersion: 2
-        x: 2032
-        y: 0
-        width: 2032
-        height: 2032
+        x: 1059
+        y: 720
+        width: 374
+        height: 433
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ce3515793bcdeb50800000000000000
-      internalID: 6624174074569768643
+      spriteID: 4d63fcdfc63d538e0800000000000000
+      internalID: -1714231618076461356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RaccoonEatSpritesheet_2
+      name: RaccoonHand_0_0_2
       rect:
         serializedVersion: 2
-        x: 4064
-        y: 0
-        width: 2032
-        height: 2032
+        x: 762
+        y: 1037
+        width: 14
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 677dfb01c59099950800000000000000
-      internalID: 6456201831834965878
+      spriteID: a43b20eb3a65e0e50800000000000000
+      internalID: 6777449750506681162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RaccoonEatSpritesheet_3
+      name: RaccoonHand_0_0_3
       rect:
         serializedVersion: 2
-        x: 6096
-        y: 0
-        width: 2032
-        height: 2032
+        x: 642
+        y: 1010
+        width: 17
+        height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9e13ad656f078ff90800000000000000
-      internalID: -6919656624133361175
+      spriteID: 03f80f145bf303a00800000000000000
+      internalID: 734156786989305648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RaccoonEatSpritesheet_4
+      name: RaccoonHand_0_0_4
       rect:
         serializedVersion: 2
-        x: 8128
-        y: 0
-        width: 2032
-        height: 2032
+        x: 677
+        y: 990
+        width: 8
+        height: 7
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24839c68001dfaad0800000000000000
-      internalID: -2688700652325357502
+      spriteID: 604890474b7f906c0800000000000000
+      internalID: -4176534824996469754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RaccoonHand_0_0_5
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 976
+        width: 42
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffdd7a67f62d36550800000000000000
+      internalID: 6152992892092145151
       vertices: []
       indices: 
       edges: []
@@ -264,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 688a01b0138c0482eb06d9f451370880
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -272,15 +284,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":2032.0,"y":2032.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      RaccoonEatSpritesheet_0: -1020348543990149662
-      RaccoonEatSpritesheet_1: 6624174074569768643
-      RaccoonEatSpritesheet_2: 6456201831834965878
-      RaccoonEatSpritesheet_3: -6919656624133361175
-      RaccoonEatSpritesheet_4: -2688700652325357502
+      RaccoonHand_0_0_0: -6659118179117956688
+      RaccoonHand_0_0_1: -1714231618076461356
+      RaccoonHand_0_0_2: 6777449750506681162
+      RaccoonHand_0_0_3: 734156786989305648
+      RaccoonHand_0_0_4: -4176534824996469754
+      RaccoonHand_0_0_5: 6152992892092145151
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

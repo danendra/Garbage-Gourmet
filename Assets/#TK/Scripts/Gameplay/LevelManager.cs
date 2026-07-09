@@ -143,6 +143,12 @@ namespace TK.Gameplay
 
         private IEnumerator RunEndSequence(bool won)
         {
+            if (!FTUESaveSystem.LoadFTUEFirstLaunchCompleted())
+            {
+                FTUESaveSystem.SaveFTUEFirstLaunchCompleted(true);
+                Debug.Log("[LevelManager] First launch FTUE completed and saved.");
+            }
+            
             yield return StartCoroutine(FadeOutGameplayVisuals());
 
             _sequenceController.PlayEndCamera();
