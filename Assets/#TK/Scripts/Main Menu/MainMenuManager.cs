@@ -78,12 +78,6 @@ namespace TK.MainMenu
                 Debug.LogWarning("[MainMenuManager] No Button component found on or around tapToStart! Please assign the PlayButton to tapToStart in the Inspector.");
             }
 
-            if(txtPoint != null)
-            {
-                _currentPoint = GameManager.Instance.intCurrentMoney;
-                txtPoint.text = AnoaModule.ConvertCurency(_currentPoint);
-            }
-
             // DEBUG RESEt buat beta
             if (upgradeButton != null)
                 upgradeButton.GetComponent<UnityEngine.UI.Button>()?.onClick.AddListener(() => { _upgradeHitTime = Time.unscaledTime; TryDebugReset(); });
@@ -93,6 +87,12 @@ namespace TK.MainMenu
 
         IEnumerator Start()
         {
+            if (GameManager.Instance != null)
+            {
+                _currentPoint = GameManager.Instance.intCurrentMoney;
+                txtPoint.text = AnoaModule.ConvertCurency(_currentPoint);
+            }
+
             if (hatchOpenAnim != null)
             {
                 var hatchImg = hatchOpenAnim.GetComponent<UnityEngine.UI.Image>();
