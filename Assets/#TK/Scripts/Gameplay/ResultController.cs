@@ -9,7 +9,7 @@ using TMPro;
 
 namespace TK.Gameplay
 {
-    using Data;
+    using Data;    
     using UI;
 
     public class ResultController : MonoBehaviour
@@ -34,7 +34,7 @@ namespace TK.Gameplay
         }
 
         private IEnumerator IEPlayResult()
-        {
+        {            
             _racoonVisual.ChangeStateToIdle();
             yield return new WaitForSeconds(0.5f);
             _racoonVisual.ChangeStateToEat();
