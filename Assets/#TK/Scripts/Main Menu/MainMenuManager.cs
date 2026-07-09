@@ -118,6 +118,9 @@ namespace TK.MainMenu
             {
                 AudioManager.Instance.PlayMenuMusic();
             }
+
+            if (FTUEMenuManager.Instance != null)
+                FTUEMenuManager.Instance.TryStartUpgradeFTUE();
         }
 
         public void PlayHatchSFX()

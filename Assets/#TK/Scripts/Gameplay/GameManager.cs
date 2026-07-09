@@ -46,9 +46,8 @@ namespace TK.Gameplay
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            UpgradeSaveSystem.ResetAll(); 
-            FTUESaveSystem.ResetAll();
-            
+            // UpgradeSaveSystem.ResetAll(); 
+            // FTUESaveSystem.ResetAll();
 
             Initialize();
 

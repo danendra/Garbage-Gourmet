@@ -1149,7 +1149,7 @@ Transform:
   m_GameObject: {fileID: 504188903}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: -80.68, z: 0}
+  m_LocalPosition: {x: -0.07, y: -94.78, z: 0}
   m_LocalScale: {x: 9.706524, y: 2.9506, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1277,7 +1277,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 10.8, y: 103.50696}
+  m_Size: {x: 10.8, y: 107.595276}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1291,7 +1291,7 @@ Transform:
   m_GameObject: {fileID: 746253283}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -38.3078, z: 0}
+  m_LocalPosition: {x: -0.02, y: -40.352, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1345,9 +1345,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4516964747361655172, guid: 1850d70d5af484087bbedf6c311b3a52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358004450961677661, guid: 1850d70d5af484087bbedf6c311b3a52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -91.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7364269750382561109, guid: 1850d70d5af484087bbedf6c311b3a52, type: 3}
       propertyPath: m_Name
       value: ItemSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7364269750382561109, guid: 1850d70d5af484087bbedf6c311b3a52, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1385,7 +1397,7 @@ Transform:
   m_GameObject: {fileID: 812219230}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.23, y: -38.4088, z: -2}
+  m_LocalPosition: {x: -6.23, y: -41.0996, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1445,7 +1457,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2.39, y: 103.239586}
+  m_Size: {x: 2.39, y: 108.62115}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1481,7 +1493,7 @@ Transform:
   m_GameObject: {fileID: 1103088727}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.01, y: -88.95, z: -2}
+  m_LocalPosition: {x: -0.01, y: -94.37, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3228,7 +3240,7 @@ Transform:
   m_GameObject: {fileID: 1892193839}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.23, y: -38.4088, z: -2}
+  m_LocalPosition: {x: 6.23, y: -41.1413, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3288,7 +3300,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2.39, y: 103.239586}
+  m_Size: {x: 2.39, y: 108.70459}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3397,6 +3409,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6436944652096357334, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
+      propertyPath: _descentAcceleration
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436944652096357334, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
       propertyPath: _ascentDurationPerUnit
       value: 0.01
       objectReference: {fileID: 0}
@@ -3478,7 +3494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166907748688121393, guid: 271aa66274cff4cb091cdf4593d76fce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -85.64
+      value: -91.22
       objectReference: {fileID: 0}
     - target: {fileID: 2166907748688121393, guid: 271aa66274cff4cb091cdf4593d76fce, type: 3}
       propertyPath: m_LocalPosition.z
