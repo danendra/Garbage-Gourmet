@@ -9,6 +9,7 @@ namespace TK.Data
         private const string KEY_FTUE_RELEASE_COMPLETED = "ftue_release_completed";
         private const string KEY_FTUE_COLLECTION_COMPLETED = "ftue_collection_completed";
         private const string KEY_FTUE_UPGRADE_COMPLETED = "ftue_upgrade_completed";
+        private const string KEY_FTUE_INVENTORY_UPGRADE_COMPLETED = "ftue_inventory_upgrade_completed";
 
         public static void SaveFTUEFirstLaunchCompleted(bool completed)
         {
@@ -39,6 +40,12 @@ namespace TK.Data
             PlayerPrefs.Save();
         }
 
+        public static void SaveFTUEInventoryUpgradeCompleted(bool completed)
+        {
+            PlayerPrefs.SetInt(KEY_FTUE_INVENTORY_UPGRADE_COMPLETED, completed ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+
         public static bool LoadFTUEFirstLaunchCompleted()
         {
             return PlayerPrefs.GetInt(KEY_FTUE_FIRST_LAUNCH_COMPLETED, 0) == 1;
@@ -64,6 +71,11 @@ namespace TK.Data
             return PlayerPrefs.GetInt(KEY_FTUE_UPGRADE_COMPLETED, 0) == 1;
         }
 
+        public static bool LoadFTUEInventoryUpgradeCompleted()
+        {
+            return PlayerPrefs.GetInt(KEY_FTUE_INVENTORY_UPGRADE_COMPLETED, 0) == 1;
+        }
+
         // Ini buat testing ya kakak
         public static void ResetAll()
         {
@@ -72,6 +84,7 @@ namespace TK.Data
             PlayerPrefs.DeleteKey(KEY_FTUE_RELEASE_COMPLETED);
             PlayerPrefs.DeleteKey(KEY_FTUE_COLLECTION_COMPLETED);
             PlayerPrefs.DeleteKey(KEY_FTUE_UPGRADE_COMPLETED);
+            PlayerPrefs.DeleteKey(KEY_FTUE_INVENTORY_UPGRADE_COMPLETED);
             PlayerPrefs.Save();
         }
     }
