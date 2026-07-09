@@ -37,6 +37,7 @@ namespace TK.Gameplay
 
             yield return new WaitForSeconds(_cameraTop.BlendDuration);
 
+            yield return new WaitForSeconds(1.0f);
             ///
             /// IVAN disini animasi korek2 sampah
             //yield return animationRacoon.PlaySequence("Play", false);
