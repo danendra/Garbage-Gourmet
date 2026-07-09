@@ -51,13 +51,13 @@ namespace TK.UI
                         if (canAfford)
                         {
                             if (affordableStarAsset != null) costText.spriteAsset = affordableStarAsset;
-                            costText.text = $"Upgrade | <sprite=0> {AnoaModule.ConvertCurency(nextCost)}";
                         }
                         else
                         {
                             if (unaffordableStarAsset != null) costText.spriteAsset = unaffordableStarAsset;
-                            costText.text = $"Collect <sprite=0> {AnoaModule.ConvertCurency(nextCost)} to upgrade";
                         }
+                        
+                        costText.text = $"Upgrade | <sprite=0> {AnoaModule.ConvertCurency(nextCost)}";
                     }
 
                     if (upgradeButton.image != null)

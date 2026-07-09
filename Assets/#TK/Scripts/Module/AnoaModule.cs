@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,50 +16,38 @@ namespace Anoa
 
         public static string ConvertCurency(long amount)
         {
-            string result = amount.ToString();
-
             if (amount >= 1000000000000)
             {
-                result = ConvertThousand(amount / 1000000000) + "T";
+                return (amount / 1000000000000f).ToString("0.#").Replace(",", ".") + "T";
             }
             else if (amount >= 1000000000)
             {
-                result = ConvertThousand(amount / 1000000) + "B";
+                return (amount / 1000000000f).ToString("0.#").Replace(",", ".") + "B";
             }
             else if (amount >= 1000000)
             {
-                result = ConvertThousand(amount / 1000) + "M";
+                return (amount / 1000000f).ToString("0.#").Replace(",", ".") + "M";
             }
-            //else if (amount >= 1000)
-            //{
-            //    result = (amount / 1000) + "K";
-            //}
-
-            return result;
+            
+            return ConvertThousand((int)amount);
         }
 
         public static string ConvertCurency(float amount)
         {
-            string result = amount.ToString();
-
-            if (amount >= 1000000000000)
+            if (amount >= 1000000000000f)
             {
-                result = ConvertThousand(amount / 1000000000) + "T";
+                return (amount / 1000000000000f).ToString("0.#").Replace(",", ".") + "T";
             }
-            else if (amount > 1000000000)
+            else if (amount >= 1000000000f)
             {
-                result = ConvertThousand(amount / 1000000) + "B";
+                return (amount / 1000000000f).ToString("0.#").Replace(",", ".") + "B";
             }
-            else if (amount > 1000000)
+            else if (amount >= 1000000f)
             {
-                result = ConvertThousand(amount / 1000) + "M";
+                return (amount / 1000000f).ToString("0.#").Replace(",", ".") + "M";
             }
-            //else if (amount > 1000)
-            //{
-            //    result = (amount / 1000).ToString("F2") + "k";
-            //}
-
-            return result;
+            
+            return ConvertThousand(amount);
         }
 
         public static string ConvertThousand(int amount)
