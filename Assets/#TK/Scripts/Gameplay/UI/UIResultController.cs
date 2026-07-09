@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,8 @@ namespace TK.UI
 {
     using Gameplay;
     using Data;
+    using Audio;
+    using Unity.Mathematics;
 
     public class UIResultController : MonoBehaviour
     {
@@ -33,6 +34,8 @@ namespace TK.UI
 
         public void Initialize(CollectibleController[] _arrCollectibles, RecipeData _recipe, int _intCalculateScore, bool _isTrash)
         {
+            AudioManager.Instance.PlayResultMusic();
+
             RectTransform _rectTransform;
             Vector2 _size;
 
@@ -50,7 +53,7 @@ namespace TK.UI
 
                 _arrImgBurgers[i].gameObject.SetActive(true);
             }
-            
+
             if (_arrCollectibles.Length == 0)
             {
                 _txtBurgerName.text = "No Burger";
@@ -107,6 +110,7 @@ namespace TK.UI
         public void TrashScore()
         {
             _intTargetScore = 0;
+            _intSpeedScore = Mathf.CeilToInt(_fltCurrentScore);
             _txtMultiplier.text = "X0";
             _objTag.SetActive(true);
 
@@ -127,7 +131,7 @@ namespace TK.UI
             {
                 _fltCurrentScore = Mathf.MoveTowards(_fltCurrentScore, _intTargetScore, Time.deltaTime * _intSpeedScore);
 
-                if (_fltCurrentScore > _intTargetScore - 1)
+                if (Mathf.Abs(_fltCurrentScore - _intTargetScore) < 1)
                 {
                     _fltCurrentScore = _intTargetScore;
                     _isShowScore = false;

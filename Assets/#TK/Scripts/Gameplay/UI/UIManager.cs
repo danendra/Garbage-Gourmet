@@ -27,7 +27,7 @@ namespace TK.UI
 
         public void HideGameplay()
         {
-            _tweenInventory.transform.DOLocalMoveX(-200, 0.3f).SetEase(Ease.InBack).SetRelative(true);
+            _tweenInventory.transform.DOLocalMoveX(-400, 0.3f).SetEase(Ease.InBack).SetRelative(true);
             _tweenBar.transform.DOLocalMoveX(300, 0.3f).SetEase(Ease.InBack).SetRelative(true);
             _tweenStar.RecreateTweenAndPlay();
         }
