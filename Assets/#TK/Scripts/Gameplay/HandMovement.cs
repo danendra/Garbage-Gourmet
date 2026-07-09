@@ -21,6 +21,7 @@ namespace TK.Gameplay
         [SerializeField] private float _descentSpeed = 1f;
         [SerializeField] private Transform _ascentTarget;
         [SerializeField] private float _ascentDurationPerUnit = 1f;
+        [SerializeField] private float _descentAcceleration = 0.1f;
         
 
         [Header("Horizontal Movement")]
@@ -261,6 +262,8 @@ namespace TK.Gameplay
                 case HAND_STATE.Descent:
                     MoveHorizontalSmoothed();
                     _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -_descentSpeed);
+                    _rb.AddForce(Vector2.down * _descentAcceleration, ForceMode2D.Force);
+                    _descentSpeed += _descentAcceleration * Time.fixedDeltaTime;
                     break;
                 case HAND_STATE.Holding:
                 case HAND_STATE.Idle:
