@@ -46,13 +46,16 @@ namespace TK.Gameplay
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            UpgradeSaveSystem.ResetAll(); 
+            FTUESaveSystem.ResetAll();
+
             Initialize();
+
+            Application.targetFrameRate = 100;
         }
 
         public void Start()
         {
-            // UpgradeSaveSystem.ResetAll(); 
-            // FTUESaveSystem.ResetAll();
             if(!FTUESaveSystem.LoadFTUEFirstLaunchCompleted())
             {
                 SceneManager.LoadScene("GameScene");
