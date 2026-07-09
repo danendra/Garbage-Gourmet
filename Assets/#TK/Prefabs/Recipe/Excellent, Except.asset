@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Excellent, Except
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Excellent, except
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 1703685071771673367, guid: 8afc0934d7ecd4830927527774edd40f, type: 3}
   CollectionDescription: A flawless burger, wrecked by one bad lettuce leaf. Rude,
     honestly.
   CollectibleIngredients:

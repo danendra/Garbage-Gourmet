@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Long and smelly
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Long and smelly
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 5650310715673799907, guid: 90a4f962bfc454ad0a1c289269857653, type: 3}
   CollectionDescription: All eight slots filled, all bad quality. Somehow still edible.
     Somehow...
   CollectibleIngredients:

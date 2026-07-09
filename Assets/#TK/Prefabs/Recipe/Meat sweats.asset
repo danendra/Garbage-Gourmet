@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Meat sweats
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Meat sweats
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 1172625299937427863, guid: 0f295fe3f3af549ecba0b6cc58e2ce9d, type: 3}
   CollectionDescription: Three patties, zero bread. The burger part was optional,
     it turns out.
   CollectibleIngredients:
