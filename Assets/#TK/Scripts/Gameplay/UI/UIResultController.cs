@@ -8,6 +8,7 @@ namespace TK.UI
     using Gameplay;
     using Data;
     using Audio;
+    using Unity.Mathematics;
 
     public class UIResultController : MonoBehaviour
     {
@@ -109,6 +110,7 @@ namespace TK.UI
         public void TrashScore()
         {
             _intTargetScore = 0;
+            _intSpeedScore = Mathf.CeilToInt(_fltCurrentScore);
             _txtMultiplier.text = "X0";
             _objTag.SetActive(true);
 
@@ -129,7 +131,7 @@ namespace TK.UI
             {
                 _fltCurrentScore = Mathf.MoveTowards(_fltCurrentScore, _intTargetScore, Time.deltaTime * _intSpeedScore);
 
-                if (_fltCurrentScore > _intTargetScore - 1)
+                if (Mathf.Abs(_fltCurrentScore - _intTargetScore) < 1)
                 {
                     _fltCurrentScore = _intTargetScore;
                     _isShowScore = false;
