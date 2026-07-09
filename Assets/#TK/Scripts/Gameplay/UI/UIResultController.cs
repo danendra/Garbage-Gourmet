@@ -31,7 +31,7 @@ namespace TK.UI
 
         }
 
-        public void Initialize(CollectibleController[] _arrCollectibles, RecipeData _recipe, int _intCalculateScore)
+        public void Initialize(CollectibleController[] _arrCollectibles, RecipeData _recipe, int _intCalculateScore, bool _isTrash)
         {
             RectTransform _rectTransform;
             Vector2 _size;
@@ -50,8 +50,20 @@ namespace TK.UI
 
                 _arrImgBurgers[i].gameObject.SetActive(true);
             }
+            
+            if (_arrCollectibles.Length == 0)
+            {
+                _txtBurgerName.text = "No Burger";
 
-            if (_recipe)
+                _btnResult.interactable = true;
+            }
+            else if (_isTrash)
+            {
+                _txtBurgerName.text = "Trash Burger";
+
+                Invoke("TrashScore", 1.5f);
+            }
+            else if (_recipe)
             {
                 _txtBurgerName.text = _recipe.name;
                 _objNew.SetActive(_recipe.IsNew());
@@ -88,6 +100,17 @@ namespace TK.UI
             _isShowScore = true;
 
             GameManager.Instance.AddPoint(_intTargetScore);
+
+            _btnResult.interactable = true;
+        }
+
+        public void TrashScore()
+        {
+            _intTargetScore = 0;
+            _txtMultiplier.text = "X0";
+            _objTag.SetActive(true);
+
+            _isShowScore = true;
 
             _btnResult.interactable = true;
         }
