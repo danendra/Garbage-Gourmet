@@ -1664,6 +1664,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121f8c46810ff4e609997955430b61a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!1 &1321889967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3377986660405874015, guid: 8b8bf0622616f480895ae961e2d80ce0, type: 3}
+  m_PrefabInstance: {fileID: 6853019431177110756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1334628978
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,6 +2815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ResultController
   _inventory: {fileID: 1882932755}
   _transSpawn: {fileID: 1216343859}
+  _objMask: {fileID: 1321889967}
   poolScore: {fileID: 1458571175}
   poolMultiplier: {fileID: 1334628980}
   _racoonVisual: {fileID: 1281718225}
