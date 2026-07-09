@@ -12,12 +12,16 @@ namespace TK.UI
 
         void Start()
         {
-            float _fltPos = Mathf.Lerp(_slider.minValue, _slider.maxValue, _handMovement.GetMaxReach);
+                       
+        }
+
+        public void UpdateFlag()
+        {
+            float _fltPos = Mathf.Lerp(780, -675, _handMovement.GetMaxReach / 105.0f);
             Vector2 _pos = _rectFlag.anchoredPosition;
             _pos.y = _fltPos;
 
-            _rectFlag.anchoredPosition = _pos;
-            Debug.Log(_pos.y);
+            _rectFlag.anchoredPosition = _pos; 
         }
 
         private void Update()
