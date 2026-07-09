@@ -175,7 +175,7 @@ namespace TK.UI
             RecipeData data = config.pageItems[0]; 
 
             // TODO: Connect to SaveData system to check if 'data' is unlocked by the player
-            bool isUnlocked = true; 
+            bool isUnlocked = !data.IsNew(); 
 
             if (isUnlocked)
             {
@@ -187,7 +187,7 @@ namespace TK.UI
 
                 if (posterFoodImage != null) 
                 {
-                    posterFoodImage.sprite = data.CollectionImage;
+                    // posterFoodImage.sprite = data.CollectionImage;
                     posterFoodImage.color = unlockedColor;
                 }
                 
@@ -215,7 +215,7 @@ namespace TK.UI
 
                 if (posterFoodImage != null) 
                 {
-                    posterFoodImage.sprite = data.CollectionImage;
+                    // posterFoodImage.sprite = data.CollectionImage;
                     posterFoodImage.color = lockedShadowColor;
                 }
                 

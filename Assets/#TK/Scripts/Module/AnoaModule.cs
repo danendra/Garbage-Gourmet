@@ -20,15 +20,15 @@ namespace Anoa
 
             if (amount >= 1000000000000)
             {
-                result = ConvertThousand(amount / 1000000000) + "B";
+                result = ConvertThousand(amount / 1000000000) + "T";
             }
             else if (amount >= 1000000000)
             {
-                result = ConvertThousand(amount / 1000000) + "M";
+                result = ConvertThousand(amount / 1000000) + "B";
             }
             else if (amount >= 1000000)
             {
-                result = ConvertThousand(amount / 1000) + "K";
+                result = ConvertThousand(amount / 1000) + "M";
             }
             //else if (amount >= 1000)
             //{
@@ -44,15 +44,15 @@ namespace Anoa
 
             if (amount >= 1000000000000)
             {
-                result = ConvertThousand(amount / 1000000000) + "B";
+                result = ConvertThousand(amount / 1000000000) + "T";
             }
             else if (amount > 1000000000)
             {
-                result = ConvertThousand(amount / 1000000) + "M";
+                result = ConvertThousand(amount / 1000000) + "B";
             }
             else if (amount > 1000000)
             {
-                result = ConvertThousand(amount / 1000) + "K";
+                result = ConvertThousand(amount / 1000) + "M";
             }
             //else if (amount > 1000)
             //{

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dumpster Special
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Dumpster special
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 8588109440255942030, guid: 331c8889a89ed4fbd97e0c378bef65c3, type: 3}
   CollectionDescription: Every ingredient, worst possible quality. Perfectly, consistently
     terrible.
   CollectibleIngredients:

@@ -78,8 +78,8 @@ namespace TK.UI
 
                 if (collectionImage != null)
                 {
-                    if (collectionData.CollectionImage != null) collectionImage.sprite = collectionData.CollectionImage;
-                    collectionImage.color = unlockedColor;
+                    // if (collectionData.CollectionImage != null) collectionImage.sprite = collectionData.CollectionImage;
+                    // collectionImage.color = unlockedColor;
                 }
             }
             else
@@ -93,8 +93,8 @@ namespace TK.UI
 
                 if (collectionImage != null)
                 {
-                    if (collectionData.CollectionImage != null) collectionImage.sprite = collectionData.CollectionImage;
-                    collectionImage.color = shadowColor;
+                    // if (collectionData.CollectionImage != null) collectionImage.sprite = collectionData.CollectionImage;
+                    // collectionImage.color = shadowColor;
                 }
             }
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cursed cheese
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Cursed cheese
-  CollectionImage: {fileID: 0}
+  rectPrefab: {fileID: 4848274347504755146, guid: 59500faa25dc8461094812a3330b4099, type: 3}
   CollectionDescription: Three bad cheeses. We don't know why either.
   CollectibleIngredients:
   - {fileID: 167430920777688230, guid: be597c0d6a2dc46a9b12e21fcb1b8e65, type: 3}
