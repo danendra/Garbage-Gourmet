@@ -2191,6 +2191,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 316374576962704141, guid: 061e5a3997af448a8ad6661410305f79, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316374576962704141, guid: 061e5a3997af448a8ad6661410305f79, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1466658096752348162, guid: 061e5a3997af448a8ad6661410305f79, type: 3}
       propertyPath: _handMovement
       value: 
@@ -3051,6 +3059,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FTUE Game Scene
       objectReference: {fileID: 0}
+    - target: {fileID: 1911699758938411709, guid: 0b29dd9aac2ab4cf1a68292e95ffe5c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8586329511972724176, guid: 0b29dd9aac2ab4cf1a68292e95ffe5c8, type: 3}
       propertyPath: _inventory
       value: 
@@ -3214,7 +3226,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1715238135}
   - component: {fileID: 1715238136}
-  - component: {fileID: 1715238137}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -3275,18 +3286,6 @@ MonoBehaviour:
   _raccoonVisual: {fileID: 1281718225}
   fadeDuration: 0.18
   _result: {fileID: 1768968579}
---- !u!114 &1715238137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715238134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5ae26ec41104f84875062353455a1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TK.Gameplay.SessionManager
 --- !u!1 &1747490782
 GameObject:
   m_ObjectHideFlags: 0
@@ -3682,6 +3681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6436944652096357334, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
+      propertyPath: _transLimitInfo
+      value: 
+      objectReference: {fileID: 914010118}
     - target: {fileID: 6436944652096357334, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
       propertyPath: _descentAcceleration
       value: 0.05

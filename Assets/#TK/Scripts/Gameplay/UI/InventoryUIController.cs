@@ -1,13 +1,15 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+
+using TMPro;
 
 namespace TK.UI
 {
-    using System.Collections;
     using Gameplay;
 
     public class InventoryUIController : MonoBehaviour
     {
+        [SerializeField] protected TMP_Text _txtRelease;
         [SerializeField] protected InventoryBoxController[] _arrInventoryBox;
 
         protected PlayerInventory _inventory;
@@ -20,6 +22,7 @@ namespace TK.UI
             _inventory = LevelManager.Instance.GetPlayerInventory;
             _inventory.OnItemAdded += OnItemAdded;
             _inventory.OnItemRemoved += OnItemRemoved;
+            _inventory.OnReleaseUpdate += OnReleaseUpdate;
 
             Initialize();
         }
@@ -28,26 +31,41 @@ namespace TK.UI
         {
             _inventory.OnItemAdded -= OnItemAdded;
             _inventory.OnItemRemoved -= OnItemRemoved;
+            _inventory.OnReleaseUpdate -= OnReleaseUpdate;
         }
 
         public void Initialize()
         {
             for (int i = 0; i < _arrInventoryBox.Length; i++)
             {
-                if(i < _inventory.MaxPickUpItems)
+                if (i < _inventory.MaxPickUpItems)
                 {
                     _arrInventoryBox[i].gameObject.SetActive(true);
                 }
                 else
                 {
                     _arrInventoryBox[i].gameObject.SetActive(false);
-                }                
+                }
             }
+
+            if (GameManager.Instance.ReleaseLevel == 0)
+            {                
+                _txtRelease.transform.parent.gameObject.SetActive(false);
+            }
+            else
+            {
+                OnReleaseUpdate(_inventory.IntReleaseChance);
+            }
+        }
+
+        public void OnReleaseUpdate(int _intValue)
+        {
+            _txtRelease.text = "Release: " + _intValue;
         }
 
         public void OnItemAdded(CollectibleController _collectible)
         {
-            _arrInventoryBox[_inventory.HeldItems.Count - 1].AddItem(_collectible.GetSprite);            
+            _arrInventoryBox[_inventory.HeldItems.Count - 1].AddItem(_collectible.GetSprite);
         }
 
         public void OnItemRemoved(int _intIndex)
