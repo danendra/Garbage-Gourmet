@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2851757627811680150, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3999879360733985435, guid: d57f6ec0748ab431881bd02c5d1d6135, type: 3}
       propertyPath: m_Size.y
       value: 0.08669013

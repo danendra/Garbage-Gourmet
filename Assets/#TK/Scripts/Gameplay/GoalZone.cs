@@ -33,18 +33,6 @@ namespace TK.Gameplay
 
             CollectibleController best = SelectBestItem(inventory);
 
-            // Store the full list for any future use or remove based on design changes.
-            GameSession.CollectedItems.Clear();
-            foreach (var item in inventory.HeldItems)
-                GameSession.CollectedItems.Add(item);
-
-            // Store the winning item.
-            GameSession.BestItem = best;
-            GameSession.CollectedItemType = best.GetType;
-            GameSession.CollectedRarity = best.GetRarity;
-            GameSession.CollectedSprite = best.GetSprite;
-            GameSession.CollectedItemName = best.name;
-
             if (best.GetType == ITEM_TYPE.Trash)
                 gameManager.LoseGame(hand);
             else
