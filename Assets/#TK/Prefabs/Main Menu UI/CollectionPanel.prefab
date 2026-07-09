@@ -302,7 +302,7 @@ MonoBehaviour:
   posterContainer: {fileID: 7883930308639775793}
   posterDecorationContainer: {fileID: 6382183994655850216}
   posterBackgroundImage: {fileID: 5456782788319325456}
-  posterFoodImage: {fileID: 0}
+  posterFoodImage: {fileID: 4084221300097243757}
   posterTitle: {fileID: 2753819348764684792}
   posterDesc: {fileID: 5443935964418710687}
   posterLockedTitleScribble: {fileID: 6523572993840305949}
@@ -959,7 +959,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -9122800135911971099, guid: cedfd10a2219c43409df24c40974018e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

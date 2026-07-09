@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.RecipeData
   CollectionName: Golden deluxe
   rectPrefab: {fileID: 2828534123955982179, guid: 095d53b96441f47eaa73477fb44315df, type: 3}
+  spriteIcon: {fileID: 8788200458106924117, guid: d21d983ee0a2d4ce88370a37af5d6ed9, type: 3}
   CollectionDescription: THE perfect burger, It's the burger the raccoon brags about.
   CollectibleIngredients:
   - {fileID: 3444456717332883107, guid: cddddf30f27c14352b1f50e60084e7b3, type: 3}

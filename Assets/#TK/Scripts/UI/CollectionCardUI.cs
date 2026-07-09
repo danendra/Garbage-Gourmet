@@ -61,7 +61,7 @@ namespace TK.UI
             _iconBurger.gameObject.SetActive(true);
 
             currentCollectionData = collectionData;
-            isUnlockedStatus = collectionData.IsNew();
+            isUnlockedStatus = !collectionData.IsNew();
             isFlipped = false;
             isAnimating = false;
 

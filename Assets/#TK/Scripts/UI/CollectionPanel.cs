@@ -170,6 +170,7 @@ namespace TK.UI
             if (config.pageItems == null || config.pageItems.Count == 0) return;
 
             RecipeData data = config.pageItems[0]; 
+            posterFoodImage.sprite = data.spriteIcon;
 
             // TODO: Connect to SaveData system to check if 'data' is unlocked by the player
             bool isUnlocked = !data.IsNew(); 
@@ -191,7 +192,7 @@ namespace TK.UI
                 if (posterBackgroundImage != null)
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
-                    posterBackgroundImage.color = unlockedColor;
+                    // posterBackgroundImage.color = unlockedColor;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
 
@@ -219,7 +220,7 @@ namespace TK.UI
                 if (posterBackgroundImage != null)
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
-                    posterBackgroundImage.color = lockedShadowColor;
+                    // posterBackgroundImage.color = lockedShadowColor;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
 

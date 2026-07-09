@@ -12,6 +12,7 @@ namespace TK.Data
         [Header("Collection Display Data")]
         public string CollectionName;
         public RectTransform rectPrefab;
+        public Sprite spriteIcon;
 
         [TextArea(3, 5)]
         public string CollectionDescription;
@@ -69,7 +70,7 @@ namespace TK.Data
 
         public bool IsNew()
         {
-            return PlayerPrefs.HasKey("BURGER_" + name);            
+            return !PlayerPrefs.HasKey("BURGER_" + name);            
         }
     }
 }
