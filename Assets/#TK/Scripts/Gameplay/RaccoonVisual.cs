@@ -21,6 +21,7 @@ namespace TK.Gameplay
 
         private SpriteRenderer1DSpritesheet _visualIdleSpritesheet;
         private SpriteRenderer1DSpritesheet _visualEatSpritesheet;
+        private SpriteMask1DSpritesheet _visualEatMaskSpritesheet;
 
         public Transform Transform => transform;
 
@@ -66,6 +67,9 @@ namespace TK.Gameplay
             _baseScale = transform.localScale;
             _visualIdleSpritesheet = _visualIdle.GetComponent<SpriteRenderer1DSpritesheet>();
             _visualEatSpritesheet = _visualEat.GetComponent<SpriteRenderer1DSpritesheet>();
+
+            Transform maskChild = _visualEat.transform.Find("Mask");
+            _visualEatMaskSpritesheet = maskChild.GetComponent<SpriteMask1DSpritesheet>();
         }
 
         private void Start()
@@ -109,6 +113,9 @@ namespace TK.Gameplay
 
             if (!_visualEatSpritesheet) return;
             _visualEatSpritesheet.SetFrame(_stage);
+
+            if (!_visualEatMaskSpritesheet) return;
+            _visualEatMaskSpritesheet.SetFrame(_stage);
         }
 
         // squash and stretch
