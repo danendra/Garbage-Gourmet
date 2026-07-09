@@ -14,7 +14,7 @@ namespace TK.UI
         [SerializeField] private Image collectionImage;
         [SerializeField] private TextMeshProUGUI collectionNameText;
         [SerializeField] private TextMeshProUGUI multiplierText;
-        [SerializeField] private GameObject lockedOverlay;
+
         [SerializeField] private GameObject lockedNameScribble;
         [SerializeField] private GameObject lockedMultiplierScribble;
 
@@ -60,7 +60,7 @@ namespace TK.UI
 
             if (isUnlocked)
             {
-                if (lockedOverlay != null) lockedOverlay.SetActive(false);
+
                 if (lockedNameScribble != null) lockedNameScribble.SetActive(false);
                 if (lockedMultiplierScribble != null) lockedMultiplierScribble.SetActive(false);
 
@@ -84,7 +84,7 @@ namespace TK.UI
             }
             else
             {
-                if (lockedOverlay != null) lockedOverlay.SetActive(true);
+
                 if (lockedNameScribble != null) lockedNameScribble.SetActive(true);
                 if (lockedMultiplierScribble != null) lockedMultiplierScribble.SetActive(true);
                 

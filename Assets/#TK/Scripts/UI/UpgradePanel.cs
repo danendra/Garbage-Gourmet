@@ -48,9 +48,15 @@ namespace TK.UI
                 closeButton.onClick.AddListener(() => Hide());
         }
 
-        protected override void OnShown()
+        public override void Show(bool immediate = false)
         {
-            base.OnShown();
+            base.Show(immediate);
+            
+            if (TK.MainMenu.MainMenuManager.Instance != null)
+            {
+                TK.MainMenu.MainMenuManager.Instance.BringCoinUIToFront();
+            }
+            
             UpdateUpgradeUI();
         }
 

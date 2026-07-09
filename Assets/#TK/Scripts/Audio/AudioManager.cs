@@ -199,6 +199,15 @@ namespace TK.Audio
             ApplyVolume(masterVolumeParam, masterVolume);
             ApplyVolume(musicVolumeParam, musicVolume);
             ApplyVolume(sfxVolumeParam, sfxVolume);
+
+            if (musicSource != null) musicSource.mute = (musicVolume <= 0.01f);
+            if (sfxPool != null)
+            {
+                foreach (var src in sfxPool)
+                {
+                    if (src != null) src.mute = (sfxVolume <= 0.01f);
+                }
+            }
         }
 
         private void ApplyVolume(string parameterName, float linearVolume)
@@ -224,6 +233,8 @@ namespace TK.Audio
             musicVolume = Mathf.Clamp01(linearVolume);
             ApplyVolume(musicVolumeParam, musicVolume);
             PlayerPrefs.SetFloat(MusicVolumeKey, musicVolume);
+            
+            if (musicSource != null) musicSource.mute = (musicVolume <= 0.01f);
         }
 
         public void SetSFXVolume(float linearVolume)
@@ -231,6 +242,14 @@ namespace TK.Audio
             sfxVolume = Mathf.Clamp01(linearVolume);
             ApplyVolume(sfxVolumeParam, sfxVolume);
             PlayerPrefs.SetFloat(SFXVolumeKey, sfxVolume);
+
+            if (sfxPool != null)
+            {
+                foreach (var src in sfxPool)
+                {
+                    if (src != null) src.mute = (sfxVolume <= 0.01f);
+                }
+            }
         }
     }
 }

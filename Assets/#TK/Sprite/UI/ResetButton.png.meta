@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a231f6376059040b1b2567214600922b
+guid: e70d537add69647d2a184002b244c15a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 305508353773400190
-    second: HandUpgradeButton2_0
+      213: 5243372756566668239
+    second: ResetButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HandUpgradeButton2_0
+      name: ResetButton_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 395
-        height: 76
+        width: 623
+        height: 235
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e70f396aa326d3400800000000000000
-      internalID: 305508353773400190
+      spriteID: fc3fd14ddb334c840800000000000000
+      internalID: 5243372756566668239
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HandUpgradeButton2_0: 305508353773400190
+      ResetButton_0: 5243372756566668239
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
