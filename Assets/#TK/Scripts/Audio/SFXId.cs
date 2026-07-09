@@ -6,6 +6,9 @@ namespace TK.Audio
         EatFood,
         EatTrash,
         Rating,
-        ButtonClick
+        ButtonClick,
+        PanelOpen,
+        PanelClose,
+        PageTurn
     }
 }

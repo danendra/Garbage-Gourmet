@@ -8,7 +8,7 @@ namespace TK.Audio
     {
         [SerializeField] private SFXId id;
         [SerializeField] private AudioResource audioResource;
-
+        
         public SFXId Id => id;
         public AudioResource AudioResource => audioResource;
 
