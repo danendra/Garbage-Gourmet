@@ -14,6 +14,7 @@ namespace TK.Gameplay
         [SerializeField] private GameObject _movementFTUE;
         [SerializeField] private GameObject _inventoryFTUE;
         [SerializeField] private GameObject _releaseFTUE;
+        [SerializeField] private GameObject _inventoryUpgradeFTUE;
 
         [Header("Player References")]
         [SerializeField] private HandMovement _handMovement;
@@ -29,6 +30,8 @@ namespace TK.Gameplay
         private FTUEGameplayStep _currentStep = FTUEGameplayStep.None;
 
         private bool _inventoryFTUECanDismiss = false;
+        private bool _releaseFTUECanDismiss = false;
+        private bool _inventoryUpgradeFTUECanDismiss = false;
         private float _cumulativeDragX = 0f;
 
         private void Awake()
@@ -136,7 +139,14 @@ namespace TK.Gameplay
             if (Touch.activeTouches.Count > 0 &&
                 Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
-                OnInventoryFTUECompleted();
+                if( _inventoryFTUE.activeSelf)
+                {
+                    OnInventoryFTUECompleted();
+                }
+                else if (_inventoryUpgradeFTUE.activeSelf)
+                {
+                    OnInventoryUpgradeFTUECompleted();
+                }
             }
         }
 
@@ -155,11 +165,19 @@ namespace TK.Gameplay
             Time.timeScale = 0f;
 
             _releaseFTUE.SetActive(true);
+            _releaseFTUECanDismiss = false;
             _currentStep = FTUEGameplayStep.WaitForDoubleTap;
+
+            DOVirtual.DelayedCall(_InventoryHoldTime, () =>
+            {
+                _releaseFTUECanDismiss = true;
+            }, ignoreTimeScale: true).SetId(this);
         }
 
         private void CheckDoubleTap()
         {
+            if(!_releaseFTUECanDismiss) return;
+
             if (Touch.activeTouches.Count > 0 &&
                 Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
@@ -183,6 +201,27 @@ namespace TK.Gameplay
         public void OnFirstSessionCompleted()
         {
             FTUESaveSystem.SaveFTUEFirstLaunchCompleted(true);
+        }
+
+        public void StartInventoryUpgradeFTUE()
+        {
+            _inventoryUpgradeFTUE.SetActive(true);
+            _inventoryUpgradeFTUECanDismiss = false;
+            _currentStep = FTUEGameplayStep.WaitForTap;
+
+            DOVirtual.DelayedCall(_InventoryHoldTime, () =>
+            {
+                _inventoryUpgradeFTUECanDismiss = true;
+            }, ignoreTimeScale: true).SetId(this);
+        }
+
+        private void OnInventoryUpgradeFTUECompleted()
+        {
+            _currentStep = FTUEGameplayStep.None;
+
+            _inventoryUpgradeFTUE.SetActive(false);
+
+            FTUESaveSystem.SaveFTUEInventoryUpgradeCompleted(true);
         }
     }
 }
