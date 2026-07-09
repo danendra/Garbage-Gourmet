@@ -8,14 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 402692949389358481, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -3785303248457180991, guid: 6b3045a4548bb4737be44678c5b93edf, type: 3}
-    - target: {fileID: 402692949389358481, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
-      propertyPath: m_MaskInteraction
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4413405740751166454, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
       propertyPath: m_Name
       value: Trash_1 Variant
@@ -60,6 +52,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7808827076231101227, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3785303248457180991, guid: 6b3045a4548bb4737be44678c5b93edf, type: 3}
+    - target: {fileID: 7808827076231101227, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8957538404547563046, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
       propertyPath: m_Size.x
       value: 0.7421875
@@ -83,6 +83,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3426349519948900485, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
     - {fileID: 5460878534998822557, guid: 0c8b9b53299fe4d6b944686879f34e36, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

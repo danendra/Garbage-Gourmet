@@ -12,10 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trash_3 Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 2315685260897963627, guid: 8f7b398284c3b42108233e72a2a42971, type: 3}
+    - target: {fileID: 5326305599471911121, guid: 8f7b398284c3b42108233e72a2a42971, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7695296389557667190, guid: 6b3045a4548bb4737be44678c5b93edf, type: 3}
+    - target: {fileID: 5326305599471911121, guid: 8f7b398284c3b42108233e72a2a42971, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6483989235316323804, guid: 8f7b398284c3b42108233e72a2a42971, type: 3}
       propertyPath: m_Size.y
       value: 0.17414208
@@ -72,7 +76,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

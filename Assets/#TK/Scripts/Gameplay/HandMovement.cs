@@ -48,6 +48,7 @@ namespace TK.Gameplay
         private float _xVelocity; // used internally by SmoothDamp
         
         public float RawDragDeltaX { get; private set; }
+        public float GetMaxReach => _maximumArmReach;
 
         // touch drag tracking
         private Vector2 _lastTouchPos;

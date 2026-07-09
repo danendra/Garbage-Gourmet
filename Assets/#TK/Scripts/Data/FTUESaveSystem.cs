@@ -4,11 +4,17 @@ namespace TK.Data
 {
     public static class FTUESaveSystem
     {
+        private const string KEY_FTUE_FIRST_LAUNCH_COMPLETED = "ftue_first_launch_completed";
         private const string KEY_FTUE_GAMEPLAY_COMPLETED = "ftue_gameplay_completed";
         private const string KEY_FTUE_RELEASE_COMPLETED = "ftue_release_completed";
         private const string KEY_FTUE_COLLECTION_COMPLETED = "ftue_collection_completed";
         private const string KEY_FTUE_UPGRADE_COMPLETED = "ftue_upgrade_completed";
 
+        public static void SaveFTUEFirstLaunchCompleted(bool completed)
+        {
+            PlayerPrefs.SetInt(KEY_FTUE_FIRST_LAUNCH_COMPLETED, completed ? 1 : 0);
+            PlayerPrefs.Save();
+        }
         public static void SaveFTUEGameplayCompleted(bool completed)
         {
             PlayerPrefs.SetInt(KEY_FTUE_GAMEPLAY_COMPLETED, completed ? 1 : 0);
@@ -31,6 +37,11 @@ namespace TK.Data
         {
             PlayerPrefs.SetInt(KEY_FTUE_UPGRADE_COMPLETED, completed ? 1 : 0);
             PlayerPrefs.Save();
+        }
+
+        public static bool LoadFTUEFirstLaunchCompleted()
+        {
+            return PlayerPrefs.GetInt(KEY_FTUE_FIRST_LAUNCH_COMPLETED, 0) == 1;
         }
 
         public static bool LoadFTUEGameplayCompleted()
@@ -56,6 +67,7 @@ namespace TK.Data
         // Ini buat testing ya kakak
         public static void ResetAll()
         {
+            PlayerPrefs.DeleteKey(KEY_FTUE_FIRST_LAUNCH_COMPLETED);
             PlayerPrefs.DeleteKey(KEY_FTUE_GAMEPLAY_COMPLETED);
             PlayerPrefs.DeleteKey(KEY_FTUE_RELEASE_COMPLETED);
             PlayerPrefs.DeleteKey(KEY_FTUE_COLLECTION_COMPLETED);

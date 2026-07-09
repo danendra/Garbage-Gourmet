@@ -179,5 +179,10 @@ namespace TK.Gameplay
 
             FTUESaveSystem.SaveFTUEReleaseCompleted(true);
         }
+
+        public void OnFirstSessionCompleted()
+        {
+            FTUESaveSystem.SaveFTUEFirstLaunchCompleted(true);
+        }
     }
 }

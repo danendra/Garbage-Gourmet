@@ -11,8 +11,8 @@ namespace TK.Gameplay
         Cheese,
         Patty,
         Vegetable,
-        Bottom_Bun,
-        Trash
+        Trash,
+        Bottom_Bun        
     }
 
     public enum RARITY
@@ -45,7 +45,7 @@ namespace TK.Gameplay
 
         void Start()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             _collider = GetComponent<Collider2D>();
         }
 
@@ -64,9 +64,6 @@ namespace TK.Gameplay
 
             if (collector == null || !collector.CanCollect || LevelManager.Instance.GetHandMovement.State == HAND_STATE.Ascent)
                 return;
-
-            GameSession.CollectedSprite = _spriteRenderer.sprite;
-            GameSession.CollectedItemName = name;
 
             _collider.enabled = false;
 

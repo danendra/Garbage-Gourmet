@@ -129,8 +129,6 @@ namespace TK.Gameplay
             IsGameOver = true;
 
             finalScore = Mathf.RoundToInt(playerRef.GetDepth() * 10f);
-            GameSession.FinalScore = finalScore;
-            GameSession.PlayerWon = true;
 
             StartCoroutine(RunEndSequence(true));
         }
@@ -140,14 +138,17 @@ namespace TK.Gameplay
             if (IsGameOver) return;
             IsGameOver = true;
 
-            GameSession.FinalScore = 0;
-            GameSession.PlayerWon = false;
-
             StartCoroutine(RunEndSequence(false));
         }
 
         private IEnumerator RunEndSequence(bool won)
         {
+            if (!FTUESaveSystem.LoadFTUEFirstLaunchCompleted())
+            {
+                FTUESaveSystem.SaveFTUEFirstLaunchCompleted(true);
+                Debug.Log("[LevelManager] First launch FTUE completed and saved.");
+            }
+            
             yield return StartCoroutine(FadeOutGameplayVisuals());
 
             _sequenceController.PlayEndCamera();

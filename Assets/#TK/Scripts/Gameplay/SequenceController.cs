@@ -13,11 +13,12 @@ namespace TK.Gameplay
         [SerializeField] private CameraTransition _cameraTop;
         [SerializeField] private CameraTransition _cameraPlayer;
         [SerializeField] private TransitionAnimationController animationRacoon;
+        [SerializeField] private RaccoonVisual _raccoonVisual;
 
         protected CinemachineBrain _cinemachineBrain;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        void Awake()
         {
             _cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         }
@@ -29,17 +30,15 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayIntroScene(UnityAction _action)
         {
-            yield return new WaitForSeconds(1.0f);
-
             _cameraPlayer.SetInactive();
             _cameraBottom.SetInactive();
             _cameraTop.SetActive(_cinemachineBrain);
 
             yield return new WaitForSeconds(_cameraTop.BlendDuration);
+            
+            _raccoonVisual.ChangeStateToTrash();
 
-            ///
-            /// IVAN disini animasi korek2 sampah
-            //yield return animationRacoon.PlaySequence("Play", false);
+            yield return new WaitForSeconds(1.0f);
 
             _cameraTop.SetInactive();
             _cameraPlayer.SetActive(_cinemachineBrain);

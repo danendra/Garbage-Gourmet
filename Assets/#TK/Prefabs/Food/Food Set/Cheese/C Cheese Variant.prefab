@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.9199219
       objectReference: {fileID: 0}
+    - target: {fileID: 3584161457233443231, guid: 3cf2db7386fe847408e6a99e3355ebb3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 221790193684785848, guid: 170b80b766953420382630f4b762d07a, type: 3}
     - target: {fileID: 6374104320938833701, guid: 3cf2db7386fe847408e6a99e3355ebb3, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -72,7 +76,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: C Cheese Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6374104320938833701, guid: 3cf2db7386fe847408e6a99e3355ebb3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

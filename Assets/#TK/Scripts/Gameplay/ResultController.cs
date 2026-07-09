@@ -9,13 +9,14 @@ using TMPro;
 
 namespace TK.Gameplay
 {
-    using Data;
+    using Data;    
     using UI;
 
     public class ResultController : MonoBehaviour
     {
         [SerializeField] private PlayerInventory _inventory;
         [SerializeField] private Transform _transSpawn;
+        [SerializeField] private GameObject _objMask;
         [SerializeField] private PoolerContainer poolScore;
         [SerializeField] private PoolerContainer poolMultiplier;
         [SerializeField] private RaccoonVisual _racoonVisual;
@@ -33,24 +34,17 @@ namespace TK.Gameplay
         }
 
         private IEnumerator IEPlayResult()
-        {
-            ///
-            /// IVAN disini flow animasi makannya ya
-            /// tutup mulut dulu baru delay buat buka mulutnya
-            /// 
+        {            
             _racoonVisual.ChangeStateToIdle();
             yield return new WaitForSeconds(0.5f);
             _racoonVisual.ChangeStateToEat();
-
-            // sip aman
-            
 
             int _intScore = 0;
 
             IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
             List<Rigidbody2D> _listRB = new List<Rigidbody2D>();
 
-            // _objRaccoon.SetActive(true);
+            _objMask.SetActive(false);
             UIManager.Instance.HideGameplay();
 
             GameObject _object;
@@ -64,8 +58,9 @@ namespace TK.Gameplay
                 _rb = _object.GetComponent<Rigidbody2D>();
                 _listRB.Add(_rb);
 
+                _rb.gravityScale = 0;
                 _object.transform.localScale = Vector3.one * 2;
-                _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
+                _object.GetComponentInChildren<SpriteRenderer>().sortingOrder = _index;
 
                 _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);
 
@@ -77,16 +72,19 @@ namespace TK.Gameplay
             yield return new WaitForSeconds(0.5f);
 
             _index = 0;
+            _objMask.SetActive(true);
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
 
+                _rb.freezeRotation = true;
                 _rb.linearVelocity = Vector2.zero;
                 _rb.angularVelocity = 0;
                 _object.transform.position = _transSpawn.position;
                 _object.transform.rotation = Quaternion.identity;
+                _rb.gravityScale = 1;
 
                 _intScore += Mathf.RoundToInt(_collectible.GetScore * _collectible.GetMultiplier);
 
@@ -97,24 +95,29 @@ namespace TK.Gameplay
                 _index++;
             }
 
-            if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
-                _intScore = 0;
-
             RecipeData _recipe = null;
+            bool _isTrash = false;
 
-            if (LevelManager.Instance.FindRecipe(_listCollectible, out _recipe))
+            if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
             {
-                Debug.Log(_recipe.name);
+                _isTrash = true;
             }
             else
-            {
-                Debug.Log("Any Burger");
+            {                
+                if (LevelManager.Instance.FindRecipe(_listCollectible, out _recipe))
+                {
+                    Debug.Log(_recipe.name);
+                }
+                else
+                {
+                    Debug.Log("Any Burger");
+                }
             }
 
             yield return new WaitForSeconds(1.0f);
 
             _dgAnimation.RecreateTweenAndPlay();
-            
+
             yield return new WaitForSeconds(1.0f);
 
             // deactivate rb game object
@@ -125,17 +128,9 @@ namespace TK.Gameplay
 
             _racoonVisual.ChangeStateToIdle();
 
-            UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore);
+            yield return new WaitForSeconds(0.5f);
 
-            // GameManager.Instance.AddPoint(_intScore);
-
-            // do
-            // {
-            //     yield return null;
-            // }
-            // while (!Input.GetMouseButtonUp(0));
-
-            // GameManager.Instance.LoadScene(0);
+            UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore, _isTrash);
         }
 
         public IEnumerator IEDelayShowScore(CollectibleController _collectible, GameObject _object)
