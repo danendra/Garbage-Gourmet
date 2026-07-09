@@ -305,6 +305,7 @@ MonoBehaviour:
   settingsButton: {fileID: 5272055392826467622}
   collectionButton: {fileID: 2604380319654800174}
   upgradeButton: {fileID: 1520213876894488313}
+  txtPoint: {fileID: 0}
   hatchOpenAnim: {fileID: 6092605312100640962}
   hatchFallbackDuration: 1.8
   noHandExitDuration: 0.25
@@ -2168,7 +2169,6 @@ MonoBehaviour:
   hideEase: 5
   scaleTransition: 1
   minScale: 0.9
-  coinsText: {fileID: 6859394022984536897}
   cardContainer: {fileID: 6962920967569712802}
   cardPrefab: {fileID: 6925472807376990849}
   closeButton: {fileID: 5403780400477103332}
@@ -4517,7 +4517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4559203394322302271, guid: 31fc963f2c7f1446c9fdba4e0bff7a7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31fc963f2c7f1446c9fdba4e0bff7a7b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

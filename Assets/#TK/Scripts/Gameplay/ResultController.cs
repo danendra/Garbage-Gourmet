@@ -16,10 +16,11 @@ namespace TK.Gameplay
     {
         [SerializeField] private PlayerInventory _inventory;
         [SerializeField] private Transform _transSpawn;
+        [SerializeField] private GameObject _objMask;
         [SerializeField] private PoolerContainer poolScore;
         [SerializeField] private PoolerContainer poolMultiplier;
         [SerializeField] private RaccoonVisual _racoonVisual;
-        [SerializeField] private DOTweenAnimation _dgAnimation;
+        [SerializeField] private DOTweenAnimation _dgAnimation;        
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -34,23 +35,16 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayResult()
         {
-            ///
-            /// IVAN disini flow animasi makannya ya
-            /// tutup mulut dulu baru delay buat buka mulutnya
-            /// 
             _racoonVisual.ChangeStateToIdle();
             yield return new WaitForSeconds(0.5f);
-            _racoonVisual.ChangeStateToEat();
-
-            // sip aman
-            
+            _racoonVisual.ChangeStateToEat();            
 
             int _intScore = 0;
 
             IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
             List<Rigidbody2D> _listRB = new List<Rigidbody2D>();
 
-            // _objRaccoon.SetActive(true);
+            _objMask.SetActive(false);
             UIManager.Instance.HideGameplay();
 
             GameObject _object;
@@ -64,6 +58,7 @@ namespace TK.Gameplay
                 _rb = _object.GetComponent<Rigidbody2D>();
                 _listRB.Add(_rb);
 
+                _rb.gravityScale = 0;
                 _object.transform.localScale = Vector3.one * 2;
                 _object.GetComponent<SpriteRenderer>().sortingOrder = _index;
 
@@ -77,16 +72,19 @@ namespace TK.Gameplay
             yield return new WaitForSeconds(0.5f);
 
             _index = 0;
+            _objMask.SetActive(true);
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
-
+                
+                _rb.freezeRotation = true;
                 _rb.linearVelocity = Vector2.zero;
                 _rb.angularVelocity = 0;
                 _object.transform.position = _transSpawn.position;
                 _object.transform.rotation = Quaternion.identity;
+                _rb.gravityScale = 1;
 
                 _intScore += Mathf.RoundToInt(_collectible.GetScore * _collectible.GetMultiplier);
 
@@ -125,17 +123,9 @@ namespace TK.Gameplay
 
             _racoonVisual.ChangeStateToIdle();
 
+            yield return new WaitForSeconds(0.5f);
+
             UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore);
-
-            // GameManager.Instance.AddPoint(_intScore);
-
-            // do
-            // {
-            //     yield return null;
-            // }
-            // while (!Input.GetMouseButtonUp(0));
-
-            // GameManager.Instance.LoadScene(0);
         }
 
         public IEnumerator IEDelayShowScore(CollectibleController _collectible, GameObject _object)

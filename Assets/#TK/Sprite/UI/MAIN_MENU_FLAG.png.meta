@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 61fcf59f3fb8a423f89a23951b12a5fe
+guid: 65b7bb28afa424c6f8d84c5e9b4c8e93
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5003978209760735678
-    second: RaccoonEatMask_0_0
+      213: -905069265621858520
+    second: MAIN_MENU_FLAG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -122,30 +122,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonEatMask_0_0
+      name: MAIN_MENU_FLAG_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2000
-        height: 1573
+        x: 44
+        y: 86
+        width: 449
+        height: 348
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24e8a67945c4e8ab0800000000000000
-      internalID: -5003978209760735678
+      spriteID: 8274c755c4c8073f0800000000000000
+      internalID: -905069265621858520
       vertices: []
       indices: 
       edges: []
@@ -174,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RaccoonEatMask_0_0: -5003978209760735678
+      MAIN_MENU_FLAG_0: -905069265621858520
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

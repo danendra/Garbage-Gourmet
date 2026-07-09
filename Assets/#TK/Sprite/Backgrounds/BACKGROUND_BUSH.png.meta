@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 61fcf59f3fb8a423f89a23951b12a5fe
+guid: 3b5dcb1b9af37489992ab05007983a47
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5003978209760735678
-    second: RaccoonEatMask_0_0
+      213: -490480940125387216
+    second: BACKGROUND_BUSH_0
+  - first:
+      213: 5124675033463153003
+    second: BACKGROUND_BUSH_1
+  - first:
+      213: 2170714011959019437
+    second: BACKGROUND_BUSH_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +78,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -97,7 +103,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -122,30 +128,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonEatMask_0_0
+      name: BACKGROUND_BUSH_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2000
-        height: 1573
+        x: 549
+        y: 30
+        width: 426
+        height: 483
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24e8a67945c4e8ab0800000000000000
-      internalID: -5003978209760735678
+      spriteID: 0360ab20f267139f0800000000000000
+      internalID: -490480940125387216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BACKGROUND_BUSH_1
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 498
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6162ee8ac08e1740800000000000000
+      internalID: 5124675033463153003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BACKGROUND_BUSH_2
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 24
+        width: 358
+        height: 412
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7c7c794ecef1e10800000000000000
+      internalID: 2170714011959019437
       vertices: []
       indices: 
       edges: []
@@ -174,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RaccoonEatMask_0_0: -5003978209760735678
+      BACKGROUND_BUSH_0: -490480940125387216
+      BACKGROUND_BUSH_1: 5124675033463153003
+      BACKGROUND_BUSH_2: 2170714011959019437
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

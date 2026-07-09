@@ -32,7 +32,7 @@ namespace TK.UI
 
             if (levelText != null)
             {
-                levelText.text = $"Level {currentLevel + 1}";
+                levelText.text = $"Level {currentLevel}";
             }
 
             if (upgradeButton != null)
