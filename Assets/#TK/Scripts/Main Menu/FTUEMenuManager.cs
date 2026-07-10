@@ -5,6 +5,7 @@ using TK.Gameplay;
 using TK.UI;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TK.Audio;
 
 namespace TK.MainMenu
 {
@@ -34,6 +35,7 @@ namespace TK.MainMenu
         [SerializeField] private GameObject _collectionRacoon2;
         [SerializeField] private GameObject _collectionText1;
         [SerializeField] private GameObject _collectionText2;
+        [SerializeField] private GameObject _background;
         [SerializeField] private UnityEngine.UI.Button _collectionButton;
 
         [Header("Threshold")]
@@ -117,6 +119,8 @@ namespace TK.MainMenu
             if (MainMenuManager.Instance != null && MainMenuNavigationManager.Instance != null)
                 MainMenuManager.Instance.SetPlayButtonState(false);
                 MainMenuNavigationManager.Instance.SetUpgradeFTUEButtonsState(false);
+            
+            if(_background != null) _background.SetActive(true);
 
             // Wait for the specific upgrade button to be clicked, not any screen tap
             if (_upgradeButton != null)
@@ -134,6 +138,7 @@ namespace TK.MainMenu
             if (_upgradeMenu != null) _upgradeMenu.SetActive(false);
             if (_upgradePanel != null) _upgradePanel.SetActive(true);
 
+            AudioManager.Instance.PlaySFX(SFXId.TextTalk);
             _canTap = false;
             DOVirtual.DelayedCall(_touchDelay, () => { _canTap = true; }).SetId(this);
 
@@ -153,6 +158,7 @@ namespace TK.MainMenu
                     // Swap to second panel visuals
                     _text1.SetActive(false);
                     _text2.SetActive(true);
+                    AudioManager.Instance.PlaySFX(SFXId.TextScream);
 
                     _panelBackground1.SetActive(false);
                     _panelBackground2.SetActive(true);
@@ -171,6 +177,7 @@ namespace TK.MainMenu
                 {
                     _collectionText1.SetActive(false);
                     _collectionText2.SetActive(true);
+                    AudioManager.Instance.PlaySFX(SFXId.TextScream);
 
                     _collectionRacoon1.SetActive(false);
                     _collectionRacoon2.SetActive(true);
@@ -209,6 +216,7 @@ namespace TK.MainMenu
             _currentStep = FTUEMenuStep.None;
 
             _upgradeFTUE.SetActive(false);
+            if(_background != null) _background.SetActive(false);
 
             FTUESaveSystem.SaveFTUEUpgradeCompleted(true);
 
@@ -217,8 +225,6 @@ namespace TK.MainMenu
 
             if (MainMenuNavigationManager.Instance != null)
                 MainMenuNavigationManager.Instance.SetUpgradeFTUEButtonsState(true);
-
-            TryStartCollectionFTUE();
         }
 
         public void TryStartCollectionFTUE()
@@ -251,6 +257,7 @@ namespace TK.MainMenu
             if (_collectionText2 != null) _collectionText2.SetActive(false);
             if (_collectionRacoon1 != null) _collectionRacoon1.SetActive(true);
             if (_collectionRacoon2 != null) _collectionRacoon2.SetActive(false);
+            if(_background != null) _background.SetActive(true);
             _collectionPanel1 = false;
             _canTap = false;
 
@@ -266,6 +273,7 @@ namespace TK.MainMenu
             if (_collectionMenu != null) _collectionMenu.SetActive(false);
             if (_collectionPanel != null) _collectionPanel.SetActive(true);
 
+            AudioManager.Instance.PlaySFX(SFXId.TextTalk);
             _canTap = false;
             DOVirtual.DelayedCall(_touchDelay, () => { _canTap = true; }).SetId(this);
 
@@ -283,6 +291,7 @@ namespace TK.MainMenu
 
             _currentStep = FTUEMenuStep.None;
 
+            if(_background != null) _background.SetActive(false);
             _collectionFTUE.SetActive(false);
 
             FTUESaveSystem.SaveFTUECollectionCompleted(true);

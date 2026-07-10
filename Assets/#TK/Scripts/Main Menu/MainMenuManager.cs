@@ -108,7 +108,7 @@ namespace TK.MainMenu
                 {
                     FTUEMenuManager.Instance.TryStartUpgradeFTUE();
                 }
-                else 
+                else if(!FTUESaveSystem.LoadFTUECollectionCompleted())
                 {
                     FTUEMenuManager.Instance.TryStartCollectionFTUE();
                 }
