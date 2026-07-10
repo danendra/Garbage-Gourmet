@@ -14,9 +14,14 @@ namespace TK.Gameplay
         [SerializeField] private RecipeData[] _arrRecipes;
         [SerializeField] private UpgradeData _upgradeData;
 
+        [Header("Raccoon Stage Thresholds")]
+        [SerializeField] private int[] _arrRaccoonStageThresholds = { 400000, 800000, 1500000, 4000000, 8000000 };
+
         private int _armLevel;
         private int _pickUpLevel;
         private int _releaseLevel;
+
+        public int[] RaccoonStageThresholds => _arrRaccoonStageThresholds;
 
         public int intCurrentPoint { get; private set; }
         public int intCummulativePoint { get; private set; }

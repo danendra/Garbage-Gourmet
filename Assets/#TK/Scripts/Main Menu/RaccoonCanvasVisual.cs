@@ -15,13 +15,19 @@ namespace TK.MainMenu
         void Start()
         {
             int totalPoint = GameManager.Instance.intCummulativePoint;
+            int[] thresholds = GameManager.Instance.RaccoonStageThresholds;
 
-            if (totalPoint < 100000) _raccoonSpritesheet.SetFrame(0);
-            else if (totalPoint < 800000) _raccoonSpritesheet.SetFrame(1);
-            else if (totalPoint < 1500000) _raccoonSpritesheet.SetFrame(2);
-            else if (totalPoint < 4000000) _raccoonSpritesheet.SetFrame(3);
-            else if (totalPoint < 8000000) _raccoonSpritesheet.SetFrame(4);
-            else _raccoonSpritesheet.SetFrame(5);
+            int stage = thresholds.Length; // default: past the last threshold
+            for (int i = 0; i < thresholds.Length; i++)
+            {
+                if (totalPoint < thresholds[i])
+                {
+                    stage = i;
+                    break;
+                }
+            }
+
+            _raccoonSpritesheet.SetFrame(stage);
         }
     }
 }
