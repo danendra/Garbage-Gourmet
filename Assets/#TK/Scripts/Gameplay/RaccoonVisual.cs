@@ -141,13 +141,12 @@ namespace TK.Gameplay
         {
             int totalPoint = GameManager.Instance.intCummulativePoint;
 
-            Debug.Log($"[RaccoonVisual] totalPoint = {totalPoint}");
-
-            if (totalPoint < 800000) Stage = 0;
-            else if (totalPoint < 1500000) Stage = 1;
-            else if (totalPoint < 4000000) Stage = 2;
-            else if (totalPoint < 8000000) Stage = 3;
-            else Stage = 4;
+            if (totalPoint < 100000) Stage = 0;
+            else if (totalPoint < 800000) Stage = 1;
+            else if (totalPoint < 1500000) Stage = 2;
+            else if (totalPoint < 4000000) Stage = 3;
+            else if (totalPoint < 8000000) Stage = 4;
+            else Stage = 5;
         }
 
         private void HandleStageChange()
@@ -157,6 +156,7 @@ namespace TK.Gameplay
             if (_visualIdleSpritesheet) _visualIdleSpritesheet.SetFrame(_stage);
             if (_visualEatSpritesheet) _visualEatSpritesheet.SetFrame(_stage);
             if (_visualEatMaskSpritesheet) _visualEatMaskSpritesheet.SetFrame(_stage);
+            
             if (_visualTrashSpritesheet) _visualTrashSpritesheet.SetFrame(_stage);
             ApplyStageTrigger();
         }
