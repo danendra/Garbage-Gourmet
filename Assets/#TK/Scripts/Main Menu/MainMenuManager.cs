@@ -85,11 +85,7 @@ namespace TK.MainMenu
                 HideSplash();
             }
 
-            if (GameManager.Instance != null)
-            {
-                _currentPoint = GameManager.Instance.intCurrentMoney;
-                txtPoint.text = AnoaModule.ConvertCurency(_currentPoint);
-            }
+            UpdateCurrencyUI();
 
             if (hatchOpenAnim != null)
             {
@@ -102,6 +98,15 @@ namespace TK.MainMenu
 
             yield return new WaitForSeconds(introTransitionDelay);
             StartIdleAndReady();
+        }
+
+        public void UpdateCurrencyUI()
+        {
+            if (GameManager.Instance != null)
+            {
+                _currentPoint = GameManager.Instance.intCurrentMoney;
+                txtPoint.text = AnoaModule.ConvertCurency(_currentPoint);
+            }
         }
 
         public void StartIdleAndReady()

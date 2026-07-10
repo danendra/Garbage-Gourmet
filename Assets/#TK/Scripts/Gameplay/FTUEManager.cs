@@ -134,8 +134,8 @@ namespace TK.Gameplay
 
         private void CheckTap()
         {
-            if (!_inventoryFTUECanDismiss) return;
-
+            if(!_inventoryFTUECanDismiss && !_inventoryUpgradeFTUECanDismiss) return;
+            
             if (Touch.activeTouches.Count > 0 &&
                 Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
@@ -205,6 +205,13 @@ namespace TK.Gameplay
 
         public void StartInventoryUpgradeFTUE()
         {
+            DOVirtual.DelayedCall(1f, ShowInventoryUpgradeFTUE).SetId(this);
+        }
+
+        private void ShowInventoryUpgradeFTUE()
+        {
+            Time.timeScale = 0f;
+
             _inventoryUpgradeFTUE.SetActive(true);
             _inventoryUpgradeFTUECanDismiss = false;
             _currentStep = FTUEGameplayStep.WaitForTap;
@@ -220,7 +227,7 @@ namespace TK.Gameplay
             _currentStep = FTUEGameplayStep.None;
 
             _inventoryUpgradeFTUE.SetActive(false);
-
+            Time.timeScale = 1f;
             FTUESaveSystem.SaveFTUEInventoryUpgradeCompleted(true);
         }
     }

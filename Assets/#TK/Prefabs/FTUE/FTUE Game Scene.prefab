@@ -207,7 +207,7 @@ MonoBehaviour:
   _handMovement: {fileID: 0}
   _inventory: {fileID: 0}
   _dragThreshold: 50
-  _InventoryHoldTime: 3
+  _InventoryHoldTime: 2
 --- !u!1 &2003153414125465286
 GameObject:
   m_ObjectHideFlags: 0
