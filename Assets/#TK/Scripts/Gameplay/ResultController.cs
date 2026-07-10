@@ -22,6 +22,7 @@ namespace TK.Gameplay
         [SerializeField] private PoolerContainer poolMultiplier;
         [SerializeField] private RaccoonVisual _racoonVisual;
         [SerializeField] private DOTweenAnimation _dgAnimation;
+        [SerializeField] private GameObject _objVomit;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -51,7 +52,7 @@ namespace TK.Gameplay
             GameObject _object;
             Rigidbody2D _rb;
 
-            int _index = 6;            
+            int _index = 6;
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
@@ -70,7 +71,7 @@ namespace TK.Gameplay
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 
                 _index++;
-            }            
+            }
 
             yield return new WaitForSeconds(0.5f);
 
@@ -80,7 +81,7 @@ namespace TK.Gameplay
             AudioManager.Instance.PlaySFX(SFXId.Fall);
 
             foreach (CollectibleController _collectible in _listCollectible)
-            {                
+            {
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
 
@@ -128,6 +129,7 @@ namespace TK.Gameplay
             if (_isTrash)
             {
                 AudioManager.Instance.PlayEatTrash();
+                _objVomit.SetActive(true);
             }
             else
             {
@@ -147,9 +149,12 @@ namespace TK.Gameplay
                 _rbItem.gameObject.SetActive(false);
             }
 
-            _racoonVisual.ChangeStateToIdle();
+            if (!_isTrash)
+            {
+                _racoonVisual.ChangeStateToIdle();
+            }
 
-            yield return new WaitForSeconds(0.5f);            
+            yield return new WaitForSeconds(0.5f);
 
             UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore, _isTrash);
         }
@@ -175,13 +180,13 @@ namespace TK.Gameplay
             txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
             txtMultiplier.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
 
-            AudioManager.Instance.PlaySFX(SFXId.Land);            
+            AudioManager.Instance.PlaySFX(SFXId.Land);
 
             while (_fltTime < 0.3f)
             {
                 txtScore.text = Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f).ToString();
 
-                _fltTime += Time.deltaTime;                                
+                _fltTime += Time.deltaTime;
 
                 yield return new WaitForEndOfFrame();
             }
