@@ -33,6 +33,8 @@ namespace TK.Gameplay
         private bool _releaseFTUECanDismiss = false;
         private bool _inventoryUpgradeFTUECanDismiss = false;
         private float _cumulativeDragX = 0f;
+        private float _lastTapTime = -999f;
+        [SerializeField] private float _doubleTapTimeThreshold = 0.3f;
 
         private void Awake()
         {
@@ -80,7 +82,11 @@ namespace TK.Gameplay
             _movementFTUE.SetActive(true);
 
             _cumulativeDragX = 0f;
-            _currentStep = FTUEGameplayStep.WaitForDrag;
+        
+            DOVirtual.DelayedCall(_InventoryHoldTime, () =>
+            {
+                _currentStep = FTUEGameplayStep.WaitForDrag;
+            }, ignoreTimeScale: true).SetId(this);
         }
 
         private void CheckDrag()
@@ -135,7 +141,7 @@ namespace TK.Gameplay
         private void CheckTap()
         {
             if(!_inventoryFTUECanDismiss && !_inventoryUpgradeFTUECanDismiss) return;
-            
+
             if (Touch.activeTouches.Count > 0 &&
                 Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
@@ -181,10 +187,15 @@ namespace TK.Gameplay
             if (Touch.activeTouches.Count > 0 &&
                 Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
-                if (_releaseFTUE.activeSelf)
+                float currentTime = Time.unscaledTime;
+                if (currentTime - _lastTapTime <= _doubleTapTimeThreshold)
                 {
-                    OnReleaseFTUECompleted();
+                    if (_releaseFTUE.activeSelf)
+                    {
+                        OnReleaseFTUECompleted();
+                    }
                 }
+                _lastTapTime = currentTime;
             }
         }
 

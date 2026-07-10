@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using TK.Data;
 using TK.Gameplay;
+using TK.UI;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
@@ -12,6 +13,7 @@ namespace TK.MainMenu
         public static FTUEMenuManager Instance { get; private set; }
 
         [SerializeField] private GameObject _upgradeFTUE;
+        [SerializeField] private GameObject _collectionFTUE;
         [SerializeField] private float _touchDelay = 2f;
 
         [Header("Upgrade")]
@@ -25,13 +27,28 @@ namespace TK.MainMenu
         [SerializeField] private GameObject _text2;
         [SerializeField] private UnityEngine.UI.Button _upgradeButton;
 
+        [Header("Collection")]
+        [SerializeField] private GameObject _collectionMenu;
+        [SerializeField] private GameObject _collectionPanel;
+        [SerializeField] private GameObject _collectionRacoon1;
+        [SerializeField] private GameObject _collectionRacoon2;
+        [SerializeField] private GameObject _collectionText1;
+        [SerializeField] private GameObject _collectionText2;
+        [SerializeField] private UnityEngine.UI.Button _collectionButton;
+
         [Header("Threshold")]
         [SerializeField] private int _upgradePointThreshold = 40000;
 
-        private enum FTUEMenuStep { None, WaitToEnterUpgrade, WaitForTap, WaitForUpgrade }
+
+        [Header("Button References")]
+        [SerializeField] private UnityEngine.UI.Button _closeUpgradeButton;
+        [SerializeField] private UnityEngine.UI.Button _closeCollectionButton;
+
+        private enum FTUEMenuStep { None, WaitToEnterUpgrade, WaitForTap, WaitForUpgrade, WaitToEnterCollection }
         private FTUEMenuStep _currentStep = FTUEMenuStep.None;
 
         private bool _upgradePanel1 = false;
+        private bool _collectionPanel1 = false;
         private bool _canTap = false;
 
         private void Awake()
@@ -65,26 +82,41 @@ namespace TK.MainMenu
 
         public void TryStartUpgradeFTUE()
         {
-            if (FTUESaveSystem.LoadFTUEUpgradeCompleted()) return;
+            if (FTUESaveSystem.LoadFTUEUpgradeCompleted())
+            {
+                TryStartCollectionFTUE();
+                return;
+            }
 
-            int cumulativePoints = GameManager.Instance != null
-                ? GameManager.Instance.intCummulativePoint
+            int currentPoints = GameManager.Instance != null
+                ? GameManager.Instance.PlayerCoins
                 : 0;
 
-            if (cumulativePoints < _upgradePointThreshold) return;
+            int threshold = _upgradePointThreshold > 0 ? _upgradePointThreshold : 40000;
+
+            if (currentPoints < threshold)
+            {
+                TryStartCollectionFTUE();
+                return;
+            }
 
             StartUpgradeFTUE();
         }
 
         public void StartUpgradeFTUE()
         {
-            DOVirtual.DelayedCall(1f, ShowUpgradeFTUE).SetId(this);
+            ShowUpgradeFTUE();
         }
 
         private void ShowUpgradeFTUE()
         {
             _upgradeFTUE.SetActive(true);
             _currentStep = FTUEMenuStep.WaitToEnterUpgrade;
+
+            // Disable play, settings, and collection buttons on the menu
+            if (MainMenuManager.Instance != null && MainMenuNavigationManager.Instance != null)
+                MainMenuManager.Instance.SetPlayButtonState(false);
+                MainMenuNavigationManager.Instance.SetUpgradeFTUEButtonsState(false);
 
             // Wait for the specific upgrade button to be clicked, not any screen tap
             if (_upgradeButton != null)
@@ -95,6 +127,9 @@ namespace TK.MainMenu
         {
             if (_upgradeButton != null)
                 _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
+            
+            if(_closeUpgradeButton != null)
+                _closeUpgradeButton.interactable = false;
 
             if (_upgradeMenu != null) _upgradeMenu.SetActive(false);
             if (_upgradePanel != null) _upgradePanel.SetActive(true);
@@ -130,6 +165,28 @@ namespace TK.MainMenu
 
                 SwitchCurrentStep(FTUEMenuStep.WaitForUpgrade);
             }
+            else if (_collectionFTUE.activeSelf)
+            {
+                if (!_collectionPanel1)
+                {
+                    _collectionText1.SetActive(false);
+                    _collectionText2.SetActive(true);
+
+                    _collectionRacoon1.SetActive(false);
+                    _collectionRacoon2.SetActive(true);
+
+                    _collectionPanel1 = true;
+
+                    _canTap = false;
+                    DOVirtual.DelayedCall(_touchDelay, () => { _canTap = true; }).SetId(this);
+
+                    SwitchCurrentStep(FTUEMenuStep.WaitForTap);
+                }
+                else
+                {
+                    OnCollectionFTUECompleted();
+                }
+            }
         }
 
         private void CheckUpgradeCompleted()
@@ -146,11 +203,89 @@ namespace TK.MainMenu
 
         private void OnUpgradeFTUECompleted()
         {
+            if(_closeUpgradeButton != null)
+                _closeUpgradeButton.interactable = true;
+
             _currentStep = FTUEMenuStep.None;
 
             _upgradeFTUE.SetActive(false);
 
             FTUESaveSystem.SaveFTUEUpgradeCompleted(true);
+
+            if (MainMenuManager.Instance != null)
+                MainMenuManager.Instance.SetPlayButtonState(true);
+
+            if (MainMenuNavigationManager.Instance != null)
+                MainMenuNavigationManager.Instance.SetUpgradeFTUEButtonsState(true);
+
+            TryStartCollectionFTUE();
+        }
+
+        public void TryStartCollectionFTUE()
+        {
+            if (FTUESaveSystem.LoadFTUECollectionCompleted()) return;
+
+            if (_currentStep != FTUEMenuStep.None) return;
+
+            if (PlayerPrefs.GetInt("NEW_COLLECTION_UNLOCKED_FLAG", 0) != 1) return;
+
+            PlayerPrefs.SetInt("NEW_COLLECTION_UNLOCKED_FLAG", 0);
+            PlayerPrefs.Save();
+
+            StartCollectionFTUE();
+        }
+
+        public void StartCollectionFTUE()
+        {
+            _collectionFTUE.SetActive(true);
+            _currentStep = FTUEMenuStep.WaitToEnterCollection;
+
+            if (MainMenuManager.Instance != null && MainMenuNavigationManager.Instance != null)
+                MainMenuManager.Instance.SetPlayButtonState(false);
+                MainMenuNavigationManager.Instance.SetCollectionFTUEButtonsState(false);
+            
+            if(_closeCollectionButton != null)
+                _closeCollectionButton.interactable = false;
+
+            if (_collectionText1 != null) _collectionText1.SetActive(true);
+            if (_collectionText2 != null) _collectionText2.SetActive(false);
+            if (_collectionRacoon1 != null) _collectionRacoon1.SetActive(true);
+            if (_collectionRacoon2 != null) _collectionRacoon2.SetActive(false);
+            _collectionPanel1 = false;
+            _canTap = false;
+
+            if (_collectionButton != null)
+                _collectionButton.onClick.AddListener(OnCollectionButtonClicked);
+        }
+
+        private void OnCollectionButtonClicked()
+        {
+            if (_collectionButton != null)
+                _collectionButton.onClick.RemoveListener(OnCollectionButtonClicked);
+
+            if (_collectionMenu != null) _collectionMenu.SetActive(false);
+            if (_collectionPanel != null) _collectionPanel.SetActive(true);
+
+            _canTap = false;
+            DOVirtual.DelayedCall(_touchDelay, () => { _canTap = true; }).SetId(this);
+
+            SwitchCurrentStep(FTUEMenuStep.WaitForTap);
+        }
+
+        private void OnCollectionFTUECompleted()
+        {
+            if (MainMenuManager.Instance != null && MainMenuNavigationManager.Instance != null)
+                MainMenuManager.Instance.SetPlayButtonState(true);
+                MainMenuNavigationManager.Instance.SetCollectionFTUEButtonsState(true);
+            
+            if(_closeCollectionButton != null)
+                _closeCollectionButton.interactable = true;
+
+            _currentStep = FTUEMenuStep.None;
+
+            _collectionFTUE.SetActive(false);
+
+            FTUESaveSystem.SaveFTUECollectionCompleted(true);
         }
 
         private void SwitchCurrentStep(FTUEMenuStep newStep)
