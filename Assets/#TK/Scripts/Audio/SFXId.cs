@@ -11,6 +11,9 @@ namespace TK.Audio
         PanelClose,
         PageTurn,
         Burp,
-        Growl
+        Growl,
+        Fall,
+        Land,
+        Rise
     }
 }
