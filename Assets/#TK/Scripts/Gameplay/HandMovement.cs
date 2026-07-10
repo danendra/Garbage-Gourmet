@@ -135,6 +135,7 @@ namespace TK.Gameplay
             State = HAND_STATE.Ascent;
 
             AudioManager.Instance.StopAmbience();
+            AudioManager.Instance.PlaySFX(SFXId.Boing);
         }
 
         private void HandleInventoryFull()
