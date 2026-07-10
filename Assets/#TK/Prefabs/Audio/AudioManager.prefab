@@ -402,4 +402,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2c8f2f7a50f643e092f98e9256dd093, type: 2}
   - {fileID: 11400000, guid: 3aa88d1d592ef440fa8452216a488b75, type: 2}
   - {fileID: 11400000, guid: bfa99068299e643849a5564218945fb3, type: 2}
+  - {fileID: 11400000, guid: 107f286dd2e6c4c26806b84c39f19243, type: 2}
+  - {fileID: 11400000, guid: dcaf7ad4d04ba41238f485c9e8cb82ba, type: 2}
   poolSize: 8
