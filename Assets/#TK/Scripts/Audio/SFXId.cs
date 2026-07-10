@@ -20,6 +20,10 @@ namespace TK.Audio
         Release,
         CantRelease,
         Digging,
-        Horn
+        Horn,
+        Point,
+        TextTalk,
+        TextScream,
+        Boing
     }
 }

@@ -156,7 +156,7 @@ namespace TK.Audio
                 return;
             }
 
-            source.resource = resource;
+            source.resource = resource;            
             source.Play();
             StartCoroutine(IEReturnToPool(source));
         }
@@ -199,7 +199,7 @@ namespace TK.Audio
         public void PlayPanelOpen() => PlaySFX(SFXId.PanelOpen);
         public void PlayPanelClose() => PlaySFX(SFXId.PanelClose);
         public void PlayPageTurn() => PlaySFX(SFXId.PageTurn);
-        public void PlayBurp() => PlaySFX(SFXId.Burp);
+        public void PlayBurp() => PlaySFX(SFXId.Burp);        
 
         private void Start()
         {

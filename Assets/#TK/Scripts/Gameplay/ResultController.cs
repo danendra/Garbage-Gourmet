@@ -9,6 +9,7 @@ using TMPro;
 
 namespace TK.Gameplay
 {
+    using Anoa;
     using Data;
     using TK.Audio;
     using UI;
@@ -22,6 +23,7 @@ namespace TK.Gameplay
         [SerializeField] private PoolerContainer poolMultiplier;
         [SerializeField] private RaccoonVisual _racoonVisual;
         [SerializeField] private DOTweenAnimation _dgAnimation;
+        [SerializeField] private GameObject _objVomit;
 
         public void PlayResult()
         {
@@ -45,7 +47,7 @@ namespace TK.Gameplay
             GameObject _object;
             Rigidbody2D _rb;
 
-            int _index = 6;            
+            int _index = 6;
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
@@ -64,7 +66,7 @@ namespace TK.Gameplay
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 
                 _index++;
-            }            
+            }
 
             yield return new WaitForSeconds(0.5f);
 
@@ -73,14 +75,14 @@ namespace TK.Gameplay
 
             bool _isFinalBurger = false;
 
+            AudioManager.Instance.PlaySFX(SFXId.Fall);
+
             foreach (CollectibleController _collectible in _listCollectible)
             {
                 if (_collectible.GetRarity == RARITY.Legendary)
                 {
                     _isFinalBurger = true;
                 }
-                
-                AudioManager.Instance.PlaySFX(SFXId.Fall);
 
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
@@ -129,6 +131,7 @@ namespace TK.Gameplay
             if (_isTrash)
             {
                 AudioManager.Instance.PlayEatTrash();
+                _objVomit.SetActive(true);
             }
             else
             {
@@ -157,8 +160,11 @@ namespace TK.Gameplay
             } 
             else
             {
-                _racoonVisual.ChangeStateToIdle();
-            }          
+                if (!_isTrash)
+                {
+                    _racoonVisual.ChangeStateToIdle();
+                }
+            }        
 
             if (_isFinalBurger)
             {
@@ -198,14 +204,14 @@ namespace TK.Gameplay
 
             while (_fltTime < 0.3f)
             {
-                txtScore.text = Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f).ToString();
+                txtScore.text = AnoaModule.ConvertThousand(Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f));
 
                 _fltTime += Time.deltaTime;
 
                 yield return new WaitForEndOfFrame();
             }
 
-            txtScore.text = _intTarget.ToString();
+            txtScore.text = AnoaModule.ConvertThousand(_intTarget);
 
             yield return new WaitForSeconds(0.35f);
 
