@@ -51,7 +51,7 @@ namespace TK.Gameplay
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            ResetGameData();
+            // ResetGameData();
 
             Initialize();
 

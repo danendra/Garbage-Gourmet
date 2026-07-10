@@ -136,6 +136,7 @@ namespace TK.Gameplay
 
             AudioManager.Instance.StopAmbience();
             AudioManager.Instance.PlaySFX(SFXId.Boing);
+            _inventory.RemoveReleaseChance();
         }
 
         private void HandleInventoryFull()

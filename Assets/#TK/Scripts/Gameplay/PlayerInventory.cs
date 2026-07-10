@@ -80,6 +80,11 @@ namespace TK.Gameplay
             OnReleaseUpdate?.Invoke(IntReleaseChance);
         }
 
+        public void RemoveReleaseChance()
+        {
+            IntReleaseChance = 0;
+        }
+
         private void ReleaseItem()
         {            
             if (_heldItems.Count > 0)
