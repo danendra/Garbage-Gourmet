@@ -9,7 +9,8 @@ using TMPro;
 
 namespace TK.Gameplay
 {
-    using Data;    
+    using Data;
+    using TK.Audio;
     using UI;
 
     public class ResultController : MonoBehaviour
@@ -34,7 +35,7 @@ namespace TK.Gameplay
         }
 
         private IEnumerator IEPlayResult()
-        {            
+        {
             _racoonVisual.ChangeStateToIdle();
             yield return new WaitForSeconds(0.5f);
             _racoonVisual.ChangeStateToEat();
@@ -103,7 +104,7 @@ namespace TK.Gameplay
                 _isTrash = true;
             }
             else
-            {                
+            {
                 if (LevelManager.Instance.FindRecipe(_listCollectible, out _recipe))
                 {
                     Debug.Log(_recipe.name);
@@ -118,7 +119,18 @@ namespace TK.Gameplay
 
             _dgAnimation.RecreateTweenAndPlay();
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
+
+            if (_isTrash)
+            {
+                AudioManager.Instance.PlayEatTrash();
+            }
+            else
+            {
+                AudioManager.Instance.PlayEatFood();
+            }
+
+            yield return new WaitForSeconds(0.5f);
 
             // deactivate rb game object
             foreach (Rigidbody2D _rbItem in _listRB)
@@ -129,6 +141,11 @@ namespace TK.Gameplay
             _racoonVisual.ChangeStateToIdle();
 
             yield return new WaitForSeconds(0.5f);
+
+            if (!_isTrash)
+            {
+                AudioManager.Instance.PlayBurp();
+            }
 
             UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore, _isTrash);
         }

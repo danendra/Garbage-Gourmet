@@ -9,6 +9,8 @@ namespace TK.Audio
         ButtonClick,
         PanelOpen,
         PanelClose,
-        PageTurn
+        PageTurn,
+        Burp,
+        Growl
     }
 }

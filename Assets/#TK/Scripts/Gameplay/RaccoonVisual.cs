@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 using TK.Module;
+using TK.Audio;
 
 namespace TK.Gameplay
 {
@@ -20,6 +21,9 @@ namespace TK.Gameplay
         [SerializeField] private GameObject _visualIdle;
         [SerializeField] private GameObject _visualEat;
         [SerializeField] private GameObject _visualTrash;
+        
+        [Header("Tweening")]
+        [SerializeField] private DOTweenAnimation _tweenShake;
 
         private SpriteRenderer1DSpritesheet _visualIdleSpritesheet;
         private SpriteRenderer1DSpritesheet _visualEatSpritesheet;
@@ -126,7 +130,8 @@ namespace TK.Gameplay
                 case RACCOON_VISUAL_STATE.Trash:
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(false);
-                    _visualTrash.SetActive(true);
+                    _visualTrash.SetActive(true);                    
+
                     ApplyStageTrigger();
                     break;
             }
@@ -168,6 +173,7 @@ namespace TK.Gameplay
             ApplyStageTrigger();
         }
 
+        #region  Tweening
         // squash and stretch
         public void PlaySquashStretch(float intensity = 1f, float timeMultiplier = 1f) 
         {
@@ -191,5 +197,11 @@ namespace TK.Gameplay
         private Vector3 Squash(float intensity) => new Vector3(_baseScale.x * (1f + 0.25f * intensity), _baseScale.y * (1f - 0.30f * intensity), _baseScale.z * (1f + 0.25f * intensity));
         private Vector3 Stretch(float intensity) => new Vector3(_baseScale.x * (1f - 0.15f * intensity), _baseScale.y * (1f + 0.35f * intensity), _baseScale.z * (1f - 0.15f * intensity));
         
+        public void PlayShake()
+        {
+            _tweenShake.RecreateTweenAndPlay();
+        }
+
+        #endregion
     }
 }
