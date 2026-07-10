@@ -12,6 +12,7 @@ namespace TK.UI
         [SerializeField] private RectTransform cardContainer;
         [SerializeField] private UpgradeCard cardPrefab;
 
+        [SerializeField] private float cardSpacing = 40f;
         [SerializeField] private Button closeButton;
 
         [Header("Upgrade Definitions Config")]
@@ -31,7 +32,7 @@ namespace TK.UI
                 {
                     var layout = cardContainer.gameObject.AddComponent<HorizontalLayoutGroup>();
                     layout.childAlignment = TextAnchor.MiddleCenter;
-                    layout.spacing = 40f;
+                    layout.spacing = cardSpacing;
                     layout.childControlWidth = true;
                     layout.childControlHeight = true;
                     layout.childForceExpandWidth = false;
@@ -51,11 +52,6 @@ namespace TK.UI
         public override void Show(bool immediate = false)
         {
             base.Show(immediate);
-            
-            if (TK.MainMenu.MainMenuManager.Instance != null)
-            {
-                TK.MainMenu.MainMenuManager.Instance.BringCoinUIToFront();
-            }
             
             UpdateUpgradeUI();
         }

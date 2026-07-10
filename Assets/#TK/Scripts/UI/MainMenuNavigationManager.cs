@@ -68,6 +68,7 @@ namespace TK.UI
             if (MainMenuManager.Instance != null)
             {
                 MainMenuManager.Instance.SetMenuButtonsState(false);
+                MainMenuManager.Instance.BringCoinUIToFront();
             }
         }
 
