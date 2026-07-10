@@ -52,14 +52,14 @@ namespace Anoa
 
         public static string ConvertThousand(int amount)
         {
-            string result = amount.ToString("#,##0");
-            return result.Replace(",", ".");
+            return amount.ToString("#,##0");
+            // return result.Replace(",", ".");
         }
 
         public static string ConvertThousand(float amount)
         {
-            string result = amount.ToString("#,##0");
-            return result.Replace(",", ".");
+            return amount.ToString("#,##0");
+            // return result.Replace(",", ".");
         }
 
         public static List<T> RandomList<T>(T[] _array)
