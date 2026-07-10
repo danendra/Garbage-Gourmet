@@ -77,10 +77,10 @@ namespace TK.Gameplay
             _index = 0;
             _objMask.SetActive(true);
 
-            foreach (CollectibleController _collectible in _listCollectible)
-            {
-                AudioManager.Instance.PlaySFX(SFXId.Fall);
+            AudioManager.Instance.PlaySFX(SFXId.Fall);
 
+            foreach (CollectibleController _collectible in _listCollectible)
+            {                
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
 
@@ -175,13 +175,13 @@ namespace TK.Gameplay
             txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
             txtMultiplier.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
 
-            AudioManager.Instance.PlaySFX(SFXId.Land);
+            AudioManager.Instance.PlaySFX(SFXId.Land);            
 
             while (_fltTime < 0.3f)
             {
                 txtScore.text = Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f).ToString();
 
-                _fltTime += Time.deltaTime;
+                _fltTime += Time.deltaTime;                                
 
                 yield return new WaitForEndOfFrame();
             }
