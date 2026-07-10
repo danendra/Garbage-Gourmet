@@ -101,6 +101,13 @@ namespace TK.Gameplay
             Debug.Log("Game data has been reset.");
         }
 
+        public void ResetCummulative()
+        {
+            intCummulativePoint = 0;
+            PlayerPrefs.DeleteKey("CUMMULATIVE_POINT");
+            PlayerPrefs.Save();
+        }
+
         #region Upgrade
         //Panggil waktu start game scene
         public void ApplyUpgradesToPlayer(HandMovement hand, PlayerInventory inventory)

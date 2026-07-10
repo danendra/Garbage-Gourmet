@@ -25,12 +25,6 @@ namespace TK.Gameplay
         [SerializeField] private DOTweenAnimation _dgAnimation;
         [SerializeField] private GameObject _objVomit;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-
-        }
-
         public void PlayResult()
         {
             StartCoroutine(IEPlayResult());
@@ -79,10 +73,17 @@ namespace TK.Gameplay
             _index = 0;
             _objMask.SetActive(true);
 
+            bool _isFinalBurger = false;
+
             AudioManager.Instance.PlaySFX(SFXId.Fall);
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
+                if (_collectible.GetRarity == RARITY.Legendary)
+                {
+                    _isFinalBurger = true;
+                }
+
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
 
@@ -150,14 +151,32 @@ namespace TK.Gameplay
                 _rbItem.gameObject.SetActive(false);
             }
 
-            if (!_isTrash)
+            // if final burger, change to explode, else idle
+            if (_isFinalBurger)
             {
                 _racoonVisual.ChangeStateToIdle();
+                yield return new WaitForSeconds(1f);   
+                _racoonVisual.ChangeStateToExplode();
+            } 
+            else
+            {
+                if (!_isTrash)
+                {
+                    _racoonVisual.ChangeStateToIdle();
+                }
+            }        
+
+            if (_isFinalBurger)
+            {
+                GameManager.Instance.ResetCummulative();
+                yield return new WaitForSeconds(8f);
+                GameManager.Instance.LoadScene(0);
             }
-
-            yield return new WaitForSeconds(0.5f);
-
-            UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore, _isTrash);
+            else
+            {
+                yield return new WaitForSeconds(0.5f);
+                UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore, _isTrash);
+            }
         }
 
         public IEnumerator IEDelayShowScore(CollectibleController _collectible, GameObject _object)
@@ -198,12 +217,6 @@ namespace TK.Gameplay
 
             txtScore.gameObject.SetActive(false);
             txtMultiplier.gameObject.SetActive(false);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

@@ -109,7 +109,7 @@ MonoBehaviour:
   _rarity: 3
   _intScore: 1
   _fltMultiplier: 1
-  _goFoodServed: {fileID: 0}
+  _goFoodServed: {fileID: 1496957002537699815, guid: 14673cb9c7de84007b9d0037a4fead90, type: 3}
 --- !u!61 &9066151810168672446
 BoxCollider2D:
   m_ObjectHideFlags: 0
