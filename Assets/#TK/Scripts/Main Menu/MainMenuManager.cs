@@ -103,10 +103,22 @@ namespace TK.MainMenu
             }
 
             if (FTUEMenuManager.Instance != null)
-                FTUEMenuManager.Instance.TryStartUpgradeFTUE();
+            {
+                if (!FTUESaveSystem.LoadFTUEUpgradeCompleted())
+                {
+                    FTUEMenuManager.Instance.TryStartUpgradeFTUE();
+                }
+                else 
+                {
+                    FTUEMenuManager.Instance.TryStartCollectionFTUE();
+                }
+            }
         }
 
-
+        public void SetPlayButtonState(bool interactive)
+        {
+            if (playButtonComponent != null) playButtonComponent.interactable = interactive;
+        }
 
         private void OnPlayButtonClicked()
         {
