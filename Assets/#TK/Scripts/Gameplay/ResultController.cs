@@ -9,6 +9,7 @@ using TMPro;
 
 namespace TK.Gameplay
 {
+    using Anoa;
     using Data;
     using TK.Audio;
     using UI;
@@ -179,14 +180,14 @@ namespace TK.Gameplay
 
             while (_fltTime < 0.3f)
             {
-                txtScore.text = Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f).ToString();
+                txtScore.text = AnoaModule.ConvertThousand(Mathf.Lerp(_collectible.GetScore, _intTarget, _fltTime / 0.3f));
 
                 _fltTime += Time.deltaTime;                                
 
                 yield return new WaitForEndOfFrame();
             }
 
-            txtScore.text = _intTarget.ToString();
+            txtScore.text = AnoaModule.ConvertThousand(_intTarget);
 
             yield return new WaitForSeconds(0.35f);
 

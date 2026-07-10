@@ -3,12 +3,13 @@ using UnityEngine.UI;
 
 using TMPro;
 
+using Anoa;
+
 namespace TK.UI
 {
     using Gameplay;
     using Data;
-    using Audio;
-    using Unity.Mathematics;
+    using Audio;    
 
     public class UIResultController : MonoBehaviour
     {
@@ -139,7 +140,7 @@ namespace TK.UI
                     _isShowScore = false;
                 }
 
-                _txtScore.text = Mathf.FloorToInt(_fltCurrentScore).ToString();
+                _txtScore.text = AnoaModule.ConvertThousand(_fltCurrentScore);
             }
         }
     }
