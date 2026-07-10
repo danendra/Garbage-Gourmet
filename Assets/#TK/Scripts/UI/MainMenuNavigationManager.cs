@@ -105,5 +105,21 @@ namespace TK.UI
             if (collectionPanel != null) collectionPanel.Hide(true);
             activePanel = null;
         }
+
+        public void SetUpgradeFTUEButtonsState(bool state)
+        {
+            if (openSettingsButton != null)
+                openSettingsButton.interactable = state;
+            if (openCollectionButton != null)
+                openCollectionButton.interactable = state;
+        }
+
+        public void SetCollectionFTUEButtonsState(bool state)
+        {
+            if (openSettingsButton != null)
+                openSettingsButton.interactable = state;
+            if (openUpgradeButton != null)
+                openUpgradeButton.interactable = state;
+        }
     }
 }

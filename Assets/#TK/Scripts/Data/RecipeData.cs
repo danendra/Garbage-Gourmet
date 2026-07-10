@@ -63,6 +63,10 @@ namespace TK.Data
         public void AddBurger()
         {            
             int _intTotalMake = PlayerPrefs.GetInt("BURGER_" + name, 0);
+            if (_intTotalMake == 0)
+            {
+                PlayerPrefs.SetInt("NEW_COLLECTION_UNLOCKED_FLAG", 1);
+            }
             _intTotalMake++;
 
             PlayerPrefs.SetInt("BURGER_" + name, _intTotalMake);

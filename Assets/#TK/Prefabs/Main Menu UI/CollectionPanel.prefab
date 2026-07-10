@@ -300,6 +300,7 @@ MonoBehaviour:
   itemSlotPrefab: {fileID: 2390251330609167807}
   closeButton: {fileID: 1496132995031824165}
   posterContainer: {fileID: 7883930308639775793}
+  shineEffect: {fileID: 0}
   posterDecorationContainer: {fileID: 6382183994655850216}
   posterBackgroundImage: {fileID: 5456782788319325456}
   posterFoodImage: {fileID: 4084221300097243757}
@@ -336,6 +337,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b53ea0a5a61f34f34ab048d542a507bb, type: 2}
     posterBackground: {fileID: 0}
     useNativeBackgroundSize: 0
+    enableShine: 0
     posterDecorationsPrefab: {fileID: 0}
   - layoutType: 0
     pageItems:
@@ -347,6 +349,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cb054f2e0df75426091f399386dbb8ae, type: 2}
     posterBackground: {fileID: 0}
     useNativeBackgroundSize: 0
+    enableShine: 0
     posterDecorationsPrefab: {fileID: 0}
   - layoutType: 0
     pageItems:
@@ -358,18 +361,21 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5e3e30c739a3d4cb69821bc920f2dac1, type: 2}
     posterBackground: {fileID: 0}
     useNativeBackgroundSize: 0
+    enableShine: 0
     posterDecorationsPrefab: {fileID: 0}
   - layoutType: 1
     pageItems:
     - {fileID: 11400000, guid: 687d0ae6e04194992a1e3662c46071dd, type: 2}
     posterBackground: {fileID: 1345318526340338982, guid: 25f6da464462c4aa2b947bdc03c7a95c, type: 3}
     useNativeBackgroundSize: 1
+    enableShine: 0
     posterDecorationsPrefab: {fileID: 4406790013426456035, guid: 5b1ee5e522f9744388e245f2df78a57d, type: 3}
   - layoutType: 1
     pageItems:
     - {fileID: 11400000, guid: 2f6c0938cc4314c5a956128a4fc398d5, type: 2}
     posterBackground: {fileID: 480873307384863868, guid: 88eb636ed02544adb942d3bcb69566ae, type: 3}
     useNativeBackgroundSize: 1
+    enableShine: 0
     posterDecorationsPrefab: {fileID: 1218348390479636584, guid: ff26d757f76dc40189ebb851e5578f1d, type: 3}
   cardsPerPage: 6
 --- !u!1 &3251714589981855569
@@ -1389,8 +1395,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2142712526971695448}
-  - {fileID: 6382183994655850216}
   - {fileID: 452280245270260623}
+  - {fileID: 6382183994655850216}
   - {fileID: 3393794303399246282}
   - {fileID: 5699534194858512651}
   - {fileID: 1078706650782497076}

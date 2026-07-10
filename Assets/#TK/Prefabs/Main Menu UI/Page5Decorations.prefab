@@ -49,6 +49,8 @@ GameObject:
   - component: {fileID: 2231265839941487577}
   - component: {fileID: 945414009540170795}
   - component: {fileID: 8855184559865942070}
+  - component: {fileID: 2378312613811502213}
+  - component: {fileID: 5220793567034154479}
   m_Layer: 5
   m_Name: Fire_2
   m_TagString: Untagged
@@ -65,14 +67,14 @@ RectTransform:
   m_GameObject: {fileID: 1312311866840449554}
   m_LocalRotation: {x: -0, y: -0, z: -0.0875422, w: 0.99616086}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5144061057111325011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.044}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -329, y: 566}
+  m_AnchoredPosition: {x: -255, y: 543}
   m_SizeDelta: {x: 245, y: 331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &945414009540170795
@@ -103,7 +105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1098286324429101383, guid: 3fb44ac0dd75a42da932f2ac44b4b3a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccb8b9d0a3c6b4dd3afc7096ac7332b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -113,6 +115,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2378312613811502213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312311866840449554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7946d425e1543ffbacae76427f3bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Module.Image1DSpritesheet
+  frames:
+  - {fileID: 21300000, guid: ccb8b9d0a3c6b4dd3afc7096ac7332b5, type: 3}
+  - {fileID: 21300000, guid: ab847e67dc5a24ca28f9b2b82fc3c84e, type: 3}
+  - {fileID: 21300000, guid: a97ee2cc2ffb948348ce0a5023734de0, type: 3}
+  - {fileID: 21300000, guid: fbd1cff18b6ab4ebdabe7be95fb12064, type: 3}
+  - {fileID: 21300000, guid: 61e6250b4b1384e68ba79a2ad5f4978c, type: 3}
+  - {fileID: 21300000, guid: ae5f530d5a2ee44c3b639250c6362674, type: 3}
+  - {fileID: 21300000, guid: 868d2721617b44fdeb5899f5577c1ff7, type: 3}
+  - {fileID: 21300000, guid: d82bad46378134d0fa57b533677f52cc, type: 3}
+  _frameIndex: 0
+--- !u!114 &5220793567034154479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312311866840449554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf4b5594d0564dd3bdc4571a255d3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Module.Image1DSpritesheetPlayer
+  fps: 12
+  loop: 1
+  playOnEnable: 1
 --- !u!1 &3513761878822368718
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +163,8 @@ GameObject:
   - component: {fileID: 3819940203513752346}
   - component: {fileID: 7376162246892848955}
   - component: {fileID: 1091573197306168719}
+  - component: {fileID: 1320634651998832438}
+  - component: {fileID: 5320357752299517739}
   m_Layer: 5
   m_Name: Fire_1
   m_TagString: Untagged
@@ -147,7 +188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 19.56}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -287, y: -376}
+  m_AnchoredPosition: {x: -336, y: -393}
   m_SizeDelta: {x: 245, y: 331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7376162246892848955
@@ -178,7 +219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1098286324429101383, guid: 3fb44ac0dd75a42da932f2ac44b4b3a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccb8b9d0a3c6b4dd3afc7096ac7332b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -188,6 +229,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1320634651998832438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3513761878822368718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7946d425e1543ffbacae76427f3bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Module.Image1DSpritesheet
+  frames:
+  - {fileID: 21300000, guid: ccb8b9d0a3c6b4dd3afc7096ac7332b5, type: 3}
+  - {fileID: 21300000, guid: ab847e67dc5a24ca28f9b2b82fc3c84e, type: 3}
+  - {fileID: 21300000, guid: a97ee2cc2ffb948348ce0a5023734de0, type: 3}
+  - {fileID: 21300000, guid: fbd1cff18b6ab4ebdabe7be95fb12064, type: 3}
+  - {fileID: 21300000, guid: 61e6250b4b1384e68ba79a2ad5f4978c, type: 3}
+  - {fileID: 21300000, guid: ae5f530d5a2ee44c3b639250c6362674, type: 3}
+  - {fileID: 21300000, guid: 868d2721617b44fdeb5899f5577c1ff7, type: 3}
+  - {fileID: 21300000, guid: d82bad46378134d0fa57b533677f52cc, type: 3}
+  _frameIndex: 0
+--- !u!114 &5320357752299517739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3513761878822368718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf4b5594d0564dd3bdc4571a255d3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Module.Image1DSpritesheetPlayer
+  fps: 12
+  loop: 1
+  playOnEnable: 1
 --- !u!1 &4592069616000718603
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +277,8 @@ GameObject:
   - component: {fileID: 4155532383293295656}
   - component: {fileID: 7778912415957980122}
   - component: {fileID: 6814483789922716176}
+  - component: {fileID: 2164142155187023910}
+  - component: {fileID: 965871644765847913}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -213,13 +293,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4592069616000718603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.1568012, w: 0.9876302}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5144061057111325011}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -18.043}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 296, y: -375}
@@ -253,7 +333,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1098286324429101383, guid: 3fb44ac0dd75a42da932f2ac44b4b3a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccb8b9d0a3c6b4dd3afc7096ac7332b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -263,3 +343,40 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2164142155187023910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4592069616000718603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7946d425e1543ffbacae76427f3bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Module.Image1DSpritesheet
+  frames:
+  - {fileID: 21300000, guid: ccb8b9d0a3c6b4dd3afc7096ac7332b5, type: 3}
+  - {fileID: 21300000, guid: ab847e67dc5a24ca28f9b2b82fc3c84e, type: 3}
+  - {fileID: 21300000, guid: a97ee2cc2ffb948348ce0a5023734de0, type: 3}
+  - {fileID: 21300000, guid: fbd1cff18b6ab4ebdabe7be95fb12064, type: 3}
+  - {fileID: 21300000, guid: 61e6250b4b1384e68ba79a2ad5f4978c, type: 3}
+  - {fileID: 21300000, guid: ae5f530d5a2ee44c3b639250c6362674, type: 3}
+  - {fileID: 21300000, guid: 868d2721617b44fdeb5899f5577c1ff7, type: 3}
+  - {fileID: 21300000, guid: d82bad46378134d0fa57b533677f52cc, type: 3}
+  _frameIndex: 0
+--- !u!114 &965871644765847913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4592069616000718603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf4b5594d0564dd3bdc4571a255d3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Module.Image1DSpritesheetPlayer
+  fps: 12
+  loop: 1
+  playOnEnable: 1

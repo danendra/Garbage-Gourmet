@@ -51,8 +51,7 @@ namespace TK.Gameplay
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // UpgradeSaveSystem.ResetAll(); 
-            // FTUESaveSystem.ResetAll();
+            ResetGameData();
 
             Initialize();
 
@@ -76,6 +75,30 @@ namespace TK.Gameplay
                 UpgradeSaveSystem.SaveCoins(0);
 
             LoadUpgrades();
+        }
+
+        public void ResetGameData()
+        {
+            UpgradeSaveSystem.ResetAll();
+            FTUESaveSystem.ResetAll();
+
+            foreach (var recipe in GetAllRecipes)
+            {
+                if (recipe != null)
+                {
+                    PlayerPrefs.DeleteKey("BURGER_" + recipe.name);
+                }
+            }
+
+            intCurrentPoint = 0;
+            intCummulativePoint = 0;
+            UpgradeSaveSystem.SaveCoins(0);
+            PlayerPrefs.DeleteKey("CURRENT_POINT");
+            PlayerPrefs.DeleteKey("CUMMULATIVE_POINT");
+            PlayerPrefs.DeleteKey("NEW_COLLECTION_UNLOCKED_FLAG");
+            PlayerPrefs.Save();
+
+            Debug.Log("Game data has been reset.");
         }
 
         #region Upgrade

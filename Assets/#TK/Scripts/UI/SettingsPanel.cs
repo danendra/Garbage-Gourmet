@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TK.Audio;
 using System.Reflection;
+using TK.Gameplay;
 
 namespace TK.UI
 {
@@ -131,20 +132,7 @@ namespace TK.UI
         {
             if (AudioManager.Instance != null) AudioManager.Instance.PlayButtonClick();
 
-            if (Gameplay.GameManager.Instance != null)
-            {
-                Gameplay.GameManager.Instance.ResetUpgrades();
-            }
-            else
-            {
-                Data.UpgradeSaveSystem.ResetAll();
-            }
-
-            PlayerPrefs.DeleteKey("CURRENT_POINT");
-            PlayerPrefs.DeleteKey("CUMMULATIVE_POINT");
-
-            PlayerPrefs.DeleteKey("ftue_first_launch_completed");
-            PlayerPrefs.Save();
+            if(GameManager.Instance != null) GameManager.Instance.ResetGameData();
 
             HideResetPopup();
             Hide();
