@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3e2e867ba460b416da25d3403812dfc4
+guid: 57f2934e3887f401b8fc12dceafaef27
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8385543457615463567
-    second: RaccoonIdle_3_0
+      213: -5907391234300663880
+    second: RaccoonIdle_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonIdle_3_0
+      name: RaccoonIdle_2_0
       rect:
         serializedVersion: 2
-        x: 206
+        x: 376
         y: 0
-        width: 1583
-        height: 1855
+        width: 1232
+        height: 1791
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f8445cf985f6f5470800000000000000
-      internalID: 8385543457615463567
+      spriteID: 8b7a04a98fab40ea0800000000000000
+      internalID: -5907391234300663880
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RaccoonIdle_3_0: 8385543457615463567
+      RaccoonIdle_2_0: -5907391234300663880
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

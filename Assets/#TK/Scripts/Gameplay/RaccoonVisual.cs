@@ -140,14 +140,20 @@ namespace TK.Gameplay
         private void HandlePointUpdate()
         {
             int totalPoint = GameManager.Instance.intCummulativePoint;
+            int[] thresholds = GameManager.Instance.RaccoonStageThresholds;
 
-            Debug.Log($"[RaccoonVisual] totalPoint = {totalPoint}");
+            int stage = thresholds.Length;
+            
+            for (int i = 0; i < thresholds.Length; i++)
+            {
+                if (totalPoint < thresholds[i])
+                {
+                    stage = i;
+                    break;
+                }
+            }
 
-            if (totalPoint < 800000) Stage = 0;
-            else if (totalPoint < 1500000) Stage = 1;
-            else if (totalPoint < 4000000) Stage = 2;
-            else if (totalPoint < 8000000) Stage = 3;
-            else Stage = 4;
+            Stage = stage;
         }
 
         private void HandleStageChange()
@@ -157,6 +163,7 @@ namespace TK.Gameplay
             if (_visualIdleSpritesheet) _visualIdleSpritesheet.SetFrame(_stage);
             if (_visualEatSpritesheet) _visualEatSpritesheet.SetFrame(_stage);
             if (_visualEatMaskSpritesheet) _visualEatMaskSpritesheet.SetFrame(_stage);
+
             if (_visualTrashSpritesheet) _visualTrashSpritesheet.SetFrame(_stage);
             ApplyStageTrigger();
         }

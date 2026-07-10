@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5949301427896196012
 Transform:
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 74c6daba204264a888e03dba90ddaaa0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2d765340700140ce86e886df6b82bd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   frames:
+  - {fileID: 21300000, guid: a2d765340700140ce86e886df6b82bd9, type: 3}
   - {fileID: 21300000, guid: 74c6daba204264a888e03dba90ddaaa0, type: 3}
   - {fileID: 21300000, guid: bda3706ca309d40aa81786eceb7b79de, type: 3}
   - {fileID: 21300000, guid: 57f2934e3887f401b8fc12dceafaef27, type: 3}
@@ -308,7 +309,7 @@ SpriteMask:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 61fcf59f3fb8a423f89a23951b12a5fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 717bfb28c8d044bb9805170ef5781b45, type: 3}
   m_MaskAlphaCutoff: 0.2
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -332,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TK.Module.SpriteMask1DSpritesheet
   frames:
+  - {fileID: 21300000, guid: 717bfb28c8d044bb9805170ef5781b45, type: 3}
   - {fileID: 21300000, guid: 61fcf59f3fb8a423f89a23951b12a5fe, type: 3}
   - {fileID: 21300000, guid: 0a289e2f076bf4282b468a2493ffcdad, type: 3}
   - {fileID: 21300000, guid: 11f5bd8cc1b9d47509b2822d535d0931, type: 3}
@@ -592,7 +594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7707852877281857267
 Transform:
   m_ObjectHideFlags: 0
@@ -658,7 +660,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f225493226b5c48ccbe8da95e6079f2c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b27e653a97324d4dac3deb36e647b14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -681,6 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   frames:
+  - {fileID: 21300000, guid: 3b27e653a97324d4dac3deb36e647b14, type: 3}
   - {fileID: 21300000, guid: f225493226b5c48ccbe8da95e6079f2c, type: 3}
   - {fileID: 21300000, guid: 748e7471fed5e438daeba537110e19b0, type: 3}
   - {fileID: 21300000, guid: 6fdef0a9c67b24650a7a5362abc3e43d, type: 3}
@@ -935,7 +938,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2d917237562f7400f92990b83eb66e2d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a78ef0e2dfe241af8b35f6e8e2e6826, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -958,6 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TK.Module.SpriteRenderer1DSpritesheet
   frames:
+  - {fileID: 21300000, guid: 3a78ef0e2dfe241af8b35f6e8e2e6826, type: 3}
   - {fileID: 21300000, guid: 2d917237562f7400f92990b83eb66e2d, type: 3}
   - {fileID: 21300000, guid: 2b96601ed664a4f81abcef6e8119c5cf, type: 3}
   - {fileID: 21300000, guid: c56c00aed18df43978ce84d5e9978144, type: 3}
