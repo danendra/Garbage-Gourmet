@@ -41,7 +41,7 @@ namespace TK.Gameplay
 
             int _intScore = 0;
 
-            IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ToList();
+            IReadOnlyList<CollectibleController> _listCollectible = _inventory.HeldItems.OrderByDescending(_collectible => _collectible.GetType).ThenBy(_collectible => _collectible.GetRarity).ToList();
             List<Rigidbody2D> _listRB = new List<Rigidbody2D>();
 
             _objMask.SetActive(false);
