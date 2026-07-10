@@ -35,6 +35,7 @@ namespace TK.UI
         public void Initialize(CollectibleController[] _arrCollectibles, RecipeData _recipe, int _intCalculateScore, bool _isTrash)
         {
             AudioManager.Instance.PlayResultMusic();
+            AudioManager.Instance.PlaySFX(SFXId.Horn);
 
             RectTransform _rectTransform;
             Vector2 _size;

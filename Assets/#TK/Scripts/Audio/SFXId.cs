@@ -19,6 +19,7 @@ namespace TK.Audio
         Take,
         Release,
         CantRelease,
-        Digging
+        Digging,
+        Horn
     }
 }
