@@ -43,6 +43,19 @@ namespace TK.Gameplay
         {
             if (IsFull) return;
 
+            if (_collectible.GetRarity == RARITY.Legendary)
+            {
+                CollectibleController _collectibleTemp;
+
+                while (_heldItems.Count > 0)
+                {
+                    _collectibleTemp = _heldItems.Pop();
+                    _collectible.transform.parent = null;
+                }                                
+
+                _maxPickUpItems = 0;
+            }
+
             _heldItems.Push(_collectible);
 
             OnItemAdded?.Invoke(_collectible);

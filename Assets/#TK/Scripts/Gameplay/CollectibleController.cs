@@ -83,6 +83,13 @@ namespace TK.Gameplay
                 1f
             );
 
+            if(_rarity == RARITY.Legendary)
+            {
+                ///
+                /// IVAN Ini dapat last burger
+                /// 
+            }
+
             _collector.AddItem(this);
             transform.SetParent(target, true); // worldPositionStays = true, keeps current visual pose
 
