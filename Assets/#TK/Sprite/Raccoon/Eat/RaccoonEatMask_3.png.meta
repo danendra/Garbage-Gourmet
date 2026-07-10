@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3d8e4d36fb8b24a9ba9711c3e96e1568
+guid: 11f5bd8cc1b9d47509b2822d535d0931
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7121262699579862731
-    second: RaccoonEatMask_3_0
+      213: 8394448665290959822
+    second: RaccoonEatMask_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,17 +122,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonEatMask_3_0
+      name: RaccoonEatMask_2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 2000
-        height: 1601
+        height: 1592
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bce62b8f1bec3d260800000000000000
-      internalID: 7121262699579862731
+      spriteID: ecb6bebd5921f7470800000000000000
+      internalID: 8394448665290959822
       vertices: []
       indices: 
       edges: []
@@ -161,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RaccoonEatMask_3_0: 7121262699579862731
+      RaccoonEatMask_2_0: 8394448665290959822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

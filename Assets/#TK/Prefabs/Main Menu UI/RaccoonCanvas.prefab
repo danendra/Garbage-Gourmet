@@ -289,7 +289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 74c6daba204264a888e03dba90ddaaa0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2d765340700140ce86e886df6b82bd9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TK.Module.Image1DSpritesheet
   frames:
+  - {fileID: 21300000, guid: a2d765340700140ce86e886df6b82bd9, type: 3}
   - {fileID: 21300000, guid: 74c6daba204264a888e03dba90ddaaa0, type: 3}
   - {fileID: 21300000, guid: bda3706ca309d40aa81786eceb7b79de, type: 3}
   - {fileID: 21300000, guid: 57f2934e3887f401b8fc12dceafaef27, type: 3}

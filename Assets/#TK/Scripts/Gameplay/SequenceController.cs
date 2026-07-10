@@ -6,6 +6,7 @@ using UnityEngine.Events;
 namespace TK.Gameplay
 {
     using Module;
+    using Audio;
 
     public class SequenceController : MonoBehaviour
     {
@@ -36,6 +37,11 @@ namespace TK.Gameplay
 
             yield return new WaitForSeconds(_cameraTop.BlendDuration);
             
+            AudioManager.Instance.PlaySFX(SFXId.Growl);
+            _raccoonVisual.PlayShake();
+
+            yield return new WaitForSeconds(1.0f);
+
             _raccoonVisual.ChangeStateToTrash();
 
             yield return new WaitForSeconds(1.0f);

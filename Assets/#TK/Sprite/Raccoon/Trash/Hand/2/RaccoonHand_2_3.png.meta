@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: bc0285ad7a79f4595b5ab5c7bc5cf6f8
+guid: 37103ee3081e841ef83d6a1775ce4b0a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2180830549221458792
-    second: RaccoonHand_2_3_0
+      213: 6315431756109040280
+    second: RaccoonHand_1_3_0
+  - first:
+      213: -6726449177322370112
+    second: RaccoonHand_1_3_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,17 +125,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonHand_2_3_0
+      name: RaccoonHand_1_3_0
       rect:
         serializedVersion: 2
-        x: 1154
-        y: 683
-        width: 318
-        height: 397
+        x: 1124
+        y: 693
+        width: 292
+        height: 517
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +157,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8634aa974ddd34e10800000000000000
-      internalID: 2180830549221458792
+      spriteID: 89ac91ab8bbe4a750800000000000000
+      internalID: 6315431756109040280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RaccoonHand_1_3_1
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 716
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cb4bf98c1ad6a2a0800000000000000
+      internalID: -6726449177322370112
       vertices: []
       indices: 
       edges: []
@@ -161,7 +199,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RaccoonHand_2_3_0: 2180830549221458792
+      RaccoonHand_1_3_0: 6315431756109040280
+      RaccoonHand_1_3_1: -6726449177322370112
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 using TK.Module;
+using TK.Audio;
 
 namespace TK.Gameplay
 {
@@ -20,6 +21,9 @@ namespace TK.Gameplay
         [SerializeField] private GameObject _visualIdle;
         [SerializeField] private GameObject _visualEat;
         [SerializeField] private GameObject _visualTrash;
+        
+        [Header("Tweening")]
+        [SerializeField] private DOTweenAnimation _tweenShake;
 
         private SpriteRenderer1DSpritesheet _visualIdleSpritesheet;
         private SpriteRenderer1DSpritesheet _visualEatSpritesheet;
@@ -126,7 +130,8 @@ namespace TK.Gameplay
                 case RACCOON_VISUAL_STATE.Trash:
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(false);
-                    _visualTrash.SetActive(true);
+                    _visualTrash.SetActive(true);                    
+
                     ApplyStageTrigger();
                     break;
             }
@@ -140,14 +145,20 @@ namespace TK.Gameplay
         private void HandlePointUpdate()
         {
             int totalPoint = GameManager.Instance.intCummulativePoint;
+            int[] thresholds = GameManager.Instance.RaccoonStageThresholds;
 
-            Debug.Log($"[RaccoonVisual] totalPoint = {totalPoint}");
+            int stage = thresholds.Length;
+            
+            for (int i = 0; i < thresholds.Length; i++)
+            {
+                if (totalPoint < thresholds[i])
+                {
+                    stage = i;
+                    break;
+                }
+            }
 
-            if (totalPoint < 800000) Stage = 0;
-            else if (totalPoint < 1500000) Stage = 1;
-            else if (totalPoint < 4000000) Stage = 2;
-            else if (totalPoint < 8000000) Stage = 3;
-            else Stage = 4;
+            Stage = stage;
         }
 
         private void HandleStageChange()
@@ -157,10 +168,12 @@ namespace TK.Gameplay
             if (_visualIdleSpritesheet) _visualIdleSpritesheet.SetFrame(_stage);
             if (_visualEatSpritesheet) _visualEatSpritesheet.SetFrame(_stage);
             if (_visualEatMaskSpritesheet) _visualEatMaskSpritesheet.SetFrame(_stage);
+
             if (_visualTrashSpritesheet) _visualTrashSpritesheet.SetFrame(_stage);
             ApplyStageTrigger();
         }
 
+        #region  Tweening
         // squash and stretch
         public void PlaySquashStretch(float intensity = 1f, float timeMultiplier = 1f) 
         {
@@ -184,5 +197,11 @@ namespace TK.Gameplay
         private Vector3 Squash(float intensity) => new Vector3(_baseScale.x * (1f + 0.25f * intensity), _baseScale.y * (1f - 0.30f * intensity), _baseScale.z * (1f + 0.25f * intensity));
         private Vector3 Stretch(float intensity) => new Vector3(_baseScale.x * (1f - 0.15f * intensity), _baseScale.y * (1f + 0.35f * intensity), _baseScale.z * (1f - 0.15f * intensity));
         
+        public void PlayShake()
+        {
+            _tweenShake.RecreateTweenAndPlay();
+        }
+
+        #endregion
     }
 }
