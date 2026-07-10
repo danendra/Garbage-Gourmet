@@ -14,6 +14,11 @@ namespace TK.Audio
         Growl,
         Fall,
         Land,
-        Rise
+        Rise,
+        PutHand,
+        Take,
+        Release,
+        CantRelease,
+        Digging
     }
 }

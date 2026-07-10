@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
 using System.Linq;
+using TK.Audio;
 
 namespace TK.Gameplay
 {
@@ -56,6 +57,8 @@ namespace TK.Gameplay
                 _maxPickUpItems = 0;
             }
 
+            AudioManager.Instance.PlaySFX(SFXId.Take);
+
             _heldItems.Push(_collectible);
 
             OnItemAdded?.Invoke(_collectible);
@@ -90,6 +93,12 @@ namespace TK.Gameplay
                 IntReleaseChance--;
 
                 OnReleaseUpdate?.Invoke(IntReleaseChance);
+
+                AudioManager.Instance.PlaySFX(SFXId.Release);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX(SFXId.CantRelease);
             }
         }
 

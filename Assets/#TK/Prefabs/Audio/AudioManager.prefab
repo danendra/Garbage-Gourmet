@@ -1,5 +1,134 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1036436469243662381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3503622286508676721}
+  - component: {fileID: 669633629873912577}
+  m_Layer: 0
+  m_Name: Ambience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3503622286508676721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036436469243662381}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1081920084263814686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &669633629873912577
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036436469243662381}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8106073561081606085, guid: fc559b67752cc42d5b337b4bdffb0464, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1669401968904047581
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +160,8 @@ Transform:
   m_LocalPosition: {x: -0.03003, y: 27.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3503622286508676721}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &6434700505305894163
@@ -248,6 +378,8 @@ MonoBehaviour:
   menuMusic: {fileID: 8300000, guid: ba5cf2f1dbb044a8b84ad4844601647b, type: 3}
   gameplayMusic: {fileID: 8300000, guid: cfc751404083f4c8e8edc742475ababb, type: 3}
   resultMusic: {fileID: 8300000, guid: 3647a7d398e144f68a81c3dac5396cc0, type: 3}
+  ambienceSource: {fileID: 669633629873912577}
+  ambience: {fileID: 6418180475301049370, guid: 7dd36cbf1c57c4d77a90bd1f87f6e8ad, type: 2}
   sfxSource: {fileID: 5755223431418102244}
   sfxDataList:
   - {fileID: 11400000, guid: 656f71fdcfa6b44708e6493dd477af17, type: 2}
@@ -263,4 +395,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 655e998d000a74bafbf4e25148352ac6, type: 2}
   - {fileID: 11400000, guid: bf2fa4326b61944e0ac1c20f2fbfbbe7, type: 2}
   - {fileID: 11400000, guid: 2d3ae7b8b92e546a3894d522b3b4f0fa, type: 2}
+  - {fileID: 11400000, guid: bc3a77ca7f5e0454a8369a963ad4da11, type: 2}
+  - {fileID: 11400000, guid: ee2703ccbd311463896e3515555717e1, type: 2}
+  - {fileID: 11400000, guid: c36125b12deee4a558f7c8f758b3ef36, type: 2}
+  - {fileID: 11400000, guid: b19109f37342040ffbe1896ad0b2c0a2, type: 2}
   poolSize: 8

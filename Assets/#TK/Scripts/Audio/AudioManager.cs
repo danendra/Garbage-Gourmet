@@ -29,6 +29,10 @@ namespace TK.Audio
         [SerializeField] private AudioClip gameplayMusic;
         [SerializeField] private AudioClip resultMusic;
 
+        [Header("Ambience")]
+        [SerializeField] private AudioSource ambienceSource;
+        [SerializeField] private AudioResource ambience;
+
         [Header("SFX System")]
         [SerializeField] private AudioSource sfxSource;
         [SerializeField] private List<SFXData> sfxDataList = new List<SFXData>();
@@ -118,6 +122,17 @@ namespace TK.Audio
         }
 
         public void StopMusic() => musicSource.Stop();
+
+        public void PlayAmbienceDigging() => PlayAmbience(ambience);
+
+        public void StopAmbience() => ambienceSource.Stop();
+
+        public void PlayAmbience(AudioResource _resource)
+        {            
+            ambienceSource.resource = _resource;
+            ambienceSource.loop = true;
+            ambienceSource.Play();
+        }
 
         public void PlaySFX(SFXId id)
         {
