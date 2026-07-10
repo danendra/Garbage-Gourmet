@@ -16,9 +16,7 @@ namespace TK.MainMenu
 
         [Header("UI References")]
         [SerializeField] private RectTransform tapToStart;
-        [SerializeField] private RectTransform settingsButton;
-        [SerializeField] private RectTransform collectionButton;
-        [SerializeField] private RectTransform upgradeButton;
+
         [SerializeField] private TMPro.TextMeshProUGUI txtPoint;
         [SerializeField] private GameObject _splashScreen;
 
@@ -38,7 +36,7 @@ namespace TK.MainMenu
 
         private int _currentPoint;
 
-        // Beta debug reset has been migrated to SettingsPanel Reset Game UI
+
 
         void Awake()
         {
@@ -122,7 +120,6 @@ namespace TK.MainMenu
 
         public void PlayHatchSFX()
         {
-            // Sound removed per user request
         }
 
         private void OnPlayButtonClicked()
@@ -177,25 +174,6 @@ namespace TK.MainMenu
                 {
                     img.raycastTarget = visible;
                 }
-            }
-
-            GameObject playButtonGO = null;
-            if (playButtonComponent != null) playButtonGO = playButtonComponent.gameObject;
-            else if (tapToStart != null) playButtonGO = tapToStart.gameObject;
-
-            if (upgradeButton != null && upgradeButton.gameObject != playButtonGO && (tapToStart == null || upgradeButton.gameObject != tapToStart.gameObject)) 
-            {
-                upgradeButton.gameObject.SetActive(visible);
-            }
-
-            if (settingsButton != null && settingsButton.gameObject != playButtonGO && (tapToStart == null || settingsButton.gameObject != tapToStart.gameObject)) 
-            {
-                settingsButton.gameObject.SetActive(visible);
-            }
-
-            if (collectionButton != null && collectionButton.gameObject != playButtonGO && (tapToStart == null || collectionButton.gameObject != tapToStart.gameObject)) 
-            {
-                collectionButton.gameObject.SetActive(visible);
             }
         }
 

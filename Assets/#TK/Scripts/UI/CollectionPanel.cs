@@ -160,7 +160,6 @@ namespace TK.UI
                 else
                 {
                     card.Clear();
-                    // card.gameObject.SetActive(false); 
                 }
             }
         }
@@ -185,14 +184,12 @@ namespace TK.UI
 
                 if (posterFoodImage != null) 
                 {
-                    // posterFoodImage.sprite = data.CollectionImage;
                     posterFoodImage.color = unlockedColor;
                 }
                 
                 if (posterBackgroundImage != null)
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
-                    // posterBackgroundImage.color = unlockedColor;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
 
@@ -213,14 +210,12 @@ namespace TK.UI
 
                 if (posterFoodImage != null) 
                 {
-                    // posterFoodImage.sprite = data.CollectionImage;
                     posterFoodImage.color = lockedShadowColor;
                 }
                 
                 if (posterBackgroundImage != null)
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
-                    // posterBackgroundImage.color = lockedShadowColor;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
 
