@@ -44,12 +44,16 @@ namespace TK.Gameplay
 
             _raccoonVisual.ChangeStateToTrash();
 
+            AudioManager.Instance.PlaySFX(SFXId.PutHand);
+
             yield return new WaitForSeconds(1.0f);
 
             _cameraTop.SetInactive();
             _cameraPlayer.SetActive(_cinemachineBrain);
 
             yield return new WaitForSeconds(_cameraPlayer.BlendDuration);
+
+            AudioManager.Instance.PlayAmbienceDigging();
 
             _action.Invoke();
         }

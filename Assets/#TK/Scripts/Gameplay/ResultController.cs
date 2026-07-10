@@ -51,7 +51,7 @@ namespace TK.Gameplay
             GameObject _object;
             Rigidbody2D _rb;
 
-            int _index = 6;
+            int _index = 6;            
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
@@ -65,10 +65,12 @@ namespace TK.Gameplay
 
                 _object.transform.DOMove(_transSpawn.position + Vector3.up * 10, 1.0f).SetEase(Ease.OutBack);
 
+                AudioManager.Instance.PlaySFX(SFXId.Rise);
+
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 
                 _index++;
-            }
+            }            
 
             yield return new WaitForSeconds(0.5f);
 
@@ -77,6 +79,8 @@ namespace TK.Gameplay
 
             foreach (CollectibleController _collectible in _listCollectible)
             {
+                AudioManager.Instance.PlaySFX(SFXId.Fall);
+
                 _rb = _listRB[_index];
                 _object = _rb.gameObject;
 
@@ -132,6 +136,11 @@ namespace TK.Gameplay
 
             yield return new WaitForSeconds(0.5f);
 
+            if (!_isTrash)
+            {
+                AudioManager.Instance.PlayBurp();
+            }
+
             // deactivate rb game object
             foreach (Rigidbody2D _rbItem in _listRB)
             {
@@ -140,12 +149,7 @@ namespace TK.Gameplay
 
             _racoonVisual.ChangeStateToIdle();
 
-            yield return new WaitForSeconds(0.5f);
-
-            if (!_isTrash)
-            {
-                AudioManager.Instance.PlayBurp();
-            }
+            yield return new WaitForSeconds(0.5f);            
 
             UIManager.Instance.GetUIResult.Initialize(_listCollectible.ToArray(), _recipe, _intScore, _isTrash);
         }
@@ -170,6 +174,8 @@ namespace TK.Gameplay
 
             txtScore.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
             txtMultiplier.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
+
+            AudioManager.Instance.PlaySFX(SFXId.Land);
 
             while (_fltTime < 0.3f)
             {

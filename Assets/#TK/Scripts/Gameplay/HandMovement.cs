@@ -4,6 +4,7 @@ using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TK.Audio;
 
 namespace TK.Gameplay
 {
@@ -132,6 +133,8 @@ namespace TK.Gameplay
         private void HandleSnapToLineEnded()
         {
             State = HAND_STATE.Ascent;
+
+            AudioManager.Instance.StopAmbience();
         }
 
         private void HandleInventoryFull()
