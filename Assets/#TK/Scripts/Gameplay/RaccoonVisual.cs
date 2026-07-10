@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using TK.Module;
 using TK.Audio;
+using System.Collections;
 
 namespace TK.Gameplay
 {
@@ -245,13 +246,13 @@ namespace TK.Gameplay
             sequence.Append(transform.DOScale(_baseScale*1.8f, 1/6f).SetEase(Ease.OutQuad));
             sequence.AppendCallback(() => _explosion.SetActive(true));
             sequence.AppendCallback(TriggerExplosionAnimation);
-            sequence.AppendCallback(() => _foodExplosionParticle.Play());
-            sequence.Append(transform.DOScale(_baseScale, 1/10f).SetEase(Ease.OutQuad));
-            sequence.AppendCallback(() => Stage = 0);
+            sequence.AppendCallback(() => StartCoroutine(TriggerFoodExplosionParticle()));
             sequence.AppendInterval(0.75f);
+            sequence.Append(transform.DOScale(Vector3.zero, 1/6f).SetEase(Ease.OutQuad));
+            sequence.AppendCallback(() => _visualIdle.SetActive(false));
+            sequence.AppendCallback(() => _tail.SetActive(false));
             sequence.AppendCallback(() => _explosion.SetActive(false));
             sequence.AppendInterval(4f);
-            sequence.Append(transform.DOScale(_baseScale, 1/10f).SetEase(Ease.OutQuad));
 
             return sequence;
         }
@@ -259,6 +260,17 @@ namespace TK.Gameplay
         private void TriggerExplosionAnimation()
         {
             if (_explosionAnimator) _explosionAnimator.SetTrigger(Animator.StringToHash("Explode"));
+        }
+
+        private IEnumerator TriggerFoodExplosionParticle()
+        {
+            _foodExplosionParticle.ChangeOrderInLayer(0);
+            _foodExplosionParticle.Play();
+
+            yield return new WaitForSeconds(1f);
+            _foodExplosionParticle.ChangeOrderInLayer(200);
+
+
         }
 
         #endregion

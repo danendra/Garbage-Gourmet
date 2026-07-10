@@ -11,6 +11,15 @@ namespace TK.Module
             foreach (var ps in particles)
                 ps.Play();
         }
+
+        public void ChangeOrderInLayer(int order)
+        {
+            foreach (var ps in particles)
+            {
+                var renderer = ps.GetComponent<ParticleSystemRenderer>();
+                if (renderer) renderer.sortingOrder = order;
+            }
+        }
     }
 }
 
