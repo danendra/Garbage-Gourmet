@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using TK.Audio;
 using TK.Data;
-using DG.Tweening;
 
 namespace TK.MainMenu
 {
@@ -20,11 +19,8 @@ namespace TK.MainMenu
         [SerializeField] private TMPro.TextMeshProUGUI txtPoint;
         [SerializeField] private GameObject _splashScreen;
 
-        [Header("Animations")]
-        [SerializeField] private DOTweenAnimation hatchOpenAnim;
 
         [Header("Timing Fallbacks & Delays")]
-        [SerializeField] private float hatchFallbackDuration = 1.8f;
         [SerializeField] private float noHandExitDuration = 0.25f;
         [SerializeField] private float introTransitionDelay = 0.5f;
 
@@ -85,14 +81,6 @@ namespace TK.MainMenu
 
             UpdateCurrencyUI();
 
-            if (hatchOpenAnim != null)
-            {
-                var hatchImg = hatchOpenAnim.GetComponent<UnityEngine.UI.Image>();
-                if (hatchImg != null) hatchImg.raycastTarget = false;
-
-                hatchOpenAnim.RecreateTweenAndPlay();
-                yield return new WaitForSeconds(hatchFallbackDuration);
-            }
 
             yield return new WaitForSeconds(introTransitionDelay);
             StartIdleAndReady();
@@ -118,9 +106,7 @@ namespace TK.MainMenu
                 FTUEMenuManager.Instance.TryStartUpgradeFTUE();
         }
 
-        public void PlayHatchSFX()
-        {
-        }
+
 
         private void OnPlayButtonClicked()
         {
@@ -143,8 +129,6 @@ namespace TK.MainMenu
 
             try
             {
-                if (hatchOpenAnim != null) hatchOpenAnim.DOKill();
-
                 SetMenuButtonsState(false);
             }
             catch (System.Exception e)

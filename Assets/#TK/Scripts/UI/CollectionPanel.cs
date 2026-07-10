@@ -28,6 +28,10 @@ namespace TK.UI
         public Sprite posterBackground;
         [Tooltip("If true, the background image will automatically resize its RectTransform to match the sprite's exact pixel size.")]
         public bool useNativeBackgroundSize;
+        [Tooltip("If true, enables the background shine effect for this poster.")]
+        public bool enableShine;
+        [Tooltip("Optional offset to adjust the position of the food image for this page (e.g., lower it if it's too tall).")]
+        public Vector2 foodImageOffset;
         [Tooltip("Optional: A prefab containing unique decorations (like coins or flags) for this specific poster.")]
         public GameObject posterDecorationsPrefab;
     }
@@ -41,6 +45,7 @@ namespace TK.UI
 
         [Header("Poster UI References")]
         [SerializeField] private GameObject posterContainer;
+        [SerializeField] private GameObject shineEffect;
         [SerializeField] private Transform posterDecorationContainer;
         [SerializeField] private Image posterBackgroundImage;
         [SerializeField] private Image posterFoodImage;
@@ -62,10 +67,16 @@ namespace TK.UI
         private List<CollectionCardUI> activeCards = new List<CollectionCardUI>();
         private int currentPageIndex = 0;
         private GameObject currentDecorationsInstance;
+        private Vector2 originalFoodImagePos;
 
         protected override void Awake()
         {
             base.Awake();
+
+            if (posterFoodImage != null)
+            {
+                originalFoodImagePos = posterFoodImage.rectTransform.anchoredPosition;
+            }
 
             if (itemGridContainer != null)
             {
@@ -169,7 +180,12 @@ namespace TK.UI
             if (config.pageItems == null || config.pageItems.Count == 0) return;
 
             RecipeData data = config.pageItems[0]; 
-            posterFoodImage.sprite = data.spriteIcon;
+            
+            if (posterFoodImage != null)
+            {
+                posterFoodImage.sprite = data.spriteIcon;
+                posterFoodImage.rectTransform.anchoredPosition = originalFoodImagePos + config.foodImageOffset;
+            }
 
             // TODO: Connect to SaveData system to check if 'data' is unlocked by the player
             bool isUnlocked = !data.IsNew(); 
@@ -192,6 +208,8 @@ namespace TK.UI
                     posterBackgroundImage.sprite = config.posterBackground;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
+
+                if (shineEffect != null) shineEffect.SetActive(config.enableShine);
 
                 // Spawn decorations
                 if (currentDecorationsInstance != null) Destroy(currentDecorationsInstance);
@@ -218,6 +236,8 @@ namespace TK.UI
                     posterBackgroundImage.sprite = config.posterBackground;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
                 }
+
+                if (shineEffect != null) shineEffect.SetActive(false);
 
                 // Do not spawn decorations when locked
                 if (currentDecorationsInstance != null) Destroy(currentDecorationsInstance);
