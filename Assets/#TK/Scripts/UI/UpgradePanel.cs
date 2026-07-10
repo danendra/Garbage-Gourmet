@@ -188,6 +188,11 @@ namespace TK.UI
                 TK.Gameplay.GameManager.Instance.ReloadUpgradeLevels();
             }
 
+            if (TK.MainMenu.MainMenuManager.Instance != null)
+            {
+                TK.MainMenu.MainMenuManager.Instance.UpdateCurrencyUI();
+            }
+
             if (TK.Audio.AudioManager.Instance != null)
             {
                 TK.Audio.AudioManager.Instance.PlayButtonClick();
