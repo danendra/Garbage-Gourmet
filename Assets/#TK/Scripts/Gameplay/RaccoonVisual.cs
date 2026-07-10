@@ -10,7 +10,8 @@ namespace TK.Gameplay
     {
         Idle,
         Eat,
-        Trash
+        Trash,
+        Explode
         
     }
 
@@ -21,6 +22,9 @@ namespace TK.Gameplay
         [SerializeField] private GameObject _visualIdle;
         [SerializeField] private GameObject _visualEat;
         [SerializeField] private GameObject _visualTrash;
+        [SerializeField] private GameObject _tail;
+        [SerializeField] private GameObject _explosion;
+        [SerializeField] private ParticleGroup _foodExplosionParticle;
         
         [Header("Tweening")]
         [SerializeField] private DOTweenAnimation _tweenShake;
@@ -29,6 +33,7 @@ namespace TK.Gameplay
         private SpriteRenderer1DSpritesheet _visualEatSpritesheet;
         private SpriteRenderer1DSpritesheet _visualTrashSpritesheet;
         private Animator _handAnimator;
+        private Animator _explosionAnimator;
         private SpriteMask1DSpritesheet _visualEatMaskSpritesheet;
 
         public Transform Transform => transform;
@@ -66,6 +71,7 @@ namespace TK.Gameplay
         public void ChangeStateToIdle() => State = RACCOON_VISUAL_STATE.Idle;
         public void ChangeStateToEat() => State = RACCOON_VISUAL_STATE.Eat;
         public void ChangeStateToTrash() => State = RACCOON_VISUAL_STATE.Trash;
+        public void ChangeStateToExplode() => State = RACCOON_VISUAL_STATE.Explode;
 
         // tween
         private Vector3 _baseScale;
@@ -79,6 +85,7 @@ namespace TK.Gameplay
             _visualEatMaskSpritesheet = _visualEat.GetComponentInChildren<SpriteMask1DSpritesheet>();
             _visualTrashSpritesheet = _visualTrash.GetComponent<SpriteRenderer1DSpritesheet>();
             _handAnimator = _visualTrash.GetComponentInChildren<Animator>();
+            _explosionAnimator = _explosion.GetComponent<Animator>();
         }
 
         private void OnEnable()
@@ -106,33 +113,48 @@ namespace TK.Gameplay
             if (Input.GetKeyDown(KeyCode.Alpha1)) State = RACCOON_VISUAL_STATE.Idle;
             if (Input.GetKeyDown(KeyCode.Alpha2)) State = RACCOON_VISUAL_STATE.Eat;
             if (Input.GetKeyDown(KeyCode.Alpha3)) State = RACCOON_VISUAL_STATE.Trash;
-            if (Input.GetKeyDown(KeyCode.Alpha4)) Stage++;
-            if (Input.GetKeyDown(KeyCode.Alpha5)) Stage--;
+            if (Input.GetKeyDown(KeyCode.Alpha4)) State = RACCOON_VISUAL_STATE.Explode;
+            if (Input.GetKeyDown(KeyCode.Alpha5)) Stage++;
+            if (Input.GetKeyDown(KeyCode.Alpha6)) Stage--;
         }
 
         private void HandleStateChange()
         {
             PlaySquashStretch(intensity: 1.5f, timeMultiplier: 1f);
+            _explosion.SetActive(false);  
+            _tail.SetActive(true);
+
             switch (_state)
             {
                 case RACCOON_VISUAL_STATE.Idle:
                     _visualIdle.SetActive(true);
                     _visualEat.SetActive(false);
                     _visualTrash.SetActive(false);
+
                     break;
 
                 case RACCOON_VISUAL_STATE.Eat:
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(true);
                     _visualTrash.SetActive(false);
+
                     break;
                 
                 case RACCOON_VISUAL_STATE.Trash:
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(false);
-                    _visualTrash.SetActive(true);                    
+                    _visualTrash.SetActive(true);               
 
                     ApplyStageTrigger();
+                    break;
+                
+                case RACCOON_VISUAL_STATE.Explode:
+                    _visualIdle.SetActive(true);
+                    _visualEat.SetActive(false);
+                    _visualTrash.SetActive(false);
+
+                    PlayExplodeExpand();
+                                      
                     break;
             }
         }
@@ -200,6 +222,43 @@ namespace TK.Gameplay
         public void PlayShake()
         {
             _tweenShake.RecreateTweenAndPlay();
+        }
+
+        public void PlayExplodeExpand()
+        {
+            if (_scaleSequence != null && _scaleSequence.IsActive())
+                _scaleSequence.Kill();
+
+            _scaleSequence = CreateExplodeExpandTween();
+        }
+
+        private Sequence CreateExplodeExpandTween()
+        {
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(transform.DOScale(_baseScale*1.2f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.Append(transform.DOScale(_baseScale*1.1f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.Append(transform.DOScale(_baseScale*1.6f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.Append(transform.DOScale(_baseScale*1.4f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.Append(transform.DOScale(_baseScale*2f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.Append(transform.DOScale(_baseScale*1.8f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.AppendCallback(() => _explosion.SetActive(true));
+            sequence.AppendCallback(TriggerExplosionAnimation);
+            sequence.AppendCallback(() => _foodExplosionParticle.Play());
+            sequence.Append(transform.DOScale(_baseScale, 1/10f).SetEase(Ease.OutQuad));
+            sequence.AppendCallback(() => Stage = 0);
+            sequence.AppendInterval(0.75f);
+            sequence.AppendCallback(() => _explosion.SetActive(false));
+            sequence.AppendInterval(4f);
+            sequence.Append(transform.DOScale(_baseScale, 1/10f).SetEase(Ease.OutQuad));
+
+            return sequence;
+        }
+
+        private void TriggerExplosionAnimation()
+        {
+            if (_explosionAnimator) _explosionAnimator.SetTrigger(Animator.StringToHash("Explode"));
         }
 
         #endregion

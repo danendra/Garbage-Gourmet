@@ -51,7 +51,6 @@ namespace TK.Gameplay
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            ResetGameData();
 
             Initialize();
 
@@ -99,6 +98,13 @@ namespace TK.Gameplay
             PlayerPrefs.Save();
 
             Debug.Log("Game data has been reset.");
+        }
+
+        public void ResetCummulative()
+        {
+            intCummulativePoint = 0;
+            PlayerPrefs.DeleteKey("CUMMULATIVE_POINT");
+            PlayerPrefs.Save();
         }
 
         #region Upgrade
