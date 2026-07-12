@@ -69,7 +69,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _AnimationSpeed: 1
+    - _AnimationSpeed: 3
     - _Blend: 0
     - _BlendOp: 0
     - _CameraFadingEnabled: 0

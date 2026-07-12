@@ -51,8 +51,6 @@ namespace TK.Gameplay
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // ResetGameData();
-
             Initialize();
 
             Application.targetFrameRate = 100;
@@ -97,6 +95,8 @@ namespace TK.Gameplay
             PlayerPrefs.DeleteKey("CUMMULATIVE_POINT");
             PlayerPrefs.DeleteKey("NEW_COLLECTION_UNLOCKED_FLAG");
             PlayerPrefs.Save();
+
+            LoadUpgrades();
 
             Debug.Log("Game data has been reset.");
         }
