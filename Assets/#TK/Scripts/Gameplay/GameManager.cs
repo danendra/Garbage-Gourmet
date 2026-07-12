@@ -51,8 +51,6 @@ namespace TK.Gameplay
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // ResetGameData();
-
             Initialize();
 
             Application.targetFrameRate = 100;
