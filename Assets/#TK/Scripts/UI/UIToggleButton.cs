@@ -39,11 +39,6 @@ namespace TK.UI
             UpdateVisuals();
             
             onToggleChanged?.Invoke(_isOn);
-
-            if (TK.Audio.AudioManager.Instance != null)
-            {
-                TK.Audio.AudioManager.Instance.PlayButtonClick();
-            }
         }
 
         private void UpdateVisuals()

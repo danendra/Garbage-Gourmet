@@ -61,6 +61,8 @@ namespace TK.Gameplay
 
             _heldItems.Push(_collectible);
 
+            TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Light);
+
             OnItemAdded?.Invoke(_collectible);
 
             if (IsFull)
@@ -96,6 +98,8 @@ namespace TK.Gameplay
                 OnItemRemoved.Invoke(_heldItems.Count);
 
                 IntReleaseChance--;
+
+                TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Medium);
 
                 OnReleaseUpdate?.Invoke(IntReleaseChance);
 

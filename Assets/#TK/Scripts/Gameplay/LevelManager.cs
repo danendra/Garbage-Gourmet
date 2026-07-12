@@ -132,6 +132,8 @@ namespace TK.Gameplay
 
             finalScore = Mathf.RoundToInt(playerRef.GetDepth() * 10f);
 
+            TK.Audio.HapticManager.PlayNotification(TK.Audio.HapticNotificationType.Success);
+
             StartCoroutine(RunEndSequence(true));
         }
 
@@ -139,6 +141,8 @@ namespace TK.Gameplay
         {
             if (IsGameOver) return;
             IsGameOver = true;
+
+            TK.Audio.HapticManager.PlayNotification(TK.Audio.HapticNotificationType.Error);
 
             StartCoroutine(RunEndSequence(false));
         }

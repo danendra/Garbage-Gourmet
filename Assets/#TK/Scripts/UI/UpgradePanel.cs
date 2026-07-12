@@ -189,10 +189,7 @@ namespace TK.UI
                 TK.MainMenu.MainMenuManager.Instance.UpdateCurrencyUI();
             }
 
-            if (TK.Audio.AudioManager.Instance != null)
-            {
-                TK.Audio.AudioManager.Instance.PlayButtonClick();
-            }
+            TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Medium);
 
             UpdateUpgradeUI();
         }

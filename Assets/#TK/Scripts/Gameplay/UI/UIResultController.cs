@@ -71,7 +71,12 @@ namespace TK.UI
             else if (_recipe)
             {
                 _txtBurgerName.text = _recipe.name;
-                _objNew.SetActive(_recipe.IsNew());
+                bool isNew = _recipe.IsNew();
+                _objNew.SetActive(isNew);
+                if (isNew)
+                {
+                    TK.Audio.HapticManager.PlayNotification(TK.Audio.HapticNotificationType.Success);
+                }
                 _recipe.AddBurger();
 
                 Invoke("FinalizeScore", 1.5f);
