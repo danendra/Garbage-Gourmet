@@ -96,6 +96,8 @@ namespace TK.Gameplay
             PlayerPrefs.DeleteKey("NEW_COLLECTION_UNLOCKED_FLAG");
             PlayerPrefs.Save();
 
+            LoadUpgrades();
+
             Debug.Log("Game data has been reset.");
         }
 

@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2670868978392931343, guid: 5d2fccd32e3b8489683a91b339b6193f, type: 3}
+      propertyPath: m_text
+      value: Are you sure you want to reset your save files?
+      objectReference: {fileID: 0}
     - target: {fileID: 2730372895377136563, guid: 5d2fccd32e3b8489683a91b339b6193f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
