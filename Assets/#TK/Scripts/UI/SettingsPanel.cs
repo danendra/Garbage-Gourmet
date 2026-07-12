@@ -69,8 +69,6 @@ namespace TK.UI
 
         private void LoadCurrentSettings()
         {
-            if (AudioManager.Instance == null) return;
-
             float music = GetVolumeFromManager(METHOD_GET_MUSIC_VOL, PREFS_MUSIC_VOL, 1f);
             float sfx = GetVolumeFromManager(METHOD_GET_SFX_VOL, PREFS_SFX_VOL, 1f);
 
@@ -103,8 +101,10 @@ namespace TK.UI
             PlayerPrefs.SetInt(PREFS_HAPTICS, isOn ? 1 : 0);
             PlayerPrefs.Save();
             
-            // TODO: Implement Haptics logic here when it's ready
-            // if (isOn) EnableHaptics(); else DisableHaptics();
+            if (isOn)
+            {
+                HapticManager.PlayImpact(HapticImpactType.Light);
+            }
         }
 
         private void SetScreenShake(bool isOn)
@@ -119,19 +119,15 @@ namespace TK.UI
         private void ShowResetPopup()
         {
             if (resetPopupPanel != null) resetPopupPanel.SetActive(true);
-            if (AudioManager.Instance != null) AudioManager.Instance.PlayButtonClick();
         }
 
         private void HideResetPopup()
         {
             if (resetPopupPanel != null) resetPopupPanel.SetActive(false);
-            if (AudioManager.Instance != null) AudioManager.Instance.PlayButtonClick();
         }
 
         private void ConfirmReset()
         {
-            if (AudioManager.Instance != null) AudioManager.Instance.PlayButtonClick();
-
             if(GameManager.Instance != null) GameManager.Instance.ResetGameData();
 
             HideResetPopup();

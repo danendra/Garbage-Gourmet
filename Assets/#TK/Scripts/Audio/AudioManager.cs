@@ -195,7 +195,6 @@ namespace TK.Audio
         public void PlayEatFood() => PlaySFX(SFXId.EatFood);
         public void PlayEatTrash() => PlaySFX(SFXId.EatTrash);
         public void PlayRating() => PlaySFX(SFXId.Rating);
-        public void PlayButtonClick() => PlaySFX(SFXId.ButtonClick);
         public void PlayPanelOpen() => PlaySFX(SFXId.PanelOpen);
         public void PlayPanelClose() => PlaySFX(SFXId.PanelClose);
         public void PlayPageTurn() => PlaySFX(SFXId.PageTurn);

@@ -233,6 +233,7 @@ namespace TK.Gameplay
                     _rb.linearVelocity = Vector2.zero;
                     _targetX = _rb.position.x;
                     CameraShakeManager.Instance.CameraShake(_impulseSource, 1f);
+                    TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Heavy);
                     _armLineRenderer.ChangeStateToSnap();
                     _handVisual.ChangeStateToGrab();
                     break;

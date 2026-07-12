@@ -131,11 +131,13 @@ namespace TK.Gameplay
             if (_isTrash)
             {
                 AudioManager.Instance.PlayEatTrash();
+                TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Heavy);
                 _objVomit.SetActive(true);
             }
             else
             {
                 AudioManager.Instance.PlayEatFood();
+                TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Light);
             }
 
             yield return new WaitForSeconds(0.5f);
@@ -143,6 +145,7 @@ namespace TK.Gameplay
             if (!_isTrash)
             {
                 AudioManager.Instance.PlayBurp();
+                TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Light);
             }
 
             // deactivate rb game object
@@ -201,6 +204,7 @@ namespace TK.Gameplay
             txtMultiplier.gameObject.GetComponent<DOTweenAnimation>().RecreateTweenAndPlay();
 
             AudioManager.Instance.PlaySFX(SFXId.Land);
+            TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Light);
 
             while (_fltTime < 0.3f)
             {
