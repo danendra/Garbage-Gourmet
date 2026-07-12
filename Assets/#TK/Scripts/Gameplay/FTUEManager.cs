@@ -15,6 +15,7 @@ namespace TK.Gameplay
         [SerializeField] private GameObject _inventoryFTUE;
         [SerializeField] private GameObject _releaseFTUE;
         [SerializeField] private GameObject _inventoryUpgradeFTUE;
+        [SerializeField] private GameObject _background;
 
         [Header("Player References")]
         [SerializeField] private HandMovement _handMovement;
@@ -70,6 +71,18 @@ namespace TK.Gameplay
             }
         }
 
+        private void ShowBackground()
+        {
+            if(_background != null)
+                _background.SetActive(true);
+        }
+
+        private void HideBackground()
+        {
+            if(_background != null)
+                _background.SetActive(false);
+        }
+
         public void StartGameplayFTUE()
         {
             DOVirtual.DelayedCall(1f, ShowMovementFTUE).SetId(this);
@@ -79,6 +92,7 @@ namespace TK.Gameplay
         {
             _handMovement.ChangeStateToIdle(); 
 
+            ShowBackground();
             _movementFTUE.SetActive(true);
 
             _cumulativeDragX = 0f;
@@ -101,6 +115,7 @@ namespace TK.Gameplay
         {
             _currentStep = FTUEGameplayStep.None;
 
+            HideBackground();
             _movementFTUE.SetActive(false);
             _handMovement.ChangeStateToDescent(); 
 
@@ -128,6 +143,7 @@ namespace TK.Gameplay
         {
             Time.timeScale = 0f;
 
+            ShowBackground();
             _inventoryFTUE.SetActive(true);
             _inventoryFTUECanDismiss = false;
             _currentStep = FTUEGameplayStep.WaitForTap;
@@ -160,6 +176,7 @@ namespace TK.Gameplay
         {
             _currentStep = FTUEGameplayStep.None;
 
+            HideBackground();
             _inventoryFTUE.SetActive(false);
             Time.timeScale = 1f;
 
@@ -170,6 +187,7 @@ namespace TK.Gameplay
         {
             Time.timeScale = 0f;
 
+            ShowBackground();
             _releaseFTUE.SetActive(true);
             _releaseFTUECanDismiss = false;
             _currentStep = FTUEGameplayStep.WaitForDoubleTap;
@@ -203,6 +221,7 @@ namespace TK.Gameplay
         {
             _currentStep = FTUEGameplayStep.None;
 
+            HideBackground();
             _releaseFTUE.SetActive(false);
             Time.timeScale = 1f;
 
@@ -223,6 +242,7 @@ namespace TK.Gameplay
         {
             Time.timeScale = 0f;
 
+            ShowBackground();
             _inventoryUpgradeFTUE.SetActive(true);
             _inventoryUpgradeFTUECanDismiss = false;
             _currentStep = FTUEGameplayStep.WaitForTap;
@@ -236,7 +256,8 @@ namespace TK.Gameplay
         private void OnInventoryUpgradeFTUECompleted()
         {
             _currentStep = FTUEGameplayStep.None;
-
+            
+            HideBackground();
             _inventoryUpgradeFTUE.SetActive(false);
             Time.timeScale = 1f;
             FTUESaveSystem.SaveFTUEInventoryUpgradeCompleted(true);
