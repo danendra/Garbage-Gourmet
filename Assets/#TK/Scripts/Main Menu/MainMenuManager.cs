@@ -32,8 +32,6 @@ namespace TK.MainMenu
 
         private int _currentPoint;
 
-
-
         void Awake()
         {
             if (Instance == null)
@@ -175,15 +173,46 @@ namespace TK.MainMenu
 
         public void BringCoinUIToFront()
         {
+            SetCoinUISorting(true);
+        }
+
+        public void SetCoinUISorting(bool front, Transform relativeTo = null)
+        {
             if (txtPoint != null)
             {
-                if (txtPoint.transform.parent != null)
+                Transform coinTransform = (txtPoint.transform.parent != null) ? txtPoint.transform.parent : txtPoint.transform;
+                if (front)
                 {
-                    txtPoint.transform.parent.SetAsLastSibling();
+                    coinTransform.SetAsLastSibling();
                 }
                 else
                 {
-                    txtPoint.transform.SetAsLastSibling();
+                    if (relativeTo != null)
+                    {
+                        int index = relativeTo.GetSiblingIndex();
+                        coinTransform.SetSiblingIndex(index);
+                    }
+                    else
+                    {
+                        Transform componentsTransform = coinTransform.parent;
+                        if (componentsTransform != null)
+                        {
+                            Transform panelsTransform = componentsTransform.Find("Panels");
+                            if (panelsTransform != null)
+                            {
+                                int panelsIndex = panelsTransform.GetSiblingIndex();
+                                coinTransform.SetSiblingIndex(panelsIndex);
+                            }
+                            else
+                            {
+                                coinTransform.SetAsFirstSibling();
+                            }
+                        }
+                        else
+                        {
+                            coinTransform.SetAsFirstSibling();
+                        }
+                    }
                 }
             }
         }

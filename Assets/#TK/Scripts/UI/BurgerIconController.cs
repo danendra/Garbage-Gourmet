@@ -21,6 +21,14 @@ namespace TK.UI
             }
         }
 
+        public void Unlock()
+        {
+            for (int i = 0; i < _arrImage.Length; i++)
+            {
+                _arrImage[i].color = Color.white;
+            }
+        }
+
         // Update is called once per frame
         void Update()
         {

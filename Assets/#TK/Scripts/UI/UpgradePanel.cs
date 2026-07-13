@@ -19,6 +19,8 @@ namespace TK.UI
         [SerializeField] private UpgradeData globalUpgradeData;
         [SerializeField] private List<UpgradeItemData> upgradesList = new List<UpgradeItemData>();
 
+        public override bool ShowXP => true;
+
         private List<UpgradeCard> spawnedCards = new List<UpgradeCard>();
 
         protected override void Awake()

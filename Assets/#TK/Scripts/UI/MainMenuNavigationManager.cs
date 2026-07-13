@@ -63,12 +63,13 @@ namespace TK.UI
             }
 
             activePanel = targetPanel;
+            activePanel.transform.SetAsLastSibling();
             activePanel.Show();
 
             if (MainMenuManager.Instance != null)
             {
                 MainMenuManager.Instance.SetMenuButtonsState(false);
-                MainMenuManager.Instance.BringCoinUIToFront();
+                MainMenuManager.Instance.SetCoinUISorting(targetPanel.ShowXP, targetPanel.transform.parent);
             }
         }
 
@@ -83,6 +84,7 @@ namespace TK.UI
             if (MainMenuManager.Instance != null)
             {
                 MainMenuManager.Instance.SetMenuButtonsState(true);
+                MainMenuManager.Instance.SetCoinUISorting(true);
             }
         }
 
@@ -94,6 +96,7 @@ namespace TK.UI
                 if (MainMenuManager.Instance != null)
                 {
                     MainMenuManager.Instance.SetMenuButtonsState(true);
+                    MainMenuManager.Instance.SetCoinUISorting(true);
                 }
             }
         }

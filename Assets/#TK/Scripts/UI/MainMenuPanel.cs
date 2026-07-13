@@ -118,6 +118,8 @@ namespace TK.UI
             transitionTween = seq;
         }
 
+        public virtual bool ShowXP => false;
+
         protected virtual void OnShown() { }
         protected virtual void OnHidden() { }
     }

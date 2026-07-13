@@ -34,6 +34,8 @@ namespace TK.UI
         public Vector2 foodImageOffset;
         [Tooltip("Optional: A prefab containing unique decorations (like coins or flags) for this specific poster.")]
         public GameObject posterDecorationsPrefab;
+        [Tooltip("Optional: A prefab containing unique decorations rendered behind the food (but in front of the poster background).")]
+        public GameObject posterBehindFoodDecorationsPrefab;
     }
 
     public class CollectionPanel : MainMenuPanel
@@ -47,6 +49,7 @@ namespace TK.UI
         [SerializeField] private GameObject posterContainer;
         [SerializeField] private GameObject shineEffect;
         [SerializeField] private Transform posterDecorationContainer;
+        [SerializeField] private Transform posterBehindFoodDecorationContainer;
         [SerializeField] private Image posterBackgroundImage;
         [SerializeField] private Image posterFoodImage;
         [SerializeField] private TextMeshProUGUI posterTitle;
@@ -67,6 +70,7 @@ namespace TK.UI
         private List<CollectionCardUI> activeCards = new List<CollectionCardUI>();
         private int currentPageIndex = 0;
         private GameObject currentDecorationsInstance;
+        private GameObject currentBehindFoodDecorationsInstance;
         private Vector2 originalFoodImagePos;
 
         protected override void Awake()
@@ -207,6 +211,7 @@ namespace TK.UI
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
+                    posterBackgroundImage.color = unlockedColor;
                 }
 
                 if (shineEffect != null) shineEffect.SetActive(config.enableShine);
@@ -216,6 +221,12 @@ namespace TK.UI
                 if (config.posterDecorationsPrefab != null && posterDecorationContainer != null)
                 {
                     currentDecorationsInstance = Instantiate(config.posterDecorationsPrefab, posterDecorationContainer);
+                }
+
+                if (currentBehindFoodDecorationsInstance != null) Destroy(currentBehindFoodDecorationsInstance);
+                if (config.posterBehindFoodDecorationsPrefab != null && posterBehindFoodDecorationContainer != null)
+                {
+                    currentBehindFoodDecorationsInstance = Instantiate(config.posterBehindFoodDecorationsPrefab, posterBehindFoodDecorationContainer);
                 }
             }
             else
@@ -235,12 +246,14 @@ namespace TK.UI
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
+                    posterBackgroundImage.color = lockedShadowColor;
                 }
 
                 if (shineEffect != null) shineEffect.SetActive(false);
 
                 // Do not spawn decorations when locked
                 if (currentDecorationsInstance != null) Destroy(currentDecorationsInstance);
+                if (currentBehindFoodDecorationsInstance != null) Destroy(currentBehindFoodDecorationsInstance);
             }
         }
 

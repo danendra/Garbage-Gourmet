@@ -57,7 +57,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2231265839941487577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.044}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -255, y: 543}
+  m_AnchoredPosition: {x: -289, y: 730}
   m_SizeDelta: {x: 245, y: 331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &945414009540170795
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 1320634651998832438}
   - component: {fileID: 5320357752299517739}
   m_Layer: 5
-  m_Name: Fire_1
+  m_Name: FireSmall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 2164142155187023910}
   - component: {fileID: 965871644765847913}
   m_Layer: 5
-  m_Name: Fire
+  m_Name: FireSmall1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

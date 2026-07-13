@@ -40,20 +40,28 @@ namespace TK.Audio
 
         private void Update()
         {
-           float depth = _playerHand.GetDepth();
+            float sfxVol = AudioManager.Instance != null ? AudioManager.Instance.GetSFXVolume() : 1f;
+            if (sfxVol <= 0.01f)
+            {
+                if (_audioSource.isPlaying)
+                    _audioSource.Stop();
+                return;
+            }
+
+            float depth = _playerHand.GetDepth();
 
             if (depth < _minimumDepthThreshold)
             {
                if (_audioSource.isPlaying)
                     _audioSource.Stop();
 
-                return;
+                 return;
             }
 
             float range = Mathf.Max(_playerHand.GetMaxReach - _minimumDepthThreshold, 0.0001f);
             float t = Mathf.Clamp01((depth - _minimumDepthThreshold) / range);
 
-            _audioSource.volume = Mathf.Lerp(_minVolume, _maxVolume, t);
+            _audioSource.volume = Mathf.Lerp(_minVolume, _maxVolume, t) * sfxVol;
             _audioSource.pitch  = Mathf.Lerp(_minPitch,  _maxPitch,  t);
 
             if (!_audioSource.isPlaying)
