@@ -11,6 +11,7 @@ namespace TK.Gameplay
     {
         Idle,
         Eat,
+        Nauseous,
         Trash,
         Explode
         
@@ -22,6 +23,7 @@ namespace TK.Gameplay
         [Header("Components")]
         [SerializeField] private GameObject _visualIdle;
         [SerializeField] private GameObject _visualEat;
+        [SerializeField] private GameObject _visualNauseous;
         [SerializeField] private GameObject _visualTrash;
         [SerializeField] private GameObject _tail;
         [SerializeField] private GameObject _explosion;
@@ -32,6 +34,7 @@ namespace TK.Gameplay
 
         private SpriteRenderer1DSpritesheet _visualIdleSpritesheet;
         private SpriteRenderer1DSpritesheet _visualEatSpritesheet;
+        private SpriteRenderer1DSpritesheet _visualNauseousSpritesheet;
         private SpriteRenderer1DSpritesheet _visualTrashSpritesheet;
         private Animator _handAnimator;
         private Animator _explosionAnimator;
@@ -71,6 +74,7 @@ namespace TK.Gameplay
         }
         public void ChangeStateToIdle() => State = RACCOON_VISUAL_STATE.Idle;
         public void ChangeStateToEat() => State = RACCOON_VISUAL_STATE.Eat;
+        public void ChangeStateToNauseous() => State = RACCOON_VISUAL_STATE.Nauseous;
         public void ChangeStateToTrash() => State = RACCOON_VISUAL_STATE.Trash;
         public void ChangeStateToExplode() => State = RACCOON_VISUAL_STATE.Explode;
 
@@ -84,6 +88,7 @@ namespace TK.Gameplay
             _visualIdleSpritesheet = _visualIdle.GetComponent<SpriteRenderer1DSpritesheet>();
             _visualEatSpritesheet = _visualEat.GetComponent<SpriteRenderer1DSpritesheet>();
             _visualEatMaskSpritesheet = _visualEat.GetComponentInChildren<SpriteMask1DSpritesheet>();
+            _visualNauseousSpritesheet = _visualNauseous.GetComponent<SpriteRenderer1DSpritesheet>();
             _visualTrashSpritesheet = _visualTrash.GetComponent<SpriteRenderer1DSpritesheet>();
             _handAnimator = _visualTrash.GetComponentInChildren<Animator>();
             _explosionAnimator = _explosion.GetComponent<Animator>();
@@ -113,10 +118,11 @@ namespace TK.Gameplay
             // DEBUG
             if (Input.GetKeyDown(KeyCode.Alpha1)) State = RACCOON_VISUAL_STATE.Idle;
             if (Input.GetKeyDown(KeyCode.Alpha2)) State = RACCOON_VISUAL_STATE.Eat;
-            if (Input.GetKeyDown(KeyCode.Alpha3)) State = RACCOON_VISUAL_STATE.Trash;
-            if (Input.GetKeyDown(KeyCode.Alpha4)) State = RACCOON_VISUAL_STATE.Explode;
-            if (Input.GetKeyDown(KeyCode.Alpha5)) Stage++;
-            if (Input.GetKeyDown(KeyCode.Alpha6)) Stage--;
+            if (Input.GetKeyDown(KeyCode.Alpha3)) State = RACCOON_VISUAL_STATE.Nauseous;
+            if (Input.GetKeyDown(KeyCode.Alpha4)) State = RACCOON_VISUAL_STATE.Trash;
+            if (Input.GetKeyDown(KeyCode.Alpha5)) State = RACCOON_VISUAL_STATE.Explode;
+            if (Input.GetKeyDown(KeyCode.Alpha6)) Stage++;
+            if (Input.GetKeyDown(KeyCode.Alpha7)) Stage--;
         }
 
         private void HandleStateChange()
@@ -130,6 +136,7 @@ namespace TK.Gameplay
                 case RACCOON_VISUAL_STATE.Idle:
                     _visualIdle.SetActive(true);
                     _visualEat.SetActive(false);
+                    _visualNauseous.SetActive(false);
                     _visualTrash.SetActive(false);
 
                     break;
@@ -137,6 +144,15 @@ namespace TK.Gameplay
                 case RACCOON_VISUAL_STATE.Eat:
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(true);
+                    _visualNauseous.SetActive(false);
+                    _visualTrash.SetActive(false);
+
+                    break;
+
+                case RACCOON_VISUAL_STATE.Nauseous:
+                    _visualIdle.SetActive(false);
+                    _visualEat.SetActive(false);
+                    _visualNauseous.SetActive(true);
                     _visualTrash.SetActive(false);
 
                     break;
@@ -144,14 +160,16 @@ namespace TK.Gameplay
                 case RACCOON_VISUAL_STATE.Trash:
                     _visualIdle.SetActive(false);
                     _visualEat.SetActive(false);
+                    _visualNauseous.SetActive(false);
                     _visualTrash.SetActive(true);               
 
                     ApplyStageTrigger();
                     break;
                 
                 case RACCOON_VISUAL_STATE.Explode:
-                    _visualIdle.SetActive(true);
+                    _visualIdle.SetActive(false);
                     _visualEat.SetActive(false);
+                    _visualNauseous.SetActive(true);
                     _visualTrash.SetActive(false);
 
                     PlayExplodeExpand();
@@ -190,6 +208,7 @@ namespace TK.Gameplay
 
             if (_visualIdleSpritesheet) _visualIdleSpritesheet.SetFrame(_stage);
             if (_visualEatSpritesheet) _visualEatSpritesheet.SetFrame(_stage);
+            if (_visualNauseousSpritesheet) _visualNauseousSpritesheet.SetFrame(_stage);
             if (_visualEatMaskSpritesheet) _visualEatMaskSpritesheet.SetFrame(_stage);
 
             if (_visualTrashSpritesheet) _visualTrashSpritesheet.SetFrame(_stage);
@@ -254,7 +273,7 @@ namespace TK.Gameplay
                 });
             sequence.Append(transform.DOScale(Vector3.zero, 1/6f).SetEase(Ease.OutQuad));
             sequence.AppendCallback(() => {
-                _visualIdle.SetActive(false);
+                _visualNauseous.SetActive(false);
                 _tail.SetActive(false);
                 _explosion.SetActive(false);
                 });

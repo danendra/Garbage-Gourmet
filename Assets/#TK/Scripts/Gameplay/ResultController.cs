@@ -104,7 +104,7 @@ namespace TK.Gameplay
             }
 
             RecipeData _recipe = null;
-            bool _isTrash = false;
+            bool _isTrash = true;
 
             if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
             {
@@ -130,9 +130,9 @@ namespace TK.Gameplay
 
             if (_isTrash)
             {
-                AudioManager.Instance.PlayEatTrash();
-                TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Heavy);
-                _objVomit.SetActive(true);
+                // AudioManager.Instance.PlayEatTrash();
+                // TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Heavy);
+                // _objVomit.SetActive(true);
             }
             else
             {
@@ -166,6 +166,15 @@ namespace TK.Gameplay
                 if (!_isTrash)
                 {
                     _raccoonVisual.ChangeStateToIdle();
+                } else
+                {
+                    _raccoonVisual.ChangeStateToNauseous();
+                    AudioManager.Instance.PlayBurp();
+                    yield return new WaitForSeconds(2f);
+                    AudioManager.Instance.PlayEatTrash();
+                    TK.Audio.HapticManager.PlayImpact(TK.Audio.HapticImpactType.Heavy);
+                    _raccoonVisual.ChangeStateToEat();
+                    _objVomit.SetActive(true);
                 }
             }        
 
