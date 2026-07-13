@@ -24,6 +24,8 @@ namespace TK.Audio
         Point,
         TextTalk,
         TextScream,
-        Boing
+        Boing,
+        Explosion,
+        Expand
     }
 }
