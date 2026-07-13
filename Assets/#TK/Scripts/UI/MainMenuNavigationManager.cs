@@ -63,12 +63,16 @@ namespace TK.UI
             }
 
             activePanel = targetPanel;
+            activePanel.transform.SetAsLastSibling();
             activePanel.Show();
 
             if (MainMenuManager.Instance != null)
             {
                 MainMenuManager.Instance.SetMenuButtonsState(false);
-                MainMenuManager.Instance.BringCoinUIToFront();
+                if (targetPanel == upgradePanel)
+                {
+                    MainMenuManager.Instance.BringCoinUIToFront();
+                }
             }
         }
 
