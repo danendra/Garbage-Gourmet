@@ -169,7 +169,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Standalone: com.MariaRegina.Racoon-Test
-    iPhone: com.ThinKing.PettyPaw
+    iPhone: com.ThinKing.PattyPaw
   buildNumber:
     Standalone: 0
     VisionOS: 0
