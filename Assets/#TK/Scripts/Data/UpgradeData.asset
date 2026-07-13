@@ -14,38 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TK.Data.UpgradeData
   ArmLengthLevels:
   - Value: 15
-    Cost: 40000
+    Cost: 300
   - Value: 30
-    Cost: 360000
+    Cost: 18000
   - Value: 60
-    Cost: 1080000
+    Cost: 140000
   - Value: 95
-    Cost: 3000000
+    Cost: 1500000
   - Value: 100
     Cost: 2147483647
   MaxPickUpLevels:
   - Value: 3
-    Cost: 40000
+    Cost: 1000
   - Value: 4
-    Cost: 120000
+    Cost: 15000
   - Value: 5
-    Cost: 360000
+    Cost: 150000
   - Value: 6
-    Cost: 1080000
+    Cost: 500000
   - Value: 7
-    Cost: 3000000
+    Cost: 1500000
   - Value: 8
     Cost: 2147483647
   MaxReleaseLevels:
   - Value: 0
-    Cost: 40000
+    Cost: 1000
   - Value: 1
-    Cost: 120000
+    Cost: 15000
   - Value: 2
-    Cost: 360000
+    Cost: 150000
   - Value: 3
-    Cost: 1080000
+    Cost: 500000
   - Value: 4
-    Cost: 3000000
+    Cost: 1500000
   - Value: 5
     Cost: 2147483647

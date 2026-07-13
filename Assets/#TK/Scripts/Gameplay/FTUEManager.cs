@@ -261,6 +261,9 @@ namespace TK.Gameplay
             _inventoryUpgradeFTUE.SetActive(false);
             Time.timeScale = 1f;
             FTUESaveSystem.SaveFTUEInventoryUpgradeCompleted(true);
+
+            if (UpgradeSaveSystem.LoadReleaseLevel() >= 1 && !FTUESaveSystem.LoadFTUEReleaseCompleted())
+                StartReleaseFTUE();
         }
     }
 }

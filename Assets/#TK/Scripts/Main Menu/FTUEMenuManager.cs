@@ -246,11 +246,6 @@ namespace TK.MainMenu
 
             if (_currentStep != FTUEMenuStep.None) return;
 
-            if (PlayerPrefs.GetInt("NEW_COLLECTION_UNLOCKED_FLAG", 0) != 1) return;
-
-            PlayerPrefs.SetInt("NEW_COLLECTION_UNLOCKED_FLAG", 0);
-            PlayerPrefs.Save();
-
             StartCollectionFTUE();
         }
 

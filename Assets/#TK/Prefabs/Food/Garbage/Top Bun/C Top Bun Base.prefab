@@ -95,8 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Collectible
   _itemType: 0
   _rarity: 0
-  _intScore: 10000
-  _fltMultiplier: 1.5
+  _intScore: 150
+  _fltMultiplier: 10
   _goFoodServed: {fileID: 7657299826903813138, guid: a77d1f8fa41bb4dd2b48483f7ac3cce5, type: 3}
 --- !u!114 &2068085320042060153
 MonoBehaviour:
