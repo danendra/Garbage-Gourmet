@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2b96601ed664a4f81abcef6e8119c5cf
+guid: 6eab68e933f0d41d5b35d8acbb41fb18
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 602745736882005731
-    second: RaccoonEat_2_0
+      213: 3702501402298674371
+    second: RaccoonNauseous_5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RaccoonEat_2_0
+      name: RaccoonNauseous_5_0
       rect:
         serializedVersion: 2
-        x: 414
+        x: 125
         y: 0
-        width: 1155
-        height: 1924
+        width: 1747
+        height: 1967
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3e6abb0ed026d5800800000000000000
-      internalID: 602745736882005731
+      spriteID: 3cce560a86de16330800000000000000
+      internalID: 3702501402298674371
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RaccoonEat_2_0: 602745736882005731
+      RaccoonNauseous_5_0: 3702501402298674371
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
