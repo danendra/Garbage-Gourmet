@@ -24,6 +24,7 @@ namespace TK.UI
         [SerializeField] private GameObject backFaceUnlocked;
         [SerializeField] [UnityEngine.Serialization.FormerlySerializedAs("backDescriptionText")] private TextMeshProUGUI lockedBackDescriptionText;
         [SerializeField] private TextMeshProUGUI unlockedBackDescriptionText;
+        [SerializeField] private TextMeshProUGUI unlockedBackNameText;
 
         [Header("Settings")]
         [SerializeField] private float flipDuration = 0.4f;
@@ -72,6 +73,7 @@ namespace TK.UI
 
             if (lockedBackDescriptionText != null) lockedBackDescriptionText.text = collectionData.CollectionDescription;
             if (unlockedBackDescriptionText != null) unlockedBackDescriptionText.text = collectionData.CollectionDescription;
+            if (unlockedBackNameText != null) unlockedBackNameText.text = !string.IsNullOrEmpty(collectionData.CollectionName) ? collectionData.CollectionName : collectionData.name;
 
             if (isUnlockedStatus)
             {
