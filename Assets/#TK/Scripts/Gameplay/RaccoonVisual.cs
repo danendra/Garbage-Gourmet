@@ -238,10 +238,13 @@ namespace TK.Gameplay
 
             Sequence sequence = DOTween.Sequence();
 
+            sequence.AppendCallback(() => AudioManager.Instance.PlaySFX(SFXId.Expand));
             sequence.Append(transform.DOScale(_baseScale*1.2f, 1/6f).SetEase(Ease.OutQuad));
             sequence.Append(transform.DOScale(_baseScale*1.1f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.AppendCallback(() => AudioManager.Instance.PlaySFX(SFXId.Expand));
             sequence.Append(transform.DOScale(_baseScale*1.6f, 1/6f).SetEase(Ease.OutQuad));
             sequence.Append(transform.DOScale(_baseScale*1.4f, 1/6f).SetEase(Ease.OutQuad));
+            sequence.AppendCallback(() => AudioManager.Instance.PlaySFX(SFXId.Expand));
             sequence.Append(transform.DOScale(_baseScale*2f, 1/6f).SetEase(Ease.OutQuad));
             sequence.Append(transform.DOScale(_baseScale*1.8f, 1/6f).SetEase(Ease.OutQuad));
             sequence.AppendCallback(() => _explosion.SetActive(true));
@@ -264,6 +267,7 @@ namespace TK.Gameplay
 
         private IEnumerator TriggerFoodExplosionParticle()
         {
+            AudioManager.Instance.PlaySFX(SFXId.Explosion);
             _foodExplosionParticle.ChangeOrderInLayer(0);
             _foodExplosionParticle.Play();
 
