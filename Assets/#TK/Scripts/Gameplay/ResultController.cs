@@ -21,7 +21,7 @@ namespace TK.Gameplay
         [SerializeField] private GameObject _objMask;
         [SerializeField] private PoolerContainer poolScore;
         [SerializeField] private PoolerContainer poolMultiplier;
-        [SerializeField] private RaccoonVisual _racoonVisual;
+        [SerializeField] private RaccoonVisual _raccoonVisual;
         [SerializeField] private DOTweenAnimation _dgAnimation;
         [SerializeField] private GameObject _objVomit;
 
@@ -32,9 +32,9 @@ namespace TK.Gameplay
 
         private IEnumerator IEPlayResult()
         {
-            _racoonVisual.ChangeStateToIdle();
+            _raccoonVisual.ChangeStateToIdle();
             yield return new WaitForSeconds(0.5f);
-            _racoonVisual.ChangeStateToEat();
+            _raccoonVisual.ChangeStateToEat();
 
             int _intScore = 0;
 
@@ -157,15 +157,15 @@ namespace TK.Gameplay
             // if final burger, change to explode, else idle
             if (_isFinalBurger)
             {
-                _racoonVisual.ChangeStateToIdle();
+                _raccoonVisual.ChangeStateToIdle();
                 yield return new WaitForSeconds(1f);   
-                _racoonVisual.ChangeStateToExplode();
+                _raccoonVisual.ChangeStateToExplode();
             } 
             else
             {
                 if (!_isTrash)
                 {
-                    _racoonVisual.ChangeStateToIdle();
+                    _raccoonVisual.ChangeStateToIdle();
                 }
             }        
 
@@ -173,7 +173,7 @@ namespace TK.Gameplay
             {
                 GameManager.Instance.ResetCummulative();
                 yield return new WaitForSeconds(8f);
-                GameManager.Instance.LoadScene(0);
+                GameManager.Instance.LoadScene("MainMenu");
             }
             else
             {

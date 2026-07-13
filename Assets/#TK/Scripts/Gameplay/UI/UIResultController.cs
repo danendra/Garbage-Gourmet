@@ -129,7 +129,7 @@ namespace TK.UI
 
         public void BackToMainMenu()
         {
-            GameManager.Instance.LoadScene(0);
+            GameManager.Instance.LoadScene("MainMenu");
         }
 
         // Update is called once per frame
