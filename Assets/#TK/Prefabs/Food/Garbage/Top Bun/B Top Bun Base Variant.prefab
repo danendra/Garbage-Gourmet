@@ -132,7 +132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: _intScore
-      value: 10000
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8716565346548842337, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: _goFoodServed

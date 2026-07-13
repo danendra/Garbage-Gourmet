@@ -66,3 +66,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f6c0938cc4314c5a956128a4fc398d5, type: 2}
   - {fileID: 11400000, guid: b2d24f8764f014645bdec9443226559a, type: 2}
   _upgradeData: {fileID: 11400000, guid: 19e2c6e2994da4aa2beb76ef4678f20b, type: 2}
+  _isSaveFileResetDebug: 0
+  _arrRaccoonStageThresholds: 400d030020a10700a0bb0d00c091210020aa4400

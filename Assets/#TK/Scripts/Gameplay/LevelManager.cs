@@ -99,10 +99,10 @@ namespace TK.Gameplay
 
             if (!FTUESaveSystem.LoadFTUEGameplayCompleted())
                 FTUEManager.Instance.StartGameplayFTUE();
-            else if (UpgradeSaveSystem.LoadReleaseLevel() >= 1 && !FTUESaveSystem.LoadFTUEReleaseCompleted())
-                FTUEManager.Instance.StartReleaseFTUE();
             else if (UpgradeSaveSystem.LoadPickUpLevel() >= 1 && !FTUESaveSystem.LoadFTUEInventoryUpgradeCompleted())
                 FTUEManager.Instance.StartInventoryUpgradeFTUE();
+            else if (UpgradeSaveSystem.LoadReleaseLevel() >= 1 && !FTUESaveSystem.LoadFTUEReleaseCompleted())
+                FTUEManager.Instance.StartReleaseFTUE();
         }
 
         // =====================

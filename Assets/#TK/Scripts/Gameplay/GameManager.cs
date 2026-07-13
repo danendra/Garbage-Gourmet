@@ -56,7 +56,6 @@ namespace TK.Gameplay
             if (_isSaveFileResetDebug)
             {
                 ResetGameData();
-                // LoadCheatMoney();
             }
 
             Initialize();
