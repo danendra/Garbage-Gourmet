@@ -104,7 +104,7 @@ namespace TK.Gameplay
             }
 
             RecipeData _recipe = null;
-            bool _isTrash = false;
+            bool _isTrash = true;
 
             if (_listCollectible.Count(_item => _item.GetType == ITEM_TYPE.Trash) > 0)
             {

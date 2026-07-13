@@ -216,7 +216,6 @@ namespace TK.Audio
             ApplyVolume(sfxVolumeParam, sfxVolume);
 
             if (musicSource != null) musicSource.mute = (musicVolume <= 0.01f);
-            if (ambienceSource != null) ambienceSource.mute = (musicVolume <= 0.01f);
             if (sfxPool != null)
             {
                 foreach (var src in sfxPool)
@@ -251,7 +250,6 @@ namespace TK.Audio
             PlayerPrefs.SetFloat(MusicVolumeKey, musicVolume);
             
             if (musicSource != null) musicSource.mute = (musicVolume <= 0.01f);
-            if (ambienceSource != null) ambienceSource.mute = (musicVolume <= 0.01f);
         }
 
         public void SetSFXVolume(float linearVolume)
