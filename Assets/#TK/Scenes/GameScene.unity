@@ -1178,11 +1178,11 @@ MonoBehaviour:
   _playerHand: {fileID: 692215687}
   _minimumDepthThreshold: 50
   _audioSource: {fileID: 425614932}
-  _audioClip: {fileID: 8300000, guid: b6a205ca739fb4fe6b8665c3623ed030, type: 3}
+  _audioClip: {fileID: 8300000, guid: dd8400beb5df249df8d37dbd36e5375f, type: 3}
   _outputMixerGroup: {fileID: 2530280777538871979, guid: fc559b67752cc42d5b337b4bdffb0464, type: 2}
   _minVolume: 0
   _maxVolume: 2
-  _minPitch: 0
+  _minPitch: 1
   _maxPitch: 2
 --- !u!1 &504188903
 GameObject:
@@ -3740,7 +3740,7 @@ MonoBehaviour:
   _objMask: {fileID: 1321889967}
   poolScore: {fileID: 1458571175}
   poolMultiplier: {fileID: 1334628980}
-  _racoonVisual: {fileID: 1281718225}
+  _raccoonVisual: {fileID: 1281718225}
   _dgAnimation: {fileID: 1107864607}
   _objVomit: {fileID: 1197797260}
 --- !u!1 &1878369516
@@ -3809,7 +3809,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 31fc963f2c7f1446c9fdba4e0bff7a7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e61bba94a10b2460c9a46d114c82f728, type: 3}
   m_Color: {r: 0.9607843, g: 0.8980392, b: 0.8117647, a: 1}
   m_FlipX: 0
   m_FlipY: 0

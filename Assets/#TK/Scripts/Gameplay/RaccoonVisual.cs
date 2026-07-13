@@ -247,15 +247,18 @@ namespace TK.Gameplay
             sequence.AppendCallback(() => AudioManager.Instance.PlaySFX(SFXId.Expand));
             sequence.Append(transform.DOScale(_baseScale*2f, 1/6f).SetEase(Ease.OutQuad));
             sequence.Append(transform.DOScale(_baseScale*1.8f, 1/6f).SetEase(Ease.OutQuad));
-            sequence.AppendCallback(() => _explosion.SetActive(true));
-            sequence.AppendCallback(TriggerExplosionAnimation);
-            sequence.AppendCallback(() => StartCoroutine(TriggerFoodExplosionParticle()));
-            sequence.AppendInterval(0.75f);
+            sequence.AppendCallback(() => {
+                _explosion.SetActive(true);
+                TriggerExplosionAnimation();
+                StartCoroutine(TriggerFoodExplosionParticle());
+                });
             sequence.Append(transform.DOScale(Vector3.zero, 1/6f).SetEase(Ease.OutQuad));
-            sequence.AppendCallback(() => _visualIdle.SetActive(false));
-            sequence.AppendCallback(() => _tail.SetActive(false));
-            sequence.AppendCallback(() => _explosion.SetActive(false));
-            sequence.AppendInterval(4f);
+            sequence.AppendCallback(() => {
+                _visualIdle.SetActive(false);
+                _tail.SetActive(false);
+                _explosion.SetActive(false);
+                });
+            // sequence.AppendInterval(4f);
 
             return sequence;
         }
