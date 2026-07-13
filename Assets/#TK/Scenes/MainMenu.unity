@@ -226,7 +226,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2553763409730827109, guid: 2f6ab6a6365094b7ab306e652f06a0e2, type: 3}
       propertyPath: _isSaveFileResetDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3729637235371393724, guid: 2f6ab6a6365094b7ab306e652f06a0e2, type: 3}
       propertyPath: m_LocalPosition.x
