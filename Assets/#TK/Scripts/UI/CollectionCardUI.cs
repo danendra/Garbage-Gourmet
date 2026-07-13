@@ -20,18 +20,16 @@ namespace TK.UI
         [SerializeField] private GameObject lockedMultiplierScribble;
 
         [Header("UI References (Back)")]
-        [SerializeField] private GameObject backFace;
-        [SerializeField] private TextMeshProUGUI backNameText;
-        [SerializeField] private TextMeshProUGUI backDescriptionText;
+        [SerializeField] [UnityEngine.Serialization.FormerlySerializedAs("backFace")] private GameObject backFaceLocked;
+        [SerializeField] private GameObject backFaceUnlocked;
+        [SerializeField] [UnityEngine.Serialization.FormerlySerializedAs("backDescriptionText")] private TextMeshProUGUI lockedBackDescriptionText;
+        [SerializeField] private TextMeshProUGUI unlockedBackDescriptionText;
 
         [Header("Settings")]
         [SerializeField] private float flipDuration = 0.4f;
         [SerializeField] private string multiplierFormat = "X{0} Multiplier";
 
         private Dictionary<string, BurgerIconController> _dictBurgerIcons = new Dictionary<string, BurgerIconController>();
-        // [Header("Colors (Optional)")]
-        // [SerializeField] private Color unlockedColor = Color.white;
-        // [SerializeField] private Color shadowColor = Color.black;
 
         private RecipeData currentCollectionData;
         private BurgerIconController _iconBurger;
@@ -39,7 +37,7 @@ namespace TK.UI
         private bool isFlipped = false;
         private bool isAnimating = false;
 
-        public void Setup(RecipeData collectionData, bool forceUnlock = false)
+        public void Setup(RecipeData collectionData)
         {
             Clear();
 
@@ -62,17 +60,18 @@ namespace TK.UI
             _iconBurger.gameObject.SetActive(true);
 
             currentCollectionData = collectionData;
-            isUnlockedStatus = forceUnlock || !collectionData.IsNew();
+            isUnlockedStatus = !collectionData.IsNew();
             isFlipped = false;
             isAnimating = false;
 
             transform.DOKill();
             transform.localRotation = Quaternion.identity;
             if (frontFace != null) frontFace.SetActive(true);
-            if (backFace != null) backFace.SetActive(false);
+            if (backFaceLocked != null) backFaceLocked.SetActive(false);
+            if (backFaceUnlocked != null) backFaceUnlocked.SetActive(false);
 
-            if (backNameText != null) backNameText.text = !string.IsNullOrEmpty(collectionData.CollectionName) ? collectionData.CollectionName : collectionData.name;
-            if (backDescriptionText != null) backDescriptionText.text = collectionData.CollectionDescription;
+            if (lockedBackDescriptionText != null) lockedBackDescriptionText.text = collectionData.CollectionDescription;
+            if (unlockedBackDescriptionText != null) unlockedBackDescriptionText.text = collectionData.CollectionDescription;
 
             if (isUnlockedStatus)
             {
@@ -121,7 +120,7 @@ namespace TK.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!isUnlockedStatus || isAnimating || currentCollectionData == null) return;
+            if (isAnimating || currentCollectionData == null) return;
 
             FlipCard();
         }
@@ -135,7 +134,39 @@ namespace TK.UI
             transform.DORotate(new Vector3(0, 90, 0), halfDuration).SetEase(Ease.InQuad).OnComplete(() =>
             {
                 if (frontFace != null) frontFace.SetActive(!isFlipped);
-                if (backFace != null) backFace.SetActive(isFlipped);
+                
+                if (isFlipped)
+                {
+                    if (isUnlockedStatus)
+                    {
+                        if (backFaceUnlocked != null)
+                        {
+                            backFaceUnlocked.SetActive(true);
+                            if (backFaceLocked != null) backFaceLocked.SetActive(false);
+                        }
+                        else
+                        {
+                            if (backFaceLocked != null) backFaceLocked.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        if (backFaceLocked != null)
+                        {
+                            backFaceLocked.SetActive(true);
+                            if (backFaceUnlocked != null) backFaceUnlocked.SetActive(false);
+                        }
+                        else
+                        {
+                            if (backFaceUnlocked != null) backFaceUnlocked.SetActive(true);
+                        }
+                    }
+                }
+                else
+                {
+                    if (backFaceLocked != null) backFaceLocked.SetActive(false);
+                    if (backFaceUnlocked != null) backFaceUnlocked.SetActive(false);
+                }
 
                 float targetY = isFlipped ? 180f : 0f;
                 transform.DORotate(new Vector3(0, targetY, 0), halfDuration).SetEase(Ease.OutQuad).OnComplete(() =>

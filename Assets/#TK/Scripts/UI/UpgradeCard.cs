@@ -19,6 +19,7 @@ namespace TK.UI
         [Header("Button State Sprites")]
         [SerializeField] private Sprite affordableSprite;
         [SerializeField] private Sprite unaffordableSprite;
+        [SerializeField] private Sprite maxedSprite;
 
         [Header("Text Sprite Assets")]
         [SerializeField] private TMP_SpriteAsset affordableStarAsset;
@@ -42,6 +43,19 @@ namespace TK.UI
                 if (isMaxLevel)
                 {
                     if (costText != null) costText.text = "Maxed";
+                    
+                    if (upgradeButton.image != null)
+                    {
+                        if (maxedSprite != null)
+                        {
+                            upgradeButton.image.sprite = maxedSprite;
+                        }
+                        else if (unaffordableSprite != null)
+                        {
+                            upgradeButton.image.sprite = unaffordableSprite;
+                        }
+                    }
+
                     upgradeButton.interactable = false;
                 }
                 else

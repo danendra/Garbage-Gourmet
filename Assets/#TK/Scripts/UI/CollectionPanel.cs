@@ -34,6 +34,8 @@ namespace TK.UI
         public Vector2 foodImageOffset;
         [Tooltip("Optional: A prefab containing unique decorations (like coins or flags) for this specific poster.")]
         public GameObject posterDecorationsPrefab;
+        [Tooltip("If true, the decorations prefab will render behind the food image (but in front of the poster background).")]
+        public bool renderDecorationsBehindFood;
     }
 
     public class CollectionPanel : MainMenuPanel
@@ -63,12 +65,6 @@ namespace TK.UI
 
         [Header("Settings")]
         [SerializeField] private int cardsPerPage = 6;
-
-        [Header("Testing")]
-        [Tooltip("Force unlock all collections for UI testing.")]
-        [SerializeField] private bool unlockAllForTesting = false;
-
-        public static bool UnlockAllForTesting = false;
 
         private List<CollectionCardUI> activeCards = new List<CollectionCardUI>();
         private int currentPageIndex = 0;
@@ -169,7 +165,7 @@ namespace TK.UI
                 {
                     RecipeData collectionData = config.pageItems[i];
                                         
-                    card.Setup(collectionData, unlockAllForTesting || UnlockAllForTesting);
+                    card.Setup(collectionData);
                     
                     // Ensure the card's game object is active in case it was disabled
                     card.gameObject.SetActive(true);
@@ -193,8 +189,21 @@ namespace TK.UI
                 posterFoodImage.rectTransform.anchoredPosition = originalFoodImagePos + config.foodImageOffset;
             }
 
+            if (posterDecorationContainer != null && posterFoodImage != null)
+            {
+                int foodSiblingIndex = posterFoodImage.rectTransform.GetSiblingIndex();
+                if (config.renderDecorationsBehindFood)
+                {
+                    posterDecorationContainer.SetSiblingIndex(foodSiblingIndex);
+                }
+                else
+                {
+                    posterDecorationContainer.SetSiblingIndex(foodSiblingIndex + 1);
+                }
+            }
+
             // TODO: Connect to SaveData system to check if 'data' is unlocked by the player
-            bool isUnlocked = unlockAllForTesting || UnlockAllForTesting || !data.IsNew(); 
+            bool isUnlocked = !data.IsNew(); 
 
             if (isUnlocked)
             {
@@ -213,6 +222,7 @@ namespace TK.UI
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
+                    posterBackgroundImage.color = unlockedColor;
                 }
 
                 if (shineEffect != null) shineEffect.SetActive(config.enableShine);
@@ -241,6 +251,7 @@ namespace TK.UI
                 {
                     posterBackgroundImage.sprite = config.posterBackground;
                     if (config.useNativeBackgroundSize) posterBackgroundImage.SetNativeSize();
+                    posterBackgroundImage.color = lockedShadowColor;
                 }
 
                 if (shineEffect != null) shineEffect.SetActive(false);

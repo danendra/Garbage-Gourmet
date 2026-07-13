@@ -112,8 +112,6 @@ namespace TK.UI
             PlayerPrefs.SetInt(PREFS_SCREENSHAKE, isOn ? 1 : 0);
             PlayerPrefs.Save();
             
-            // TODO: Implement Screen Shake logic here when it's ready
-            // if (isOn) EnableScreenShake(); else DisableScreenShake();
         }
 
         private void ShowResetPopup()
