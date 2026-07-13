@@ -14,6 +14,8 @@ namespace TK.Gameplay
         [SerializeField] private RecipeData[] _arrRecipes;
         [SerializeField] private UpgradeData _upgradeData;
 
+        [SerializeField] private bool _isSaveFileResetDebug = false;
+
         [Header("Raccoon Stage Thresholds")]
         [SerializeField] private int[] _arrRaccoonStageThresholds = { 400000, 800000, 1500000, 4000000, 8000000 };
 
@@ -50,6 +52,11 @@ namespace TK.Gameplay
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            if (_isSaveFileResetDebug)
+            {
+                ResetGameData();
+            }
 
             Initialize();
 
@@ -99,6 +106,11 @@ namespace TK.Gameplay
             LoadUpgrades();
 
             Debug.Log("Game data has been reset.");
+        }
+
+        private void LoadCheatMoney()
+        {
+            UpgradeSaveSystem.SaveCoins(1000000000);
         }
 
         public void ResetCummulative()

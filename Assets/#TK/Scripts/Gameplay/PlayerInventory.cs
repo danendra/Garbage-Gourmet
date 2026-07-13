@@ -16,6 +16,9 @@ namespace TK.Gameplay
         [Header("Pick Up Settings")]
         [SerializeField] private int _maxPickUpItems = 5;
 
+        [Header("Double tap release settings")]
+        [SerializeField] private float _fltDelayDoubleTouch = 0.5f;
+
         private Stack<CollectibleController> _heldItems = new Stack<CollectibleController>();
 
         // ── IItemCollector ─────────────────────────────────────────────────────
@@ -36,7 +39,6 @@ namespace TK.Gameplay
         public event System.Action<int> OnReleaseUpdate;     
 
         private bool _isFirstTouch;
-        private float _fltDelayDoubleTouch = 0.5f;
         private float _fltCountdown; 
 
         // ── IItemCollector: AddItem ────────────────────────────────────────────
