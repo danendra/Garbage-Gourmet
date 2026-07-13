@@ -32,8 +32,6 @@ namespace TK.MainMenu
 
         private int _currentPoint;
 
-
-
         void Awake()
         {
             if (Instance == null)
