@@ -242,11 +242,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9105745363536629497}
-  m_Father: {fileID: 5503785011908296507}
+  m_Father: {fileID: 5581180029305508267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 186.99994}
+  m_AnchoredPosition: {x: 71.00003, y: -33}
   m_SizeDelta: {x: 887, y: 379}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4395171588849758086
@@ -879,8 +879,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5581180029305508267}
-  - {fileID: 7244625397562682495}
-  - {fileID: 4134026007584722356}
   m_Father: {fileID: 3779463327439052537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1253,16 +1251,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2842130583590197411}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5503785011908296507}
+  m_Father: {fileID: 5581180029305508267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 466, y: 580.99994}
+  m_AnchoredPosition: {x: 536.9999, y: 360.99988}
   m_SizeDelta: {x: 201, y: 316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1673615737457003809
@@ -2223,6 +2221,7 @@ GameObject:
   - component: {fileID: 5581180029305508267}
   - component: {fileID: 648186738749276136}
   - component: {fileID: 8679054063750215683}
+  - component: {fileID: 8141302678291676678}
   m_Layer: 5
   m_Name: Stack
   m_TagString: Untagged
@@ -2245,6 +2244,8 @@ RectTransform:
   - {fileID: 6860042409877291580}
   - {fileID: 3862284103499469893}
   - {fileID: 965359809002837016}
+  - {fileID: 7244625397562682495}
+  - {fileID: 4134026007584722356}
   m_Father: {fileID: 5503785011908296507}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2290,6 +2291,114 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8141302678291676678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5177925381825351945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::DG.Tweening.DOTweenAnimation
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  targetIsSelf: 1
+  targetGO: {fileID: 0}
+  tweenTargetIsTargetGO: 1
+  delay: 0
+  duration: 3
+  easeType: 4
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 1
+  loops: -1
+  id: 
+  isRelative: 1
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  autoGenerate: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 5581180029305508267}
+  animationType: 2
+  targetType: 11
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 30, y: 30, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalBool1: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalShakeRandomnessMode: 0
+  optionalString: 
 --- !u!1 &5386920423084143200
 GameObject:
   m_ObjectHideFlags: 0
@@ -4011,7 +4120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1477877981339039593, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 566.00006
+      value: 529
       objectReference: {fileID: 0}
     - target: {fileID: 2142712526971695448, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4027,7 +4136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2254338371568943013, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2390251330609167807, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: backFaceLocked
@@ -4087,27 +4196,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6362080374572976308, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362080374572976308, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362080374572976308, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362080374572976308, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 453
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362080374572976308, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 188.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362080374572976308, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -226.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6761159597044420543, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       propertyPath: shineEffect
@@ -4253,8 +4362,124 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2142712526971695448, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
       insertIndex: -1
       addedObject: {fileID: 208722937687445397}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2366226394805405178, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7641450381176988150}
   m_SourcePrefab: {fileID: 100100000, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
+--- !u!1 &788852666804402357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2366226394805405178, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
+  m_PrefabInstance: {fileID: 3036577391753919823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7641450381176988150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788852666804402357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::DG.Tweening.DOTweenAnimation
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  targetIsSelf: 1
+  targetGO: {fileID: 0}
+  tweenTargetIsTargetGO: 1
+  delay: 0
+  duration: 3
+  easeType: 4
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 1
+  loops: -1
+  id: 
+  isRelative: 1
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  autoGenerate: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 5761530000925067556}
+  animationType: 2
+  targetType: 11
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 30, y: 30, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalBool1: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalShakeRandomnessMode: 0
+  optionalString: 
 --- !u!1 &1812400510627482244 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3675754945279784907, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
@@ -4279,6 +4504,11 @@ MonoBehaviour:
 --- !u!224 &5423536326025559240 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7016698933637759367, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
+  m_PrefabInstance: {fileID: 3036577391753919823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &5761530000925067556 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7336651925894231147, guid: f07da2d6492cd462aa4fed1e6245e374, type: 3}
   m_PrefabInstance: {fileID: 3036577391753919823}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6216545165405979578 stripped
@@ -4339,11 +4569,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4308990523861943826, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 179.44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4308990523861943826, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 45.23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_Pivot.x
@@ -4359,7 +4589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4367,7 +4597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4407,11 +4637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 443.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -189.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4541227557246843145, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4459,23 +4689,23 @@ PrefabInstance:
       objectReference: {fileID: 5045773209925386294, guid: f8e4f387a51be4278993faba78f87af3, type: 3}
     - target: {fileID: 8423398814813797551, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423398814813797551, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423398814813797551, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 139.44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423398814813797551, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 89.72
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8423398814813797551, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22.615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8760224174531766711, guid: ed10071d2a0884f7085232fd01afd5ad, type: 3}
       propertyPath: m_fontAsset
@@ -4728,8 +4958,129 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 939194085206703373, guid: 84bb94fe1ebd748d98b2919a826f1346, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7492000413120668041}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7073653454679834791, guid: 84bb94fe1ebd748d98b2919a826f1346, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8537447858238178955}
   m_SourcePrefab: {fileID: 100100000, guid: 84bb94fe1ebd748d98b2919a826f1346, type: 3}
+--- !u!1 &11756716657857048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7073653454679834791, guid: 84bb94fe1ebd748d98b2919a826f1346, type: 3}
+  m_PrefabInstance: {fileID: 7062610674600759999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8537447858238178955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11756716657857048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::DG.Tweening.DOTweenAnimation
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  targetIsSelf: 1
+  targetGO: {fileID: 0}
+  tweenTargetIsTargetGO: 1
+  delay: 0
+  duration: 3
+  easeType: 4
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 1
+  loops: -1
+  id: 
+  isRelative: 1
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  autoGenerate: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 2113614368382331182}
+  animationType: 2
+  targetType: 11
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 30, y: 30, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalBool1: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalShakeRandomnessMode: 0
+  optionalString: 
+--- !u!224 &2113614368382331182 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9175661946394049425, guid: 84bb94fe1ebd748d98b2919a826f1346, type: 3}
+  m_PrefabInstance: {fileID: 7062610674600759999}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8001734312734060466 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 939194085206703373, guid: 84bb94fe1ebd748d98b2919a826f1346, type: 3}
