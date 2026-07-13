@@ -230,6 +230,7 @@ namespace TK.Gameplay
                     if (!_handVisualSprite.enabled)
                         _handVisualSprite.enabled = true;
 
+                    _inventory.RemoveReleaseChance();
                     _rb.linearVelocity = Vector2.zero;
                     _targetX = _rb.position.x;
                     CameraShakeManager.Instance.CameraShake(_impulseSource, 1f);

@@ -90,19 +90,17 @@ namespace TK.MainMenu
                 return;
             }
 
-            int currentPoints = GameManager.Instance != null
-                ? GameManager.Instance.PlayerCoins
-                : 0;
-
+            int coins = GameManager.Instance != null ? GameManager.Instance.PlayerCoins : 0;
             int threshold = _upgradePointThreshold > 0 ? _upgradePointThreshold : 40000;
 
-            if (currentPoints < threshold)
+            if (coins >= threshold)
+            {
+                StartUpgradeFTUE();
+            }
+            else
             {
                 TryStartCollectionFTUE();
-                return;
             }
-
-            StartUpgradeFTUE();
         }
 
         public void StartUpgradeFTUE()
@@ -210,9 +208,6 @@ namespace TK.MainMenu
 
         private void OnUpgradeFTUECompleted()
         {
-            if(_closeUpgradeButton != null)
-                _closeUpgradeButton.interactable = true;
-
             _currentStep = FTUEMenuStep.None;
 
             _upgradeFTUE.SetActive(false);
@@ -225,6 +220,24 @@ namespace TK.MainMenu
 
             if (MainMenuNavigationManager.Instance != null)
                 MainMenuNavigationManager.Instance.SetUpgradeFTUEButtonsState(true);
+
+            if (_closeUpgradeButton != null)
+            {
+                _closeUpgradeButton.interactable = true;
+                _closeUpgradeButton.onClick.AddListener(OnUpgradePanelClosed);
+            }
+            else
+            {
+                TryStartCollectionFTUE();
+            }
+        }
+
+        private void OnUpgradePanelClosed()
+        {
+            if (_closeUpgradeButton != null)
+                _closeUpgradeButton.onClick.RemoveListener(OnUpgradePanelClosed);
+
+            TryStartCollectionFTUE();
         }
 
         public void TryStartCollectionFTUE()
