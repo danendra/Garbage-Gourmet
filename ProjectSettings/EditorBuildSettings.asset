@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/#TK/Scenes/SplashScreen.unity
+    guid: fc14e3c7d23e048b9bfe00de7781e3f8
+  - enabled: 1
     path: Assets/#TK/Scenes/MainMenu.unity
     guid: d9967925a3ef34442859cf27123c8b82
   - enabled: 1
