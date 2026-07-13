@@ -171,6 +171,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6173134358161352196, guid: d4c3117ee19074db58c2a00afd2b0dd3, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173134358161352196, guid: d4c3117ee19074db58c2a00afd2b0dd3, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173134358161352196, guid: d4c3117ee19074db58c2a00afd2b0dd3, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3866,6 +3878,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6436944652096357334, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
+      propertyPath: _maxX
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436944652096357334, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
+      propertyPath: _minX
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436944652096357334, guid: ec589b660ec5a42289fba257f6c79145, type: 3}
       propertyPath: _transLimitInfo
       value: 
       objectReference: {fileID: 914010118}
@@ -4148,7 +4168,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  loopType: 0
+  loopType: 1
   loops: -1
   id: 
   isRelative: 0
@@ -4256,7 +4276,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  loopType: 0
+  loopType: 1
   loops: -1
   id: 
   isRelative: 1
