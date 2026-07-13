@@ -56,19 +56,12 @@ namespace TK.Gameplay
             if (_isSaveFileResetDebug)
             {
                 ResetGameData();
+                // LoadCheatMoney();
             }
 
             Initialize();
 
             Application.targetFrameRate = 100;
-        }
-
-        public void Start()
-        {
-            if(!FTUESaveSystem.LoadFTUEFirstLaunchCompleted())
-            {
-                SceneManager.LoadScene("GameScene");
-            }
         }
 
         public void Initialize()

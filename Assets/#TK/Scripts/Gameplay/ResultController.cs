@@ -173,7 +173,7 @@ namespace TK.Gameplay
             {
                 GameManager.Instance.ResetCummulative();
                 yield return new WaitForSeconds(8f);
-                GameManager.Instance.LoadScene(0);
+                GameManager.Instance.LoadScene("MainMenu");
             }
             else
             {
