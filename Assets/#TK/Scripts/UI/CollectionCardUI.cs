@@ -39,7 +39,7 @@ namespace TK.UI
         private bool isFlipped = false;
         private bool isAnimating = false;
 
-        public void Setup(RecipeData collectionData)
+        public void Setup(RecipeData collectionData, bool forceUnlock = false)
         {
             Clear();
 
@@ -62,7 +62,7 @@ namespace TK.UI
             _iconBurger.gameObject.SetActive(true);
 
             currentCollectionData = collectionData;
-            isUnlockedStatus = !collectionData.IsNew();
+            isUnlockedStatus = forceUnlock || !collectionData.IsNew();
             isFlipped = false;
             isAnimating = false;
 
@@ -91,6 +91,8 @@ namespace TK.UI
                     multiplierText.gameObject.SetActive(true);
                     multiplierText.text = string.Format(multiplierFormat, collectionData.FltMultiplier);
                 }
+
+                _iconBurger.Unlock();
             }
             else
             {

@@ -64,6 +64,12 @@ namespace TK.UI
         [Header("Settings")]
         [SerializeField] private int cardsPerPage = 6;
 
+        [Header("Testing")]
+        [Tooltip("Force unlock all collections for UI testing.")]
+        [SerializeField] private bool unlockAllForTesting = false;
+
+        public static bool UnlockAllForTesting = false;
+
         private List<CollectionCardUI> activeCards = new List<CollectionCardUI>();
         private int currentPageIndex = 0;
         private GameObject currentDecorationsInstance;
@@ -163,7 +169,7 @@ namespace TK.UI
                 {
                     RecipeData collectionData = config.pageItems[i];
                                         
-                    card.Setup(collectionData);
+                    card.Setup(collectionData, unlockAllForTesting || UnlockAllForTesting);
                     
                     // Ensure the card's game object is active in case it was disabled
                     card.gameObject.SetActive(true);
@@ -188,7 +194,7 @@ namespace TK.UI
             }
 
             // TODO: Connect to SaveData system to check if 'data' is unlocked by the player
-            bool isUnlocked = !data.IsNew(); 
+            bool isUnlocked = unlockAllForTesting || UnlockAllForTesting || !data.IsNew(); 
 
             if (isUnlocked)
             {
