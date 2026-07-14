@@ -72,6 +72,29 @@ namespace TK.Gameplay
                 UpgradeSaveSystem.SaveCoins(0);
 
             LoadUpgrades();
+
+            if (_arrRecipes != null)
+            {
+                System.Array.Sort(_arrRecipes, (a, b) =>
+                {
+                    if (a == null && b == null) return 0;
+                    if (a == null) return 1;
+                    if (b == null) return -1;
+
+                    int rarityFixedCompare = b.IsRarityFixed.CompareTo(a.IsRarityFixed);
+                    if (rarityFixedCompare != 0) return rarityFixedCompare;
+
+                    int aLen = a.CollectibleIngredients != null ? a.CollectibleIngredients.Length : 0;
+                    int bLen = b.CollectibleIngredients != null ? b.CollectibleIngredients.Length : 0;
+                    int lengthCompare = bLen.CompareTo(aLen);
+                    if (lengthCompare != 0) return lengthCompare;
+
+                    int sameCompare = a.IsSame.CompareTo(b.IsSame);
+                    if (sameCompare != 0) return sameCompare;
+
+                    return 0;
+                });
+            }
         }
 
         public void ResetGameData()
