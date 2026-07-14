@@ -1178,7 +1178,7 @@ MonoBehaviour:
   _playerHand: {fileID: 692215687}
   _minimumDepthThreshold: 50
   _audioSource: {fileID: 425614932}
-  _audioClip: {fileID: 8300000, guid: dd8400beb5df249df8d37dbd36e5375f, type: 3}
+  _audioClip: {fileID: 8300000, guid: 227089a175de544fe806b0088eb2b69e, type: 3}
   _outputMixerGroup: {fileID: 2530280777538871979, guid: fc559b67752cc42d5b337b4bdffb0464, type: 2}
   _minVolume: 0
   _maxVolume: 2
