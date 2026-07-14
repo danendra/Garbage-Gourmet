@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 4261854843470310607, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 221790193684785848, guid: 170b80b766953420382630f4b762d07a, type: 3}
+      objectReference: {fileID: 221790193684785848, guid: 22c7200ceb51842f4a4a6a357ac22982, type: 3}
     - target: {fileID: 7657299826903813138, guid: 35332e1ee06c44f1fbe8c84d85e732ea, type: 3}
       propertyPath: m_Name
       value: C Cheese Variant
