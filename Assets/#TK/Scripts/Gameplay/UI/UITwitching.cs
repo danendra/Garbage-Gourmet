@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using TK.Audio;
 
 public class UITwitching : MonoBehaviour
 {
@@ -24,6 +25,11 @@ public class UITwitching : MonoBehaviour
         
         for(int i = 0; i < 3; i++)
         {
+            if (i==0)
+            {
+                twitchSequence.AppendCallback(() => AudioManager.Instance.PlaySFX(SFXId.TrashNudge));
+            }
+            
             twitchSequence.Append(_rectTransform.DOLocalRotate(leftRotation, _twitchDuration).SetEase(easeType));
             twitchSequence.Append(_rectTransform.DOLocalRotate(rightRotation, _twitchDuration).SetEase(easeType));
         }
