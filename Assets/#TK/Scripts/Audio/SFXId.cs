@@ -26,6 +26,7 @@ namespace TK.Audio
         TextScream,
         Boing,
         Explosion,
-        Expand
+        Expand,
+        TrashNudge
     }
 }

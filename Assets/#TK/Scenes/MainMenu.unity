@@ -557,6 +557,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6120011959922739624, guid: 4956256544a104dffb26eda9225001e2, type: 3}
+      propertyPath: sfxDataList.Array.size
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120011959922739624, guid: 4956256544a104dffb26eda9225001e2, type: 3}
+      propertyPath: 'sfxDataList.Array.data[25]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f07b180b63d23449c95e5c93efe9a6b2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
