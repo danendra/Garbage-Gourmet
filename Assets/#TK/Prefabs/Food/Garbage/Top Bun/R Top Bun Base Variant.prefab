@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: R Top Bun Base Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1690129903884817046, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 1709759367571524322, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
       propertyPath: _rarity
       value: 1
@@ -43,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 6082139266675759436, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6389992351808504773, guid: 18dcaf919a0c145a1b5f0c2c9d19438f, type: 3}
+      objectReference: {fileID: 6389992351808504773, guid: 250cfa6a49ae74707aa688a1b6d85aba, type: 3}
     - target: {fileID: 7771714958216441934, guid: f707035ef6b514a65933b528178d9f8b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.14007
