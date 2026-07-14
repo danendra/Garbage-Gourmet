@@ -18,9 +18,12 @@ namespace TK.Gameplay
             Instance = this;
         }
 
+        private const string PREFS_SCREENSHAKE = "Setting_ScreenShake";
+
         public void CameraShake(CinemachineImpulseSource impulseSource, float force = 1f)
         {
-            if (impulseSource != null)
+            bool isScreenShakeOn = PlayerPrefs.GetInt(PREFS_SCREENSHAKE, 1) == 1;
+            if (isScreenShakeOn && impulseSource != null)
             {
                 impulseSource.GenerateImpulseWithForce(force);
             }
