@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fe69ff6db6e4f108c0e5254ae4536f, type: 3}
+  m_Name: TrashNudgeSFXData
+  m_EditorClassIdentifier: Assembly-CSharp::TK.Audio.SFXData
+  id: 25
+  audioResource: {fileID: 6418180475301049370, guid: 8b7c9c214e10444ee94df18212d1daf9, type: 2}
