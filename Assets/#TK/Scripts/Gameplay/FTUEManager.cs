@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using TK.Data;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
@@ -158,8 +159,7 @@ namespace TK.Gameplay
         {
             if(!_inventoryFTUECanDismiss && !_inventoryUpgradeFTUECanDismiss) return;
 
-            if (Touch.activeTouches.Count > 0 &&
-                Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
+            if (WasPrimaryPointerPressedThisFrame())
             {
                 if( _inventoryFTUE.activeSelf)
                 {
@@ -202,8 +202,7 @@ namespace TK.Gameplay
         {
             if(!_releaseFTUECanDismiss) return;
 
-            if (Touch.activeTouches.Count > 0 &&
-                Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
+            if (WasPrimaryPointerPressedThisFrame())
             {
                 float currentTime = Time.unscaledTime;
                 if (currentTime - _lastTapTime <= _doubleTapTimeThreshold)
@@ -215,6 +214,18 @@ namespace TK.Gameplay
                 }
                 _lastTapTime = currentTime;
             }
+        }
+
+        private bool WasPrimaryPointerPressedThisFrame()
+        {
+            if (Touch.activeTouches.Count > 0 &&
+                Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
+            {
+                return true;
+            }
+
+            Mouse mouse = Mouse.current;
+            return mouse != null && mouse.leftButton.wasPressedThisFrame;
         }
 
         private void OnReleaseFTUECompleted()

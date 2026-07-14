@@ -30,8 +30,13 @@ namespace TK.Module
 
         bool WasTapped()
         {
-            return Touchscreen.current != null &&
-                   Touchscreen.current.primaryTouch.press.wasPressedThisFrame;
+            bool touchPressed = Touchscreen.current != null &&
+                                Touchscreen.current.primaryTouch.press.wasPressedThisFrame;
+
+            bool mousePressed = Mouse.current != null &&
+                                Mouse.current.leftButton.wasPressedThisFrame;
+
+            return touchPressed || mousePressed;
         }
     }
 }
