@@ -3,6 +3,7 @@ using DG.Tweening;
 using TK.Data;
 using TK.Gameplay;
 using TK.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TK.Audio;
@@ -146,8 +147,7 @@ namespace TK.MainMenu
         private void CheckTap()
         {
             if (!_canTap) return;
-            if (Touch.activeTouches.Count == 0) return;
-            if (Touch.activeTouches[0].phase != UnityEngine.InputSystem.TouchPhase.Began) return;
+            if (!WasPrimaryPointerPressedThisFrame()) return;
 
             if (_upgradeFTUE.activeSelf)
             {
@@ -192,6 +192,18 @@ namespace TK.MainMenu
                     OnCollectionFTUECompleted();
                 }
             }
+        }
+
+        private bool WasPrimaryPointerPressedThisFrame()
+        {
+            if (Touch.activeTouches.Count > 0 &&
+                Touch.activeTouches[0].phase == UnityEngine.InputSystem.TouchPhase.Began)
+            {
+                return true;
+            }
+
+            Mouse mouse = Mouse.current;
+            return mouse != null && mouse.leftButton.wasPressedThisFrame;
         }
 
         private void CheckUpgradeCompleted()

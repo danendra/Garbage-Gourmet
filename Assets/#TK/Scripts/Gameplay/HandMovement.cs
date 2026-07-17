@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 using Unity.Cinemachine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TK.Audio;
@@ -150,22 +151,22 @@ namespace TK.Gameplay
             if (_state == HAND_STATE.Descent)
             {
                 CheckTimeToAscent();
-                HandleTouchInput();
+                HandlePointerInput();
             }
             else if (_state == HAND_STATE.Idle)
             {
                 // Buat FTUE, biar player bisa drag tangan sebelum turun
-                HandleTouchInput();
+                HandlePointerInput();
             }
         }
 
-        private void HandleTouchInput()
+        private void HandlePointerInput()
         {
             RawDragDeltaX = 0f;
 
             if (Touch.activeTouches.Count == 0)
             {
-                _dragging = false;
+                HandleMouseInput();
                 return;
             }
 
@@ -193,6 +194,36 @@ namespace TK.Gameplay
                 case UnityEngine.InputSystem.TouchPhase.Canceled:
                     _dragging = false;
                     break;
+            }
+        }
+
+        private void HandleMouseInput()
+        {
+            Mouse mouse = Mouse.current;
+            if (mouse == null)
+            {
+                _dragging = false;
+                return;
+            }
+
+            if (mouse.leftButton.wasPressedThisFrame)
+            {
+                _dragging = true;
+                _lastTouchPos = mouse.position.ReadValue();
+            }
+
+            if (mouse.leftButton.isPressed && _dragging)
+            {
+                Vector2 currentMousePos = mouse.position.ReadValue();
+                float deltaX = currentMousePos.x - _lastTouchPos.x;
+                RawDragDeltaX = Mathf.Abs(deltaX);
+                _targetX = Mathf.Clamp(_targetX + deltaX * _dragSensitivity, _minX, _maxX);
+                _lastTouchPos = currentMousePos;
+            }
+
+            if (mouse.leftButton.wasReleasedThisFrame)
+            {
+                _dragging = false;
             }
         }
 
